@@ -12,7 +12,7 @@ First create your environment variable in windows by doing the following:
 1. Edit the environment variables for your account.
 2. Create a new environment variable and give it a value.
 
-![Environment Variables]({{ site.url }}/assets/images/environment_var.PNG)
+![Environment Variables]({{ site.baseurl }}/assets/images/environment_var.PNG)
 
 To access and print the variable in bash from the command-line:
 

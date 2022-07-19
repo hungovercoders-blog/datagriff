@@ -1,5 +1,4 @@
 ---
-layout: default
 title: "Welcome to hungovercoders blog"
 ---
 

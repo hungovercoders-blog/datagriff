@@ -9,11 +9,11 @@ Creating environment variables is useful for when you want to use the same varia
 
 First create your environment variable in windows by doing the following:
 
-1. Edit the environment variables for your account.
+- Edit the environment variables for your account.
 
 ![Environment Variables]({{ site.baseurl }}/assets/2022-07-19-environment-variables/edit_environment_var.PNG)
 
-2. Create a new environment variable and give it a value.
+- Create a new environment variable and give it a value.
 
 ![Environment Variables]({{ site.baseurl }}/assets/2022-07-19-environment-variables/environment_var.PNG)
 

@@ -7,15 +7,21 @@ author: dataGriff
 
 Below is a summary of the magic ingredients you can use to dramatically improve your organisations value and staff happiness.
 
+- [Team First](#team-first)
+- [OKRs](#okrs)
+  - [Beer Team OKRs](#beer-team-okrs)
+  - [Litter Team OKRs](#litter-team-okrs)
+- [Hypothesis Driven Development](#hypothesis-driven-development)
+
 ## Team First
 
-I am a firm believer in a team-first approach to an organisation, instilling pride and stability in an organisations staff. Whilst there appears to be no clear evidence on a [teams stability outperforming a fluid team](https://www.scrum.org/resources/blog/depth-stable-or-fluid-teams-what-does-science-say), this is more due to a lack of the study itself than it actually being disproven. 
+I am a firm believer in a team-first approach to an organisation, instilling pride and stability in an organisations staff. Whilst there appears to be no clear evidence on a [teams stability outperforming a fluid team](https://www.scrum.org/resources/blog/depth-stable-or-fluid-teams-what-does-science-say), this is more due to a lack of the study itself than it actually being disproven.
 
-There should be no doubting from a common sense perspective however that people who develop a close bond over time with a shared purpose will perform better. It will also minimize the amount of times that teams are outside of the high performing stage of [Tuckmans stages of group development](https://en.wikipedia.org/wiki/Tuckman%27s_stages_of_group_development). Stable teams for me then are a winner, with the mantra "[bring your work to the people and not the people to work](https://medium.com/organize-agile/from-project-teams-to-stable-agile-teams-5934c271a8fc)" resonates with me and one I often cite this in the hope of assimilation.
+There should be no doubting from a common sense perspective however that people who develop a close bond over time with a shared purpose will perform better. It will also minimize the amount of times that teams are outside of the high performing stage of [Tuckmans stages of group development](https://en.wikipedia.org/wiki/Tuckman%27s_stages_of_group_development). Stable teams for me then are a winner, with the mantra "[bring your work to the people and not the people to work](https://medium.com/organize-agile/from-project-teams-to-stable-agile-teams-5934c271a8fc)" resonates with me and one you will hear me repeat often in the hope of assimilation.
 
 ![Borg]({{ site.baseurl }}/assets/2022-09-17-team-ork-hdd/borg.jpg)
 
-Although not the purpose of this blog, appropriate team boundaries can be established utilising domain discovery methods such as [event storming](https://www.eventstorming.com/). Once domains are identified they can be divided amongst your organisation using common sense around what business problems make the most sense to live closely together. The target implementation aiming to reduce handovers and ensuring teams can provided business value by reaching a customer independently, as well as resourcing domains accordingly based on complexity or volume. For further information on identifying a suitable team layout for your organisation please see resources on  [team topologies](https://teamtopologies.com/).
+Although not the purpose of this blog, appropriate team boundaries can be established utilising domain discovery methods such as [event storming](https://www.eventstorming.com/). Once domains are identified they can be divided amongst your organisation using common sense around what business problems make the most sense to live closely together. The target implementation aiming to reduce handovers and ensuring teams can provided business value by reaching a customer independently, as well as resourcing domains accordingly based on complexity or volume. For further information on identifying a suitable team layout for your organisation please see resources on  [team topologies](https://teamtopologies.com/). **Top Tip:** Keep an eye out for them platform teams that can support a lot of the repeated work across your value-based teams - you wouldn't want to repeat authentication mechanisms for your organisation now would you?
 
 ## OKRs
 
@@ -76,3 +82,5 @@ Some examples for the litter team might be:
 If you cannot get feedback from your teams on the success or failure of a hypotheses against a key result in around 2 weeks then you maybe you likely need to check if your objectives are too complex at this point, or more likely there may be an issue with your organisational setup if they cannot deliver independently. Either way keep dreaming the dream, you should be aiming for every team in your organisation to understand if they can impact business value every 2 weeks, with absolutely clear signals of how they are doing that along with full autonomy to do so. Go get 'em tigers!
 
 ![Tiger]({{ site.baseurl }}/assets/2022-09-17-team-ork-hdd/tiger.jpg)
+
+I'll be talking how we can implement this strategy in some workflow management tools in an upcoming [blog post]({{ site.baseurl }}/dataGriff/_posts/2022-09-18-github-okr-workflow/2022-09-18-github-okr-workflow.md).

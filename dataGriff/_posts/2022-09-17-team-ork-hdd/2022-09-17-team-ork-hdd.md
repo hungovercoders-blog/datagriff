@@ -39,7 +39,7 @@ As a quick example though...
 
 We have a established a team exclusively on making the hungovercoders drinking beer. Lets motivate them!
 
-**Team Mission:** Ensure that the Hungovercodes Drink More Beer
+**Team Mission:** Ensure that the Hungovercoders Drink More Beer
 
 **Objective:** Hungovercoders regularly go to the pub
 
@@ -52,7 +52,7 @@ We have a established a team exclusively on making the hungovercoders drinking b
 
 We have a established a team exclusively on ensuring the hungovercoders pickup litter. Lets motivate them!
 
-**Team Mission:** Ensure that the Hungovercodes Pickup Litter
+**Team Mission:** Ensure that the Hungovercoders Pickup Litter
 
 **Objective:** Hungovercoders pickup litter
 
@@ -61,7 +61,7 @@ We have a established a team exclusively on ensuring the hungovercoders pickup l
 - Hungovercoders pickup 10 bags of rubbish a week by the end of September 2022.
 - Hungovercoders local areas rate rubbish presence as reduced comparing September 2022 to November 2022.
 
-As a reminder the OKRs are one of many frameworks for creating a measureable driving force for all of your teams. You may use something different but it is the one that I have identified the most. They key thing to remember is parallelising your workforce to deliver multiple streams of value independently with clear indications of success is an immense force if you design it correctly.
+As a reminder the OKRs are one of many frameworks for creating a measurable driving force for all of your teams. You may use something different but it is the one that I have identified the most. They key thing to remember is parallelising your workforce to deliver multiple streams of value independently with clear indications of success is an immense force if you design it correctly.
 
 ## Hypothesis Driven Development
 
@@ -76,8 +76,8 @@ Some examples for the beer team might be:
 
 Some examples for the litter team might be:
 
-- If we create a local neighbourhood whatsapp group to encourage hungovercodes and the community to pickup litter we will pickup 5 bags each week in October!
-- If we create a rate my litter app we will see a reduction in presence between September 2022 and November 2022.
+- If we create a local neighbourhood whatsapp group to encourage hungovercoders and the community to pickup litter - we will pickup 5 bags each week in October!
+- If we create a rate my litter app we will observe a reduction in litter presence between September 2022 and November 2022.
 
 If you cannot get feedback from your teams on the success or failure of a hypotheses against a key result in around 2 weeks then you maybe you likely need to check if your objectives are too complex at this point, or more likely there may be an issue with your organisational setup if they cannot deliver independently. Either way keep dreaming the dream, you should be aiming for every team in your organisation to understand if they can impact business value every 2 weeks, with absolutely clear signals of how they are doing that along with full autonomy to do so. Go get 'em tigers!
 

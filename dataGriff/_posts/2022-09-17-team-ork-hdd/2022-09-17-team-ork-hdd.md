@@ -83,4 +83,4 @@ If you cannot get feedback from your teams on the success or failure of a hypoth
 
 ![Tiger]({{ site.baseurl }}/assets/2022-09-17-team-ork-hdd/tiger.jpg)
 
-I'll be talking how we can implement this strategy in some workflow management tools in an upcoming [blog post]({{ site.baseurl }}/dataGriff/_posts/2022-09-18-github-okr-workflow/2022-09-18-github-okr-workflow.md).
+I'll be talking how we can implement this strategy in some workflow management tools in an upcoming [blog post]({{ site.baseurl }}/dataGriff/2022/09/18/github-okr-workflow.html).

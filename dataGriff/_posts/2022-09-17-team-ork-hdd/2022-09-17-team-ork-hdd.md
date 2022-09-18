@@ -17,7 +17,7 @@ Below is a summary of the magic ingredients you can use to dramatically improve 
 
 ## Team First
 
-I am a firm believer in a team-first approach to an organisation, instilling pride.enthusiasm and stability in an organisations staff should be seen as key to strategic success. Whilst there appears to be no clear evidence on a [teams stability outperforming a fluid team](https://www.scrum.org/resources/blog/depth-stable-or-fluid-teams-what-does-science-say), this is more due to a lack of the study itself than it actually being disproven.
+I am a firm believer in a team-first approach to an organisation, instilling pride, enthusiasm and stability in an organisations staff should be seen as key to strategic success. Whilst there appears to be no clear evidence on a [teams stability outperforming a fluid team](https://www.scrum.org/resources/blog/depth-stable-or-fluid-teams-what-does-science-say), this is more due to a lack of the study itself than it actually being disproven.
 
 There should be no doubting from a common sense perspective however that people who develop a close bond over time with a shared purpose will perform better. It will also minimize the amount of times that teams are outside of the high performing stage of [Tuckmans forming, storming, norming and performing stages of group development](https://en.wikipedia.org/wiki/Tuckman%27s_stages_of_group_development). Stable teams for me then are a winner, with the mantra "[bring your work to the people and not the people to work](https://medium.com/organize-agile/from-project-teams-to-stable-agile-teams-5934c271a8fc)" resonating with me and one you will hear me repeat often in the hope of assimilation.
 

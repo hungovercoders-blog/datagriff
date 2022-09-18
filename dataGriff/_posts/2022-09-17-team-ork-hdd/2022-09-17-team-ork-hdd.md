@@ -91,7 +91,14 @@ For example an epic can relate to an objective derived from a teams mission, a f
 
 Below is an example implementation hierarchy, but know that your terminology of each components of the hierarchy may change based on your work management tool (e.g. you may regard as an Epic and a feature and so on). Ultimately though you should aim for the logical hierarchy described in this blog of the organisation > team > objective > hypothesis > work item > code commit to be visible and consistent across the business in one set of tooling.
 
-```mermaid
+<div class="mermaid" markdown="0" >
+    graph TD 
+    A[Client] -->|tcp_123| B(Load Balancer) 
+    B -->|tcp_456| C[Server1] 
+    B -->|tcp_456| D[Server2]
+</div>
+
+```mermaid!
 classDiagram
       Organisation <|-- Team1
       Organisation <|-- Team2
@@ -160,6 +167,8 @@ classDiagram
 
 ## Monitor your Implementation
 
-If you cannot get feedback from your teams on the success or failure of a hypotheses against a key result in around 2 weeks then you maybe you likely need to check if your objectives are too complex at this point, or more likely there may be an issue with your organisational setup if they cannot deliver independently. Either way keep dreaming the dream, you should be aiming for every team in your organisation to understand if they can impact business value every 2 weeks, with absolutely clear signals of how they are doing that along with full autonomy to do so. Go get 'em tigers!
+If you cannot get feedback from your teams on the success or failure of a hypotheses against a key result in around 2 weeks then you maybe you likely need to check if your objectives are too complex at this point, or more likely there may be an issue with your organisational setup if they cannot deliver independently. 
+
+Either way keep dreaming the dream, you should be aiming for every team in your organisation to understand if they can impact business value every 2 weeks, with absolutely clear signals of how they are doing that along with full autonomy to do so. Go get 'em tigers!
 
 ![Tiger]({{ site.baseurl }}/assets/2022-09-17-team-ork-hdd/tiger.jpg)

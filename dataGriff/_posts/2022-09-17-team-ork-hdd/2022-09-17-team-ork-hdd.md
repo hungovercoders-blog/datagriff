@@ -63,7 +63,7 @@ We have a established a team exclusively on ensuring the hungovercoders pickup l
 - Hungovercoders pickup 10 bags of rubbish a week by the end of September 2022.
 - Hungovercoders local areas rate rubbish presence as reduced comparing September 2022 to November 2022.
 
-As a reminder the OKRs are one of many frameworks for creating a measurable driving force for all of your teams. You may use something different but it is the one that I have identified with the most. They key thing to remember is parallelising your workforce to deliver multiple streams of value independently with clear indications of success is an immense force if you design it correctly.
+As a reminder the OKRs are one of many frameworks for creating a measurable driving force for all of your teams. You may use something different but it is the one that I have identified with the most. The key thing to remember is parallelising your workforce to deliver multiple streams of value independently with clear indications of success is an immense force if you design it correctly.
 
 ## Hypothesis Driven Development
 

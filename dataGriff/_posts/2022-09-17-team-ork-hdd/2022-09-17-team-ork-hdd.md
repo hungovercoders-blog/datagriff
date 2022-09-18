@@ -54,7 +54,7 @@ We have a established a team exclusively on making the hungovercoders drinking b
 
 We have a established a team exclusively on ensuring the hungovercoders pickup litter. Lets motivate them!
 
-**Team Mission:** Ensure that the Hungovercoders Pickup Litter
+**Team Mission:** Ensure that the Hungovercoders have Clean Neighborhoods
 
 **Objective:** Hungovercoders pickup litter
 

@@ -1,4 +1,4 @@
-Just---
+---
 title: "Team-First, OKRs and Hypothesis Driven Development"
 date: 2022-09-17
 

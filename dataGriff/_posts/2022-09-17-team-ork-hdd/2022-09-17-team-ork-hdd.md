@@ -1,4 +1,4 @@
----
+Just---
 title: "Team-First, OKRs and Hypothesis Driven Development"
 date: 2022-09-17
 
@@ -77,7 +77,7 @@ Some examples for the beer team might be:
 - If we create a facebook group to encourage hungovercoders to socialise we will get three people to the pub in October!
 - If we create a dedicated hungovercoders calendar app we will get two people going to the pub every week in November!
 
-Some examples for the litter team might be:
+Some examples for the environment team might be:
 
 - If we create a local neighbourhood whatsapp group to encourage hungovercoders and the community to pickup litter - we will pickup 5 bags each week in October!
 - If we create a rate my litter app we will observe a reduction in litter presence between September 2022 and November 2022.

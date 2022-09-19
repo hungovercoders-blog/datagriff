@@ -1,4 +1,4 @@
----
+Ki---
 title: "Team-First, OKRs and Hypothesis Driven Development"
 date: 2022-09-17
 
@@ -52,9 +52,10 @@ We have a established a team exclusively on making the hungovercoders drinking b
 
 ### Litter Team OKRs
 
-We have a established a team exclusively on ensuring the hungovercoders pickup litter. Lets motivate them!
+We have a established a team exclusively on ensuring the hungovercoders promote environmental concerns
+. Lets motivate them!
 
-**Team Mission:** Ensure that the Hungovercoders have Clean Neighborhoods
+**Team Mission:** Ensure that the Hungovercoders protect the environment 
 
 **Objective:** Hungovercoders pickup litter
 

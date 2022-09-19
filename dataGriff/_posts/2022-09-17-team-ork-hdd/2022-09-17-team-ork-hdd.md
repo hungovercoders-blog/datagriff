@@ -10,7 +10,7 @@ Below is a summary of the magic ingredients you can use to dramatically improve 
 - [Team First](#team-first)
 - [OKRs](#okrs)
   - [Beer Team OKRs](#beer-team-okrs)
-  - [Litter Team OKRs](#litter-team-okrs)
+  - [Environment Team OKRs](#environment-team-okrs)
 - [Hypothesis Driven Development](#hypothesis-driven-development)
 - [Workflow Management Hierarchy](#workflow-management-hierarchy)
 - [Monitor your Implementation](#monitor-your-implementation)

@@ -5,7 +5,7 @@ date: 2022-10-02
 author: dataGriff
 ---
 
-So we've previously looked at creating [beer in a flask api]({{ site.baseurl }}/posts/2022-09-25-flask-api/2022-09-25-flask-api.md), now I want to guzzle some beer from the web using the python package [beautiful soup](https://pypi.org/project/beautifulsoup4/) to scrape beer information! 
+So we've previously looked at creating [beer in a flask api](https://www.hungovercoders.com/blog/datagriff/2022/09/25/flask-api.html), now I want to guzzle some beer from the web using the python package [beautiful soup](https://pypi.org/project/beautifulsoup4/) to scrape beer information!
 
 ## PreRequisites
 

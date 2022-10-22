@@ -292,7 +292,7 @@ The following will ignore anything in the folder venv. This is typically where p
 venv/*
 ```
 
-For further example of standard gitignore files for standard project setups see this [link](https://github.com/github/gitignore).
+For further example of standard gitignore files for standard project setups see this [standard for python](https://www.jcchouinard.com/gitignore-template/) or more at this [link](https://github.com/github/gitignore).
 
 ## Using Visual Studio Code
 

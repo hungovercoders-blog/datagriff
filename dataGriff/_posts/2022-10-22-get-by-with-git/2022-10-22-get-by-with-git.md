@@ -10,6 +10,9 @@ Drinking too much? Can't remember all those git commands and methods without goo
 - [PreRequisites](#prerequisites)
 - [WTF is git?](#wtf-is-git)
 - [Quick Reference](#quick-reference)
+  - [Locak](#locak)
+  - [Remote](#remote)
+  - [Branch and Commit Management](#branch-and-commit-management)
 - [Git Local](#git-local)
   - [Setup local git config](#setup-local-git-config)
   - [Setup repo and commit](#setup-repo-and-commit)
@@ -27,7 +30,6 @@ Drinking too much? Can't remember all those git commands and methods without goo
 - A [github](https://github.com/) account.
 - (optional) Install a decent IDE to work in such as [Visual Studio Code](https://code.visualstudio.com/download).
 
-
 ## WTF is git?
 
 [Git](https://git-scm.com/) is a distributed source control solution that allows you to version control your code locally and then push to a remote repository such as [github](https://github.com/). History is maintained with each copy of the code repository. You can also protect key branches of code by mandating pull requests occur that require code reviews by your peers before a commit to that branch is allowed. These key branches are often called master or main, with feature branches being the development code that is worked on before it is merged into the master branch.
@@ -36,17 +38,26 @@ Drinking too much? Can't remember all those git commands and methods without goo
 
 Git is often used from the command-line and just so you don't have to read the following sections every time... here is a quick reference that will help you most of the time. If you've stopped drinking you may remember all the commands anyway, I however need a constant prompt (hic!).
 
+### Locak
+
 ```bash
 git init ## initialise a new git repo
 git add . ## add all files in the directory to git repo
 git add "filename" ## add specific file to the git repo
 git status ## check the status of files in the git repo
 git commit -m "message" ## commit your working code to the git repo with a message
+```
+
+### Remote
+
+```bash
 git remote add origin "http://github.com/foo" ## add a remote repo to synch your local repo with
 git pull "http://github.com/foo" main ## synch your local repo with a remote repo
 git push origin main ## push your locally committed changes to the remote repo
 git pull ##pull any changes made in the remote repo to your local repo
 ```
+
+### Branch and Commit Management
 
 ```bash
 git branch branch-name ## create new branch

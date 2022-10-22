@@ -38,7 +38,7 @@ Drinking too much? Can't remember all those git commands and methods without goo
 
 Git is often used from the command-line and just so you don't have to read the following sections every time... here is a quick reference that will help you most of the time. If you've stopped drinking you may remember all the commands anyway, I however need a constant prompt (hic!).
 
-### Locak
+### Local
 
 ```bash
 git init ## initialise a new git repo
@@ -62,6 +62,7 @@ git pull ##pull any changes made in the remote repo to your local repo
 ```bash
 git branch branch-name ## create new branch
 git checkout branch-name ## checkout the branch
+git merge other-branch ## merge other-branch into current branch
 git branch --list ## what branches are there in the repo
 git log -v ## see the change history in a branch
 git log -p ## see actual change for a commit

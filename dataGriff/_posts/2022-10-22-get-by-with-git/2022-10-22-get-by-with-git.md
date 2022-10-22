@@ -17,6 +17,8 @@ Drinking too much? Can't remember all those git commands and methods without goo
 - [Git Remote](#git-remote)
   - [Setup repo and synch](#setup-repo-and-synch)
 - [Protecting Main with Pull Requests](#protecting-main-with-pull-requests)
+- [Git Ignore](#git-ignore)
+  - [Example Contents of .gitnore file](#example-contents-of-gitnore-file)
 - [Using Visual Studio Code](#using-visual-studio-code)
 
 ## PreRequisites
@@ -277,6 +279,20 @@ Now that we have a remote feature branch we can perform a pull request and then 
 You would then approve the pull request and bingo in it goes. It is likely that you will be denied as the author of the code won't be allowed to approve their own code. In a team setting though someone else would approve, as long as the code wasn't written after eight cans of beer of course.
 
 ![pull request]({{ site.baseurl }}/assets/2022-10-22-get-by-with-git/pull-request-submit-review.png)
+
+## Git Ignore
+
+If you want to ignore any files in your git repo, such as config files for local development or local python libraries you can add a .gitignore file to your repo. The patterns in this file will be ignored from your source control repo so that you do not accidentally check in superfluous libraries or sensitive data.
+
+### Example Contents of .gitnore file
+
+The following will ignore anything in the folder venv. This is typically where python libraries are installed for an environment.
+
+```bash
+venv/*
+```
+
+For further example of standard gitignore files for standard project setups see this [link](https://github.com/github/gitignore).
 
 ## Using Visual Studio Code
 

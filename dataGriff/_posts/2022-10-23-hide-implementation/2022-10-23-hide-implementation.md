@@ -44,6 +44,12 @@ Great source of [API resource naming standards](https://www.restapitutorial.com/
 
 What about quick access to data... we must have engineers and analytics in the same team allowing a cohort of analysts to get insights early. Effort must be spent in creating data products or you will enter a long term dependency battle. Insights being available internally to the team by having the makeup of the team correct should counterbalance any concern about speed to insights, as the right people will have access, just not on a consumer-wide scale yet.
 
+
+
+Frustrated analysts in a separate team waiting for data engineers to provide an entire data warehouse for your entire business will fail. The results will likely be engineers taking far too long to deliver any value due to the multiple domains they are trying to solve in one go, with analysts becoming frustrated and undoubtedly starting to make their own data domains directly from internal implementations. No one wins. Aligning data engineers with analysts within smaller domains first to allow insights within a team before data sharing with others is critical for the success of this decoupled architecture. Well thought out distributed data products from multiple domains can later become the source for a new consumer domain, that wil undoubtedly looks across multiple source domains to create a grander picture of your estate. Do not default to making a global data warehouse from the offset that covers a 360 view of your business. This is a massive project and far too slow for our modern agile needs. Distribute smaller data domains in parallel across multiple cross-functional teams to create insights within these spaces instantly, along then with considered published data products that have a slightly lower cadence compared to the internal team insights. Once these consumer facing data products are in place from multiple areas, then you have the abstracted building blocks to make decoupled data domains that look across the multiple domains of your business.
+
+databricks can abstract awway [multiple formats](https://docs.databricks.com/external-data/index.html).
+
 ### Example Data Product Implementation
 
 With the buzz around data mesh...

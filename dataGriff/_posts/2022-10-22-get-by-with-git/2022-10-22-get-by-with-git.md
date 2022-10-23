@@ -10,7 +10,7 @@ Drinking too much? Can't remember all those git commands and methods without goo
 - [PreRequisites](#prerequisites)
 - [WTF is git?](#wtf-is-git)
 - [Quick Reference](#quick-reference)
-  - [Locak](#locak)
+  - [Local](#local)
   - [Remote](#remote)
   - [Branch and Commit Management](#branch-and-commit-management)
 - [Git Local](#git-local)

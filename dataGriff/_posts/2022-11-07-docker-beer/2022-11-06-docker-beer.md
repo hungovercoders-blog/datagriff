@@ -11,7 +11,7 @@ In the previous post we created a [Beer API using Fast API in python](https://ww
 - [Setup your Codebase](#setup-your-codebase)
 - [Setup the FastAPI Code](#setup-the-fastapi-code)
 - [Setup the Docker File](#setup-the-docker-file)
-- [Create an Azure Container Registry](#create-an-azure-container-registry)
+- [Push your Container to Docker Hub](#push-your-container-to-docker-hub)
 - [Deploy your Container to an Azure Webapp for Containers](#deploy-your-container-to-an-azure-webapp-for-containers)
 
 ## PreRequisites
@@ -20,7 +20,9 @@ In the previous post we created a [Beer API using Fast API in python](https://ww
 - You'll need a decent IDE - I use [visual studio code](https://code.visualstudio.com/download).
 - Ideally you should have [git](https://git-scm.com/downloads) installed.
 - You'll need to install [docker](https://docs.docker.com/get-docker/). I highly recommend going through the docker tutorial once you have it installed, its very cool.
-
+- You'll need a [docker account](https://hub.docker.com/signup) which you can get for free.
+- You'll need an [azure account](https://azure.microsoft.com/en-gb/) which you can get for free.
+- 
 ## Setup your Codebase
 
 In your favourite IDE setup a folder structure like the following.
@@ -222,6 +224,66 @@ docker run -d --name containerbeerapi -p 80:80 imagebeerapi
 
 In docker desktop you should now see a new container running called "beerapi". If you now go to [http://localhost/beers](http://localhost/beers) you will get the beers in your beerapi. If you go to [http://localhost/docs](http://localhost/docs) you get to see all the lovely swagger we have come to know and love from FastAPI, just all running in a container! You'll also note you didn't have to create a virtual environment for your python code when using the docker container, as all the dependencies and environment is handled within your container!
 
-## Create an Azure Container Registry
+## Push your Container to Docker Hub
+
+We now want to push the beer image to your [docker hub account](https://hub.docker.com/). First of all you need to login to docker in your IDE terminal by running the following, replacing dockername with your docker account:
+
+```bash
+docker login -u {dockername}
+```
+
+We now need to tag your image with a new name so that it is recognised when we push it to docker. Run the following command:
+
+```bash
+docker tag imagebeerapi {dockername}/beerapi
+```
+
+Finally run the below and the image will now be available globally from your docker account! 
+
+```bash
+docker push {dockername}/beerapi
+```
+
+![Docker Hub]({{ site.baseurl }}/assets/2022-11-12-docker-beer/docker-hub.png)
+
+This will now mean we can then pull the images into our applications that can be pretty much hosted from anywhere, such as Azure...
 
 ## Deploy your Container to an Azure Webapp for Containers
+
+Faster than you can down ten pints of stay puft, lets get out new Beer API container hosted in the Azure cloud! In your IDE terminal run the following to login to the Azure portal using the Azure CLI. You'll likely be taken to a login browser screen and then receive the message "login successful!" in the terminal.
+
+```bash
+az login
+```
+
+We now want to create a resource group to host our beer api. I tend to use the following format {env}-{service}-rg. Run the following code to create a new resource group called dv-beerapi-rg in northeurope. Feel free to change the region somewhere closer to home.
+
+```bash
+ az group create --name dv-beerapi-rg --location northeurope
+```
+
+Now we'll create a basic app plan to host our web app on. This will be about a tenner a month so kill it if not going to continue to use it once done. The following command just needs you to add a "uniquenamespace", which is just a couple of characters to ensure your resource is globally unique. The new app plan will be created in the resource group created above.
+
+```bash
+az appservice plan create -n dv-beerapi-apl-eun-{uniquenamespace} -g qa-beerapi-rg --is-linux
+```
+
+Finally we create a web app that utilises the app plan and pulls the beerapi we pushed up to docker as the image for the application. Again just make sure you replace the "uniquenamespace" with what you used above and alter the "dockername" to be from your account. 
+
+```bash
+az webapp create --resource-group dv-beerapi-rg --plan dv-beerapi-apl-eun-{uniquenamespace}  --name dv-beerapi-app-eun-{uniquenamespace} --deployment-container-image-name registry.hub.docker.com/{dockername}/beerapi:latest
+```
+
+You should now have a resource group that looks something like this...
+
+![Azure RG]({{ site.baseurl }}/assets/2022-11-12-docker-beer/azure-rg.png)
+
+If you now go to the URL of the webapp you will get the welcome message for the API!
+
+![App URL]({{ site.baseurl }}/assets/2022-11-12-docker-beer/azure-app-url.png)
+
+![Welcome]({{ site.baseurl }}/assets/2022-11-12-docker-beer/welcome-url.png)
+
+This will now behave just like if we had the API running locally but now its available from all over the world! The cool thing about azure container web apps over azure container instances is that it does a lot of the boring configuration work for you. You'll notice that HTTPS and TLS 1.2 is out of the box so you're secure by default. Phew. Easy to forget to lock up after a few pints...
+
+![Docs]({{ site.baseurl }}/assets/2022-11-12-docker-beer/azure-docs.png)

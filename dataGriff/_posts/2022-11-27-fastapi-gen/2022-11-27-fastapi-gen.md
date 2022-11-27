@@ -139,7 +139,80 @@ with open("Beer.json", "w", encoding="utf-8") as f:
         f.write(str(schema))
 ```
 
-Run this generate.py file in your IDE and you should generate a local Beer.json file which shows your beer model in a JSON schema format.
+Run this generate.py file in your IDE and you should generate a local Beer.json file which shows your beer model in a JSON schema format. It should look something like the below depending on all the metadata you have added.
+
+```json
+{
+  "title": "The Beer schema",
+  "$ref": "#/definitions/Beer",
+  "definitions": {
+    "Flavour": {
+      "title": "Flavour",
+      "description": "This is a flavour of a beer\n\n    Args:\n        str (_type_): This takes in a string for the flavour description\n        Enum (_type_): This inherits from Enum data type for the flavour enum\n    ",
+      "enum": [
+        "Hoppy",
+        "Chocolate",
+        "Caramel",
+        "Orange"
+      ],
+      "type": "string"
+    },
+    "Beer": {
+      "title": "Beer",
+      "description": "This is a beer\n\nArgs:\n    BaseModel (_type_): This inherits from pydantic base model",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "This is the name of the beer",
+          "example": "Mike Rayer",
+          "type": "string"
+        },
+        "brewer": {
+          "title": "Brewer",
+          "description": "This is the name of the brewer of the beer",
+          "example": "Crafty Devil",
+          "type": "string"
+        },
+        "strength": {
+          "title": "Strength",
+          "description": "This is the strength of the alcohol in the beer",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 20,
+          "example": 5.2,
+          "type": "number"
+        },
+        "flavours": {
+          "description": "These are the lists of flavours in the beer",
+          "example": [
+            "Caramel"
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Flavour"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "brewer",
+        "strength"
+      ],
+      "examples": [
+        {
+          "name": "Elvis Juice",
+          "brewer": "Brewdog",
+          "strength": 5.1,
+          "flavours": [
+            "Orange",
+            "Hoppy"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
 
 ## Generate Model Code from Schema
 

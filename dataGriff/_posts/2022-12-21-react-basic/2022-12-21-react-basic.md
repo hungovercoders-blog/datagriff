@@ -190,7 +190,7 @@ If you navigate to [localhost:8000/beers](http://localhost:8000/beers) you shoul
 
 We're going to add the simplest page to our application first which will cater for all the placeholder pages and functionality that won't exist yet - the NotFound.js. In your src folder add the file NotFound.js and add the following code:
 
-```javascript
+```jsx
 import { Link } from 'react-router-dom'
 
 const NotFound = () => {
@@ -209,7 +209,7 @@ This creates a NotFound function with a className of "not-found", with the latte
 
 Update the app.js file to look like the following, which will send every page to the Not Found page, including the home page as it doesn't exist yet!
 
-```javascript
+```jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import NotFound from './NotFound';
 
@@ -243,7 +243,7 @@ We're now going to add a navigation bar component that will take us home or allo
 
 Add a new file called NavBar.js to the src directory and add the following code:
 
-```javascript
+```jsx
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
@@ -265,7 +265,7 @@ This again adds a new component with class for styling called "navbar". It then 
 
 Then update the app.js to look like this to include the navbar:
 
-```javascript
+```jsx
 import Navbar from './Navbar'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import NotFound from './NotFound';
@@ -309,7 +309,7 @@ Each of these is handled in "useState" at the top of the code which allows us to
 
 Add a new file called useFetch.js to your src directory and add the following code:
 
-```javascript
+```jsx
 import { useEffect, useState } from "react";
 
 // This is a custom hook we made
@@ -360,7 +360,7 @@ To see further details on this UseFetch function see this [section of the course
 
 We now need to add something that will nicely display a list of beers once our homepage passes the data into it. The following creates a list of beers from a beers object passed into it and displays it appropriately in html. To do this add a file called BeerList.js to your src directory and add the following code:
 
-```javascript
+```jsx
 import { Link } from "react-router-dom";
 
 const BeerList = ({ beers }) => {
@@ -385,7 +385,7 @@ export default BeerList;
 
 Now lets get back to adding this data to our homepage now that we have the ability to fetch any data and also return a list of beers. Add a Home.js file to your src directory and add the following code:
 
-```javascript
+```jsx
 import BeerList from "./BeerList";
 import useFetch from "./useFetch";
 
@@ -409,7 +409,7 @@ This utilises the BeerList and UseFetch components created in the previous secti
 
 To enable this functionality update the app.js file to the following:
 
-```javascript
+```jsx
 import Navbar from './Navbar'
 import Home from './Home'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -443,7 +443,7 @@ You should now get some ugly beers being shown on the homepage.
 
 Now for our favourite, creating a beer (well maybe drinking it is better, but we digress)... Add a new file to your src directory called Create.js and add the following code:
 
-```javascript
+```jsx
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'
 
@@ -516,7 +516,7 @@ export default Create;
 
 Then update the app.js file to the following to include the create functionality which can be reached easily via the navbar:
 
-```javascript
+```jsx
 import Navbar from './Navbar'
 import Home from './Home'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -556,7 +556,7 @@ Add a new beer then return to the homepage and you should see it in the beer lis
 
 Now we want to use the UseFetch function to get our BeerDetails from our locally running API using json-server. To do this add a BeerDetails.js file and add the following code:
 
-```javascript
+```jsx
 import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 
@@ -603,7 +603,7 @@ This code imports the UseFetch component then creates a BeerDetail function. The
 
 To add this functionality to your application, update your app.js file to look like the following:
 
-```javascript
+```jsx
 import Navbar from './Navbar'
 import Home from './Home'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'

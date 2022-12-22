@@ -34,7 +34,7 @@ node -v
 
 The following will also make your life easier...
 
-- You'll want to install [react snippets](https://marketplace.visualstudio.com/items?itemName=burkeholland.simple-react-snippets) for VS code.
+- You'll want to install [react snippets](https://marketplace.visualstudio.com/items?itemName=burkeholland.simple-react-snippets) and [ES7](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets) for VS code.
 - You'll want to get react dev tools too for [chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [firefox](https://addons.mozilla.org/en-GB/firefox/addon/react-devtools/) or [edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil).
 - Use [emmet abbreviations](https://code.visualstudio.com/docs/editor/emmet) in VS code to cut down some coding time. In VS code settings update the emmet include languages to look like this.
 

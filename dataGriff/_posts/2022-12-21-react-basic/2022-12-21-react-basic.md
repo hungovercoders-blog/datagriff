@@ -575,7 +575,7 @@ const BeerDetails = () => {
 
     return (
         <div className="beer-details">
-            {isPending && <div>Loading...</div>}
+            {isPending && <div>Pouring...</div>}
             {error && <div>{error}</div>}
             {beer && (
                 <article>

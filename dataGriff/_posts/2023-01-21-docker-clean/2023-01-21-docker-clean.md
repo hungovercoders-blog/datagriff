@@ -1,6 +1,6 @@
 ---
 title: "Save Space on you Local Docker"
-date: 2023-01-22
+date: 2023-01-21
 
 author: dataGriff
 ---

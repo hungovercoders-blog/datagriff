@@ -117,3 +117,5 @@ The dataLayer tab reflects this as well.
 If we go back to the debug page and click a button we will see the values update to what we have set in the data layer. The event is click and the brewery value is what we expect.
 
 ![GTM Debug Click]({{ site.baseurl }}/assets/2023-02-27-data-layer/clickvar.png)
+
+If you are happy with the behaviour you can then go back to your GTM container and submit the changes.

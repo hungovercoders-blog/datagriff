@@ -12,11 +12,14 @@ I wanted to make some local breweries available to the browser client side so I 
 - [What is the Data Layer?](#what-is-the-data-layer)
 - [Setup a Basic Web Page with DataLayer](#setup-a-basic-web-page-with-datalayer)
 - [Observe the Values of the DataLayer](#observe-the-values-of-the-datalayer)
+- [Create a GTM Data Layer Variable](#create-a-gtm-data-layer-variable)
+- [Debug Data Layer](#debug-data-layer)
 
 ## PreRequisities
 
 - You can do this with notepad but I use [VS Code](https://code.visualstudio.com/) as my IDE and text editor.
 - I recommend the [live server VS code extension](https://code.visualstudio.com/) to easily test running web pages in a browser.
+- A google tag manager container setup for testing.
 
 ## What is the Data Layer?
 
@@ -56,3 +59,61 @@ Now click a button and type in dataLayer again, press return and you should see 
 If you click the other button and repeat the process you should then see the new brewery value and another click event.
 
 ![Click02]({{ site.baseurl }}/assets/2023-02-27-data-layer/click02.png)
+
+## Create a GTM Data Layer Variable
+
+Go to your [GTM account](https://tagmanager.google.com/) and the relevant  container. First you'll need to add the GTM container code to your HTML page. You can get this from Admin > Instal Google Tag Manager. When you add the code to your HTML make sure to put the head script below the dataLayer script.
+
+```html
+
+<head>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+    </script>
+    <!-- Google Tag Manager -->
+    ...
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    ...
+    <!-- End Google Tag Manager (noscript) -->
+    <h1>Breweries</h1>
+    <button onclick="window.dataLayer.push({'event': 'click','brewery': 'Tiny Rebel'});">Tiny Rebel</button>
+    <button onclick="window.dataLayer.push({'event': 'click','brewery': 'Crafty Devil'});">Crafty Devil</button>
+</body>
+```
+
+Now in the container add a data layer variable called "brewery". This will capture the brewery value you pushed into the dataLayer.
+
+![New Data Layer Variable]({{ site.baseurl }}/assets/2023-02-27-data-layer/newvariable.png)
+
+Configure the new variable as below.
+
+![New Data Layer Variable]({{ site.baseurl }}/assets/2023-02-27-data-layer/varconfig.png)
+
+You should then see a new data layer variable called "brewery" that is a data layer variable.
+
+![New Data Layer Variable]({{ site.baseurl }}/assets/2023-02-27-data-layer/brewvar.png)
+
+## Debug Data Layer
+
+In your [tag manager](https://tagmanager.google.com/) container preview your changes.
+
+![GTM preview]({{ site.baseurl }}/assets/2023-02-27-data-layer/preview.png)
+
+When asked for the URL use the one that is running on your local server e.g. http://127.0.0.1:5500/pages/test.html. When this opens in the debug window you will see that the URL has a gtm parameter in the URL showing it is debugging.
+
+![GTM Debug]({{ site.baseurl }}/assets/2023-02-27-data-layer/debug.png)
+
+If you look at tag assistant under variables you will see that _event is gtm.load and the brewery is "not set" as per the default we gave it.
+
+![GTM Debug Page Load]({{ site.baseurl }}/assets/2023-02-27-data-layer/pageloadvar.png)
+
+The dataLayer tab reflects this as well.
+
+![GTM Debug Page Load]({{ site.baseurl }}/assets/2023-02-27-data-layer/pageloaddata.png)
+
+If we go back to the debug page and click a button we will see the values update to what we have set in the data layer. The event is click and the brewery value is what we expect.
+
+![GTM Debug Click]({{ site.baseurl }}/assets/2023-02-27-data-layer/clickvar.png)

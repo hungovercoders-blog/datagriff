@@ -21,3 +21,4 @@ analytics:
   provider               : google-gtag
   google:
     tracking_id          : G-T2PKN7LCTP
+    

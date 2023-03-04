@@ -1,5 +1,5 @@
 ---
-title: "Welcome to hungovercoders blog"
+title: "Blog - dataGriff"
 ---
 
 ![Logo]({{ site.baseurl }}/assets/_site/logo.png)

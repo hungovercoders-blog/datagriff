@@ -15,13 +15,15 @@ Ok beer and code lovers, I wanted to make sure that I captured consent for analy
 - [Use GTM Consent State Template Variable](#use-gtm-consent-state-template-variable)
 - [Use GTM Consent Mode Template Tag](#use-gtm-consent-mode-template-tag)
 - [Create Consent Test Tags](#create-consent-test-tags)
-- [Preview the Work](#preview-the-work)
+- [Categorise Consent Objects in a Folder](#categorise-consent-objects-in-a-folder)
+- [Preview and Walkthrough the Work](#preview-and-walkthrough-the-work)
 - [Submit and Test Site](#submit-and-test-site)
 
 ## PreRequisities
 
 As this consent is using [Google Tag Manager](https://tagmanager.google.com/) you will also need this with a container running on your website. In order to have cookie consent on any entry point on your website, you'll need to make sure GTM is installed on every page, and every page going forward.
 You'll also need a privacy or terms and condition page for your website in order to direct any questions around consent towards this. The dialog box we build will direct users to this if they have any queries.
+I also recommend installing the extension [edit this cookie](https://www.editthiscookie.com/) as it makes it easier to specifically manipulate your cookies without having to go into the developer console when testing.
 
 ## Sources
 
@@ -243,6 +245,68 @@ Under advanced settings in the tag, for consent settings set the "Require additi
 
 ![GTM Consent Test Marketing Settings]({{ site.baseurl }}/assets/2023-03-11/consent-test-marketing-settings.png)
 
-## Preview the Work
+## Categorise Consent Objects in a Folder
+
+This is an optional step but you can collect all your consent related objects into a folder so its easier to recognise them. I feel I will need to explore this further...
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/folders-consent.png)
+
+## Preview and Walkthrough the Work
+
+In the top right hand corner of your screen you should have 12 workspace changes (or 11 if you didn't do the folder categorisation in the last step). 
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-workspace-changes.png)
+
+Click preview and connect to your website.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-hungovercoders.png)
+
+You should now find the cookie consent pop-up occurs with the "Analytics" and "Marketing" services we offered consent on.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-pop-up.png)
+
+First if we check our cookies, either developer tools or "edit this cookie", you will see that the consent_klaro cookie is behaving as expected with analytics set to true and marketing set to false.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-cookies.png)
+
+Navigate to some other pages now of the website and you will not be asked for cookie consent again. This is due to our settings in our klaro config we currently set them to last for 365 days. We can also use these page view events to confirm our test tags are firing or not appropriately using tag assistant.
+
+If we now go into tag assistant and look through the different events you will see the triggers firing and the different states of the variables we have implemented. We can also see our test tags firing or not. There is a bit of chicken and egg going on with the consent capture as by default customers deny all on their first visit until they have completed the consent pop-up. This is why I set the  **mustConsent: true** configuration in the klaro configuration to ensure we get this as early as possible so the customer can consent appropriately.
+
+Let's have a walkthrough of the events to explain this... 
+
+So on the home page for consent initialisation both the consent mode and the consent capture tags fire.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-home-consent-initialisation.png)
+
+The variables at this point for GTM consent state are all true, but you can see that the "consentAnalytics" and "consentMarketing" variables that we use to apply our GTM consent mode are both "denied". This is because the "consentCapture" cookie from the klaro dialog box is still "undefined" so is yet to set these values.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-home-consent-initialisation-variables.png)
+
+The next to events are set and consent. If you look at the "consent" call you will see that it is an API call that sets all the GTM consent modes to "denied". These are the defaults we set and also the customer still has not set any preferences in the consent dialog box.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-home-consent-api-call.png)
+
+Now you as the customer at this point has been forced to set their preferences for consent. If you then look at the link click event which is the navigation to another page, you will see that the consentCapture variable has now been set, along with the appropriate individual "consentAnalytics" and "consentMarketing" variables.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-home-click.png)
+
+However, the consentState object will not be set until another consent initialisation event occurs when opening the next page. It is here then you can see that the analytics_storage property is also set to true here as a result of the previous consent update.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-test-consent-initialisation.png)
+
+If you look at the container loaded event for this page view you will also see that the "Consent Test Analytics" tag fired but the "Consent Test Marketing Tag" was blocked by Consent settings.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/preview-test-tags.png)
+
+I recommend having a clear out of your cookies, either using developer console or edit this cookie, and make sure you understand the process and that everything is behaving as expected. Feel free to play around and tweak any of the configuration to make it suit your needs, but this should be a good base for you to start from now.
 
 ## Submit and Test Site
+
+Now that you're happy the consent mechanisms are working as you expect, submit the GTM workspace and publish it to your production website.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11/publish.png)
+
+Navigate to your website and confirm all is working as expected.
+
+I think that's worthy of a quick pint after all this work... I definitely consent!

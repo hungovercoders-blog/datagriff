@@ -5,9 +5,9 @@ date: 2023-03-04
 author: dataGriff
 ---
 
-Ok beer and code lovers, I wanted to make sure that I captured consent for analytics for anyone coming to the hungovercoders website.  I'll be honest by the end of my consent rabbit hole I really fancied a can, but instead I'll share my knowledge here with you of how I leverage [Google Tag Manager](https://tagmanager.google.com/) and [Klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) to manage consent. The reason that this is such a great combination is that it is free, extremely customizable and you can manage your consent from a single point.
+Ok beer and code lovers, I wanted to make sure that I captured consent for analytics for anyone coming to the hungovercoders website.  I'll be honest by the end of my consent rabbit hole I really fancied a can, but instead I'll share my knowledge here with you of how I leveraged [Google Tag Manager](https://tagmanager.google.com/) and [Klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) to manage consent for a website. The reason that this is such a great combination is that it is free, extremely customizable and you can manage your consent from a single point.
 
-- [PreRequisities](#prerequisities)
+- [Prerequisites](#prerequisites)
 - [Sources](#sources)
 - [Enable Google Tag Manager Consent Overview](#enable-google-tag-manager-consent-overview)
 - [Capture User Consent with Klaro](#capture-user-consent-with-klaro)
@@ -20,19 +20,21 @@ Ok beer and code lovers, I wanted to make sure that I captured consent for analy
 - [Submit and Test Site](#submit-and-test-site)
   - [Wait - Set Consent Explicitly in Tags](#wait---set-consent-explicitly-in-tags)
 
-## PreRequisities
+## Prerequisites
 
-As this consent is using [Google Tag Manager](https://tagmanager.google.com/) you will also need this with a container running on your website. In order to have cookie consent on any entry point on your website, you'll need to make sure GTM is installed on every page, and every page going forward.
-You'll also need a privacy or terms and condition page for your website in order to direct any questions around consent towards this. The dialog box we build will direct users to this if they have any queries.
+This consent mechanism is using [Google Tag Manager](https://tagmanager.google.com/) so you will need this with a container running on your website. In order to have the cookie consent mechanism on any entry point of your website, you'll need to make sure GTM is installed on every page, and every page going forward.
+
+You'll also need a privacy or terms and condition page for your website in order to direct any questions around consent towards this. The consent modal box we build will direct users to this if they have any queries.
+
 I also recommend installing the extension [edit this cookie](https://www.editthiscookie.com/) as it makes it easier to specifically manipulate your cookies without having to go into the developer console when testing.
 
 ## Sources
 
-I did my background learning and stealing from far more learned people than me. Please see [Muhammad Ali's blog](https://muhammadali.xyz/js-simple-cookie-consent/?utm_source=hungovercoders) for a great simple cookie consent explanation, who then put me on to [klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) as an open source consent tool. I then discovered this great video tutorial by [measureschool](https://measureschool.com/?utm_source=hungovercoders) backed up by this [blog post](https://measureschool.com/cookie-consent-banner/). It's also worth reading through [google tag manager consent configuration](https://support.google.com/tagmanager/answer/10718549?hl=en). However I will be summarising all of this into my own brand of hungovercoder succinctness below...
+I did my background learning and stealing from far more learned people than me. Please see [Muhammad Ali's blog](https://muhammadali.xyz/js-simple-cookie-consent/?utm_source=hungovercoders) for a great simple cookie consent explanation, who then put me on to [klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) as an open source consent tool. I then discovered this great video tutorial by [measureschool](https://measureschool.com/?utm_source=hungovercoders) backed up by this [blog post](https://measureschool.com/cookie-consent-banner/). It's also worth reading through [google tag manager consent configuration](https://support.google.com/tagmanager/answer/10718549?hl=en). However I will be summarising all of this into my our own brand of hungovercoder implementation below...
 
 ## Enable Google Tag Manager Consent Overview
 
-First of all enable google tag manager consent overview in tag manager. This is by far the best place to start as it immediately gives you an overarching view of the variables that apply consent on each of your tags. You will also see that there a number of built-in consent parameters for tags like GA4 for analytics and advertising. Understanding the names of these variables up-front will help us map our Klaro consent to the consent mechanism out of the box from GTM. To further understand the impact of these built-in variables to google analytics, please see documentation [here](https://support.google.com/analytics/answer/9976101?hl=en).
+First of all enable google tag manager consent overview in [Google Tag Manager](https://tagmanager.google.com/). This is by far the best place to start as it immediately gives you an overarching view of the variables that apply consent on each of your tags. You will also see that there a number of built-in consent parameters for tags like GA4 configuration for analytics and advertising. Understanding the names of these variables up-front will help us map our Klaro consent to the consent mechanism out of the box from GTM. To further understand the impact of these built-in variables to google analytics, please see the documentation [here](https://support.google.com/analytics/answer/9976101?hl=en).
 
 To enable consent overview, in google tag manager go to Admin > Container Settings and then tick Enable Consent overview.
 
@@ -319,6 +321,8 @@ Go into each tag and under advanced settings set the appropriate consent require
 ![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/consent-settings.png)
 
 Once you have done that with your tags, if you then go to publish you will see the warning removed and you'll have a nice clean starting point to manage and observe consent.
+
+![GTM Folder Consent]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/publish-consent-sorted.png)
 
 Now navigate to your website and confirm all is working as expected.
 

@@ -8,20 +8,26 @@ author: dataGriff
 Ok beer and code lovers, I wanted to make sure that I captured consent for analytics for anyone coming to the hungovercoders website.  I'll be honest by the end of my consent rabbit hole I really fancied a can, but instead I'll share my knowledge here with you of how I leveraged [Google Tag Manager](https://tagmanager.google.com/) and [Klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) to manage consent for a website. The reason that this is such a great combination is that it is free, extremely customizable and you can manage your consent from a single point.
 
 - [Prerequisites](#prerequisites)
-- [Sources](#sources)
+  - [Tools](#tools)
+  - [Reading Material \& Sources](#reading-material--sources)
 - [Enable Google Tag Manager Consent Overview](#enable-google-tag-manager-consent-overview)
 - [Capture User Consent with Klaro](#capture-user-consent-with-klaro)
 - [Create User Defined Vairables to Hold Each Consent](#create-user-defined-vairables-to-hold-each-consent)
-- [Use GTM Consent State Template Variable](#use-gtm-consent-state-template-variable)
-- [Use GTM Consent Mode Template Tag](#use-gtm-consent-mode-template-tag)
+- [Configure GTM Consent](#configure-gtm-consent)
+  - [Use GTM Consent State Template Variable](#use-gtm-consent-state-template-variable)
+  - [Use GTM Consent Mode Template Tag](#use-gtm-consent-mode-template-tag)
 - [Create Consent Test Tags](#create-consent-test-tags)
 - [Categorise Consent Objects in a Folder](#categorise-consent-objects-in-a-folder)
 - [Preview and Walkthrough the Work](#preview-and-walkthrough-the-work)
+  - [Navigate Preview Website](#navigate-preview-website)
+  - [Tag Assistant Logs](#tag-assistant-logs)
 - [Submit and Test Site](#submit-and-test-site)
-  - [Wait - Set Consent Explicitly in Tags](#wait---set-consent-explicitly-in-tags)
+  - [Wait! - Set Consent Explicitly in Tags](#wait---set-consent-explicitly-in-tags)
   - [Publish with Consent Configured](#publish-with-consent-configured)
 
 ## Prerequisites
+
+### Tools
 
 This consent mechanism is using [Google Tag Manager](https://tagmanager.google.com/) so you will need this with a container running on your website. In order to have the cookie consent mechanism on any entry point of your website, you'll need to make sure GTM is installed on every page, and every page going forward.
 
@@ -29,7 +35,7 @@ You'll also need a privacy or terms and condition page for your website in order
 
 I also recommend installing the extension [edit this cookie](https://www.editthiscookie.com/) as it makes it easier to specifically manipulate your cookies without having to go into the developer console when testing.
 
-## Sources
+### Reading Material & Sources
 
 I did my background learning and stealing from far more learned people than me. Please see [Muhammad Ali's blog](https://muhammadali.xyz/js-simple-cookie-consent/?utm_source=hungovercoders) for a great simple cookie consent explanation, who then put me on to [klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) as an open source consent tool. I then discovered this great video tutorial by [measureschool](https://measureschool.com/?utm_source=hungovercoders) backed up by this [blog post](https://measureschool.com/cookie-consent-banner/). It's also worth reading through [google tag manager consent configuration](https://support.google.com/tagmanager/answer/10718549?hl=en). However I will be summarising all of this into my our own brand of hungovercoder implementation below...
 
@@ -181,7 +187,9 @@ Your variable should look like the below.
 
 ![GTM Consent Variable Marketing]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/consent-variable-marketing.png)
 
-## Use GTM Consent State Template Variable
+## Configure GTM Consent
+
+### Use GTM Consent State Template Variable
 
 We now want to add a variable that GTM can use to map to the global GTM consent mode we saw in the first section of this blog post. Luckily someone has made this for us as a template so we can go to templates, variable templates and add the GTM consent state.
 
@@ -197,7 +205,7 @@ Go to variables and add a new user defined variable called "consentState", which
 
 In the next section we'll ensure that our klaro consent is mapped to this variable so that GTM consent can pick up the values.
 
-## Use GTM Consent Mode Template Tag
+### Use GTM Consent Mode Template Tag
 
 Luckily we have another template we can use, this time a tag. Go to templates and search in the tag templates for "Consent Mode" and add the one shown below.
 
@@ -257,6 +265,8 @@ This is an optional step but you can collect all your consent related objects in
 
 ## Preview and Walkthrough the Work
 
+### Navigate Preview Website
+
 In the top right hand corner of your screen you should have 12 workspace changes (or 11 if you didn't do the folder categorisation in the last step). 
 
 ![GTM Preview Workspace Changes]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/preview-workspace-changes.png)
@@ -274,6 +284,8 @@ First if we check our cookies, either developer tools or "edit this cookie", you
 ![GTM Preview Cookies]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/preview-cookies.png)
 
 Navigate to some other pages now of the website and you will not be asked for cookie consent again. This is due to our settings in our klaro config we currently set them to last for 365 days. We can also use these page view events to confirm our test tags are firing or not appropriately using tag assistant.
+
+### Tag Assistant Logs
 
 If we now go into tag assistant and look through the different events you will see the triggers firing and the different states of the variables we have implemented. We can also see our test tags firing or not. There is a bit of chicken and egg going on with the consent capture as by default customers deny all on their first visit until they have completed the consent pop-up. This is why I set the  **mustConsent: true** configuration in the klaro configuration to ensure we get this as early as possible so the customer can consent appropriately.
 
@@ -311,7 +323,7 @@ Now that you're happy the consent mechanisms are working as you expect, submit t
 
 ![GTM Publish]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/publish.png)
 
-### Wait - Set Consent Explicitly in Tags
+### Wait! - Set Consent Explicitly in Tags
 
 Hold on... you can also see that there is a warning with the shields saying "you have tags that have not been configured for consent". This is referring to tags that have no additional consent configured. The built in consent mechanisms for GA4 will still work. However it is worth us getting consent-orientated from the start and setting this explicitly in our tags before publishing.
 

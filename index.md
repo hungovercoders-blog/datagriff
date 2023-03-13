@@ -2,6 +2,6 @@
 title: "Blog - dataGriff"
 ---
 
-![Logo]({{ site.baseurl }}/assets/_site/logo.png)
+![Logo]({{ site.baseurl }}/assets/site/logo.png)
 
 Please see the below hungovercoders for their insights!

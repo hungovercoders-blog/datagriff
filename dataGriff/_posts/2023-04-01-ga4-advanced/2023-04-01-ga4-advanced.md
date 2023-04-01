@@ -1,11 +1,9 @@
 ---
 title: "Advanced Quick Start for Google Analytics 4 Using GTM"
-date: 2023-03-31
+date: 2023-04-01
 
 author: dataGriff
 ---
-
-### Publish Container
 
 ## Adding a Custom Dimension with Data Layer
 

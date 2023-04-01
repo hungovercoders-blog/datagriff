@@ -83,7 +83,7 @@ Fill in your details and click create.
 
 Go to Admin, copy the code and paste it on every page of your website.
 
-![GTM Install]({{ site.baseurl }}/assets/2023-03-31-ga4-gtm-quickstart/gtm_install.png)
+![GTM Install]({{ site.baseurl }}/assets/2023-03-31-ga4-gtm-quickstart/gtm-install.png)
 
 ### Create New GTM Workspace
 
@@ -127,7 +127,7 @@ Then go to google analytics, go to reports, choose "real time" and you should se
 
 ### Consent Mode Setup
 
-In order to start collecting google analytics data for real you really should setup consent on your website to ensure customers know what data is being collected about them. You can set this up using this cookie consent mechanism as per this previous [blog post](https://www.hungovercoders.com/blog/datagriff/2023/03/04/cookie-consent.html).
+In order to start collecting google analytics data for real you really should setup consent on your website to ensure customers know what data is being collected about them. You can set this up using this cookie consent mechanism as per this previous [blog post](https://www.hungovercoders.com/blog/datagriff/2023/03/11/cookie-consent.html).
 
 ### Publish
 

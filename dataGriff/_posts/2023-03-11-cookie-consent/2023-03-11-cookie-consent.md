@@ -1,6 +1,6 @@
 ---
 title: "Cookie Consent for your Website"
-date: 2023-03-04
+date: 2023-03-11
 
 author: dataGriff
 ---
@@ -9,9 +9,11 @@ Ok beer and code lovers, I wanted to make sure that I captured consent for analy
 
 - [Prerequisites](#prerequisites)
   - [Tools](#tools)
-  - [Reading Material \& Sources](#reading-material--sources)
+  - [Reading Material and Sources](#reading-material-and-sources)
 - [Enable Google Tag Manager Consent Overview](#enable-google-tag-manager-consent-overview)
 - [Capture User Consent with Klaro](#capture-user-consent-with-klaro)
+  - [Create First Party Cookie Variable](#create-first-party-cookie-variable)
+  - [Preview](#preview)
 - [Create User Defined Vairables to Hold Each Consent](#create-user-defined-vairables-to-hold-each-consent)
 - [Configure GTM Consent](#configure-gtm-consent)
   - [Use GTM Consent State Template Variable](#use-gtm-consent-state-template-variable)
@@ -35,7 +37,7 @@ You'll also need a privacy or terms and condition page for your website in order
 
 I also recommend installing the extension [edit this cookie](https://www.editthiscookie.com/) as it makes it easier to specifically manipulate your cookies without having to go into the developer console when testing.
 
-### Reading Material & Sources
+### Reading Material and Sources
 
 I did my background learning and stealing from far more learned people than me. Please see [Muhammad Ali's blog](https://muhammadali.xyz/js-simple-cookie-consent/?utm_source=hungovercoders) for a great simple cookie consent explanation, who then put me on to [klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) as an open source consent tool. I then discovered this great video tutorial by [measureschool](https://measureschool.com/?utm_source=hungovercoders) backed up by this [blog post](https://measureschool.com/cookie-consent-banner/). It's also worth reading through [google tag manager consent configuration](https://support.google.com/tagmanager/answer/10718549?hl=en). However I will be summarising all of this into my our own brand of hungovercoder implementation below...
 
@@ -80,7 +82,7 @@ var klaroConfig = {
     embedded: false,
     groupByPurpose: false,
     storageMethod: 'cookie',
-    cookieName: 'consent_klaro', // change cookie name to show consent in name
+    cookieName: 'consent', // change cookie name to show consent in name
     cookieExpiresAfterDays: 365,
     default: false, // set the global default to be not consenting
     mustConsent: true, // ensure users have to consent when enter website
@@ -133,11 +135,19 @@ Add a trigger to your tag for "Consent Initialization - All Pages". Your "Consen
 
 ![GTM Consent Tag]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/klaro-consent-capture-tag.png)
 
+### Create First Party Cookie Variable
+
+Now create a first party cookie variable to capture the consent details captured in the cookie in the previous section. We can then leverage this as a cookie and parse it into other variables. To do this go to variables > create new > first party cookie. Set the variable name to be "consentCapture" and set the cookie name to be what you set in your claro config, in this case "consent", finally set it to be a URI-decode cookie with a tick box.  
+
+![GTM First Party Cookie]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/cookie-variable.png)
+
+### Preview
+
 To see the new functionality in action go to "Preview" in google tag manager and connect to your website.
 
 ![Klaro Consent Pop-Up]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/klaro-consent-pop-up.png)
 
-If you for example decline marketing but leave analytics as it is, you can see the variable set correctly in tag assistant.
+If you for example decline marketing but leave analytics as it is, you can see the first party cookie variable set correctly in tag assistant.
 
 ![GTM Consent Variable]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/klaro-consent-variable.png)
 

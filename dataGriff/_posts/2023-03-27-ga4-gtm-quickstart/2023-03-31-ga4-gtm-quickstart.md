@@ -8,13 +8,13 @@ author: dataGriff
 I want google analytics 4 on my website and I want it now. How else can I ensure that all the hungovercoders are learning all the best tech and finding their local breweries?? The following shows you how to setup a GA4 property and hook it up to your website with google tag manager...
 
 - [Pre-Requisites](#pre-requisites)
-- [Why use Google Analytics 4?](#why-use-google-analytics-4)
+- [Why use Google Analytics 4 and GTM?](#why-use-google-analytics-4-and-gtm)
 - [Creating a GA Account, Property and Data Stream](#creating-a-ga-account-property-and-data-stream)
   - [Account](#account)
   - [Property](#property)
   - [Data Stream](#data-stream)
 - [Using a GTM Container with Standard Tags](#using-a-gtm-container-with-standard-tags)
-  - [Account \& Container](#account--container)
+  - [Account and Container](#account-and-container)
   - [Add Container to Your Website](#add-container-to-your-website)
   - [Create New GTM Workspace](#create-new-gtm-workspace)
   - [GA4 Variables](#ga4-variables)
@@ -27,9 +27,13 @@ I want google analytics 4 on my website and I want it now. How else can I ensure
 
 You're going to need a [google account](https://myaccount.google.com/) so that you can leverage [google analytics](https://analytics.google.com/analytics/web/) and [google tag manager](https://tagmanager.google.com/). There's then a nice [google platform homepage](https://marketingplatform.google.com/home) you can use as a portal to leverage these tools (among others).
 
-## Why use Google Analytics 4?
+## Why use Google Analytics 4 and GTM?
 
-[Google analytics 4](https://developers.google.com/analytics/devguides/collection/ga4) is a great tool to monitor your website with very minimal effort. It offers a huge amount of built in analytics out of the box, it integrates well into google tag manager and allows you to synch a million rows of event data to [big query](https://cloud.google.com/bigquery) absolutely free - daily! I also have a preference to use [google tag manager](https://tagmanager.google.com/) to manage all GA integration over the site tag as once in place it allows complete management of analytics from GTM without the need for website deploys.
+[Google analytics 4](https://developers.google.com/analytics/devguides/collection/ga4) is a great tool to monitor your website with very minimal effort. It offers a huge amount of built in analytics out of the box, it integrates well into google tag manager and allows you to synch a million rows of event data to [big query](https://cloud.google.com/bigquery) absolutely free - daily! I also have a preference to use [google tag manager](https://tagmanager.google.com/) to manage all GA integration over the site tag as once in place it allows complete management of analytics from GTM without the need for website deploys. 
+
+The following setup will look something like the below.
+
+![GA GTM Map]({{ site.baseurl }}/assets/2023-03-31-ga4-gtm-quickstart/ga-gtm-map.drawio.png)
 
 ## Creating a GA Account, Property and Data Stream
 
@@ -69,7 +73,9 @@ Once created, copy the measurement id ready to use in GTM to configure GA later.
 
 ## Using a GTM Container with Standard Tags
 
-### Account & Container
+We'll create a GTM account first that we'll consider as mapping at the same level to the GA account we setup previously. The container for GTM will then map to the data stream we created in GA. We could end up with multiple containers mapping to multiple data streams that roll up to a single property in GA, but for now this is our simple quickstart.
+
+### Account and Container
 
 In google tag manager click create account.
 

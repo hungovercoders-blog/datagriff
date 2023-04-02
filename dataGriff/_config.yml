@@ -1,0 +1,15 @@
+title: Hungovercoders
+##layout: default
+author: dataGriff
+email: your-email@domain.com
+description: > # this means to ignore newlines until "baseurl:"
+  For those who enjoy coding and drinking.
+theme: minima
+plugins:
+  - jekyll-spaceship
+
+# social links
+twitter_username: your-twitter-handle # DO NOT include the @ character, or else the build will fail!
+github_username:  your-github-handle # DO NOT include the @ character, or else the build will fail!
+
+show_excerpts: true # set to false to remove excerpts on the homepage

@@ -2,6 +2,6 @@
 title: "Blog - dataGriff"
 ---
 
-<img src="/blog/assets/site/logo.png" alt="Logo" width="100" height="100"/>
+<img src="/assets/site/logo3.ico" alt="Logo" width="150px" height="auto"/>
 
 Please see the below hungovercoders for their insights!

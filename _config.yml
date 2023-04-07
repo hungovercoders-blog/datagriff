@@ -8,8 +8,8 @@ theme: minima
 plugins:
   - jekyll-spaceship
 
-url: https://blog.hungovercoders.com
-baseurl: /datagriff
+# url: https://blog.hungovercoders.com
+# baseurl: /datagriff
 
 # social links
 twitter_username: your-twitter-handle # DO NOT include the @ character, or else the build will fail!

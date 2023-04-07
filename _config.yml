@@ -8,8 +8,9 @@ theme: minima
 plugins:
   - jekyll-spaceship
 
-# url: https://blog.hungovercoders.com
-# baseurl: /datagriff
+domain: blog.hungovercoders.com       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+url: https://blog.hungovercoders.com # the base hostname and protocol for your site, e.g. http://example.com
+baseurl: /datagriff 
 
 # social links
 twitter_username: your-twitter-handle # DO NOT include the @ character, or else the build will fail!

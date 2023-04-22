@@ -34,7 +34,7 @@ theme: minima
 plugins:
   - jekyll-feed
 
-google_analytics: G-D95TZQ8QFT
+google_analytics: GTM-5RJBJWL
 
 show_excerpts: true # set to false to remove excerpts on the homepage
 

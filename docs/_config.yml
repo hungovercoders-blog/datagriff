@@ -29,6 +29,7 @@ baseurl: /datagriff      # place folder name if the site is served in a subfolde
 twitter_username: datagriff
 github_username:  datagriff
 linkedin_username:  datagriff
+youtube_username:  '@datagriff182'
 
 # Build settings
 theme: minima

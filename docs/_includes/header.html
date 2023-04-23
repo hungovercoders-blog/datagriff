@@ -1,6 +1,4 @@
 <header class="site-header">
-  <a href="https://www.hungovercoders.com"><img alt="hungovercoders" src="{{ site.baseurl }}/assets/site/logo3.ico"
-      width=75px align="left"></a>
   <div class="wrapper">
 
     {%- assign default_paths = site.pages | map: "path" -%}
@@ -20,6 +18,8 @@
         </span>
       </label>
 
+
+
       <div class="trigger">
         {%- for path in page_paths -%}
         {%- assign my_page = site.pages | where: "path", path | first -%}
@@ -30,5 +30,8 @@
       </div>
     </nav>
     {%- endif -%}
+    <!-- <a href="https://www.hungovercoders.com"><img alt="hungovercoders" src="{{ site.baseurl }}/assets/site/logo3.ico"
+      width=50px align="right"></a> -->
   </div>
+
 </header>

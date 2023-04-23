@@ -4,15 +4,6 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+My name is Richard Griffiths otherwise known as dataGriff who likes all things tech and is one of the infamous [hungovercoders](https://www.hungovercoders.com/)!
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+You can find me on [LinkedIn](https://www.linkedin.com/datagriff/), [Twitter](https://twitter.com/datagriff) or visit the [hungovercoders organisation](https://github.com/hungovercoders) or [hungovercoders blog](https://github.com/hungovercoders-blog) on github.

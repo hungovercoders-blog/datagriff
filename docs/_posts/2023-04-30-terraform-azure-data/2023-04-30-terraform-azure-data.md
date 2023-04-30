@@ -34,10 +34,10 @@ I am quite often creating various data assets like data lake storage, databricks
 
 ## Terraform an Azure Resource Group with Local State
 
-First lets create the simplest possible deployment possible using local state. Create a new directory on your local machine called azure.platform and initialise a git repo with a README.md. The end file structure is going to look like the following:
+First lets create the simplest possible deployment possible using local state. Create a new directory on your local machine called platform.azure.data and initialise a git repo with a README.md. The end file structure is going to look like the following:
 
 ```file
-azure.platform
+azure.platform.data
 │   README.md
 |   .gitignore    
 |   main.tf
@@ -295,7 +295,7 @@ Everything should now be working except you won't have a state file locally, thi
 
 ## Deploy Resource Group with Github Action
 
-If you haven't already ensure your local repository is synched to your github account. I called my repo azure.platform.data.
+If you haven't already ensure your local repository is synched to your github account. I called my repo platform.azure.data.
 
 Next create a team API token in your [terraform cloud organisation](https://app.terraform.io/app/organizations). Copy this value.
 
@@ -486,4 +486,4 @@ Check in your source code and the github actions should kick off automatically. 
 These resources don't tend to cost anything when they don't have clusters or hubs on them so they're fine to leave... but I would recommend a regular tear down in case you have added compute to them. You can then easily create them again using this system you have now setup.
 To kill your assets when you are not using them you can then run terraform destroy from your IDE when logged in or run destroy from your terraform cloud workspace.
 
-To see the most up to date version of this code see my repository at [dataGriff/azure.platform.data](https://github.com/dataGriff/azure.platform.data), or in case I renamed it drunkenly check out [datagriff github](https://github.com/dataGriff)!
+To see the most up to date version of this code see my repository at [dataGriff/platform.azure.data](https://github.com/dataGriff/platform.azure.data), or in case I renamed it drunkenly check out [datagriff github](https://github.com/dataGriff)!

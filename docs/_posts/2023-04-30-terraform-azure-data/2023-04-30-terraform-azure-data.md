@@ -25,9 +25,12 @@ I am quite often creating various data assets like data lake storage, databricks
 
 ## Diagram
 
-1. We're going to be deploying our infrastructure assets to Azure.
-1. We're going to be storing the state of our infrastructure in terraform cloud.
-1. We're going to be leveraging github for source control and deployment with github actions.
+1. We're going to be deploying our infrastructure assets to Azure in a resource group in a subscription.
+1. We're going to create an application registration in Azure that will have the credentials to interact with the Azure subscription.
+1. We're going to be storing the state of our infrastructure in terraform cloud. This will interact with the Azure infrastructure using the Azure application registration credentials that will be stored as environment variables in terraform cloud scoped to the terraform cloud project.
+1. We're going to be leveraging github for source control and deployment with github actions. The github action will interact with the state deploy in terraform cloud using a secure API key generated from a terraform cloud team that is part of the terraform organisation.
+
+![Terraform Azure Overview]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/overview.drawio.png)
 
 ## Terraform an Azure Resource Group with Local State
 
@@ -218,13 +221,13 @@ Navigate to your new organisation and create a project called "learning". We cou
 
 We are now going to create an application registration in azure with contributor credentials to deploy assets into azure. For this I am going to scope it at the subscription I am learning in and run the following command. If you're not already logged in to Azure you'll need to do tha again with "az login".
 
-``bash
+```bash
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/%AZURE_SUBSCRIPTION_ID%" --name "aprg-lrn-cont"
 ```
 
 In terraform cloud create a variable set called "Azure Learning Credentials" and apply it to the learning project.
 
-![Terraform Cloud Variable Set Name]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/terraform_cloud_variableset01.png)
+![Terraform Cloud Variable Set Name]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/terraform_variableset01.png)
 
 Then add environment variables to the terraform cloud variable set that came out of the azure CLI command above. Make sure you set them as environment variables and the ARM_CLIENT_SECRET is set to sensitive.
 
@@ -236,15 +239,22 @@ Then add environment variables to the terraform cloud variable set that came out
 
 You will also need to add ARM_SUBSCRIPTION_ID as a variable and add your Azure subscription id to this. Save your variable set once completed.
 
-![Terraform Cloud Variable Set Values]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/terraform_cloud_variableset02.png)
+| Terraform Cloud Variable Name  |
+|---|
+|  ARM_SUBSCRIPTION_ID |
+
+Your variable keys and their values should look something like the below. Make sure the category is **env**.
+
+![Terraform Cloud Variable Set Values]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/terraform_variableset02.png)
 
 Create a workspace and we're going to use **API-diven-workflow** as the option on the first page and not the recommended version control workflow. This is currently a personal preference as I want to manage all deployment visibility in github actions (see later section). Name the workspace learn_azure_platform_data and ensure it is in the learning project - which as well as organising our workspaces it will also be able to leverage the environment variables we setup previously.
 
 ![Terraform Cloud Workspace]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/terraform_cloud_workspace.png)
 
-Amend the version.tf file to now use terraform cloud to manage state instead of it being managed locally. You'll also need to update the organisation below to the one you created.
+Amend the version.tf file to now use terraform cloud to manage state instead of it being managed locally. You'll also need to update the myorganisation value below to the name of the one you created.
 
-```terraform {
+```terraform
+{
 
   cloud {
     organization = "myorganisation"
@@ -275,13 +285,13 @@ To confirm this now works remnotely you will need to first run terraform login a
 terraform login
 ```
 
-The run apply.
+Then run apply.
 
 ```bash
 terraform apply
 ```
 
-Everything should now be working except you won't have a state file locally, this will be in your terraform cloud project.
+Everything should now be working except you won't have a state file locally, this will be held in your terraform cloud workspace.
 
 ## Deploy Resource Group with Github Action
 
@@ -291,7 +301,7 @@ Next create a team API token in your [terraform cloud organisation](https://app.
 
 ![Terraform Cloud Token]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/terraform_cloud_token.png)
 
-Add the APi token from terraform cloud to your github repository under settings > security > secrets and vaiables > actions called "TF_API_TOKEN". Paste in the value from the team API token above.
+Add the APi token from terraform cloud to your github repository under settings > security > secrets and vaiables > actions and name it "TF_API_TOKEN". Paste in the value from the team API token above.
 
 ![Github Secret]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/github_secret.png)
 
@@ -352,7 +362,7 @@ You should be able to do a manual run of this workflow because we added the work
 
 ## Deploy Azure Data Platform Assets
 
-Now we have everything configured I want to add some data platform resources to my terraform code. Before I do this I need to update my variables file to name these appropriately. Amend your variables.tf code to be the following which now has extra variables to hand the new resource names (databricks, data lake and event hub).
+Now we have everything configured I want to add some data platform resources to my terraform code. Before I do this I need to update my variables file to name these appropriately. Amend your variables.tf code to be the following which now has extra variables at the end to handle the new resource names (databricks, data lake and event hub).
 
 ```terraform
 variable "region" {
@@ -476,4 +486,4 @@ Check in your source code and the github actions should kick off automatically. 
 These resources don't tend to cost anything when they don't have clusters or hubs on them so they're fine to leave... but I would recommend a regular tear down in case you have added compute to them. You can then easily create them again using this system you have now setup.
 To kill your assets when you are not using them you can then run terraform destroy from your IDE when logged in or run destroy from your terraform cloud workspace.
 
-To see the most up to date version of this code see my repository at [dataGriff/azure.platform.data](https://github.com/dataGriff/azure.platform.data), or if I renamed it drunkely see [datagriff github](https://github.com/dataGriff)!
+To see the most up to date version of this code see my repository at [dataGriff/azure.platform.data](https://github.com/dataGriff/azure.platform.data), or in case I renamed it drunkenly check out [datagriff github](https://github.com/dataGriff)!

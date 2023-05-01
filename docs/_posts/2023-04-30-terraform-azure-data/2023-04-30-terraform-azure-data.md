@@ -5,7 +5,7 @@ author: dataGriff
 description: This is how to deploy azure platform resources with terraform
 
 image:
-  path: /assets/2023-04-14-terraform-azure-data/link.png
+  path: /assets/2023-04-30-terraform-azure-data/link.png
 
 tags: terraform azure
 ---

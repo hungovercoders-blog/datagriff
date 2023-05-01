@@ -15,7 +15,7 @@ I am quite often creating various data assets like data lake storage, databricks
 - [Pre-Requisites](#pre-requisites)
 - [Diagram](#diagram)
 - [Terraform an Azure Resource Group with Local State](#terraform-an-azure-resource-group-with-local-state)
-- [Setup \& Deploy Through Terraform Cloud](#setup--deploy-through-terraform-cloud)
+- [Setup and Deploy Through Terraform Cloud](#setup-and-deploy-through-terraform-cloud)
 - [Deploy Resource Group with Github Action](#deploy-resource-group-with-github-action)
 - [Deploy Azure Data Platform Assets](#deploy-azure-data-platform-assets)
 
@@ -212,7 +212,7 @@ Before we continue though, run the following to remove the resource group you de
 terraform destroy
 ```
 
-## Setup & Deploy Through Terraform Cloud
+## Setup and Deploy Through Terraform Cloud
 
 Now we are going to manage state remotely in terraform cloud instead of in a local file. This will allow us to perform automated deployment using remote techniques such as github actions. First then, to avoid confusion, remove the terraform.tfstate file from your local repo.
 

@@ -3,6 +3,11 @@ title: "Terraform Azure Data Learning Platform"
 date: 2023-04-30
 
 author: dataGriff
+
+image:
+  path: /datagriff/assets/site/datagriff.png
+  height: 100
+  width: 100
 ---
 
 I am quite often creating various data assets like data lake storage, databricks etc on Azure for learning. I want to automate the provision of these to make my life easier and so I decided to crack open a can and learn some [terraform on Azure](https://developer.hashicorp.com/terraform/tutorials/azure-get-started) with github actions to make this repeatable!

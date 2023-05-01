@@ -30,6 +30,8 @@ twitter_username: datagriff
 github_username:  datagriff
 linkedin_username:  datagriff
 youtube_username:  '@datagriff182'
+image:
+  path: /assets/site/datagriff.png
 
 # Build settings
 theme: minima

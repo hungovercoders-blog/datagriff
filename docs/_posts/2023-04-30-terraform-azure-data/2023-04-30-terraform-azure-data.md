@@ -5,7 +5,7 @@ date: 2023-04-30
 author: dataGriff
 
 image:
-  path: /datagriff/assets/site/datagriff.png
+  path: /assets/site/datagriff.png
   height: 100
   width: 100
 ---

@@ -2,7 +2,7 @@
 title: "Terraform Azure Data Learning Platform"
 date: 2023-04-30
 author: dataGriff
-description: This is how to deploy azure platform resources with terraform
+description: This is how to deploy azure platform resources with terraform. The resource deployed include azure data lake storage, databricks and event hub namespaces. The  automated deployment utilises github actions and terraform cloud. 
 
 image:
   path: /assets/2023-04-30-terraform-azure-data/link.png

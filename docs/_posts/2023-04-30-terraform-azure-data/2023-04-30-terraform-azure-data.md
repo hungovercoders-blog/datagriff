@@ -315,7 +315,7 @@ In your github repository go to actions and choose a Terraform workflow.
 ![Github Workflow]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/github_workflow.png)
 
 You can remove all the comments at the top as they are pretty much everything we have just gone through. The two things to change will be to add a workflow dispatch as an "on" trigger and also remove the quotes from "main" in the apply conditional branch. You can also remove all comments if you wish. Your file should now look something like the following, commit this to your remote repository.
-
+{% raw %}
 ```yaml
 name: 'Terraform'
 
@@ -360,7 +360,7 @@ jobs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
 ```
-
+{% endraw %}
 You should be able to do a manual run of this workflow because we added the workflow_dispatch trigger. Run your workflow and make sure it all goes green!
 
 ![Github Workflow Success]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/github_workflow_success.png)

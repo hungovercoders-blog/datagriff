@@ -1,8 +1,11 @@
 ---
 title: "Web Scraping for Beer with Python Beautiful Soup"
 date: 2022-10-02
-
 author: dataGriff
+description: Covering how to use beautifulsoup python library to scrape websites for information and parse it into something useful
+image:
+  path: /assets/2022-10-01-beautiful-soup/link.png
+tags: python beautiful-soup web-scraping
 ---
 
 So we've previously looked at creating [beer in a flask api](https://www.hungovercoders.com/blog/datagriff/2022/09/25/flask-api.html), now I want to guzzle some beer from the web using the python package [beautiful soup](https://pypi.org/project/beautifulsoup4/) to scrape beer information!

@@ -3,6 +3,13 @@ title: "Cookie Consent for your Website"
 date: 2023-03-11
 
 author: dataGriff
+
+description: This is how you can create cookie consent for your website using google tag manager and Klaro
+
+image:
+  path: /assets/2023-03-11-cookie-consent/link.png
+
+tags: google-tag-manager
 ---
 
 Ok beer and code lovers, I wanted to make sure that I captured consent for analytics for anyone coming to the hungovercoders website.  I'll be honest by the end of my consent rabbit hole I really fancied a can, but instead I'll share my knowledge here with you of how I leveraged [Google Tag Manager](https://tagmanager.google.com/) and [Klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) to manage consent for a website. The reason that this is such a great combination is that it is free, extremely customizable and you can manage your consent from a single point.

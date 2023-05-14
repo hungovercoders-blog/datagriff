@@ -1,8 +1,11 @@
 ---
 title: "Save Space on you Local Docker"
 date: 2023-01-21
-
 author: dataGriff
+description: This is how you remove your unused containers locally to save a lot of disk space
+image:
+  path: /assets/2023-01-21-docker-clean/link.png
+tags: docker
 ---
 
 Super quick blog post today which will help stop you screaming at your C drive when it runs out of space for more beer downloads.

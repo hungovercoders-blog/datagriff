@@ -1,8 +1,11 @@
 ---
 title: "Creating Schemas and Data from Beer Models"
 date: 2022-11-27
-
 author: dataGriff
+description: This is how you can used pydantic models to create schemas from your data model such as JSON schemas and fake data generation
+image:
+  path: /assets/2022-11-27-fastapi-gen/link.png
+tags: python fastapi pydantic
 ---
 
 A quick post today showing how [Pydantic](https://pydantic-docs.helpmanual.io/) offers some great ways to create schemas from your data model. In this post I"ll show you how to create a JSON schema for you beers and generate some fake data!
@@ -73,7 +76,7 @@ pip install -r requirements.txt
 
 ## Setup your Model
 
-We"re going to setup another simple beer model like we did in the last few posts. The only extra piece that has been added is the "Config" class that allows you to add an example of the class in JSON format. This will then be added to your JSON schema that you output. 
+We"re going to setup another simple beer model like we did in the last few posts. The only extra piece that has been added is the "Config" class that allows you to add an example of the class in JSON format. This will then be added to your JSON schema that you output.
 
 Copy and paste the below code into your beer.py file.
 

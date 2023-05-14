@@ -1,8 +1,11 @@
 ---
 title: "Creating a Beer Form with React"
 date: 2022-12-21
-
 author: dataGriff
+description: Create a simple CRUD form application using react
+image:
+  path: /assets/2022-12-21-react-basic/link.png
+tags: react
 ---
 
 With the festive season upon us I have been more hungover than coder recently... However I was able to do this [quick react course](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d) by [NetNinja](https://www.youtube.com/@NetNinja) and can now show you how to start creating beers in a simple single page app!

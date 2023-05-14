@@ -1,8 +1,13 @@
 ---
 title: "Data Layer with Javascript"
 date: 2023-02-27
-
 author: dataGriff
+description: This is how you can add data to the dataLayer of your website using Javascript, view it using developer tools and also leverage it in google tag manager
+
+image:
+  path: /assets/2023-02-27-data-layer/link.png
+
+tags: google-tag-manager javascript
 ---
 
 I wanted to make some local breweries available to the browser client side so I can then use this in tagging exploits. Below talks through how I can make these alcoholic hotpots available in the data layer!

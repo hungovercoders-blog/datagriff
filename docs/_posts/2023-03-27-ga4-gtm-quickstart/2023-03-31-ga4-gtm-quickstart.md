@@ -1,8 +1,14 @@
 ---
 title: "Quick Start for Google Analytics 4 Using GTM"
 date: 2023-03-27
-
 author: dataGriff
+
+description: This is how you can quickly setup a google analytics 4 property using google tag manager to monitor your website traffic
+
+image:
+  path: /assets/2023-03-27-ga4-gtm-quickstart/link.png
+
+tags: google-tag-manager google-analytics
 ---
 
 I want google analytics 4 on my website and I want it now. How else can I ensure that all the hungovercoders are learning all the best tech and finding their local breweries?? The following shows you how to setup a GA4 property and hook it up to your website with google tag manager...

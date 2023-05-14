@@ -1,8 +1,11 @@
 ---
 title: "Sitting on the docker the beer"
 date: 2022-11-12
-
 author: dataGriff
+description: Containerize a fastapi application in a docker container and publish this as an azure container app
+image:
+  path: /assets/2022-11-12-docker-beer/link.png
+tags: azure docker api
 ---
 
 In the previous post we created a [Beer API using Fast API in python](https://www.hungovercoders.com/blog/datagriff/2022/11/06/fast-api.html). Now fellow hungovercoders we want to pour this into a docker container and publish in an azure container app, sharing our beer-fuelled goodness with the world!!!

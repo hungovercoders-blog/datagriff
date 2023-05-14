@@ -1,8 +1,11 @@
 ---
 title: "Get by with Git"
 date: 2022-10-22
-
 author: dataGriff
+description: Covering how to use git and a cheatsheet of the most regularly used commands as well as how to integrate with github
+image:
+  path: /assets/2022-10-22-get-by-with-git/link.png
+tags: git github
 ---
 
 Drinking too much? Can't remember all those git commands and methods without googling them every time?? Google no more, this page will help you... get by with git!

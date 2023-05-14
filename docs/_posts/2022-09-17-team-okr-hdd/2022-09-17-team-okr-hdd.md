@@ -1,8 +1,11 @@
 ---
 title: "Team-First, OKRs and Hypothesis Driven Development"
 date: 2022-09-17
-
 author: dataGriff
+description: Why a team first approach couple with an objective and key results framework motivated by hypothesis driven development can lead to success in your organisation
+image:
+  path: /assets/2022-09-17-team-okr-hdd/link.png
+tags: okr team
 ---
 
 Below is a summary of the magic ingredients you can use to dramatically improve your organisations value and staff happiness.

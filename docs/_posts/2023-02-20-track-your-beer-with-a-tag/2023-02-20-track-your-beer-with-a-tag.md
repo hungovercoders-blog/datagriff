@@ -1,8 +1,13 @@
 ---
 title: "Track Your Beer with a Tag"
 date: 2023-02-20
-
 author: dataGriff
+description: This is how you can setup basic tagging with google tag manager so you can track traffic leaving your website with a unique identifier that gets generated on links
+
+image:
+  path: /assets/2023-02-20-track-your-beer-with-a-tag/link.png
+
+tags: google-tag-manager
 ---
 
 You have a load of lovely links on your website that link to external alcoholic partners. How do you keep track of your beer fuelled journeys when a customer goes to those beer-infused partners?? With google tag manager and some tasty javascript, that's how!

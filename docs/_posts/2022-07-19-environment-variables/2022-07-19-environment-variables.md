@@ -1,8 +1,11 @@
 ---
 title: "Utilizing User Environment Variables"
 date: 2022-07-19
-
 author: dataGriff
+description: Using local environment variables for repeat usage in code such as python, .net, powershell and bash
+image:
+  path: /assets/2022-07-19-environment-variables/link.png
+tags: python powershell .net bash
 ---
 
 Creating environment variables is useful for when you want to use the same variable across multiple languages, or perhaps to maintain a consistent environment for your settings on your machine, such as development credentials.

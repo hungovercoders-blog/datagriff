@@ -3,10 +3,8 @@ title: "Passing the Spark Exam"
 date: 2023-05-14
 author: dataGriff
 description: This is a guide of how I passed the databricks spark exam along with a bit of a cheat sheet on spark architecture and the spark API
-
 image:
   path: /assets/2023-05-14-pass-spark-exam/link.png
-
 tags: spark certification
 ---
 

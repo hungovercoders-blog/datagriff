@@ -1,8 +1,11 @@
 ---
 title: "Docker Environment Variables and Secret Beers in Azure Key Vault"
 date: 2023-01-02
-
 author: dataGriff
+description: This is how you can use environment variables in a docker application and reference key vault for these in a deployed application in Azure 
+image:
+  path: /assets/2023-01-02-docker-environment-variables/link.png
+tags: docker azure
 ---
 
 I have been looking at storing beers in a database and to do that I needed to understand how environment variables work. My alcohol-addled mind needed to hello world this before I got state involved as well. Below is a simple demonstration of how you deal with environment variables in a docker fast api setup and then how you can reference these in a deployed app with key vault in Azure.

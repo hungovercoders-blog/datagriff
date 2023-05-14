@@ -10,7 +10,7 @@ image:
 tags: spark certification
 ---
 
-After a few Guinness there is nothing I like better than to do a certification. In this instance it was the [databricks spark developer associate certification](https://www.databricks.com/learn/certification/apache-spark-developer-associate). This is how I did it!
+After a few Guinness there is nothing I like better than to do a certification. In this instance it was the [databricks spark developer associate certification](https://www.databricks.com/learn/certification/apache-spark-developer-associate). It took me about 2 weeks from deciding to do it to passing as I was already well versed in spark. This is how I did it!
 
 - [Pre-Requisites](#pre-requisites)
 - [Useful Links](#useful-links)

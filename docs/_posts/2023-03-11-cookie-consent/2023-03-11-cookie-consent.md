@@ -1,5 +1,5 @@
 ---
-title: "Cookie Consent for your Website"
+title: "Cookie Consent for your Website Using Google Tag Manager"
 date: 2023-03-11
 
 author: dataGriff

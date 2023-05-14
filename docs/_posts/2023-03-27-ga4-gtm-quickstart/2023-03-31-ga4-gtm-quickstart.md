@@ -1,5 +1,5 @@
 ---
-title: "Quick Start for Google Analytics 4 Using GTM"
+title: "Quick Start for Google Analytics 4 Using Google Tag Manager"
 date: 2023-03-27
 author: dataGriff
 

@@ -1,5 +1,5 @@
 ---
-title: "Creating Schemas and Data from Beer Models"
+title: "Creating Schemas and Data from Pydantic Beer Models"
 date: 2022-11-27
 author: dataGriff
 description: This is how you can used pydantic models to create schemas from your data model such as JSON schemas and fake data generation

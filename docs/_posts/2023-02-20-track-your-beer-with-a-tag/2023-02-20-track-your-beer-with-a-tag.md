@@ -1,5 +1,5 @@
 ---
-title: "Track Your Beer with a Tag"
+title: "Track Your Beer with a Tag using Google Tag Manager"
 date: 2023-02-20
 author: dataGriff
 description: This is how you can setup basic tagging with google tag manager so you can track traffic leaving your website with a unique identifier that gets generated on links

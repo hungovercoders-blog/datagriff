@@ -54,7 +54,7 @@ If you then type **div.test** in VS code and then press tab you get the followin
 We are going to use some boiler plate command line tools to create our file structure, but lets use this a guide to know what our rough end state will be and which are the most important files for this demo.
 
 ```file
-beerapi
+beer-demo
 │   README.md
 |   .gitignore
 |   package-lock.json  

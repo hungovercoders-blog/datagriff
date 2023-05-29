@@ -16,6 +16,7 @@ After a few Guinness there is nothing I like better than to do a certification. 
   - [Diagram](#diagram)
   - [Terms](#terms)
 - [Spark API Cheatsheet](#spark-api-cheatsheet)
+  - [Generate Test Data](#generate-test-data)
   - [Basic Querying Dataframes](#basic-querying-dataframes)
   - [Reading and Writing](#reading-and-writing)
   - [Beyond Basic Querying Dataframes](#beyond-basic-querying-dataframes)
@@ -83,7 +84,112 @@ There are far better diagrams out there such as this one so this is simply to ke
 
 ## Spark API Cheatsheet
 
-This next session is as much syntax and content that I can muster... I recommend going through the courses and links mentioned above still, but the below should help by having enough reminders for any quick questions you want to lookup for the exam. If you want to actually run some of this code you can use my [cheatsheet notebooks](https://github.com/hungovercoders-blog/cheatsheets/tree/main/Spark) found here in the [hungovercoders cheatsheets](https://github.com/hungovercoders-blog/cheatsheets) which also generates the test data to go with it.
+This next session is as much syntax and content that I can muster... I recommend going through the courses and links mentioned above still, but the below should help by having enough reminders for any quick questions you want to lookup for the exam. If you want to actually run some of this code you can use the generate test data section below to create it. You can also use my [cheatsheet notebooks](https://github.com/hungovercoders-blog/cheatsheets/tree/main/Spark) found here in the [hungovercoders cheatsheets](https://github.com/hungovercoders-blog/cheatsheets) to run the notebooks in databricks which also generates the test data to go with it.
+
+### Generate Test Data
+
+First install the required packages.
+
+```bash
+pip install dbldatagen
+pip install faker
+```
+
+Create some fake reference data for breweries.
+
+```py
+brewery_beers = [
+    "tinyrebel_staypuft",
+    "tinyrebel_cwtch",
+    "craftydevil_mikerayer",
+    "craftydevil_mangowalk",
+    "flowerhorn_yawn",
+    "flowerhorn_mantis",
+]
+
+df_brewer = spark.createDataFrame([("Tiny Rebel", "Newport"), ("Crafty Devil", "Cardiff"), ("Flowerhorn", "Cardiff")], ["brewer", "location"])
+
+brewer_metadata = {"description": "This is the name of the brewer of the beer."}
+df_brewer = df_brewer.withMetadata("brewer", brewer_metadata)
+location_metadata = {"description": "This is the location of the brewer."}
+df_brewer = df_brewer.withMetadata("location", location_metadata)
+
+print("Here is the metadata for the fields:")
+for field in df_brewer.schema:
+    print(field.name, field.dataType, field.metadata["description"])
+
+display(df_brewer)
+```
+
+Then create the drinking data!
+
+```py
+from datetime import timedelta, datetime
+from pyspark.sql.functions import current_timestamp, current_date, lit
+from pyspark.sql.types import (
+    StructType,
+    StructField,
+    StringType,
+    FloatType,
+    TimestampType,
+)
+import dbldatagen as dg
+from faker.providers.person.en import Provider
+
+first_names = list(set(Provider.first_names))[0:1000]
+
+
+interval = timedelta(days=1, hours=1)
+end = datetime.now()
+start = end - timedelta(30)
+
+first_name_metadata = {"description": "The first name of the person who drank the beer"}
+brewery_beer_metadata = {"description": "The brewer and beer that was drunk"}
+quantity_pint_metadata = {"description": "The amount of beer that was drunk"}
+timestamp_metadata = {"description": "Date and time beer was drank"}
+last_updated_metadata = {"description": "The last date and time this row was updated"}
+
+schema = StructType(
+    [
+        StructField("first_name", StringType(), True, metadata=first_name_metadata),
+        StructField("brewery_beer", StringType(), True, metadata=brewery_beer_metadata),
+        StructField(
+            "quantity_pint", FloatType(), True, metadata=quantity_pint_metadata
+        ),
+        StructField("timestamp", TimestampType(), True, metadata=timestamp_metadata),
+        StructField(
+            "last_updated", TimestampType(), True, metadata=last_updated_metadata
+        ),
+    ]
+)
+
+beers_drank = (
+    dg.DataGenerator(sparkSession=spark, name="beers_drank", rows=10000, partitions=10)
+    .withSchema(schema)
+    .withColumnSpec("first_name", "string", values=first_names)
+    .withColumnSpec("brewery_beer", "string", values=brewery_beers)
+    .withColumnSpec("quantity_pint", minValue=0.5, maxValue=1, step=0.5, random=True)
+    .withColumnSpec(
+        "timestamp", "timestamp", begin=start, end=end, interval=interval, random=True
+    )
+)
+
+df_beers_drank = (
+    beers_drank.build(withTempView=True)
+    .withMetadata("first_name", first_name_metadata)
+    .withMetadata("brewery_beer", brewery_beer_metadata)
+    .withMetadata("quantity_pint", quantity_pint_metadata)
+    .withMetadata("timestamp", timestamp_metadata)
+    .withColumn("last_updated", current_timestamp())
+    .withMetadata("last_updated", last_updated_metadata)
+)
+
+print("Here is the metadata for the fields:")
+for field in df_beers_drank.schema:
+    print(field.name, field.dataType, field.metadata["description"])
+
+display(df_beers_drank.limit(10))
+```
 
 ### Basic Querying Dataframes
 

@@ -84,7 +84,7 @@ There are far better diagrams out there such as this one so this is simply to ke
 
 ## Spark API Cheatsheet
 
-This next session is as much syntax and content that I can muster... I recommend going through the courses and links mentioned above still, but the below should help by having enough reminders for any quick questions you want to lookup for the exam. If you want to actually run some of this code you can use the generate test data section below to create it. You can also use my [cheatsheet notebooks](https://github.com/hungovercoders-blog/cheatsheets/tree/main/Spark) found here in the [hungovercoders cheatsheets](https://github.com/hungovercoders-blog/cheatsheets) to run the notebooks in databricks which also generates the test data to go with it.
+This next session is as much syntax and content that I can muster... I recommend going through the courses and links mentioned above still, but the below should help by having enough reminders for any quick questions you want to lookup for the exam. If you want to actually run some of this code you can use the generate test data section below to create it. You can also use the [cheatsheet notebooks](https://github.com/hungovercoders-blog/cheatsheets/tree/main/Spark) found here in the [hungovercoders cheatsheets](https://github.com/hungovercoders-blog/cheatsheets) to run the notebooks in databricks which also generates the test data to go with it.
 
 ### Generate Test Data
 

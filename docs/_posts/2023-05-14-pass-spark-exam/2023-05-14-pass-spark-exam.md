@@ -1,5 +1,5 @@
 ---
-title: "Passing the Spark Exam"
+title: "How to Pass the Databricks Spark Exam and Cheatsheets "
 date: 2023-05-14
 author: dataGriff
 description: This is a guide of how I passed the databricks spark exam along with a bit of a cheat sheet on spark architecture and the spark API

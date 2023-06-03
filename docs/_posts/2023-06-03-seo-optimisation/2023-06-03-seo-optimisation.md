@@ -8,7 +8,7 @@ image:
 tags: SEO
 ---
 
-So I realised not enough people were coding under the influence and visiting the [hungovercoders website](www.hungovercoders.com). I simply could not understand why not everyone in the world was coming to this awesome site. I heard the letters SEO and thought - what's occurring? A quick test found that the SEO score of the site was under 20%. Here is what I found out to improve the SEO of [www.hungovercoders.com](www.hungovercoders.com) and [blog.hungovercoders.com](blog.hungovercoders.com)!
+I realised not enough people were coding under the influence and visiting the hungovercoders website. I simply could not understand why not everyone in the world was coming to this awesome site. I heard the letters SEO and thought - what's occurring? A quick test found that the SEO score of the site was under 20%. Here is what I found out to improve the SEO of [www.hungovercoders.com](www.hungovercoders.com) and [blog.hungovercoders.com](blog.hungovercoders.com)!
 
 I may have been on Barry Island when I thought of the title of this blog post and nothing [ChatGPT](https://chat.openai.com/) was going to say was going to make me change that.
 
@@ -88,17 +88,17 @@ The first html```<meta name="title">``` is what creates the text at the top of s
 
 The html ```<meta name="description">``` is what creates underneath the title in search results or the more detailed text below social media links the other meta descriptions. Again I have chosen to keep all these consistent to make it easier.
 
-![Meta Search Results]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/meta-search-results.png)
+![Meta Search Results]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/meta-search-results.png)
 
 The  html```<meta name="viewport" content="width=device-width, initial-scale=1.0">``` is key to ensure that your webpage displays appropriately sized on any screen that it is displayed upon. This was a bit of a revelation!
 
-We then also have a number of image tags that have different purposes. The two images at the end, html```  <link rel="icon"``` and html```<link rel="apple-touch-icon"``` are what create icons either at the top of your webpage tab or on apple tablet style devices respectively. Both recommended as improving performance in SEO.
+We then also have a number of image tags that have different purposes. The two images at the end, html```<link rel="icon"``` and html```<link rel="apple-touch-icon"``` are what create icons either at the top of your webpage tab or on apple tablet style devices respectively. Both recommended as improving performance in SEO.
 
-We then have the social media images in html``` <meta property="og:image"``` and html``` <meta property="twitter:image"```. These are the images that will be shown when you share your links on social media.
+We then have the social media images in html```<meta property="og:image"``` and html```<meta property="twitter:image"```. These are the images that will be shown when you share your links on social media.
 
 You'll notice that search engines and social media might take a little while to get the updated meta tags that you want to share. This was when I discovered [meta tags](https://metatags.io/) which allows you to pop in the link to your website and confirm everything is working correctly. Nice!
 
-![Meta Validator]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/meta-validator.png)
+![Meta Validator]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/meta-validator.png)
 
 ## Meta Tags on Jekyll Sites
 
@@ -126,7 +126,7 @@ Going down the rabbit hole of SEO I came across [Seobility](https://www.seobilit
 
 The great thing about this SEO check tool is it gives you a score and a breakdown of all the things you want to try and fix in great detail.
 
-![SEO Check Overview]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/seo-check-overview.png)
+![SEO Check Overview]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/seo-check-overview.png)
 
 As a quick checklist based on the output of the tools ensure you always consider the following to improve your SEO:
 
@@ -138,23 +138,23 @@ As a quick checklist based on the output of the tools ensure you always consider
 
 There are loads of tools on this website that I am still exploring but I have gone from a score of about 20% to over 70% or 80% on my websites now, so I still have work to do!
 
-![SEO Check Tools]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/seo-check-tools.png)
+![SEO Check Tools]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/seo-check-tools.png)
 
 ### Create a Project
 
 With the free tier you can create one project in seobility that you will then see in your [dashboard](https://www.seobility.net/en/dashboard/).
 
-![SEO Check Dashboard]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/seo-check-dashboard.png)
+![SEO Check Dashboard]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/seo-check-dashboard.png)
 
 There is again a huge swathe of tooling to get stuck in to here and one of my favourites is the ranking page. Here you can add keywords to check the ranking of and you can see that hungovercoders is offically the number one rank for the keyword hungovercoders! (drops mic, sips can)
 
-![SEO Check Ranking]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/seo-check-ranking.png)
+![SEO Check Ranking]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/seo-check-rankings.png)
 
 ### Adding Txt to Domain
 
 In order to allow Seoility and google search console to crawl your site you'll be asked at some point to add a TXT to your domain. I use namecheap and these additions look something like this under the Advanced DNS.
 
-![TXT Records]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/txt-records.png)
+![TXT Records]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/txt-records.png)
 
 You can then confirm these additions by using nslookup.
 
@@ -210,7 +210,7 @@ I have now uploaded a sitemap to google search console and you can also see:
 - Average ranking position.
 - What pages are indexed and force them to be indexed.
 
-![Google Search Console]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/google-search-console.png)
+![Google Search Console]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/google-search-console.png)
 
 ## Manual ChatGPT Usage
 
@@ -220,11 +220,11 @@ And so it begins... yes during this process I needed to generate content for my 
 
 Then I could ask chatgpt to make it more "alcoholic".. and voila! Boozey and epic content!
 
-![Content More Alcoholic]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/chatgpt-more-alcoholic.png)
+![Content More Alcoholic]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/chatgpt-more-alcoholic.png)
 
 Once I started playing with this I also realised I could use it to optimise my meta tag information and have them interact with each other.
 
-![ChatGPT Meta Tags]({{ site.baseurl }}/assets/2023-06-04-seo-optimisation/chatgpt-meta-tags.png)
+![ChatGPT Meta Tags]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/chatgpt-meta-tags.png)
 
 The current content on [www.hungovercoders.com](www.hungovercoders.com) and [blog.hungovercoders.com](blog.hungovercoders.com) are a combination of a few beers and my first foray into prompt engineering... I hope this will only get better and that I only use the robots for good, not evil.
 
@@ -232,8 +232,8 @@ The current content on [www.hungovercoders.com](www.hungovercoders.com) and [blo
 
 Ok, ChatGPT might have taken over the world by my next blog post, and who knows if its me or a robot writing them (I promise I'll throw in my usual charm so you know it's me), but here are my thoughts on automation to perhaps make general website generation easier.
 
-- Automate sitemap generation and upload to relevant tooling
-- Automate validation of meta tags
+- Automate sitemap generation and upload to relevant tooling.
+- Automate validation of meta tags.
 - Create [ChatGPT](https://chat.openai.com/) integrated content creator or validator that analyses your website for desired keyword optimisation that either feeds back on a regular cadence, or letting it drive and change the content dynamically... A bit of an experiment that one and would likely need another model to check for semantics and inappropriate language, but its definitely at the back of my mind to try.
 
 Keep coding under the influence and keep searching for fun!

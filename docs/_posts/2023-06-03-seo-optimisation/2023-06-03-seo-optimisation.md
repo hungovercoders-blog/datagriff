@@ -4,7 +4,7 @@ date: 2023-05-28
 author: dataGriff
 description: Supercharge your web page with meta tag optimization, SEO analysis, and AI-powered content assistance from ChatGPT
 image:
-  path: /assets/2023-05-14-pass-spark-exam/link.png
+  path: /assets/2023-06-03-seo-optimisation/link.png
 tags: SEO
 ---
 

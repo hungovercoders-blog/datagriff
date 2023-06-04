@@ -1,6 +1,6 @@
 ---
 title: "SEO What's Occurring? | Basic Search Engine Optimisation"
-date: 2023-06-23
+date: 2023-06-03
 author: dataGriff
 description: Supercharge your web page with meta tag optimization, SEO analysis, and AI-powered content assistance from ChatGPT
 image:

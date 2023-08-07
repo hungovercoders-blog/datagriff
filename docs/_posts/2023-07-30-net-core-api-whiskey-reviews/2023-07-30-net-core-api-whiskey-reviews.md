@@ -1,37 +1,50 @@
 ---
-title: ".Net Core 7 API backed with Cosmos or Mongo | Create a Whiskey Review API with .Net Core 7"
+title: ".Net Core 7 API backed with Cosmos SQL | Create a Whiskey Review API with .Net Core 7"
 date: 2023-07-30
 author: dataGriff
 description: Create a simple API with .Net Core 7 backed with a NoSQL database
 image:
   path: /assets/2023-07-03-net-core-api-whiskey-reviews/link.png
-tags: Azure API Cosmos Mongo .Net
+tags: Azure API Cosmos .Net
 ---
+
+Well I'm definitely a hungovercoder today and its been quite difficult to stare at lists of distilleries without wanting a bit of hair of the dog... Anyway this POST (see what I did there?) will walkthrough how to create a simple API using .Net Core backed with an Azure Cosmos SQL database. I am not a .Net ninja, nor am I an API aficionado (yet!), but the following will create you a basic and currently very insecure API. I hope to investigate APIs further in .Net and follow-up with better practice approaches in the future.
 
 - [Pre-Requisites](#pre-requisites)
 - [Plan the API](#plan-the-api)
 - [Codebase Overview](#codebase-overview)
-- [Deploy Resources](#deploy-resources)
 - [Create the API Starter Template](#create-the-api-starter-template)
 - [Install Packages](#install-packages)
-- [Create the Model](#create-the-model)
+- [Create the Distillery Model](#create-the-distillery-model)
+- [Add Distillery Data](#add-distillery-data)
+- [Create the Whiskey Controller](#create-the-whiskey-controller)
+- [Test our API](#test-our-api)
+- [Get our Swagger On](#get-our-swagger-on)
+- [Create the Whiskey Review Model](#create-the-whiskey-review-model)
+- [Deploy Cosmos SQL API](#deploy-cosmos-sql-api)
 - [Create the Data Interface](#create-the-data-interface)
-- [Create the Controller](#create-the-controller)
-- [Test the API with Swagger](#test-the-api-with-swagger)
-- [Basic Front End](#basic-front-end)
+- [Add Whiskey Review Endpoints to our Controller](#add-whiskey-review-endpoints-to-our-controller)
+- [Test the API](#test-the-api)
 
 ## Pre-Requisites
 
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [.Net Framework](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
+* [Azure Subscription](https:://portal.azure.com)
+* [Cosmos DB Emulator](https://learn.microsoft.com/en-us/azure/cosmos-db/local-emulator) (optional - but handy for local dev)
+
 ## Plan the API
 
-The API is going to allow us to create, view and amend whiskey reviews as a user. We therefore need to think about our endpoints in relation to this behaviour and expected user interaction. We also don't want to create any verbs in our URI paths as we will leave that to the HTTP verbs to handle for us. We also want to show that the API is interacting with the whiskeyreviews and so we'll represent this entity as plural in the rest calls.
+The API is going to allow us to create, view and amend whiskey reviews as a user. We therefore need to think about our endpoints in relation to this behaviour and expected user interaction. We also don't want to create any verbs in our URI paths as we will leave that to the HTTP verbs to handle for us. The first endpoint is going to be simple GET of a list of distilleries that we can use to validate some inputs. The second is then how we can POST a new whiskey review. The rest of the calls are how a user can then interact with their own whiskeys and reviews.
 
 | Behaviour  | HTTP Verb  | URI |
 |---|---|---|
-|  User creates a whiskey review |  POST |  https://api.myurl/users/{userid}/whiskeyreviews |
-|  User gets whiskey reviews |  GET |  https://api.myurl/users/{userid}/whiskeyreviews |
-|  User gets specific whiskey review |  GET |  https://api.myurl/users/{userid}/whiskeyreviews/{whiskey} |
-|  User deletes a whiskey review |  DELETE |  https://api.myurl/users/{userid}/whiskeyreviews/{whiskey} |
+|  Get distilleries |  GET |  https://api.myurl/distilleries |
+|  Whiskey review created |  POST |  https://api.myurl/whiskeys/reviews |
+|  User gets whiskey reviews |  GET |  https://api.myurl/users/{userId}/whiskeys |
+|  User gets a whiskey review |  GET |  https://api.myurl/users/{userId}/whiskeys/{whiskeyId} |
+|  User deletes a whiskey review |  DELETE |  https://api.myurl/users/{userId}/whiskeys/{whiskeyId} |
+|  User updates whiskey review |  PUT | https://api.myurl/users/{userId}/whiskeys/{whiskeyId} |
 
 ## Codebase Overview
 
@@ -48,21 +61,19 @@ whiskey.reviews
 │   │   appsettings.Development.json
 │   └───Models
 |   |   |   WhiskeyReview.cs
+|   |   |   Distillery.cs
+|   |   |   TransactionResult.cs
 │   └───Data
 |   |   |   CosmosSQLDatabase.cs
 |   |   |   IDatabaseAdapter.cs
-|   |   |   MongoDBDatabase.cs
+│   └───DataSource
+|   |   |   CosmosSQLDatabase.c
+|   |   |   IDatabaseAdapter.cs
 │   └───Controllers
 |   |   |   WhiskeyReviewController.cs
-└───web
-│   │   WhiskeyReviews.html
 ```
 
-The api folder will contain the resources for the api. The Models folder will contain our object that represents the whiskey reviews we'll be creating. The Data folder will have the IDatabaseAdapter interface that both the Cosmos and Mongo files need to inherit from. This interface is what is going to allow us to swap out the database back end without impacting the functionality of the application. The Controller folder will then contain all the endpoints that the api will expose and how each API verb behaves when it is interacted with. This will interact with the current database via the IDatabaseAdapter which is declared in the Program.cs file. It is the Program.cs file that launches the program and contains the configuration and settings of the API we're main. 
-
-## Deploy Resources
-
-Setup your environment variables so that the code in the following post will work for you correctly.
+The api folder will contain the resources for the api. The Models folder will contain our object that represents the whiskey reviews we'll be creating. The Data folder will have the IDatabaseAdapter interface that both the Cosmos and Mongo files need to inherit from. This interface is what is going to allow us to swap out the database back end without impacting the functionality of the application. The Controller folder will then contain all the endpoints that the api will expose and how each API verb behaves when it is interacted with. This will interact with the current database via the IDatabaseAdapter which is declared in the Program.cs file. It is the Program.cs file that launches the program and contains the configuration and settings of the API.
 
 ## Create the API Starter Template
 
@@ -159,19 +170,203 @@ dotnet add package Microsoft.OpenAPI
 dotnet add package Swashbuckle.AspNetCore.Annotations
 dotnet add package Newtonsoft.Json
 dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+dotnet add package Microsoft.Extensions.Caching.Memory
 ```
 
-The cosmos package will allow us to interact with Azure Cosmos DB as our NoSQL database store. The OpenAPI and Swashbuckle packages will allow us to document our API with swagger.The Newtonsoft.Json package will allow us to use JsonProperty in our Model class so that when we serialize and deserialize our whiskey reviews from JSON it all works successfully.
+The cosmos package will allow us to interact with Azure Cosmos DB as our NoSQL database store. The OpenAPI and Swashbuckle packages will allow us to document our API with swagger.The Newtonsoft.Json package will allow us to use JsonProperty in our Model class so that when we serialize and deserialize our whiskey reviews from JSON it all works successfully. The caching memory package will allow us to cache some reusable lists for our distilleries.
 
-## Create the Model
+## Create the Distillery Model
 
-In your api directory create a Models folder and a WhiskeyReview.cs file. This will contain the properties that will model our whiskey review entity in the real world.
+The first model we are going to create is for our distillery lookup. Under the api/Models folder, create a file called Distillery.cs. Add the following code which will represent our distilleries.
+
+```csharp
+using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
+
+namespace api.Models
+{
+    public class Distillery
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; } 
+
+        [JsonPropertyName("wikiLink")]
+        public string? WikiLink { get; set; }
+
+        [JsonPropertyName("country")]
+        public string? Country { get; set; }
+
+        [JsonPropertyName("type")]
+        public string? Type { get; set; }
+    }
+}
+```
+
+This class setups up a distillery object to have five properties. The JsonPropertyName is leveraging the System.Text.Json.Serialization and not Newtonsoft (more on that later) which states what the name of the properties will be when serializing and deserializing. You'll notice this in the next section where our distillery JSON data matches the casing in the JsonPropertyName. 
+
+## Add Distillery Data
+
+Create a distilleries.json file under a api/DataSource directory. This is going to contain lookup data for our distilleries and it is going to be read only. In the file add the following data:
+
+```json
+[
+    {
+        "id": "glenmorangie",
+        "name": "Glenmorangie",
+        "wikiLink": "/wiki/Glenmorangie_distillery",
+        "country": "Scotland",
+        "type": "Single Malt"
+    },
+        {
+        "id": "clontarf1014",
+        "name": "Clontarf 1014",
+        "wikiLink": "/wiki/Clontarf_(whiskey)",
+        "country": "Ireland",
+        "type": "Blended"
+    },
+    {
+        "id": "hakushu",
+        "name": "Hakushu",
+        "wikiLink": "/wiki/Hakushu_distillery",
+        "country": "Japan",
+        "type": "Single grain Irishs"
+    }
+]
+```
+
+If you want to get a big list of distilleries you can use [this]() in the original repo which I have taken by scraping the [wikipedia list of whiskey brands](https://en.wikipedia.org/wiki/List_of_whisky_brands) page.
+
+## Create the Whiskey Controller
+
+Create a file called WhiskeyReviewController.cs under the Controllers directory. This is going to hold our endpoints for interacting with the API. Add the following code to the file which will add a single GET endpoint to retrieve our distilleries. The method utilises local caching so once the distilleries have been looked up from storage subsequent calls get the data from the cache. The comments above the GetDistilleries method form part of our Swagger documentation which we will see in the next section where we test the API. The URL of the API will be the base domain plus api/v1, which is declared at the APIController route. The v1 style path is to allow versioning. The route for the distilleries GET request will be at "distilleries" as declared by the route property above the method, so the path for this request will be api/v1/distilleries.
+
+```csharp
+using System.Net;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using api.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using Microsoft.Extensions.Caching.Memory;
+
+namespace api.Controllers
+{
+    [Route("api/v1")] //this is the base route
+    [ApiController]
+    public class WhiskeyReviewController : ControllerBase
+    {
+        private readonly IMemoryCache _cache;
+
+        public WhiskeyReviewController(IMemoryCache cache)
+        {
+            _cache = cache;
+        }
+
+        /// <summary>
+        /// Gets list of distilleries
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     GET api/v1/distilleries
+        /// </remarks>
+        /// <response code="200">Successfully returned distillers</response>
+        /// <returns>Distilleries</returns>
+        [Route("distilleries")]
+        [HttpGet]
+        public async Task<List<Distillery>> GetDistilleries()
+        {
+            const string cacheKey = "distilleries";
+            if (!_cache.TryGetValue(cacheKey, out List<Distillery> _distilleries))
+            {
+                Console.WriteLine("Retrieving data from storage...");
+                string jsonString = await System.IO.File.ReadAllTextAsync("Datasource\\distilleries.json");
+                _distilleries = JsonSerializer.Deserialize<List<Distillery>>(jsonString);
+
+                _cache.Set(cacheKey, _distilleries, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(365)
+                });
+            }
+            else
+            {
+                Console.WriteLine("Retrieving data from cache...");
+            }
+            return _distilleries;
+        }
+    }
+}
+```
+
+In order to leverage the caching you will need to add this to the services when the app is built in the Program.cs file. Add the following line above the AddControllers() method call in the Program.cs file to ensure the memory cache service is available.
+
+```csharp
+//Ensuring cache is available for lookup
+builder.Services.AddMemoryCache();
+// Add services to the container.
+builder.Services.AddControllers();
+```
+
+## Test our API
+
+In the terminal open up your api directory and run dotnet build to make sure everything is building correctly. Then run dotnet run which should start up your API. Navigate to the URL we have stated and go to the swagger docs at [https://localhost:3001/swagger/index.html)](https://localhost:3001/swagger/index.html).
+
+You should see the swagger as below.
+
+If you execute the GET the request you will see the list of distilleries returned.
+
+You'll also notice if you perform repeat GET requests against the API, only the first will write "retrieving from storage" and the rest will write "retrieving from cache" as we are caching this lookup data in the app.
+
+## Get our Swagger On
+
+You'll notice that none of the documentation we added to our API is currently present in the Swagger. To add this, add thw following using statement in the Program.cs file.
+
+```csharp
+using System.Reflection;
+```
+
+Then replace the AddSwagger code with this so that when the services are being built they will leverage the documentation we have provided for the API.
+
+```csharp
+builder.Services.AddSwaggerGen(options =>
+{
+    options.EnableAnnotations();
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+});
+```
+
+You'll also need to edit the project file XML by adding the GenerateDocumentationFile property group and setting it to true.
+
+```xml
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+```
+
+Now when we go back to the API we should see some basic documentation based on the comments above our code in the controller class.
+
+
+
+## Create the Whiskey Review Model
+
+In your api directory create a Models folder and a Distillery.cs file. This will contain the properties that will model our whiskey review entity in the real world.
 
 In the WhiskeyReview file paste the following code:
 
 ```csharp
-using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace api.Models
 {
@@ -188,54 +383,68 @@ namespace api.Models
     {
         public WhiskeyReview()
         {
-            id = Whiskey;
-            date = DateTime.Now;
+            Date = DateTime.Now;
         }
 
         [JsonProperty("id")]
-        public string Id { get; }
-
-        [JsonProperty("date")]
-        public string Date { get; }
+        public string Id { get { return WhiskeyID   + "-" + UserId.ToLower(); } }
 
         [JsonProperty("userId")]
-        public string UserID { get; set; }
+        public string UserId { get; set; }
 
-        [JsonProperty("whiskey")]
-        public string Whiskey { get; set; }
+        [JsonProperty("date")]
+        private DateTime Date { get; set; }
 
-        [JsonProperty("rating")]
-        public int Rating
+        [JsonProperty("whiskeyId")]
+        public string WhiskeyID
         {
-            get { return rating; }
-            set 
-            { 
-                if(value < 1 || value > 5)
-                    throw new ArgumentException("Rating must be between 1 and 5.");
-                else
-                    rating = value;
+            get
+            {
+                return new string(WhiskeyName.Where(c => Char.IsLetterOrDigit(c)).ToArray()).ToLower();
             }
         }
+
+        [Required]
+        [JsonProperty("whiskeyName")]
+        public string WhiskeyName { get; set; }
+
+        [Required]
+        [JsonProperty("distilleryName")]
+        public string? DistilleryName { get; set; }
+
+        [Required]
+        [Range(1, 5)]
+        [JsonProperty("rating")]
+        public int? Rating { get; set; }
 
         [JsonProperty("notes")]
-        public Note[] Notes { get; set; }
+        public Note[]? Notes { get; set; }
 
-        public string Review
-        {
-            get { return review; }
-            set
-            {
-                if (value != null && value.Length > 500)
-                    throw new ArgumentException("Review must be less than 500 characters.");
-                else
-                    review = value;
-            }
-        }
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Must be at least 1 characters long and less than 100 characters.")]
+        [JsonProperty("review")]
+        public string? Review { get; set; }
+
+        [JsonProperty("location")]
+        public string? Location { get; set; }
     }
 }
 ```
 
-The code creates a list of enums that are allowed for the notes property. This is an array where users can add multiple notes they taste in the whiskey. There is then validation on the rating to ensure this is only between 1 and 5. There is also validation on the review to ensure this is no more than 500 words.
+The code creates a list of enums that are allowed for the notes property. This is an array where users can add multiple notes they taste in the whiskey. There is then validation on the rating to ensure this is only between 1 and 5. There is also validation on the review to ensure this is no more than 500 words. The Date property is private and will just set the Date to be now whenever an instance of a whiskey review is created. The Whiskey ID is generated by removing spaces and special characters from the Whiskey Name. This is then concatenated with the user to make a unique id for each review.
+
+## Deploy Cosmos SQL API
+
+We need to create a serverless Cosmos SQL API instance in Azure to back our API. You can use the cosmos local emulator if you wish but for this demo I have used an Azure instance. To deploy a serverless instance of Cosmos you can use the use the following CLI command and either run it from a local terminal or in the cloud shell.
+
+```bash
+
+```
+
+Once you the instance has created, copy the key and endpoint:
+
+And set them as environment variables on your machine:
+
+This means we can now easily reference these in our code without worrying about checking in connection strings.
 
 ## Create the Data Interface
 
@@ -361,11 +570,9 @@ namespace api.Data
 
 ```
 
-## Create the Controller
+## Add Whiskey Review Endpoints to our Controller
 
-## Test the API with Swagger
-
-## Basic Front End
+## Test the API
 
 
 

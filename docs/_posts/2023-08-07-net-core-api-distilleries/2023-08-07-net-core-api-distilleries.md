@@ -5,7 +5,7 @@ author: dataGriff
 description: Create a simple API with .Net Core 7
 image:
   path: /assets/2023-08-07-net-core-api-distilleries/link.png
-tags: Azure API Cosmos .Net
+tags: Azure API .Net
 ---
 
 Well I was definitely a hungovercoder yesterday and it was quite difficult to stare at lists of distilleries without wanting a bit of hair of the dog... Anyway below explains how to create a simple lookup API GET request using .Net core. I am not a .Net ninja, nor am I an API aficionado (yet!), but the following will create you a basic and currently very insecure API. I hope to investigate APIs further in .Net and follow-up with better practice approaches in the future. The ongoing implementation of this API can be found in the hungovercoders github organisation under [whiskey.reviews](https://github.com/hungovercoders/whiskey.reviews).
@@ -32,7 +32,7 @@ The API is going to allow us to retrieve a list of distileries. Therefore the fi
 
 | Behaviour  | HTTP Verb  | URI |
 |---|---|---|
-|  Get distilleries |  GET |  https://api.myurl/distilleries |
+|  Get distilleries |  GET |  https://api.myurl/v1/distilleries |
 
 ## Codebase Overview
 

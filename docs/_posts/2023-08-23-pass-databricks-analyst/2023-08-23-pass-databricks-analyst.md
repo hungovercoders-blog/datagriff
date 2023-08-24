@@ -1,5 +1,5 @@
 ---
-title: "Databricks Data Analyst Associate | How to prepare and pass"
+title: "How to Pass the Databricks Data Analyst Associate Exam"
 date: 2023-08-23
 author: dataGriff
 description: This is a guide of how I passed the databricks analyst associate exam

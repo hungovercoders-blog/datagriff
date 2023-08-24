@@ -864,3 +864,5 @@ Refresh the alert and you should see its status change to triggered. You'll also
 ## Book the Exam
 
 Now that you have queried your night out data its time to head over to [Kryterion Certification Login](https://www.webassessor.com/wa.do?page=login) and book that exam. Hope you are soon creating your own night out data in celebration of your exam passing success!
+
+Once you're done you can also remove the resources you have made if you did make any, or keep them for further practice and just ensure your clusters etc are kept off to reduce costs.

@@ -5,3 +5,7 @@ This is the readme
 cd docs
 bundle exec jekyll serve
 ```
+
+## Escape Curly Brackets
+
+{% raw %}{{ place }}{% endraw %}

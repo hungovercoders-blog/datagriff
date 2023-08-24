@@ -8,7 +8,7 @@ image:
 tags: databricks certification
 ---
 
-It was my birthday over the weekend and whilst my body was completely destroyed by whiskey and vermouth... my mind craved sustenance and my soul penance. Therefore I looked at the preparation guidelines for the [databricks analyst associate certification](https://www.databricks.com/learn/certification/data-analyst-associate) and thought "we got this!"*. Within 48 hours my mind was full to the brim, my soul ready to redeem some of the reprehensible activities of the weekend by passing the exam and then sharing this approach with you. Here goes...
+It was my birthday over the weekend and whilst my body was completely destroyed by whiskey and vermouth... my mind craved sustenance and my soul penance. Therefore I looked at the preparation guidelines for the [databricks analyst associate certification](https://www.databricks.com/learn/certification/data-analyst-associate) and thought "we got this!". Within 48 hours my mind was full to the brim, my soul ready to redeem some of the reprehensible activities of the weekend by passing the exam and then sharing this approach with you. Here goes...
 
 - [Pre-Requisites](#pre-requisites)
 - [Useful Links](#useful-links)
@@ -43,6 +43,7 @@ It was my birthday over the weekend and whilst my body was completely destroyed 
 - [Parameters](#parameters)
 - [Dashboard](#dashboard)
 - [Alerts](#alerts)
+- [Book the Exam](#book-the-exam)
 
 ## Pre-Requisites
 
@@ -50,7 +51,7 @@ It was my birthday over the weekend and whilst my body was completely destroyed 
 
 ## Useful Links
 
-- [Databricks Academy](https://customer-academy.databricks.com/learn/signin) - Sign up to this learning resource which is absolutely free. I actually did the lakehouse fundamentals course first (about 2 hours with speed ramped up) and then do the data analyst learning plan. It says 7 hours but can do it in much less.
+- [Databricks Academy](https://customer-academy.databricks.com/learn/signin) - Sign up to this learning resource which is absolutely free. I actually did the lakehouse fundamentals course first (about 2 hours with speed ramped up) and then do the **data analyst learning plan**. It says 7 hours but you can do it in much less.
 - [Kryterion Certification Login](https://www.webassessor.com/wa.do?page=login) - This is where you can book your exam. I booked this 90 minutes before deciding to do this particular exam as I was pretty confident immediately after doing the course above and what I had read about it.
 - [Udemy Practice Questions](https://www.udemy.com/course/databricks-certified-data-analyst-practice-test/). There is no practice exam for the databricks data analyst associate so I thought I would try this Udemy version. I'll be honest it gave me confidence but a lot of the questions I did not trust or were worded weirdly, so I think I could have done without and kept the ten quid. I believe the below and the databricks academy course should be enough to steer you through.
 
@@ -74,7 +75,7 @@ There are a couple of analytic definitions you need to be aware of which are cov
 ## Provision Workspace and Unity Catalog
 
 The following section is not needed for the exam but I have put in case you need a workspace to practice your analytics in if you do not have one available. It takes about 15 minutes and is not a bad exercise to understand the workings of it all anyway. 
-The process here is manual but there are ways of automating this using tools such as terraform. This is all out of scope for the exam so just to get what you need for an environment to work within, the following should do. If you already have a workspace and catalog setup skip to [import data](#import-data).
+The process here is manual but there are ways of automating this using tools such as terraform. This is all out of scope for the exam so just to get what you need for an environment to work within, the following should do. If you already have a workspace and catalog setup skip to [Quick SQL Tour and Warehouse Setup](#quick-sql-tour-and-warehouse-setup).
 
 ### Create Workspace
 
@@ -98,13 +99,9 @@ You'll need to create a storage account to back your unity catalog storage creat
 3. Set the resource group to be the same one you created your workspace in.
 4. Set the storage account name to be something like lrncatalogsaeuwdgrf, changing the last four characters to be something unique for your resource.
 5. Set the region to be the same as your databricks workspace and the same as the shortcode you placed for the storage - in this case I used West Europe (euw).
-
 ![Create Storage]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage.png)
-
 6. On the advanced tab ensure that "Enable Hierarchical Namespace" is ticked. This ensures a data lake storage account is created.
-
 ![Create Storage HNS]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage-hns.png)
-
 7. Leave everything else the same and select review then create.
 
 ### Create Containers
@@ -125,17 +122,12 @@ The external connector is how your databricks workspace will authenticate agains
 4. Name it something like lrn-databricks-dbexc-euw-dgrf but change the last four characters to make it unique to your resource.
 5. Choose the same region that you created your your other resources, for me this was West Europe.
 6. Click review and create.
-
 ![Create Databricks Connector]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-databricks-connector.png)
-
 7. Navigate to your storage account, go to Access Control and select + Add.
-
 ![Storage Add Permissions]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-add-permissions.png)
-
 8. For the role choose storage Blob Data Contributor.
 9. For members choose Managed Identity, select members and then pick the databricks access connector we have created.
 10. Select review and assign.
-
 ![Storage Assign Blob Contributor]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-assign-blob-contributor.png)
 
 ### Create Unity Catalog
@@ -143,21 +135,18 @@ The external connector is how your databricks workspace will authenticate agains
 1. Launch your new databricks workspace.
 2. In the top right click your user name and navigate to "Manage Account".
 
-![Manage Account]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/manage-account.png)
+    ![Manage Account]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/manage-account.png)
 
-3. Choose data and then select "create metastore".
+1. Choose data and then select "create metastore".
+![Create Metastore 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-01.png)
+1. Name the metastore lrn-databricks-uc-euw-dgrf, remembering to change the last four characters to something unique to you.
+1. Select the same region you created your other resources, in my case it was West Europe again.
+1. Set the ADLS Gen 2 Path to be your storage account path which should be something like this: abfss://default@lrncatalogsaeuwdgrf.dfs.core.windows.net/
+1. Set the access connector id to be the external connector resource id you created which will be something like this: /subscriptions/xxxxxx-xxxxxx-xxxxxx-xxxxxx-xxxxxx/resourceGroups/lrn-databricks-rg/providers/Microsoft.Databricks/accessConnectors/lrn-databricks-dbexc-euw-dgrf.
 
-![Create Meastore 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-01.png)
+    ![Create Metastore 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-02.png)
 
-4. Name the metastore lrn-databricks-uc-euw-dgrf, remebering to change the last four characters to something unique to you.
-5. Select the same region you created your other resources, in my case it was West Europe again.
-6. Set the ADLS Gen 2 Path to be your storage account path which should be something like this: abfss://default@lrncatalogsaeuwdgrf.dfs.core.windows.net/
-7. Set the access connector id to be the external connector resource id you created which will be something like this: /subscriptions/xxxxxx-xxxxxx-xxxxxx-xxxxxx-xxxxxx/resourceGroups/lrn-databricks-rg/providers/Microsoft.Databricks/accessConnectors/lrn-databricks-dbexc-euw-dgrf.
-
-![Create Metastore 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-02.png)
-
-8. Assign the metastore to your new workspace.
-
+1. Assign the metastore to your new workspace.
 ![Assign Workspace]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/assign-workspace.png)
 
 ### Create External Location
@@ -175,6 +164,16 @@ External locations are handy if we want to distribute our storage across multipl
 ### Unity Catalog Overview
 
 Before we carry on, it's quickly worth noting the unity catalog hierarchy and how it maps to the three part naming conventions we'll use in our data objects.
+
+![Unity Catalog]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/unity.drawio.png)
+
+The metastore exists outside the workspaces which allows for multiple workspaces to access the same unity catalog. This means all the objects can be shared between multiple workspaces, even though for this exercise we are only assigning one, we could assign more.
+
+Based on the hierarchy of unity catalog the three part naming components of data objects in are:
+
+- **catalog.schema.objectname**
+
+Where object name could be a table or a view.
 
 ## Quick SQL Tour and Warehouse Setup
 
@@ -286,7 +285,7 @@ DESCRIBE HISTORY learning.hungovercoders.beers;
 
 ![Describe History]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/describe-history.png)
 
-Lets accidentally insert a new duplicate row then look at the history again.
+Lets accidentally insert a new duplicate row then look at the history again. We wil now see a new WRITE version in the history based on the new row we inserted in a transaction.
 
 ```sql
 INSERT INTO learning.hungovercoders.beers
@@ -317,7 +316,7 @@ A **managed table** couples the pointer in unity catalog and the data so that wh
 
 ## Import Data
 
-First we need to download some sample data. Download this [file]![New Data]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data.csv) to your local machine which is a simple csv of locations and what was drank.
+First we need to download some sample data. Download this [file]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data.csv) to your local machine which is a simple csv of locations and what was drank.
 
 To import data easily into databricks (up to 1GB in size), select + New on the left hand side of the workspace and choose "File Upload".
 
@@ -647,13 +646,15 @@ Enter this SQL in your new query and execute. This will add the last place of th
 WITH CTE AS (
 SELECT 'fuel' AS place,
 'unknown' AS drink,
-'10' AS quantity
+10 AS quantity
 )
 
 MERGE INTO learning.hungovercoders.night_out AS dest
 USING CTE AS src ON
 src.place = dest.place
+WHEN MATCHED THEN UPDATE SET *
 WHEN NOT MATCHED THEN INSERT *;
+
 
 SELECT * FROM learning.hungovercoders.night_out
 ```
@@ -749,7 +750,9 @@ First lets create a query we can use in a dropdown list that can feed the parame
 SELECT DISTINCT Place FROM learning.hungovercoders.night_out;
 ```
 
-In our previous query lets add a place parameter to it. Replace your visualisations query with the following, noting the parameter for place that now exists in the where clause. We are using IN as its going to be a multi select parameter. The "place IS NULL" part of the where clause is to ensure we always return the total as well.
+![Get Place]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/get-place.png)
+
+In our previous "Visualisations" query lets add a place parameter to it. Replace your visualisations query with the following, noting the parameter for place that now exists in the where clause. We are using IN as its going to be a multi select parameter. The "place IS NULL" part of the where clause is to ensure we always return the total as well.
 
 ```sql
 WITH CTE_dt AS (
@@ -772,7 +775,7 @@ SELECT
 dt, place, drink, quantity + floor(rand()*2) + -2 AS quantity
 FROM learning.hungovercoders.night_out
 CROSS JOIN CTE_dt
-WHERE place IS NULL OR place IN ({{ place }})
+WHERE place IS NULL OR place IN ({% raw %}{{ place }}{% endraw %})
 )
 
 SELECT dt, place, drink, SUM(quantity) AS Quantity, SUM(quantity)+1 AS Target
@@ -783,9 +786,9 @@ ORDER BY dt, place, drink;
 
 You will see at the bottom of the query as soon as you enter the parameters that boxes will appear to represent them.
 
-- Click the little settings cog
-- Set the title as Place
-- Set the type to be "Query Based Dropdown List"
+- Click the little settings cog.
+- Set the title as Place.
+- Set the type to be "Query Based Dropdown List".
 - Set the Query to be "Get Place".
 - Tick the allow multiple values box.
 
@@ -848,7 +851,7 @@ Navigate to alerts on the left hand side of the workspace and select create aler
 - Set the Operator to be More Than (>).
 - Set the Threshold Value to be 5.
 - Set the send notification to be "Each time alert is evaluated" so that we ensure we can trigger it every time we refresh manually.
-- Leave the rest of the defaults but then use a custom template and in the Subject add "{{ ALERT_NAME }} Fired" and in the Body add "{{ QUERY_RESULT_VALUE }} MORE THAN {{ ALERT_THRESHOLD }}" which will add dynamic values from the alert. Tick preview to see the outcome of this.
+- Leave the rest of the defaults but then use a custom template and in the Subject add "{% raw %}{{ ALERT_NAME }}{% endraw %} Fired" and in the Body add "{% raw %}{{ QUERY_RESULT_VALUE }}{% endraw %} MORE THAN {% raw %}{{ ALERT_THRESHOLD }}{% endraw %}" which will add dynamic values from the alert. Tick preview to see the outcome of this.
 - Leave refresh as never as we will run this manually for now. We can schedule to have it run more often but this would incur costs and as we are just learning we don't want to do this.
 - Save the alert.
 
@@ -858,3 +861,6 @@ Refresh the alert and you should see its status change to triggered. You'll also
 
 ![Alert Triggered]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/alert-triggered.png)
 
+## Book the Exam
+
+Now that you have queried your night out data its time to head over to [Kryterion Certification Login](https://www.webassessor.com/wa.do?page=login) and book that exam. Hope you are soon creating your own night out data in celebration of your exam passing success!

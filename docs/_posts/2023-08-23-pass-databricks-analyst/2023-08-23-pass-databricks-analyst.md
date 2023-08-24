@@ -88,7 +88,7 @@ The process here is manual but there are ways of automating this using tools suc
 7. Set the managed resource group name to be the same as your resource group name plus "managed", e.g. lrn-databricks-euw-dgrf-managed.
 8. You don't need to worry about any other options for this so just click review and create. Creating the workspace might take a few minutes.
 
-![Create Workspace]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-workspace.png)
+![Create Workspace]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-workspace.PNG)
 
 ### Create Storage Account
 
@@ -99,9 +99,9 @@ You'll need to create a storage account to back your unity catalog storage creat
 3. Set the resource group to be the same one you created your workspace in.
 4. Set the storage account name to be something like lrncatalogsaeuwdgrf, changing the last four characters to be something unique for your resource.
 5. Set the region to be the same as your databricks workspace and the same as the shortcode you placed for the storage - in this case I used West Europe (euw).
-![Create Storage]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage.png)
+![Create Storage]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage.PNG)
 6. On the advanced tab ensure that "Enable Hierarchical Namespace" is ticked. This ensures a data lake storage account is created.
-![Create Storage HNS]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage-hns.png)
+![Create Storage HNS]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage-hns.PNG)
 7. Leave everything else the same and select review then create.
 
 ### Create Containers
@@ -110,7 +110,7 @@ You'll need to create a storage account to back your unity catalog storage creat
 2. Click + Container and call it default. This will be used as the default storage container for unity catalog in the next section.
 3. Click + Container and call it external. This will be used as container storage for an external location in unity catalog.
 
-![Create Containers]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-containers.png)
+![Create Containers]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-containers.PNG)
 
 ### Create External Connector & Grant Access
 
@@ -122,32 +122,32 @@ The external connector is how your databricks workspace will authenticate agains
 4. Name it something like lrn-databricks-dbexc-euw-dgrf but change the last four characters to make it unique to your resource.
 5. Choose the same region that you created your your other resources, for me this was West Europe.
 6. Click review and create.
-![Create Databricks Connector]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-databricks-connector.png)
+![Create Databricks Connector]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-databricks-connector.PNG)
 7. Navigate to your storage account, go to Access Control and select + Add.
-![Storage Add Permissions]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-add-permissions.png)
+![Storage Add Permissions]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-add-permissions.PNG)
 8. For the role choose storage Blob Data Contributor.
 9. For members choose Managed Identity, select members and then pick the databricks access connector we have created.
 10. Select review and assign.
-![Storage Assign Blob Contributor]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-assign-blob-contributor.png)
+![Storage Assign Blob Contributor]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-assign-blob-contributor.PNG)
 
 ### Create Unity Catalog
 
 1. Launch your new databricks workspace.
 2. In the top right click your user name and navigate to "Manage Account".
 
-    ![Manage Account]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/manage-account.png)
+    ![Manage Account]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/manage-account.PNG)
 
 1. Choose data and then select "create metastore".
-![Create Metastore 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-01.png)
+![Create Metastore 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-01.PNG)
 1. Name the metastore lrn-databricks-uc-euw-dgrf, remembering to change the last four characters to something unique to you.
 1. Select the same region you created your other resources, in my case it was West Europe again.
 1. Set the ADLS Gen 2 Path to be your storage account path which should be something like this: abfss://default@lrncatalogsaeuwdgrf.dfs.core.windows.net/
 1. Set the access connector id to be the external connector resource id you created which will be something like this: /subscriptions/xxxxxx-xxxxxx-xxxxxx-xxxxxx-xxxxxx/resourceGroups/lrn-databricks-rg/providers/Microsoft.Databricks/accessConnectors/lrn-databricks-dbexc-euw-dgrf.
 
-    ![Create Metastore 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-02.png)
+    ![Create Metastore 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-02.PNG)
 
 1. Assign the metastore to your new workspace.
-![Assign Workspace]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/assign-workspace.png)
+![Assign Workspace]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/assign-workspace.PNG)
 
 ### Create External Location
 
@@ -159,7 +159,7 @@ External locations are handy if we want to distribute our storage across multipl
 4. Set the URL to be abfss://external@lrncatalogsaeuwdgrf.dfs.core.windows.net/, changing the name of the storage to be whatever you created.
 5. Set the only storage credential available which will be the external connector already created.
 
-![Create External Location]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-external-location.png)
+![Create External Location]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-external-location.PNG)
 
 ### Unity Catalog Overview
 
@@ -179,7 +179,7 @@ Where object name could be a table or a view.
 
 For the data analyst associate we're going to be interested in this section of the workspace covering queries, dashboards, alerts, history and warehouses.
 
-![Serverless Warehouse]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/sql-areas.png)
+![Serverless Warehouse]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/sql-areas.PNG)
 
 In order to save the pennies, speed up our queries, and to leverage the serverless aspect of databricks that is now available, first go into SQL Warehouses.
 
@@ -191,13 +191,13 @@ In order to save the pennies, speed up our queries, and to leverage the serverle
 - Click save.
 - Start the warehouse.
 
-![Serverless Warehouse]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/serverless-warehouse.png)
+![Serverless Warehouse]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/serverless-warehouse.PNG)
 
 ## Create a Folder to Store your Work
 
 Before we start creating queries, dashboards and visualisations left, right and centre, lets create a folder to store all this work in. Navigate to workspace, your username, then click add folder. Call the new folder lrn_sql_analyst.
 
-![Create Folder]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-folder.png)
+![Create Folder]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-folder.PNG)
 
 ## Create Catalog and Schema
 
@@ -212,11 +212,11 @@ COMMENT ON SCHEMA learning.hungovercoders IS 'This catalog is for hungovercoders
 
 You should see a new catalog appear in data and a new schema. Both of these will also have comments on them in data explorer.
 
-![Create Catalog and Schema]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-catalog-schema.png)
+![Create Catalog and Schema]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-catalog-schema.PNG)
 
 Save the query as "Setup Catalog" in your folder lrn_sql_analyst.
 
-![Save Query]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/save-query.png)
+![Save Query]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/save-query.PNG)
 
 ## Quick Table Create
 
@@ -244,15 +244,15 @@ You should the above returns two rows of the two two beers we inserted. Save the
 
 Navigate to data explorer and you'll also see the table existing there.
 
-![Data Explorer]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data-explorer.png)
+![Data Explorer]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data-explorer.PNG)
 
 If you then open the table in data explorer by clicking the ellipsis next to its name, you will see the comments, columns, sample data, the owner and popularity.
 
-![Data Explorer]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data-explorer-table.png)
+![Data Explorer]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data-explorer-table.PNG)
 
 Its worth noting at this point in details you will see that the data is automatically saved in the default container of our unity catalog storage.
 
-![Data Explorer]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data-explorer-table-location.png)
+![Data Explorer]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/data-explorer-table-location.PNG)
 
 This is because we have not set a location as part of our schema setup so it uses the default. We can create a schema that leverages the external location we created earlier by running the following.
 
@@ -263,7 +263,7 @@ COMMENT ON SCHEMA learning.hungovercoders IS 'This catalog is for hungovercoders
 
 Save the query as Create External Schema in our lrn_sql_analyst folder. If you now navigate to this schema in data explorer and check details you will see that its using the external location we setup.
 
-![Create External Schema]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-external-schema.png)
+![Create External Schema]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-external-schema.PNG)
 
 ## Describe, Time Travel & Restores
 
@@ -273,7 +273,7 @@ Create a new query and call it time travel, saving it in the lrn_sql_analyst loc
 DESCRIBE EXTENDED learning.hungovercoders.beers;
 ```
 
-![Describe Extended]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/describe-extended.png)
+![Describe Extended]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/describe-extended.PNG)
 
 This will give us a lot of information about the table such as whether its managed or unmanaged, the storage location, who created it and the schema.
 
@@ -283,7 +283,7 @@ Now if we run the following we can get the version history of the table which in
 DESCRIBE HISTORY learning.hungovercoders.beers;
 ```
 
-![Describe History]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/describe-history.png)
+![Describe History]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/describe-history.PNG)
 
 Lets accidentally insert a new duplicate row then look at the history again. We wil now see a new WRITE version in the history based on the new row we inserted in a transaction.
 
@@ -296,7 +296,7 @@ VALUES ('Yawn','Flowerhorn');
 DESCRIBE HISTORY learning.hungovercoders.beers;
 ```
 
-![Describe History Write]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/describe-history-write.png)
+![Describe History Write]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/describe-history-write.PNG)
 
 If we want to query a previous version we can run this command.
 
@@ -320,21 +320,21 @@ First we need to download some sample data. Download this [file]({{ site.baseurl
 
 To import data easily into databricks (up to 1GB in size), select + New on the left hand side of the workspace and choose "File Upload".
 
-![New Data]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/new-data.png)
+![New Data]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/new-data.PNG)
 
 Navigate to the file you just downloaded and select it to import. Change the catalog to be learning, the schema to be hungovercoders and call the table "night_out". Your screen should look something like the below.
 
-![Import Data Create Table]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/import-data-create-table.png)
+![Import Data Create Table]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/import-data-create-table.PNG)
 
 You can make changes on the data types if you wish by clicking the icons next to the column names and also Under advanced attributes you can also make changes there such as the delimiter, and whether the rows contain a header.
 
-![Import Data Advanced]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/import-data-advanced.png)
+![Import Data Advanced]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/import-data-advanced.PNG)
 
 We're happy with our little table though so we can select Create Table.
 
 Now if we go back to SQL Editor and create a new query called "Night Out" and save it in the lrn_sql_analyst location. We can now run the below and interact with the data we just uploaded like a normal table.
 
-![Select Night Out]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/select-night-out.png)
+![Select Night Out]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/select-night-out.PNG)
 
 ## Minimum SQL
 
@@ -612,7 +612,7 @@ Pub,explode(DrinkStrengths) AS DrinkStrengths
 ```
 
 
-![Explode Arrays]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/arrays-explode.png)
+![Explode Arrays]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/arrays-explode.PNG)
 
 If we want to perform calculations on items within an array we can use TRANSFORM.
 
@@ -630,7 +630,7 @@ Pub,DrinkStrengths,transform(DrinkStrengths, value -> value + 1 ) AS FeelsLikeDr
 
 In this case we can see we have added one to each value in the array to get a more accurate "feels like drink strength" value.
 
-![Transform Arrays]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/arrays-transform.png)
+![Transform Arrays]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/arrays-transform.PNG)
 
 ### Merge
 
@@ -659,17 +659,17 @@ WHEN NOT MATCHED THEN INSERT *;
 SELECT * FROM learning.hungovercoders.night_out
 ```
 
-![Merge]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/merge.png)
+![Merge]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/merge.PNG)
 
 ## Query History
 
 Now that we have a load of queries we have been running, lets look at the query history on the left hand side of the workspace.
 
-![Query History]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/query-history.png)
+![Query History]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/query-history.PNG)
 
 This shows all the queries that have been executed over the time range selected, how long they ran for, the SQL warehouse used and the user. If you select one of the queries you get further details that can help you debug and understand things like if the cache was used in the IO section.
 
-![Query History Example]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/query-history-example.png)
+![Query History Example]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/query-history-example.PNG)
 
 ## Visualisations
 
@@ -712,7 +712,7 @@ ORDER BY dt, place, drink;
 
 First add a visualisation by clicking the plus next to the results and choose Visualisation.
 
-![Visualisation Add]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-add.png)
+![Visualisation Add]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-add.PNG)
 
 - Choose visualisation type of counter.
 - Name it "Drinks Counter".
@@ -722,7 +722,7 @@ First add a visualisation by clicking the plus next to the results and choose Vi
 - Explore the format tab and add "Drank" as the formatting string prefix and set the suffix to be " Drinks".
 - Then save.
 
-![Visualisation Counter]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-counter.png)
+![Visualisation Counter]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-counter.PNG)
 
 Now add another visualisation by clicking the plus next to the results and choose Visualisation.
 
@@ -736,7 +736,7 @@ Now add another visualisation by clicking the plus next to the results and choos
 - In the y axis section set the name to be Quantity.
 - Then save.
 
-![Visualisation Bar]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-bar.png)
+![Visualisation Bar]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-bar.PNG)
 
 These are just two of the example visualisations and I recommend checking them all out and having a bit of a play...
 
@@ -750,7 +750,7 @@ First lets create a query we can use in a dropdown list that can feed the parame
 SELECT DISTINCT Place FROM learning.hungovercoders.night_out;
 ```
 
-![Get Place]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/get-place.png)
+![Get Place]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/get-place.PNG)
 
 In our previous "Visualisations" query lets add a place parameter to it. Replace your visualisations query with the following, noting the parameter for place that now exists in the where clause. We are using IN as its going to be a multi select parameter. The "place IS NULL" part of the where clause is to ensure we always return the total as well.
 
@@ -792,17 +792,17 @@ You will see at the bottom of the query as soon as you enter the parameters that
 - Set the Query to be "Get Place".
 - Tick the allow multiple values box.
 
-![Visualisation Parameters]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-parameters.png)
+![Visualisation Parameters]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-parameters.PNG)
 
 We can now choose the places we want to query very easily from the dropdown that is populated for us as a parameter.
 
-![Visualisation Parameters Chart]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-parameters-chart.png)
+![Visualisation Parameters Chart]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/visualisation-parameters-chart.PNG)
 
 ## Dashboard
 
 Navigate to dashboard on the left hand side of the workspace. Click create dashboard and name it "Nights Out".
 
-![Dashboard New]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-new.png)
+![Dashboard New]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-new.PNG)
 
 Add a text box and as its markdown simply enter
 
@@ -810,7 +810,7 @@ Add a text box and as its markdown simply enter
 # Nights Out!
 ```
 
-![Dashboard Add Text]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-add-text.png)
+![Dashboard Add Text]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-add-text.PNG)
 
 Next...
 
@@ -818,7 +818,7 @@ Next...
 - Change the title to be "Drinks Counter".
 - Leave the parameter as place and note the value source will be a new dashboard parameter. This will be created for us and should work on the next visualisation we add as well.
 
-![Dashboard Add Visualisation 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-add-visualisation-01.png)
+![Dashboard Add Visualisation 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-add-visualisation-01.PNG)
 
 Next...
 
@@ -826,7 +826,7 @@ Next...
 - Change the title to be "Drinks Timeline".
 - Leave the parameter as place and note the value source will be a new dashboard parameter. This should reuse the same one from before so the dashboard parameter applies to all visualisations.
 
-![Dashboard Add Visualisation 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-add-visualisation-02.png)
+![Dashboard Add Visualisation 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-add-visualisation-02.PNG)
 
 Shuffle your dashboard about a bit and you should end up with something like the below.
 
@@ -835,11 +835,11 @@ Shuffle your dashboard about a bit and you should end up with something like the
 - Global parameter that affects all visualisations.
 - Multiple visualisations.
 
-![Dashboard Final]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-final.png)
+![Dashboard Final]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-final.PNG)
 
 You can schedule the dashboard to run at a cadence you wish and also send the output to relevant subscribers by going to "Schedule" and setting the relevant options. Ensure you use an appropriately sized SQL Warehouse and don't run it too often as it will likely never go off and you will incur costs! For the testing I would just leave it as never.
 
-![Dashboard Schedule]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-schedule.png)
+![Dashboard Schedule]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/dashboard-schedule.PNG)
 
 ## Alerts
 
@@ -855,11 +855,11 @@ Navigate to alerts on the left hand side of the workspace and select create aler
 - Leave refresh as never as we will run this manually for now. We can schedule to have it run more often but this would incur costs and as we are just learning we don't want to do this.
 - Save the alert.
 
-![Alert Save]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/alert-save.png)
+![Alert Save]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/alert-save.PNG)
 
 Refresh the alert and you should see its status change to triggered. You'll also get an e-mail with the custom template we specified. You can add more destinations to these alerts in the integrations section of the workspace which include webhooks and slack, as well as email.
 
-![Alert Triggered]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/alert-triggered.png)
+![Alert Triggered]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/alert-triggered.PNG)
 
 ## Book the Exam
 

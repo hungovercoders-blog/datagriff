@@ -447,6 +447,8 @@ FROM
   JOIN CTE_ref AS ref on ref.place = night.place
 ```
 
+![Inner Join]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/join-inner.PNG)
+
 #### Left Join
 
 If we run the following command we will get four results returned. The left join means that rows that exist in the left hand table will always be returned even if the row does not exist in the right hand table. In this case "type" is NULL for pennyroyal because it does not exist in the right hand reference data table.
@@ -480,6 +482,8 @@ FROM
   LEFT JOIN CTE_ref AS ref on ref.place = night.place
 ```
 
+![Left Join]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/join-left.PNG)
+
 #### Right Join
 
 If we run the following command we will get four results returned. The right join means that rows that exist in the right hand table will always be returned even if the row does not exist in the right hand table. In this case "drink", "place" and "quantity" is NULL for Fuel because it does not exist in the left hand night out data table. We have ensured the name of the place is still brought back by placing a coalesce in the statement that will enter the data in the return statement from the left or right side of the join, depending on where it exists.
@@ -512,6 +516,8 @@ FROM
   learning.hungovercoders.night_out night
   RIGHT JOIN CTE_ref AS ref on ref.place = night.place
 ```
+
+![Right Join]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/join-right.PNG)
 
 ### Aggregations and Group by
 

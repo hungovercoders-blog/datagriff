@@ -7,6 +7,7 @@ tasks:
       gp sync-done jekyllstart
       cd docs
       bundle exec jekyll serve
+      sleep 1
   - name: Open Site Preview
     command: |
       gp sync-await jekyllstart 

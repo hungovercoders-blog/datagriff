@@ -1,0 +1,9 @@
+tasks:
+  - name: Install and Run Jekyll
+    init: |
+      cd docs
+      bundle install
+    command: |
+      cd docs
+      bundle exec jekyll serve
+      gp preview $(gp url 4000)/datagriff

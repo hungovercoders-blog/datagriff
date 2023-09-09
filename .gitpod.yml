@@ -10,4 +10,4 @@ tasks:
   - name: Open Site Preview
     command: |
       gp sync-await jekyllstart 
-      gp preview $(gp url 4000)/datagriff
+      gp preview $(gp url 4000)/datagriff/

@@ -4,10 +4,10 @@ tasks:
       cd docs
       bundle install
     command: |
-      gp synch-done jekyllstart
+      gp sync-done jekyllstart
       cd docs
       bundle exec jekyll serve
   - name: Open Site Preview
     command: |
-      gp synch-await jekyllstart 
+      gp sync-await jekyllstart 
       gp preview $(gp url 4000)/datagriff

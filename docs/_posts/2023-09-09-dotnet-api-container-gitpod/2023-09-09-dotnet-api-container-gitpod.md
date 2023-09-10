@@ -222,7 +222,7 @@ The workspaces I have done so far have been so quick prebuilds have been great b
 
 ## What Next??
 
-I'll likely be following up with more blogs but I also recommend just going through some [quickstarts](https://www.gitpod.io/docs/introduction/getting-started/quickstart) and blink jaw-slacked at your screen as you realise the magnitude of the effort being reduced in your development efforts from this day forwards.
+I'll likely be following up with more blogs but I also recommend just going through some [quickstarts](https://www.gitpod.io/docs/introduction/getting-started/quickstart) to fully appreicate the simplicity and magnitude of the effort being reduced in your development efforts from this day forwards.
 
 My plans now are:
 

@@ -1,8 +1,8 @@
 ---
-title: ".Net API Container on Gitpod | .Net containers in cloud developer environments"
+title: ".Net API Container on Gitpod | Great developer experience in a cloud developer environment"
 date: 2023-09-09
 author: dataGriff
-description: Dotnet containers in cloud developer environments
+description: Dotnet containers in cloud developer environments for a great developer experience
 image:
   path: /assets/2023-09-09-dotnet-api-container-gitpod/link.png
 tags: API .Net Container Gitpod
@@ -75,9 +75,17 @@ The Dockerfile performs the following:
 5. It publishes the built project.
 6. It creates a dotnet entry point for the image.
 
-At this point if you have your own hardware environment configured you could run the following to build the image.
+At this point if you have your own hardware environment configured to run containers you could run the following to build the image.
+
+```bash
+docker build -t whiskeyapiimage .
+```
 
 Then run the container with this command.
+
+```bash
+docker run -d -p 3000:3000 --name whiskeyapi whiskeyapiimage
+```
 
 However after some falling out with my laptop, this is what led me to using gitpod as my development environment instead...
 
@@ -86,6 +94,8 @@ However after some falling out with my laptop, this is what led me to using gitp
 [Gitpod](https://gitpod.io) is a [cloud developer environment](https://www.gitpod.io/cde) that aims to remove the need for people to configure their own machines for development. This should also solve the "it works on my machine" statement as the code specifying the machine environment is also held with the code, therefore every developer using the codebase also gets the same environment. This is an awesome place to be and one I am now fervently behind with a view to never look back. The [documentation](https://www.gitpod.io/docs/introduction) is excellent and be prepared to stare slack-jawed at your screen after a few [quickstarts](https://www.gitpod.io/docs/introduction/getting-started/quickstart) when you realise the magnitude of time this tool will save.
 
 Gitpod leverages containers as the developer environment and you can work completely in the browser if you. The interface is based completely on VS code so you get a very familiar look and feel as well as the extensions.
+
+
 
 You can only install extensions from [open visual studio registry](https://open-vsx.org/) in the actual browser, to open microsoft extensions you have to open in desktop VS code. This is fine though as you can still continue running your container cloud developer environment from your desktop. Awesome!
 
@@ -121,7 +131,7 @@ image:
 
 tasks:
   - name: Build & Run Container
-    init: docker build -t whiskeyapi 
+    init: docker build -t whiskeyapi .
     command: |
       gp sync-done dockerrun
       docker run -d -p 8000:3000 --name whiskeyapi whiskeyapi
@@ -185,6 +195,8 @@ To make these workspaces even quicker you can configure [prebuilds](https://www.
 
 You create these in projects in your [gitpod dashboard](https://gitpod.io/projects) with a 1:1 mapping to a repo and configure them to trigger off a particular branch if you wish.
 
+
+
 The workspaces I have done so far have been so quick prebuilds have been great but not mandatory, however I can imagine as workflows and development gets more complex, these are going to be a lifesaver.
 
 ## What Next??
@@ -198,8 +210,9 @@ My plans now are:
 - Combine gitpod with github actions for the whiskey review to make a complete cloud hosted software development lifecycle.
 - I want to look at bringing in the cosmos db emulator into the whiskey review codebase and utilise cosmos within gitpod, hopefully turning this into a really useful template.
 - I want to look at creating a FARM stack template based on the work I've done with FastAPI, Mongo and React.
+- I'll probably take a few steps back and do a blog on a hello world configuration for gitpod.
 - I'll continue to keep this [gitpod cheatsheet](https://blog.hungovercoders.com/cheatsheets/gitpod/gitpod.html) up to date for gitpod as part of the hungovercoders [cheatsheets](https://blog.hungovercoders.com/cheatsheets/) and ensure it looks a bit prettier in future!
 
-Well all of that has left me breathless and excited.
+Well all of that has left me breathless and excited. If you want to know more come and speak to me or get on the [discord community](https://discord.com/channels/816244985187008514) for gitpod which has plenty of other enthusiasts too.
 
 I really hope this has changed your development world as much as it has changed mine. Mind blown.

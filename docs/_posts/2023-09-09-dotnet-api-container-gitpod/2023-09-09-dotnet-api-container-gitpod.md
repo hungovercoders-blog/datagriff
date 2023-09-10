@@ -107,7 +107,7 @@ You get 50 free hours in the [free plan](https://www.gitpod.io/pricing?plan=clou
 
 ![Gitpod Usage]({{ site.baseurl }}/assets/2023-09-09-dotnet-api-container-gitpod/gitpod-usage.PNG)
 
-The default workspace itself is this [docker workspace full image](https://hub.docker.com/r/gitpod/workspace-full) which is chock to the brim with [useful language and installs](https://www.gitpod.io/docs/introduction) such as python, ruby, go, **docker**, to name but a few, that I no longer have to manage on my machine! This is hungovercoder bliss as oftentimes we have quite diminished capacity ad simply need to code, so without further ado, lets get gitpod going!
+The default workspace itself is this [docker workspace full image](https://hub.docker.com/r/gitpod/workspace-full) which is chock to the brim with [useful language and installs](https://www.gitpod.io/docs/introduction) such as python, ruby, go, **docker**, to name but a few, that I no longer have to manage on my machine! This is hungovercoder bliss as oftentimes we have quite diminished capacity and simply need to code, so without further ado, lets get gitpod going!
 
 ## Setup Gitpod
 

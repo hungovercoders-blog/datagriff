@@ -227,6 +227,7 @@ I'll likely be following up with more blogs but I also recommend just going thro
 My plans now are:
 
 - Go all in and remove all of the bloat on my machine that I require for development. That's right I have decided to completely commit to cloud developer environments and never look back. Value focus for the win!
+- I am likely going to checkout [github codespaces](https://github.com/features/codespaces) to do a comparison.
 - [Gitpodify](https://www.gitpod.io/guides/gitpodify) all the things including this [blog](https://github.com/hungovercoders-blog/datagriff) - which I already have and am writing to you from a workspace that has ruby and jekyll installed with a live browser within my browser refreshing to the right of me as I write this!
 - Combine gitpod with github actions for the whiskey review to make a complete cloud hosted software development lifecycle.
 - I want to look at bringing in the [cosmos db emulator container](https://hub.docker.com/r/microsoft/azure-cosmosdb-emulator) into the whiskey review codebase and utilise cosmos within gitpod, hopefully turning this into a really useful template, including seeding with test data as part of the workspace starting.

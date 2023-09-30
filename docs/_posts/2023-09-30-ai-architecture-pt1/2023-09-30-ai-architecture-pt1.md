@@ -20,7 +20,7 @@ Unless you've been living under a rock (or some rubble caused by the rise of the
 
 ## Prerequisites
 
-- [Github Account](https://www.github.com) - If you haven't already get yourself a github account, this is how you're going to host code and optionally open up gitpod.
+- [Github Account](https://www.github.com) - If you haven't already get yourself a github account, this is how you're going to host code and optionally open up [gitpod](https://www.gitpod.io/).
 - [Chatgpt Account](https://chat.openai.com/) - You'll want to get yourself on this page and ensure its bookmarked, every other developer does! I actually pay for the premium version which is about twenty pounds a month and allows me to use the latest GPT-4 model available which is also a lot faster. I think its totally worth it if you're a mad hungovercoder like me as it generates so much proof of concept code for you to get you going quickly. You won't regret it. 
 - A tenner (optional unless you want to do the API part). In order to be fancy and call the ChatGPT API you need to pay. I have done a number of calls now with my ten pounds and you can keep track of it quite easily without the fear of going over any budget. Once you've spent your credit, you simply won't be able to call the API any more.
 

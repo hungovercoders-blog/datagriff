@@ -8,7 +8,7 @@ image:
 tags: AI ChatGpt EventCatalog Architecture
 ---
 
-Unless you've been living under a rock (or some rubble caused by the rise of the machines) you must have heard of [chatgpt](https://chat.openai.com/) by now. This is a large language model that can write poetry, write content (see my post on [SEO](https://blog.hungovercoders.com/datagriff/2023/06/03/seo-optimisation.html)) and even generate excellent boilerplate code for pretty much any language and design pattern. If you haven't already, get onboard the AI train or you're be left behind. Everyone is rushing to find "that use case" for AI and whilst I won't find that one that will make me millions, or destroy the planet, I was keen on seeing how well it could do at generating logical software architecture... My plan is to combine AI tooling with this great open source [event catalog](https://www.eventcatalog.dev/) tooling that has templates for markdown I hope to leverage. This first part of the blog series is going to be generating an domain, event and team schema JSON using chatgpt. I will then use this to feed into [event catalog markdown templates](https://www.eventcatalog.dev/docs/events/introduction)](https://www.eventcatalog.dev/docs/events/introduction) in part 2. Hold on to your drinks..!
+Unless you've been living under a rock (or some rubble caused by the rise of the machines) you must have heard of [chatgpt](https://chat.openai.com/) by now. This is a large language model that can write poetry, write content (see my post on [SEO](https://blog.hungovercoders.com/datagriff/2023/06/03/seo-optimisation.html)) and even generate excellent boilerplate code for pretty much any language and design pattern. If you haven't already, get onboard the AI train or you're be left behind. Everyone is rushing to find "that use case" for AI and whilst I won't find that one that will make me millions, or destroy the planet, I was keen on seeing how well it could do at generating logical software architecture... My plan is to combine AI tooling with this great open source [event catalog](https://www.eventcatalog.dev/) tooling that has templates for markdown I hope to leverage. This first part of the blog series is going to be generating an domain, event and team schema JSON using chatgpt. I will then use this to feed into [event catalog markdown templates](https://www.eventcatalog.dev/docs/events/introduction) in part 2. Hold on to your drinks..!
 
 - [Prerequisites](#prerequisites)
 - [Proof of Concept Using ChaptGPT](#proof-of-concept-using-chaptgpt)
@@ -71,7 +71,7 @@ for the software architecture for a dog rescue.**".
 
 ![Chatgpt Third Attempt]({{ site.baseurl }}/assets/2023-09-30-ai-architecture-pt1/chatgpt-third-attempt.PNG)
 
-Bingo. We've got the JSON format we want and only the JSON schema we want returned. You'll notice that ChatGPT has returned slightly different variations each time in the actual values too, this is why at the moment this whole exercise will be for boilerplate ideas and it will be up to you to refine you architecture. Still its great to get some ideas quickly!
+Bingo. We've got the JSON format we want and only the JSON schema we want returned. You'll notice that ChatGPT has returned slightly different variations each time in the actual values too, this is why at the moment this whole exercise will be for boilerplate ideas and it will be up to you to refine the architecture. Still its great to get some ideas quickly!
 
 ## Generate ChatGPT API Key
 

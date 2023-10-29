@@ -42,15 +42,15 @@ After the disappoint of the rugby and the need to distract myself from the linge
 
 ### Add configuration
 
-### Create startup scripts
+### Create Azure startup scripts
 
 ## Create Terraform Initialisation
 
 ### Create storage account
 
-### 
+### Create Terraform startup scripts
 
-## Deploy Resource Group
+## Deploy a Resource Group
 
 ## Clone Template for Azure Container Environment
 

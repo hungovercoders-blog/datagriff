@@ -34,13 +34,13 @@ Cloud developer environments I believe are the future of how we will be developi
 
 
 They go one step further than docker providing the environment for your software to run, as they actually provide the environment that the software was built on in the first place. This truly solves the "it runs on my machine" issue. Another reason is that I hate configuring my machine, or more to the point I hate remembering HOW to configure my machine. Cloud develop environments allow you to wrap your configuration in an automated code solution which me it works exactly the same for whoever opens it, and you can go back to see your configuration in source control. I think as a hungovercoder it is more important that it solves the problem of "that's how I got it to work on my machine!!!" as well as the classic "it runs on my machine...". I have started dabbling with both [github codespaces]() and [gitpod](https://www.gitpod.io/cde) for cloud developer environment experiences and I would recommend you do the same to make the choice that suits you. I started my journey with gitpod, which is why the current blog sticks to this at the moment, but if you check out the repo referenced throughout it will also have the configuration mostly setup for codespaces too. They both leverage a common container setup so its very easy to make your code function for both.
-I am aiming to do a fair comparison between the two when I think I am ready towards the end of the year. At the moment my summary would be that github codespaces have a huge amount of functionality, quickstarts and I get to leverage more compute credits as I already have [github pro](). Gitpod, while less bells and whistles, seems to still be a far smooth and quicker experience, as well as not abstracting too much away so that it takes away the knowledge of how you configured your machine. I find codespaces provide more of a template quickstart and would be the best choice for beginners, but gitpod has allowed me to figure out "how it worked on my machine" and place that in code, without me not knowing how I got it to work in the first place, which is still an important thing at least at this point for developers to understand.
+I am aiming to do a fair comparison between the two when I think I am ready towards the end of the year. At the moment my summary would be that github codespaces have a huge amount of functionality, co-pilot(!), quickstarts, Microsoft extensions in the browser, and I get to leverage more compute credits as I already have github pro. Gitpod, while less bells and whistles, seems to still be a far smooth and quicker experience, as well as not abstracting too much away so that it takes away the knowledge of how you configured your machine. I find codespaces provide more of a template quickstart and would be the best choice for beginners, but gitpod has allowed me to figure out "how it worked on my machine" and place that in code, without me not knowing how I got it to work in the first place, which is still an important thing at least at this point for developers to understand. I am looking forward to comparing the two in more detail and from a fairer perspective in the future.
 
 ## Create base image with prebuild
 
 ### Declare docker file
 
-I initially tried to install the Azure CLI and Terraform as part of the gitpod configuration file. I thought this was adding too much time to when I opened up my environment. My environment was also all based on the [gitpod full image](https://hub.docker.com/layers/gitpod/workspace-full/latest/images/sha256-811f72def04ed647cb4cb991771db8d3c6d9ceeec2f164fadda3db703eb54469?context=explore) and I thought that this 2.5 GB image was far too large for what I need specifically for this environment, simply a linux distribution, [brew](https://brew.sh/) (to provide me easy ability to install terraform and azure cli), terraform and the azure cli. After speaking to the lovely people on the [gitpod discord community](https://discord.com/channels/816244985187008514) they then recommended that I put all these installations into the docker file itself and use the [workspace-base image](https://hub.docker.com/layers/gitpod/workspace-base/latest/images/sha256-7bc9afe251dc71cd50b7aaeebfd1ed80690a9080c43322e39a57fc9959f6af6d?context=explore), which is only around 600 MB in size. This made my docker image a third of the size and cut the environment startup time to a few seconds once I had configured prebuilds (see next section). The docker file I called ".cde.Dockerfile" and added to the root of my git repo with this code. This initaites a container from the gitpod base image, installs [brew](https://brew.sh/), then uses brew to install terraform and the azure cli.
+I initially tried to install the Azure CLI and Terraform as part of the gitpod configuration file. I thought this was adding too much time to when I opened up my environment. My environment was also all based on the [gitpod full image](https://hub.docker.com/layers/gitpod/workspace-full/latest/images/sha256-811f72def04ed647cb4cb991771db8d3c6d9ceeec2f164fadda3db703eb54469?context=explore) and I thought that this 2.5 GB image was far too large for what I needed specifically for this environment, simply a linux distribution, [brew](https://brew.sh/) (to provide me easy ability to install terraform and azure cli), terraform and the azure cli. After speaking to the lovely people on the [gitpod discord community](https://discord.com/channels/816244985187008514) they then recommended that I put all these installations into the docker file itself and use the [workspace-base image](https://hub.docker.com/layers/gitpod/workspace-base/latest/images/sha256-7bc9afe251dc71cd50b7aaeebfd1ed80690a9080c43322e39a57fc9959f6af6d?context=explore), which is only around 600 MB in size. This made my docker image a third of the size and cut the environment startup time to a few seconds once I had configured prebuilds (see next section). The docker file I called ".cde.Dockerfile" and added to the root of my git repo with this code. 
 
 ```bash
 FROM gitpod/workspace-base
@@ -58,27 +58,156 @@ RUN eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
     brew install hashicorp/tap/terraform && \
     brew install azure-cli
 ```
+This initaites a container from the gitpod base image, installs [brew](https://brew.sh/), then uses brew to install terraform and the azure cli. I made a "standardised" decision to start prefixing files and directories with "cde" to represent "cloud developer environment" with a view to hoepfully use common configuration across the multiple tools (gitpod, github codespaces, ANother).
 
 ### Configure prebuild
 
-You can take advantage of [prebuilds](https://www.gitpod.io/docs/configure/projects/prebuilds) in gitpod which basically... well pre-build your environment so that when you open it next time it will be faster. This prebuild creates whatever the image is for your docker file and also runs any init tasks that you have in your configuration. I didn't have any init tasks planned but having the container ready made and the tools installed once up-front is a massive time saver.
+You can take advantage of [prebuilds](https://www.gitpod.io/docs/configure/projects/prebuilds) in gitpod which basically... well pre-build your environment so that when you open it next time it will be faster. This prebuild creates whatever the image is for your docker file and also runs any init tasks that you have in your configuration. I didn't have any init tasks planned but having the container ready made and the tools installed once up-front is a massive time saver. Using this it now take seconds to open up the environment for this template.
+
+![Gitpod Prebuilds]({{ site.baseurl }}/assets/2023-10-29-cloud-dev-platform-template/gitpod-prebuilds.PNG)
 
 ## Create Azure CLI Initialisation
 
-### Create app reg
+### Create Azure Application Registration
 
-### Add configuration
+Iniitally when I setup this environment I used my own credentials to login to Azure when the environment opened using this command in the gitpod configuration.
+
+```bash
+az login --use-device-code
+```
+
+This however this involved me having to look at the terminal, copy a code and login externally. It was all part of the process... but I wanted to integrate into Azure in a completely automated manner... I have no time for this manual interaction! This was just my developer environment after all. I therefore decided to use a an application registration and see if I could use that to automatically login, with the aspiration to be able to allow the Terraform validation and plan to all occur as part of the environment startup too (see later sections).
+
+You can either create an Azure application registration in the portal like this:
+
+Or you can use the cloud shell in the Azure portal using this command:
+
+```bash
+
+```
+
+The values you are going to need from your Azure environment and application registration to plug into your gitpod configuration are:
+
+- Tenant ID
+- Subscription Name
+- Client ID
+- Client Secret
+
+I also granted this application registration the "Contributor" role on my subscription so that it could create resources. I am not sure if this is the best role to use, but it worked for me. I am sure there is a more granular role that could be used.
+
+### Add Azure Configuration to Gitpod
+
+You can add variables to gitpod either at a user level or at an individual project level. An individual project essentially maps to a repository in github. I decided to add the variables at the user level so that I could reuse these credentials against my developer environment for any repository I wanted to use. I scoped the variables to be for "hungovercoders/*" though so that these environment variables only appeared in projects/repos prefixed with this organisation.
+
+![Gitpod Variables]({{ site.baseurl }}/assets/2023-10-29-cloud-dev-platform-template/gitpod-variables.PNG)
+
+The reason I used the naming convention of "ARM_..." in upper case is because during my experimentation with this I found that the variables named like this were native to Terraform and they picked them up automatically.
 
 ### Create Azure startup scripts
+
+In order to continue down my route of being cloud developer environment agnostic, I created external scripts to run the Azure CLI installation commands. I created a directory called "cde" in the root of my git repo and added the following script called "azure.sh" to it.
+
+```bash
+az login --service-principal -u $ARM_CLIENT_ID -p $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID
+az account set --subscription "$ARM_SUBSCRIPTION_NAME"
+az account show
+```
+
+I then referenced this script in the .gitpod.yml configuration file like this.
+
+```bash
+image:
+  file: .cde.Dockerfile
+
+tasks:
+  - name: Azure CLI
+    command: |
+      sh ./cde/azure.sh
+```
+
+When you open up the environment now you will see that the Azure CLI is installed and you are logged in from the "Azure CLI" terminal.
+
+![Azure CLI]({{ site.baseurl }}/assets/2023-10-29-cloud-dev-platform-template/azure-cli.PNG)
 
 ## Create Terraform Initialisation
 
 ### Create storage account
 
+I wanted to store my Terraform state in Azure so that I could share it across multiple environments. I created a storage account in Azure called "stateeundgrf" in a resource group called "state-rg" and then created a container called "state" in it. 
+This was all a bit rushed so please change these to be more suitable names! 
+
+I then created a file called "versions.tf" in a terraform directory of my git repo with the following code.
+
+```hcl
+terraform {
+
+
+  backend "azurerm" {
+    resource_group_name  = "state-rg"
+    storage_account_name = "stateeundgrf"
+    container_name       = "state"
+    key                  = "terraform.tfstate"
+  }
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>3.62.1"
+    }
+  }
+
+  required_version = ">= 1.2.3"
+
+}
+
+provider "azurerm" {
+  features {}
+}
+```
+
 ### Create Terraform startup scripts
+
+Just like I did with the Azure CLI, I created an external bash script called "terraform.sh" to run the Terraform commands to initialise, format, validate and plan in the cde directory.
+
+```bash
+cd  terraform
+terraform init
+terraform fmt
+terraform validate
+terraform plan
+```
+
+I then referenced this script in the .gitpod.yml configuration file like this. Notice that I added a "gp sync-await waitonazurecli" on the Terraform task so that it would wait for the Azure CLI task to complete before running, which has the corresponding "gp sync-done waitonazurecli" in the Azure CLI task.
+
+```bash
+
+```bash
+image:
+  file: .cde.Dockerfile
+
+tasks:
+  - name: Terraform
+    command: |
+      gp sync-await waitonazurecli
+      sh ./cde/terraform.sh
+  - name: Azure CLI
+    command: |
+      sh ./cde/azure.sh
+      gp sync-done waitonazurecli
+
+vscode:
+  extensions:
+    - hashicorp.terraform
+```
+
+When you open up the environment now you will see that the Terraform tasks run after the Azure CLI has completed.
+
+![Azure CLI]({{ site.baseurl }}/assets/2023-10-29-cloud-dev-platform-template/terraform.PNG)
 
 ## Deploy a Resource Group
 
-## Clone Template for Azure Container Environment
+## Initalise New Repo with Template and Deploy Azure Container Platform
 
-## What next?
+
+
+

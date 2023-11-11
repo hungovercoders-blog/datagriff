@@ -74,9 +74,9 @@ Copy and paste this [footer script](https://github.com/jekyll/minima/blob/master
 
 ## Comments Now Appear on Blog
 
-You can now see on this blog post below you can add a comment by logging in with your github account and sending me some feedback.
+You can now see the comments functionality on this blog post in the footer below and in all my previous posts! You can now add a comment by logging in with your github account and sending me some feedback. Easy peasy.
 
-These comments also appear in the [discussions](https://github.com/hungovercoders-blog/datagriff/discussions) of the blog repo.
+These comments also appear in the [discussions](https://github.com/hungovercoders-blog/datagriff/discussions) of the blog repo as this is what backs this functionality.
 
 ![Discussions Blog Repo]({{ site.baseurl }}/assets/2023-11-11-blog-comments-giscus/discussions_blog.PNG)
 

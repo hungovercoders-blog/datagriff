@@ -14,7 +14,7 @@ I wanted to start getting feedback for my [github pages](https://pages.github.co
 - [Create Public Discussions Repo](#create-public-discussions-repo)
 - [Generate Giscuss Javascript](#generate-giscuss-javascript)
 - [Add Footer File to \_includes Folder](#add-footer-file-to-_includes-folder)
-- [Comments Now Appear on Blog!](#comments-now-appear-on-blog)
+- [Comments Now Appear on Blog](#comments-now-appear-on-blog)
 
 ## Prerequisites
 
@@ -72,11 +72,11 @@ Copy and paste this [footer script](https://github.com/jekyll/minima/blob/master
 
 ![Footer File]({{ site.baseurl }}/assets/2023-11-11-blog-comments-giscus/footer_file.PNG)
 
-## Comments Now Appear on Blog!
+## Comments Now Appear on Blog
 
-You can now see on this blog post below you can add a comment by logging in with your github account and sending me some feedback. 
+You can now see on this blog post below you can add a comment by logging in with your github account and sending me some feedback.
 
-These comments also appear in the discussions of the repo we setup earlier.
+These comments also appear in the [discussions](https://github.com/hungovercoders-blog/datagriff/discussions) of the blog repo.
 
 ![Discussions Blog Repo]({{ site.baseurl }}/assets/2023-11-11-blog-comments-giscus/discussions_blog.PNG)
 

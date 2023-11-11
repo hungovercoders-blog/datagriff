@@ -4,7 +4,7 @@ date: 2023-11-11
 author: dataGriff
 description: Adding Comments to Jekyll Minima Blog on Github Pages with Giscus
 image:
-  path: /assets/2023-11-11-blog-comments-giscuss/link.png
+  path: /assets/2023-11-11-blog-comments-giscus/link.png
 tags: Blog Github Giscus Jekyll
 ---
 
@@ -12,7 +12,7 @@ I wanted to start getting feedback for my [github pages](https://pages.github.co
 
 - [Prerequisites](#prerequisites)
 - [Create Public Discussions Repo](#create-public-discussions-repo)
-- [Generate Giscuss Javascript](#generate-giscuss-javascript)
+- [Generate Giscus Javascript](#generate-giscus-javascript)
 - [Add Footer File to \_includes Folder](#add-footer-file-to-_includes-folder)
 - [Comments Now Appear on Blog](#comments-now-appear-on-blog)
 
@@ -31,7 +31,7 @@ Then you need to enable discussions on your github personal account or organisat
 
 ![Enable Discussions]({{ site.baseurl }}/assets/2023-11-11-blog-comments-giscus/discussions_enable.PNG)
 
-## Generate Giscuss Javascript
+## Generate Giscus Javascript
 
 Navigate to [giscus app](https://giscus.app/) and enter the following details;
 

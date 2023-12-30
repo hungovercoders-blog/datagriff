@@ -4,7 +4,7 @@ date: 2023-12-30
 author: dataGriff
 description: Creating postman collection for Marvel API in VS Code
 image:
-  path: /assets/2023-12-30-postman-vscode-marvel
+  path: /assets/2023-12-30-postman-vscode-marvel/link.png
 tags: Postman VSCode API
 ---
 

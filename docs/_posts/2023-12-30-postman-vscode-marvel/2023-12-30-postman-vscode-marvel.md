@@ -105,7 +105,7 @@ First create a folder for "Characters" under your Marvel collection. This will j
 
 ![Collection Folder]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/collection_folder.PNG)
 
-Add a GET request with the URL being **{{base_url}}/characters?hash={{hash}}&ts={{$timestamp}}**. This will inherit the base_url and hash variables from our environment whilst also leveraging the built-in timestamp variable. We can also add each of the params documented in the [characters API](https://developer.marvel.com/docs) but not tick them so they're not used yet.
+Add a GET request with the URL being **{% raw %}{{base_url}}/characters?hash={{hash}}&ts={{$timestamp}}{% endraw %}**. This will inherit the base_url and hash variables from our environment whilst also leveraging the built-in timestamp variable. We can also add each of the params documented in the [characters API](https://developer.marvel.com/docs) but not tick them so they're not used yet.
 
 ![Request Characters Example 1]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/request_characters_ex1.PNG)
 
@@ -129,7 +129,7 @@ Now try another request with the nameStartsWith parameter set to "spider". You w
 
 ### Create a Character Request
 
-Add a GET request with the URL being **{{base_url}}/characters/{{character_id}}?hash={{hash}}&ts={{$timestamp}}**. This will again inherit everything from the environment and parent as before. The only difference is it has a "character_id" variable as part of the URL which will only return the hulk. Send the request and see the response is indeed the hulk!
+Add a GET request with the URL being **{% raw %}{{base_url}}/characters/{{character_id}}?hash={{hash}}&ts={{$timestamp}}{% endraw %}**. This will again inherit everything from the environment and parent as before. The only difference is it has a "character_id" variable as part of the URL which will only return the hulk. Send the request and see the response is indeed the hulk!
 
 ![Request Character]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/request_character.PNG)
 

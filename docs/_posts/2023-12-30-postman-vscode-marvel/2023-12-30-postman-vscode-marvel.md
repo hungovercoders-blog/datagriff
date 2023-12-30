@@ -135,15 +135,23 @@ Add a GET request with the URL being **{% raw %}{{base_url}}/characters/{{charac
 
 ### Documentation
 
-You can view documentation at the request level in the VS code extension, but you cannot edit things like variable descriptions.
+You can view documentation at the request level in the VS code extension, but you cannot edit things like query parameter descriptions.
+
+![Request Documentation]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/request_documentation.PNG)
 
 You can also view documentation at the collection level.
 
-This also allows you to pick a particular language for your API interactions too as a quick start for your application code... However as I couldn't add examples in the VS Code extension which allows for this feature to kick-in, this was the first reason for me to go back to the postman app. I also wanted to edit documentation at the variable description level so this again led me to venturing back into the Postman app. Fear not we will be back to see it all synced up in VS code but we'll need to go into the postman app for some documentation, examples and AI generated testing!
+![Collection Documentation 1]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/collection_documentation.PNG)
+
+This also allows you to pick a particular language for your API interactions too as a quick start for your application code...
+
+![Collection Documentation 2]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/collection_documentation_1.PNG)
+
+However as I couldn't add examples in the VS Code extension which allows for this feature to kick-in, this was the first reason for me to go back to the postman app. I also wanted to edit documentation at the query parameter description level so this again led me to venturing back into the Postman app. Fear not we will be back to see it all synced up in VS code but we'll need to go into the postman app for some documentation, examples and AI generated testing!
 
 ## Postman App
 
-I was hoping I'd never have to leave VS code ever again, and in the main this is true. I found the below at least at this point were easier to achieve in the postman app. I'll definitely be keeping an eye on this in the future to see if I never do have to leave...
+I was hoping I'd never have to leave VS code ever again, and in the main this is true. I found the below at least at this point were easier to achieve in the postman app. I'll definitely be keeping an eye on this in the future to see if I never do have to leave VS code...
 
 ### Add Descriptions
 
@@ -197,7 +205,7 @@ pm.test("Name and description in results array are non-empty strings", function 
 
 ## VS Code Extension Revisited
 
-When I now go back into the VS code extension I can see that the documentation has been added to the variables.
+When I now go back into the VS code extension I can see that the documentation has been added to the query parameters.
 
 ![VS Code Docs 1]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/vscode_docs_1.PNG)
 

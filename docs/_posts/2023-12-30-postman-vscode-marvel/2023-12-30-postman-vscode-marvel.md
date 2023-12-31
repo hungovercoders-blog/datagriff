@@ -8,7 +8,7 @@ image:
 tags: Postman VSCode API
 ---
 
-I am way behind on my blogging given tis the season to be hungover and not coding... Below describes how to create a simple postman collection using the super [Marvel API](https://developer.marvel.com/){:target="_blank"} leveraging environments and variables using the [postman VS Code extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode). This I thought would be a great opportunity for me to see how API endpoints get structured and documented for a public facing API. I then show how you can add some examples, descriptions and tests (using AI no less!) in the [Postman app](https://www.postman.com/downloads/). **dataGriff SMASH!**
+I am way behind on my blogging given tis the season to be hungover and not coding... Below describes how to create a simple postman collection using the super [Marvel API](https://developer.marvel.com/){:target="_blank"} leveraging environments and variables using the [postman VS Code extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode){:target="_blank"}. This I thought would be a great opportunity for me to see how API endpoints get structured and documented for a public facing API. I then show how you can add some examples, descriptions and tests (using AI no less!) in the [Postman app](https://www.postman.com/downloads/){:target="_blank"}. **dataGriff SMASH!**
 
 - [Prerequisites](#prerequisites)
 - [VS Code Extension](#vs-code-extension)
@@ -25,11 +25,11 @@ I am way behind on my blogging given tis the season to be hungover and not codin
 
 ## Prerequisites
 
-- [Postman Account](https://www.postman.com/) - This will be so you can use postman and ensure your settings are synced between the application and the VS code extension.
-- [Postman App](https://www.postman.com/downloads/) - This will provide some more functionality over the VS code extension such as AI assistant for test generation.
-- [VS Code](https://code.visualstudio.com/) - This to leverage the postman VS code extension.
-- [Postman Extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode) - This to VS code extension we will experiment with.
-- [Marvel Account](https://developer.marvel.com/account) - This is to get your own public and private keys so that you can experiment with the Marvel API.
+- [Postman Account](https://www.postman.com/){:target="_blank"} - This will be so you can use postman and ensure your settings are synced between the application and the VS code extension.
+- [Postman App](https://www.postman.com/downloads/){:target="_blank"} - This will provide some more functionality over the VS code extension such as AI assistant for test generation.
+- [VS Code](https://code.visualstudio.com/){:target="_blank"} - This to leverage the postman VS code extension.
+- [Postman Extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode){:target="_blank"} - This to VS code extension we will experiment with.
+- [Marvel Account](https://developer.marvel.com/account){:target="_blank"} - This is to get your own public and private keys so that you can experiment with the Marvel API.
 
 ## VS Code Extension
 
@@ -107,7 +107,7 @@ First create a folder for "Characters" under your Marvel collection. This will j
 
 ![Collection Folder]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/collection_folder.PNG)
 
-Add a GET request with the URL being **{% raw %}{{base_url}}/characters?hash={{hash}}&ts={{$timestamp}}{% endraw %}**. This will inherit the base_url and hash variables from our environment whilst also leveraging the built-in timestamp variable. We can also add each of the params documented in the [characters API](https://developer.marvel.com/docs) but not tick them so they're not used yet.
+Add a GET request with the URL being **{% raw %}{{base_url}}/characters?hash={{hash}}&ts={{$timestamp}}{% endraw %}**. This will inherit the base_url and hash variables from our environment whilst also leveraging the built-in timestamp variable. We can also add each of the params documented in the [characters API](https://developer.marvel.com/docs){:target="_blank"} but not tick them so they're not used yet.
 
 ![Request Characters Example 1]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/request_characters_ex1.PNG)
 
@@ -157,7 +157,7 @@ I was hoping I'd never have to leave VS code ever again, and in the main this is
 
 ### Add Descriptions
 
-First I added descriptions to the characters API query parameters by taking them from the [Marvel API docs](https://developer.marvel.com/docs).
+First I added descriptions to the characters API query parameters by taking them from the [Marvel API docs](https://developer.marvel.com/docs){:target="_blank"}.
 
 ![Postman Variable Descriptions]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/postman_variables.PNG)
 

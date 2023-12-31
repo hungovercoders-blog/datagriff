@@ -8,7 +8,7 @@ image:
 tags: Blog Github Giscus Jekyll
 ---
 
-I wanted to start getting feedback for my [github pages](https://pages.github.com/) hosted [jekyll minima](https://github.com/jekyll/minima) backed blog posts. These could possibly be scathing drunkards furious with my methods, so that we may enter an educational debate, or simply feedback on how to improve areas as I am always busting to elevate my code! I came across [giscus](https://giscus.app/) and found that this was very simple to do by backing it with [github discussions](https://docs.github.com/en/discussions) as follows...
+I wanted to start getting feedback for my [github pages](https://pages.github.com/){:target="_blank"} hosted [jekyll minima](https://github.com/jekyll/minima){:target="_blank"} backed blog posts. These could possibly be scathing drunkards furious with my methods, so that we may enter an educational debate, or simply feedback on how to improve areas as I am always busting to elevate my code! I came across [giscus](https://giscus.app/){:target="_blank"} and found that this was very simple to do by backing it with [github discussions](https://docs.github.com/en/discussions){:target="_blank"} as follows...
 
 - [Prerequisites](#prerequisites)
 - [Create Public Discussions Repo](#create-public-discussions-repo)
@@ -18,8 +18,8 @@ I wanted to start getting feedback for my [github pages](https://pages.github.co
 
 ## Prerequisites
 
-- [Github Account](https://www.github.com)
-- [Github pages](https://pages.github.com/) blog backed with [jekyll minima](https://github.com/jekyll/minima).
+- [Github Account](https://www.github.com){:target="_blank"}
+- [Github pages](https://pages.github.com/){:target="_blank"} blog backed with [jekyll minima](https://github.com/jekyll/minima){:target="_blank"}.
 
 ## Create Public Discussions Repo
 
@@ -33,7 +33,7 @@ Then you need to enable discussions on your github personal account or organisat
 
 ## Generate Giscus Javascript
 
-Navigate to [giscus app](https://giscus.app/) and enter the following details;
+Navigate to [giscus app](https://giscus.app/){:target="_blank"} and enter the following details;
 
 - The language for your comments
 - The repo that contains your blog that you want comments on
@@ -68,7 +68,7 @@ Add a footer file to the _includes folder of your blog repo.
 
 ![Footer File Directory]({{ site.baseurl }}/assets/2023-11-11-blog-comments-giscus/footer_file_directory.PNG)
 
-Copy and paste this [footer script](https://github.com/jekyll/minima/blob/master/_includes/footer.html) sourced from [Jekyll Minima source page](https://github.com/jekyll/minima) into this footer file. Now add in the javascript that you generated from the [giscus app](https://giscus.app/). You directory structure and footer file content should look something like the below.
+Copy and paste this [footer script](https://github.com/jekyll/minima/blob/master/_includes/footer.html){:target="_blank"} sourced from [Jekyll Minima source page](https://github.com/jekyll/minima){:target="_blank"} into this footer file. Now add in the javascript that you generated from the [giscus app](https://giscus.app/){:target="_blank"}. You directory structure and footer file content should look something like the below.
 
 ![Footer File]({{ site.baseurl }}/assets/2023-11-11-blog-comments-giscus/footer_file.PNG)
 
@@ -76,7 +76,7 @@ Copy and paste this [footer script](https://github.com/jekyll/minima/blob/master
 
 You can now see the comments functionality on this blog post in the footer below and in all my previous posts! You can now add a comment by logging in with your github account and sending me some feedback. Easy peasy.
 
-These comments also appear in the [discussions](https://github.com/hungovercoders-blog/datagriff/discussions) of the blog repo as this is what backs this functionality.
+These comments also appear in the [discussions](https://github.com/hungovercoders-blog/datagriff/discussions){:target="_blank"} of the blog repo as this is what backs this functionality.
 
 ![Discussions Blog Repo]({{ site.baseurl }}/assets/2023-11-11-blog-comments-giscus/discussions_blog.PNG)
 

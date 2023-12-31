@@ -9,3 +9,7 @@ bundle exec jekyll serve
 ## Escape Curly Brackets
 
 {% raw %}{{ place }}{% endraw %}
+
+## Markdown Open New Tab
+
+{:target="_blank"} 

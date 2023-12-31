@@ -8,7 +8,7 @@ image:
 tags: Postman VSCode API
 ---
 
-I am way behind on my blogging given tis the season to be hungover and not coding... Below describes how to create a simple postman collection using the super [Marvel API](https://developer.marvel.com/) leveraging environments and variables using the [postman VS Code extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode). This I thought would be a great opportunity for me to see how API endpoints get structured and documented for a public facing API. I then show how you can add some examples, descriptions and tests (using AI no less!) in the [Postman app](https://www.postman.com/downloads/). **dataGriff SMASH!**
+I am way behind on my blogging given tis the season to be hungover and not coding... Below describes how to create a simple postman collection using the super [Marvel API](https://developer.marvel.com/){:target="_blank"} leveraging environments and variables using the [postman VS Code extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode). This I thought would be a great opportunity for me to see how API endpoints get structured and documented for a public facing API. I then show how you can add some examples, descriptions and tests (using AI no less!) in the [Postman app](https://www.postman.com/downloads/). **dataGriff SMASH!**
 
 - [Prerequisites](#prerequisites)
 - [VS Code Extension](#vs-code-extension)
@@ -98,6 +98,8 @@ This is what it looks like in postman:
 ![Collection PreRequest]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/collection_pre_request.PNG)
 
 We're going to set one variable at the collection level and that will be for the character id so that we can easily set it for the single character endpoint URL when calling multiple instances of it later. I have gone for 1009351 which is... HULK SMASH!
+
+![Collection Character Id]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/collection_char_id.PNG)
 
 ### Create a Characters Request
 

@@ -60,7 +60,7 @@ The resource group I have chose contains:
 
 ![Resource Group Original]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/resource_group_original.png)
 
-Run the following command from that directory with the rg parameter taking in the resource group you want to import. The below imports a resource group called "dev-containerapp-rg-hngc" from the subscription we have authenticated against in the previous setup steps.
+Run the following command from that directory with the rg parameter taking in the resource group you want to import. The below imports a resource group called "lrn-containerapp-rg-hngc" from the subscription we have authenticated against in the previous setup steps.
 
 ```bash
 aztfexport rg lrn-containerapp-rg-hngc

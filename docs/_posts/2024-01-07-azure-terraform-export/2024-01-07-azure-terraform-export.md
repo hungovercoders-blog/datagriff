@@ -8,11 +8,12 @@ image:
 tags: Azure Terraform
 ---
 
-The hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform) is now an absolute beast and one the template I frequently use as a starting point for any codebases that will deploy infrastructure to Azure. However, I wanted to know if there was a way to fastrack anyone who doesn't want to convert their ARM or bicep from first principles... The answer is yes and it is [aztfexport](https://github.com/Azure/aztfexport)! Lets crack open a can and automate those terraform files!
+The hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} is now an absolute beast and a template I frequently use as a starting point for any codebases that will deploy infrastructure to Azure. However, I wanted to know if there was a way to fast-track anyone who doesn't want to convert their ARM or bicep from first principles into terraform... The answer is yes and it is [aztfexport](https://github.com/Azure/aztfexport){:target="_blank"}! Lets crack open a can and automate those terraform files!
 
 - [Prerequisites](#prerequisites)
 - [Import the Resources](#import-the-resources)
 - [Validate Terraform Resources with Plan](#validate-terraform-resources-with-plan)
+- [Add a New Resource](#add-a-new-resource)
 - [Apply to a New Resource Group](#apply-to-a-new-resource-group)
 - [Use the Template](#use-the-template)
 
@@ -20,17 +21,17 @@ The hungovercoders [template.azure.terraform repo](https://github.com/hungoverco
 
 You can either:
 
-- Use the hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform) in a cloud developer environment that will come with absolutely everything you need to get started. See tje README for detailed instructions of how to use. The section [importing existing azure resources into terraform](https://github.com/hungovercoders/template.azure.terraform#importing-existing-azure-resources-into-terraform) is essentially the root of this blog post.
+- Use the hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} in a cloud developer environment that will come with absolutely everything you need to get started. See tje README for detailed instructions of how to use. The section [importing existing azure resources into terraform](https://github.com/hungovercoders/template.azure.terraform#importing-existing-azure-resources-into-terraform){:target="_blank"} is essentially the root of this blog post.
 
 OR you will need to install:
 
-- [VS Code](https://code.visualstudio.com/)
-- [VS Code Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)
-- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
-- [aztfexport](https://github.com/Azure/aztfexport/releases)
+- [VS Code](https://code.visualstudio.com/){:target="_blank"}
+- [VS Code Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform){:target="_blank"}
+- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="_blank"}
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli){:target="_blank"}
+- [aztfexport](https://github.com/Azure/aztfexport/releases){:target="_blank"}
 
-For these last three I used brew to install as part of the docker container for the cloud developer environment that the template produces, see [here](https://github.com/hungovercoders/template.azure.terraform/blob/main/.cde.Dockerfile).
+**Note:** For the last three tools I used [homebrew](https://brew.sh/){:target="_blank"} to install as part of the docker container for the cloud developer environment that the template produces, see [here](https://github.com/hungovercoders/template.azure.terraform/blob/main/.cde.Dockerfile){:target="_blank"} for details. If you have brew available on your local machine this might be an easier option.
 
 I certainly prefer option (1) as its all done for me. The methods and screenshots below will be based on the template cloud developer environment, but it will still all be relevant to if you perform the tasks locally.
 
@@ -57,7 +58,7 @@ The resource group I have chose contains:
 - A key vault
 - A serverless cosmos database
 
-![Resource Group Original](images/resource_group_original.png)
+![Resource Group Original]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/resource_group_original.png)
 
 Run the following command from that directory with the rg parameter taking in the resource group you want to import. The below imports a resource group called "dev-containerapp-rg-hngc" from the subscription we have authenticated against in the previous setup steps.
 
@@ -67,19 +68,19 @@ aztfexport rg lrn-containerapp-rg-hngc
 
 You should see "initializing" in the terminal.
 
-![Aztfexport Initializing](images/aztfexport_initialising.PNG)
+![Aztfexport Initializing]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/aztfexport_initialising.PNG)
 
 Sometimes there are a load of "skips" you might see as it does not have the ability to import absolutely everything, but this hasn't been a problem for me so far as they are usually "behind the scenes" type resources. There are a number of options present though and so for now I choose "w" which is just the import all option.
 
-![Aztfexport Options](images/aztfexport_options.png)
+![Aztfexport Options]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/aztfexport_options.png)
 
 You'll then see "importing" if it has kicked off correctly.
 
-![Aztfexport Importing](images/aztfexport_importing.png)
+![Aztfexport Importing]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/aztfexport_importing.png)
 
 After a period you should see the appropriate terraform files in the directory that you can use as a starting point.
 
-![Aztfexport Imported](images/aztfexport_imported.png)
+![Aztfexport Imported]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/aztfexport_imported.png)
 
 ## Validate Terraform Resources with Plan
 
@@ -89,13 +90,35 @@ You can then run a terraform plan from the tfexport directory to validate the in
 terraform plan
 ```
 
-![Terraform Plan](images/terraform_plan.png)
+![Terraform Plan]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/terraform_plan.png)
+
+## Add a New Resource
+
+You can quickly make changes to this infrastructure if you wanted. for example if we added the following storage account terraform in the main.tf file:
+
+```hcl
+resource "azurerm_storage_account" "storage" {
+  name                     = "lrnhelloworldsaeunhngc"
+  resource_group_name      = "${var.environment_shortcode}-containerapp-rg-hngc"
+  location                 = "northeurope"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  account_kind             = "StorageV2"
+   tags = {
+    team = "hungovercoders"
+  }
+}
+```
+
+Then run terraform plan you can see we immediately have our new infrastructure in code and part of the state ready to add.
+
+![Terraform Plan Add]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/terraform_plan_add_resource.PNG)
 
 ## Apply to a New Resource Group
 
 We'll keep this simple and pretend we're going to take this resource group from learning environment (lrn) to the production environment. To do this we're going to create an environment variable and allow us to pass that in to change anything referencing "lrn" to "prd".
 
-We'll first need to delete the terraform files and migrate the state so that the local state knows that we are going to start referencing brand new resources.
+We'll first need to delete the terraform files and migrate the state so that the local state knows that we are going to start referencing brand new resources in a different environment.
 
 Delete the following files and directories:
 
@@ -109,7 +132,7 @@ Then migrate the state:
 terraform init -migrate-state
 ```
 
-![Terraform Migrate](images/terraform_migrate.png)
+![Terraform Migrate]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/terraform_migrate.PNG)
 
 Then amend the main.tf file to take in the variable and amend all the resources to reference this:
 
@@ -142,7 +165,7 @@ We now run terraform plan and we can see that resources are going to be added.
 terraform plan
 ```
 
-![Terraform Plan New](images/terraform_plan_new.png)
+![Terraform Plan New]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/terraform_plan_new.PNG)
 
 Run terraform apply and watch the new resource group get created identical to the learning environment but in "production".
 
@@ -150,12 +173,12 @@ Run terraform apply and watch the new resource group get created identical to th
 terraform apply
 ```
 
-![Terraform Apply](images/terraform_apply_new.png)
+![Terraform Apply New]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/terraform_apply_new.PNG)
 
-In this example the resource group at the end looks like this:
+In this example the resource group at the end looks like the below which is identical but in a "prd" environment instead.
 
-![Resource Group New](images/resource_group_new.png)
+![Resource Group New]({{ site.baseurl }}/assets/2024-01-07-azure-terraform-export/resource_group_new.PNG)
 
 ## Use the Template
 
-If you're using the [template](https://github.com/hungovercoders/template.azure.terraform) you can move the imported code into the terraform folder and start tweaking it to meet your needs. This becomes a really quick start to import azure resources into terraform, utilise a cloud developer environment with all the tooling ready and a github actions pipeline ready for you to deploy. Now that is a happy new year!
+If you're using the [template](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} you can move the imported code into the terraform folder and start tweaking it to meet your needs. This becomes a really quick start to import azure resources into terraform, utilise a cloud developer environment with all the tooling ready and a github actions pipeline ready for you to deploy. Now that is a happy new year!

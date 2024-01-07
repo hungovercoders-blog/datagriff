@@ -21,7 +21,7 @@ The hungovercoders [template.azure.terraform repo](https://github.com/hungoverco
 
 You can either:
 
-- Use the hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} in a cloud developer environment that will come with absolutely everything you need to get started. See the README for detailed instructions of how to use. The section [importing existing azure resources into terraform](https://github.com/hungovercoders/template.azure.terraform#importing-existing-azure-resources-into-terraform){:target="_blank"} is essentially the root of this blog post.
+- Use the hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} in a cloud developer environment that will come with absolutely everything you need to get started. See the [README](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} for detailed instructions of how to use. The section [importing existing azure resources into terraform](https://github.com/hungovercoders/template.azure.terraform#importing-existing-azure-resources-into-terraform){:target="_blank"} is essentially the root of this blog post.
 
 OR you will need to install:
 

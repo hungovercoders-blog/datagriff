@@ -29,7 +29,7 @@ A lot of the exploration work I carry out for hungovercoders I now carry out in 
 
 The first thing I did was link a github project to a repo as per the screenshot below.
 
-
+![Project Link]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/project_link.png)
 
 This however does not mean that issues raised automatically get added to that project board - it appears to be just a nice link. This led me on to the three methods described below to ensure the issues raised from the repo landed on the board that I wanted.
 
@@ -39,7 +39,7 @@ The official method to ensure issues are added to your project is to use the pro
 
 ![Project Automation]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/project_automation.png)
 
-I tried this first but then quickly found out you could only do one repository at a time and there is a limit of 5 workflows per project(!). This wasn't going to be sustainable so I looked elsewhere. It looks like this has been brough up in [github discussions](https://github.com/orgs/community/discussions/47803), but in the meantime...
+I tried this first but then quickly found out you could only do one repository at a time and there is a limit of 5 workflows per project(!). This wasn't going to be sustainable so I looked elsewhere. I am currently keeping an eye on this issue which may completely negate the need for the below, but in the meantime...
 
 ## Method 2: Template Issues and Bugs
 
@@ -111,6 +111,6 @@ The PAT token I generated from my own user and placed that as an organisation le
 
 ![Github Secrets]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_secrets.png)
 
-Whenever I raise an issue now on a repo (even from the mobile app!) that has this workflow installed, it will kick off that action and ensure the issue is assigned to the project you have chosen. No more forgetting of ideas now and all my work lands on the hungovercoders board. Victory!
+Whenever I raise an issue now on a repo (even from the mobile app!) that has this workflow installed, from any github account I might add, it will kick off that action and ensure the issue is assigned to the project you have chosen. No more forgetting of ideas now and all my work lands on the hungovercoders board. Victory!
 
 ![Github Action]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_action.png)

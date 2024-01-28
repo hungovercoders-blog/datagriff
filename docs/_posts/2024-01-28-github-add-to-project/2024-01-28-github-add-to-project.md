@@ -29,23 +29,54 @@ A lot of the exploration work I carry out for hungovercoders I now carry out in 
 
 The first thing I did was link a github project to a repo as per the screenshot below.
 
+
+
 This however does not mean that issues raised automatically get added to that project board - it appears to be just a nice link. This led me on to the three methods described below to ensure the issues raised from the repo landed on the board that I wanted.
 
 ## Method 1: Project Automation
 
-The official method to ensure issues are added to your project is to use the project workflows now available, in particular the "auto-add to project". 
+The official method to ensure issues are added to your project is to use the project workflows now available, in particular the "auto-add to project".
 
-I tried this first but then quickly found out you could only do one repository at a time and there is a limit of 5 workflows per project(!). This wasn't going to be sustainable so I looked elsewhere. I am currently keeping an eye on this issue which may completely negate the need for the below, but in the meantime...
+![Project Automation]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/project_automation.png)
+
+I tried this first but then quickly found out you could only do one repository at a time and there is a limit of 5 workflows per project(!). This wasn't going to be sustainable so I looked elsewhere. It looks like this has been brough up in [github discussions](https://github.com/orgs/community/discussions/47803), but in the meantime...
 
 ## Method 2: Template Issues and Bugs
 
 I found that you could create template issues, pull requests and bugs in your repository by placing them in the .github/ISSUE_TEMPLATE directory. You can see some examples in the hungover coders github template repo [here](https://github.com/hungovercoders/template.github.platform/tree/main/.github/ISSUE_TEMPLATE). These will then appear under your issues area of that repository as quickstarts for desired input.
 
-The markdown style, whilst more intuitive, does not support automated project linkage, but the yaml files do. Therefore if you create something like this:
+The markdown style, whilst more intuitive, does not support automated project linkage, but the yaml files do. Therefore if you create something like this...
+
+```yaml
+name: Issue
+description: Create an Issue
+title: "[Issue]: "
+labels: ["value", "cost","quality","happy"]
+projects: ["hungovercoders/5"]
+assignees:
+  - self
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to raise this issue!
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "An idea happened!"
+    validations:
+      required: true
+```
 
 Then leverage this yaml based template to create the desired ticket, that will automatically link to the project you state.
 
-However... If anyone still creates a vanilla issue it will not link tot he project you want and be work visible where you need it to be! I am also a big fan of the github app where I want to raise issues quickly on the go and it only supports standard issues without leaving to go to the browser for the templates. I therefore did some googling, maybe some chatgpt-ing, I can't remember anymore and discovered the solution in the next section.
+![Template Usage]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/template_usage.png)
+
+However... If anyone still creates a vanilla issue it will not link tot he project you want and be work visible where you need it to be! I am also a big fan of the [github mobile app](https://github.com/mobile) where I want to raise issues quickly on the go and it only supports standard issues without leaving to go to the browser for the templates. I therefore did some googling, maybe some chatgpt-ing, I can't remember anymore and discovered the solution in the next section.
 
 ## Method 3: Github Actions
 

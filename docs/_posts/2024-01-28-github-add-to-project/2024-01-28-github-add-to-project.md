@@ -49,10 +49,37 @@ However... If anyone still creates a vanilla issue it will not link tot he proje
 
 ## Method 3: Github Actions
 
-The catch-all method of ensuring that any issue raised lands on the board of your choice is to leverage a github action. The action code can be found in the hungovercoders template [here]() and can also be seen below.
+The catch-all method of ensuring that any issue raised lands on the board of your choice is to leverage a github action. The action code can be found in the hungovercoders template [here](https://github.com/hungovercoders/template.github.platform/blob/main/.github/workflows/add-to-project.yml) and can also be seen below.
 
-Rather than hardcode the project in the action, as I will likely have this action in a number of places, I have setup global variables for team project URLs like this:
+```yaml
+name: Add Issues to Project
 
-The PAT token I generated from my own user and placed that as an organisation level secret. 
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.4.1
+        with:
+          # You can target a project in a different organization
+          # to the issue
+          project-url: ${{ vars.TEMPLATE_TEAM_PROJECT }}
+          github-token: ${{ secrets.WORK_MANAGEMENT }}
+```
+
+Rather than hardcode the project in the action, as I will likely have this action in a number of places, you can see I have setup github global variables for the team project URLs so its easier for me to change in one place if I need to.
+
+![Github Variables]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_variables.png)
+
+The PAT token I generated from my own user and placed that as an organisation level secret.
+
+![Github Secrets]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_secrets.png)
 
 Whenever I raise an issue now on a repo (even from the mobile app!) that has this workflow installed, it will kick off that action and ensure the issue is assigned to the project you have chosen. No more forgetting of ideas now and all my work lands on the hungovercoders board. Victory!
+
+![Github Action]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_action.png)

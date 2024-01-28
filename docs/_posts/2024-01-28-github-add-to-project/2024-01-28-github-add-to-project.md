@@ -20,6 +20,9 @@ Being a hungover coder it can be difficult to remember all the ideas you've had 
 ## Prerequisites
 
 - [Github](https://github.com/){:target="_blank"} - To utilise any of the tips below you're going to want to be working in github.
+- [Github Project](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) - You'll want to setup a github project to collate all your work and make it visible. The hungovercoders team board can be seen below.
+
+![Github Project]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_project.png)
 
 ## Hungovercoders Github Template
 
@@ -39,7 +42,7 @@ The official method to ensure issues are added to your project is to use the pro
 
 ![Project Automation]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/project_automation.png)
 
-I tried this first but then quickly found out you could only do one repository at a time and there is a limit of 5 workflows per project(!). This wasn't going to be sustainable so I looked elsewhere. I am currently keeping an eye on this issue which may completely negate the need for the below, but in the meantime...
+I tried this first but then quickly found out you could only do one repository at a time and there is a limit of 5 workflows per project(!). This wasn't going to be sustainable so I looked elsewhere...
 
 ## Method 2: Template Issues and Bugs
 

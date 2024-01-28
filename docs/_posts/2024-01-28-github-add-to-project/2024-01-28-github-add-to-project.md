@@ -8,7 +8,7 @@ image:
 tags: Github
 ---
 
-Being a hungover coder it can be difficult to remember all the ideas you've had or which ones you are currently working on... I've therefore invested in [github projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects) and organised all my work (at least for now). One of the constraints of the github projects is that even if you link a repo, the issues or bugs are not automatically added to your project board. Below are three ways to ensure issues are automatically added to the board of your choosing!
+Being a hungover coder it can be difficult to remember all the ideas you've had or which ones you are currently working on... I've therefore invested in [github projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects){:target="_blank"} and organised all my work (at least for now). One of the constraints of the github projects is that even if you link a repo, the issues or bugs are not automatically added to your project board. Below are three ways to ensure issues are automatically added to the board of your choosing!
 
 - [Prerequisites](#prerequisites)
 - [Hungovercoders Github Template](#hungovercoders-github-template)
@@ -23,7 +23,7 @@ Being a hungover coder it can be difficult to remember all the ideas you've had 
 
 ## Hungovercoders Github Template
 
-A lot of the exploration work I carry out for hungovercoders I now carry out in this [template.github.platform](https://github.com/hungovercoders/template.github.platform) repository. It allows me to experiment and test practices before I roll them out to other projects. Keep an eye on this repo for cheatsheets and automation that you can leverage across your github repositories, including the ones from this blog post.
+A lot of the exploration work I carry out for hungovercoders I now carry out in this [template.github.platform](https://github.com/hungovercoders/template.github.platform){:target="_blank"} repository. It allows me to experiment and test practices before I roll them out to other projects. Keep an eye on this repo for cheatsheets and automation that you can leverage across your github repositories, including the ones from this blog post.
 
 ## Linking a Repo to a Project
 
@@ -31,7 +31,7 @@ The first thing I did was link a github project to a repo as per the screenshot 
 
 ![Project Link]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/project_link.png)
 
-This however does not mean that issues raised automatically get added to that project board - it appears to be just a nice link. This led me on to the three methods described below to ensure the issues raised from the repo landed on the board that I wanted.
+This however does not mean that issues raised for that repo automatically get added to that project board - it appears to be just a nice link. This led me on to the three methods described below to ensure the issues raised from the repo landed on the board that I wanted.
 
 ## Method 1: Project Automation
 
@@ -43,9 +43,9 @@ I tried this first but then quickly found out you could only do one repository a
 
 ## Method 2: Template Issues and Bugs
 
-I found that you could create template issues, pull requests and bugs in your repository by placing them in the .github/ISSUE_TEMPLATE directory. You can see some examples in the hungover coders github template repo [here](https://github.com/hungovercoders/template.github.platform/tree/main/.github/ISSUE_TEMPLATE). These will then appear under your issues area of that repository as quickstarts for desired input.
+I found that you could create template issues, pull requests and bugs in your repository by placing them in the .github/ISSUE_TEMPLATE directory. You can see some examples in the hungover coders github template repo [here](https://github.com/hungovercoders/template.github.platform/tree/main/.github/ISSUE_TEMPLATE){:target="_blank"}. These will then appear under your issues area of that repository as quickstarts for desired input.
 
-The markdown style, whilst more intuitive, does not support automated project linkage, but the yaml files do. Therefore if you create something like this...
+The markdown style, whilst more intuitive, does not support automated project linkage, but the yaml files do. Therefore if you create something like this as an issue.yml file in the ISSUE_TEMPLATE folder...
 
 ```yaml
 name: Issue
@@ -76,11 +76,11 @@ Then leverage this yaml based template to create the desired ticket, that will a
 
 ![Template Usage]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/template_usage.png)
 
-However... If anyone still creates a vanilla issue it will not link tot he project you want and be work visible where you need it to be! I am also a big fan of the [github mobile app](https://github.com/mobile) where I want to raise issues quickly on the go and it only supports standard issues without leaving to go to the browser for the templates. I therefore did some googling, maybe some chatgpt-ing, I can't remember anymore and discovered the solution in the next section.
+However... If anyone still creates a vanilla issue it will not link tot he project you want and work be visible where you need it to be! I am also a big fan of the [github mobile app](https://github.com/mobile){:target="_blank"} where I want to raise issues quickly on the go and it only supports standard issues without leaving to go to the browser for the templates. I therefore did some googling, maybe some chatgpt-ing, I can't remember anymore and discovered the solution in the next section.
 
 ## Method 3: Github Actions
 
-The catch-all method of ensuring that any issue raised lands on the board of your choice is to leverage a github action. The action code can be found in the hungovercoders template [here](https://github.com/hungovercoders/template.github.platform/blob/main/.github/workflows/add-to-project.yml) and can also be seen below.
+The catch-all method of ensuring that any issue raised lands on the board of your choice is to leverage the [add to project github action](https://github.com/actions/add-to-project){:target="_blank"}. The action code can be found in the hungovercoders template [here](https://github.com/hungovercoders/template.github.platform/blob/main/.github/workflows/add-to-project.yml){:target="_blank"} and can also be seen below.
 
 ```yaml
 name: Add Issues to Project
@@ -111,6 +111,6 @@ The PAT token I generated from my own user and placed that as an organisation le
 
 ![Github Secrets]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_secrets.png)
 
-Whenever I raise an issue now on a repo (even from the mobile app!) that has this workflow installed, from any github account I might add, it will kick off that action and ensure the issue is assigned to the project you have chosen. No more forgetting of ideas now and all my work lands on the hungovercoders board. Victory!
+Whenever I raise an issue now on a repo (even from the mobile app!) that has this workflow installed, from any github account I might add, it will kick off that action and ensure the issue is assigned to the project you have chosen. No more forgetting of ideas now and all my work lands on the hungovercoders board. Victory! (I may have to keep an eye on action minutes but it takes a few seconds to run so should be ok...)
 
 ![Github Action]({{ site.baseurl }}/assets/2024-01-28-github-add-to-project/github_action.png)

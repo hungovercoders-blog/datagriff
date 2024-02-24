@@ -10,12 +10,30 @@ tags: OKR Agile
 
 It's been nearly 2 years since I posted one of my [first blogs which was around OKRs (objectives and key results)](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="_blank"}. Since then I have been preaching their usage and loving the concept... but I have completely missed integrating their ideas into the day to day agile working practices, rendering them ineffective. Spurred on by co-workers, my will to ensure that prioritisation of value is easy during iteration ceremonies, and the awesome book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="_blank"}, below are my thoughts on how to integrate OKR cycles into the agile framework.
 
-- [Prerequisites](#prerequisites)
-- [Hungovercoders Github Template](#hungovercoders-github-template)
-- [Linking a Repo to a Project](#linking-a-repo-to-a-project)
-- [Method 1: Project Automation](#method-1-project-automation)
-- [Method 2: Template Issues and Bugs](#method-2-template-issues-and-bugs)
-- [Method 3: Github Actions](#method-3-github-actions)
+- [Why Integrate OKRs with Agile](#why-integrate-okrs-with-agile)
+- [OKRs gone Wrong](#okrs-gone-wrong)
+- [Making OKRs Everything...](#making-okrs-everything)
+- [...Except Renumeration](#except-renumeration)
+- [OKR and Agile Cycle](#okr-and-agile-cycle)
+- [OKR Ceremonies](#okr-ceremonies)
+  - [OKR Ideation](#okr-ideation)
+    - [Categories of Concern](#categories-of-concern)
+  - [OKR Creation](#okr-creation)
+  - [OKR Impact Planning](#okr-impact-planning)
+  - [OKR Retrospective](#okr-retrospective)
+- [Iteration Ceremonies](#iteration-ceremonies)
+  - [Daily Stand-ups](#daily-stand-ups)
+  - [Backlog Refinement](#backlog-refinement)
+  - [Iteration Review](#iteration-review)
+  - [Iteration Planning](#iteration-planning)
+- [Zero Tolerance](#zero-tolerance)
+- [Work Item Types and Tagging](#work-item-types-and-tagging)
+  - [Work Item Types](#work-item-types)
+  - [Work Item Tags](#work-item-tags)
+    - [Value Tags](#value-tags)
+    - [Concern Tags](#concern-tags)
+    - [General Tags](#general-tags)
+
 
 ## Why Integrate OKRs with Agile
 

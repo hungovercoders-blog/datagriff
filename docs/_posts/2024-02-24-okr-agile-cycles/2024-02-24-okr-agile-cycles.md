@@ -27,12 +27,6 @@ It's been nearly 2 years since I posted one of my [first blogs which was around 
   - [Iteration Review](#iteration-review)
   - [Iteration Planning](#iteration-planning)
   - [Zero Tolerance](#zero-tolerance)
-- [Work Item Types and Tagging](#work-item-types-and-tagging)
-  - [Work Item Types](#work-item-types)
-  - [Work Item Tags](#work-item-tags)
-    - [Value Tags](#value-tags)
-    - [Concern Tags](#concern-tags)
-    - [General Tags](#general-tags)
 - [Stay Agile](#stay-agile)
 
 ## Why Integrate OKRs with Agile
@@ -52,13 +46,13 @@ If you are going to do OKRs I recommend just using them for everything - except 
 
 - **Key Result 1**: 100% of Scottish distilleries are available for online hungovercoder visitors to read by the end of the quarter.
 - **Key Result 2**: 100% of Irish distilleries are available for online hungovercoder visitors to read by the end of the quarter.
-- **Key Result 3**: 100% of Japanese distilleries are available for online hungovercoder visitors to read by the end of the quarter.
+- **Key Result 3**: One hungovercoder visitor has clicked a distillery link by the end of the quarter.
   
 **Objective 2**: Improve Dog Rescue Coverage
 
 - **Key Result 1**: 100% of Dogs Trust centres are available for online hungovercoder visitors to read by the end of the quarter.
 - **Key Result 2**: 100% of Blue Cross centres are available for online hungovercoder visitors to read by the end of the quarter.
-- **Key Result 3**: 25% of the ADCH rescues are available for online hungovercoder visitors to read by the end of the quarter.
+- **Key Result 3**: One hungovercoder visitor has clicked a dog rescue link by the end of the quarter.
 
 **Objective 3**: Share Knowledge in Online Community
 
@@ -66,11 +60,13 @@ If you are going to do OKRs I recommend just using them for everything - except 
 - **Key Result 2**: 4 Blog posts made available on hungovercoders by end of second month.
 - **Key Result 3**: 6 Blog posts made available on hungovercoders by end of third month.
 
+Looking at the above shows the clear focus and succinct nature of the OKRs. They are not overwhelming and they are not too detailed whilst maintaining a specificity that makes it easy for the team to prioristise their work as part of their agile iterations. Make sure that your OKRs are plastered across as many different places as possible so that each team member sees these at least daily. This can include your team homepage, team dashboards, work planning boards, desktop background or pinned communication messages to name but a few. The more you can make these visible the more likely they are to be front of mind when the team is working on their day to day tasks and be able to prioritise correctly when it comes to iteration ceremonies. I recommend having them readily available to other teams and senior management so they know what you are focused on and the reasons you have for saying "no" legitimately to requests that sit outside the bounds of these OKRs you have agreed.
+
 What about work that we need to do that does not come as part of the more strategic OKRs...?
 
 ### Objective Zero
 
-What about "keeping the lights on" type work? This is where you can create an "Objective Zero" as discussed in the book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="_blank"}. This describes treating your objective zero and its key results as a set of service level agreements (SLAs) that you need to maintain in order to keep the lights on. This way you can still have a set of OKRs that are strategic and aspirational and a set of OKRs that are more operational and tactical. It also highlights the tension between the two types of work and the need to balance them rather than "managing" BAU tickets separately to what you want to achieve strategically. It may even involve removing a strategic objective because of the realisation of this work. 
+What about BAU or "keeping the lights on" type work? This is where you can create an "Objective Zero" as discussed in the book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="_blank"}. This describes treating your objective zero and its key results as a set of service level agreements (SLAs) that you need to maintain in order to keep the lights on. This way you can still have a set of OKRs that are strategic and aspirational and a set of OKRs that are more operational and tactical. It also highlights the tension between the two types of work and the need to balance them rather than "managing" BAU tickets separately to what you want to achieve strategically. It may even involve removing a strategic objective because of the realisation of this work. 
 
 **Objective Zero**: Ensure the team is able to maintain the current level of service
 
@@ -244,18 +240,6 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 **Duration:**
 
 **Agenda:**
-
-## Work Item Types and Tagging
-
-### Work Item Types
-
-### Work Item Tags
-
-#### Value Tags
-
-#### Concern Tags
-
-#### General Tags
 
 ## Stay Agile
 

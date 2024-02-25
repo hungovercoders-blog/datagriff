@@ -14,7 +14,7 @@ It's been nearly 2 years since I posted one of my [first blogs which was around 
 - [Why Integrate OKRs with Agile](#why-integrate-okrs-with-agile)
 - [Making OKRs Everything](#making-okrs-everything)
   - [Objective Zero](#objective-zero)
-- [Team OKRs Should not Link to Individual Renumeration](#team-okrs-should-not-link-to-individual-renumeration)
+- [Team OKRs Should not Link to Individual Remuneration](#team-okrs-should-not-link-to-individual-remuneration)
 - [The Football Analogy](#the-football-analogy)
 - [OKR and Agile Cycle](#okr-and-agile-cycle)
 - [OKR Ceremonies](#okr-ceremonies)
@@ -63,7 +63,7 @@ If you do not integrate your OKRs with the day to day workload usually managed b
 
 ## Making OKRs Everything
 
-If you are going to do OKRs I recommend just using them for everything - except individual renumeration ([see below](#team-okrs-should-not-link-to-individual-renumeration)). This is because one of the main purposes of OKRs is to make prioritisation easy when you are in the middle of your iterations. When you are in short-term work mode and deep into solving the problem that is immediately in front of you as part of your iterations, you are not taking the time to lookup as much you would like and prioritisation almost feels like a distraction. How many times you have yourself maybe groaned at the prospect of backlog refinement or iteration planning because you are in the middle of something and you just want to get it done? OKRs can help by making it far easier in these ceremonies to prioritise the work as a team as you have already spent the time in advance to establish and agree your OKRs. If something does not align with your OKRs then it is not a priority and you can move on. I'd recommend making no more than four objectives and aim for around three key results each. This provides a simple way for the team to focus by not overwhelming them with too much to remember.
+If you are going to do OKRs I recommend just using them for everything (except individual remuneration - [see below](#team-okrs-should-not-link-to-individual-remuneration)). This is because one of the main purposes of OKRs is to make prioritisation easy when you are in the middle of your iterations and so having separate priorisation methods would negate this benefit. When you are in short-term work mode and deep into solving the problem that is immediately in front of you as part of your iterations, you are not taking the time to lookup as much you would like and prioritisation almost feels like a distraction. How many times you have yourself maybe groaned at the prospect of backlog refinement or iteration planning because you are in the middle of something and you just want to get it done? OKRs can help by making it far easier in these ceremonies to prioritise the work as a team as you have already spent the time in advance to establish and agree your OKRs. If something does not align with your OKRs then it is not a priority and you can move on. I'd recommend making no more than four objectives and aim for around three key results each. This provides a simple way for the team to focus by not overwhelming them with too much to remember.
 
 **Objective 1**: Improve Whiskey Distillery Coverage
 
@@ -105,11 +105,11 @@ What about BAU or "keeping the lights on" type work? This is where you can creat
 
 The fact that you will realise that you need an objective zero speaks volumes about its importance and I would potentially default to treating this objective as the most important when prioritising, but hopefully with the least amount of work. If you do find that your Objective Zero is consuming most of your strategic work, you likely need to revisit why as part of your OKR planning and bring in more focused objectives to solve the amount of time you need to spend on keeping the lights on. I love this idea to integrate this type of work as part of your OKRs and aim to satisfy the need to cover this work in the ceremony "[Zero Tolerance](#zero-tolerance)" below. Ensure your objective zero sits alongside any documentation or posts that you have for your OKRs so that it is clear the importance of this work and the need to balance it with your strategic OKR work.
 
-## Team OKRs Should not Link to Individual Renumeration
+## Team OKRs Should not Link to Individual Remuneration
 
 **The goal of every team member should simply be to help the team achieve their OKRs.** I love the simplicity of this statement.
 
-However a persons individual renumeration should not be associated with the teams OKRs. This may sound counter-intuitive but as soon as you introduce individuals goals as being a driver for OKRs you will inevitably get gaming of the system ([Goldharts Law](https://en.wikipedia.org/wiki/Goodhart%27s_law#:~:text=Goodhart's%20law%20%5B...%5D,people%20start%20to%20game%20it.)) and so the very purpose of OKRs is lost. OKRs are meant to drive ownership and the enjoyment of solving a shared problem, if you start isolating the outcomes to individual performance of each team member you will lose the core aspect of a team contributing to a shared goal.
+However a persons individual remuneration should not be associated with the teams OKRs. This may sound counter-intuitive but as soon as you introduce individuals goals as being a driver for OKRs you will inevitably get gaming of the system ([Goldharts Law](https://en.wikipedia.org/wiki/Goodhart%27s_law#:~:text=Goodhart's%20law%20%5B...%5D,people%20start%20to%20game%20it.)) and so the very purpose of OKRs is lost. OKRs are meant to drive ownership and the enjoyment of solving a shared problem, if you start isolating the outcomes to individual performance of each team member you will lose the core aspect of a team contributing to a shared goal.
 
 ![OKR Money]({{ site.baseurl }}/assets/2024-02-24-okr-agile-cycles/okr-money.png)
 

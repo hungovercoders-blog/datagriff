@@ -144,7 +144,7 @@ Hopefully this further demonstrates how you can allow an individual to succeed i
 
 ## OKR and Agile Cycle
 
-Below is an example schedule of how you can setup your ceremonies to align with your OKR cycles. The example below setups up quarterly OKR cycles and fortnightly iterations, this is a very high level view and you may need to adjust the timings of these ceremonies to fit your own teams needs. If you are just starting OKRs it may be pertinent to try monthly cycles at first to get fast feedback on their efficacy and allowing you to change more often before committing to quarterly turnarounds. 
+Below is an example schedule of how you can setup your ceremonies to align with your OKR cycles. The example below setups up quarterly OKR cycles and fortnightly iterations, this is a very high level view and you may need to adjust the timings of these ceremonies to fit your own teams needs. If you are just starting OKRs it may be pertinent to try monthly cycles at first to get fast feedback on their efficacy and allowing you to change more often before committing to quarterly turnarounds. The good thing about getting this viewpoint is seeing how many iterations you actually have to deliver on your OKRs as they can often go by very quickly and value may not have been realised when it should have been.
 
 The OKR ceremonies are setup to align with the start and end of the OKR cycle and the iteration ceremonies are setup to align with the start and end of the iteration cycle. The iteration cycles are driven by the OKRs established and the iterations are then just that, iterative progress against your objectives inline with the key results by which they have agreed to be measured.
 
@@ -180,14 +180,42 @@ Iteration Retrospective: 2024-02-01, 2024-02-01
 Iteration Planning: 2024-02-01, 2024-02-01
 
 section Iteration 3
-Daily Stand-ups: 2024-02-02, 2024-02-15
+Daily Stand-ups: 2024-02-02, 2024-02-14
 Zero Tolerance: 2024-02-05, 2024-02-05
 Backlog Refinement: 2024-02-05, 2024-02-05
-Zero Tolerance: 2024-01-29, 2024-01-29
-Backlog Refinement: 2024-01-29, 2024-01-29
-Iteration Review: 2024-02-01, 2024-02-01
-Iteration Retrospective: 2024-02-01, 2024-02-01
-Iteration Planning: 2024-02-01, 2024-02-01
+Zero Tolerance: 2024-02-12, 2024-02-12
+Backlog Refinement: 2024-02-12, 2024-02-12
+Iteration Review: 2024-02-15, 2024-02-15
+Iteration Retrospective: 2024-02-15, 2024-02-15
+Iteration Planning: 2024-02-15, 2024-02-15
+
+section Iteration 4
+Daily Stand-ups: 2024-02-16, 2024-02-28
+Zero Tolerance: 2024-02-19, 2024-02-19
+Backlog Refinement: 2024-02-19, 2024-02-19
+Zero Tolerance: 2024-02-26, 2024-02-26
+Backlog Refinement: 2024-02-26, 2024-02-26
+Iteration Review: 2024-02-29, 2024-02-29
+Iteration Retrospective: 2024-02-29, 2024-02-15
+Iteration Planning: 2024-02-29, 2024-02-29
+
+section Iteration 5
+Daily Stand-ups: 2024-03-01, 2024-03-13
+Zero Tolerance: 2024-03-04, 2024-03-04
+Backlog Refinement: 2024-03-04, 2024-03-04
+Zero Tolerance: 2024-03-11, 2024-03-11
+Backlog Refinement: 2024-03-11, 2024-03-11
+Iteration Review: 2024-03-14, 2024-03-14
+Iteration Retrospective: 2024-03-14, 2024-03-14
+Iteration Planning: 2024-03-14, 2024-03-14
+
+section Iteration 6
+Daily Stand-ups: 2024-03-15, 2024-03-20
+Zero Tolerance: 2024-03-19, 2024-03-19
+Backlog Refinement: 2024-03-19, 2024-03-19
+Iteration Review: 2024-03-21, 2024-03-21
+Iteration Retrospective: 2024-03-21, 2024-03-21
+Iteration Planning: 2024-03-21, 2024-03-21
 
 section OKR Current End
 OKR Retrospective: 2024-03-22, 2024-03-22
@@ -220,7 +248,7 @@ OKR Impact Planning: 2024-03-27, 2024-03-27
 - Exercise: Team breakouts in 2-3 with 5-10 minutes to write down what they think the teams tenets are.
 - Reveal: Everyone relays their team tenets.
 - Confirm: The teams tenets are agreed as a collective.
-- Review the current [categories of concern](#categories-of-concern) and their current status. Ensure they still provide coverage of the teams concerns and that they are still relevant.
+- Review the current [categories of concern](#categories-of-concern) and their current status in the context of their values and the strategic context. Ensure they still provide coverage of the teams concerns and that they are still relevant.
 - Based on precision, understand if we are missing any categories of concern because we don't have them at all or if they simply have not been made available. Ensure that making these available is a priority for the OKR creation ceremony next. If they cannot be made available they will likely become an objective for the next OKR cycle.
 
 #### Categories of Concern
@@ -305,6 +333,8 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 **Duration:** Maximum of 2 days. If you can finish sooner then do so.
 
+**Frequency:**: Quarterly.
+
 **Agenda:**
 
 - Review the objectives and key results created in [OKR creation](#okr-creation).
@@ -336,11 +366,26 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 ### OKR Retrospective
 
-**Purpose:**: 
+**Purpose:**: Understand team member status and team efficiency in delivering the OKRs
 
-**Duration:**
+**Duration:** Maximum of 4 hours. If you can finish sooner then do so.
+
+**Frequency:**: Quarterly.
 
 **Agenda:**
+
+- Assess status of team with questionnaire.
+- Review the team status feedback and understand any issues.
+- Review team deliverability metrics like lead time for the last quarter.
+- Exercise: Team writes down what well in the last OKR cycle.
+- Exercise: Team writes down what didn't well in the last OKR cycle.
+- Exercise: Team writes down ideas to improve future OKR cycles.
+- Review and celebrate what went well.
+- Review and understand what didn't go well.
+- Review and understand the ideas to improve future OKR cycles, creating work items and adjusting future ceremonies where necessary.
+- Celebrate the end of the OKR cycle and the start of the next.
+  
+**Top Tip:** Celebrate! You've just been working for an entire quarter, make sure you take the time to celebrate and socialise with the team and a job well done.
 
 ## Iteration Ceremonies
 
@@ -349,6 +394,8 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 **Purpose:** Update on current iteration work and any blockers.
 
 **Duration:** 15 minutes maximum.
+
+**Frequency:**: Daily.
 
 **Agenda:**
 
@@ -376,6 +423,8 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 - Review at a high level any outdated software for each service.
 - Identify those with the shortest time to live and create a ticket if it breaks the thresholds set out in objective zero.
 
+**Top Tip:** Using the key results set out in objective zero will make it very easy to prioritise what needs doing.
+
 ### Backlog Refinement
 
 **Purpose:**: Ensuring the most valuable work is ready for the next iteration.
@@ -386,11 +435,13 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 **Agenda:**
 
-- Ensure all zero tolerance tickets are refined and ready for the next iteration. 
+- Ensure all zero tolerance tickets are refined and ready for the next iteration.
 - Ensure all unplanned requests are reviewed and prioritised against the OKRs. If they do not align with the OKRs then they are not a priority and can be removed. If they are a priority then they should be refined.
-- Confirm objectives and hypotheses are still in the correct order.
+- Confirm objectives and hypotheses are still in the correct order with regards to meeting team OKRs.
 - Navigate the objectives and hypotheses as a team in priority order ensuring work is closed if all work is completed.
 - Navigate the objectives and hypotheses as a team in priority order understanding what work is required to close each piece of work. This may mean either removing work items if now deemed less valuable or refining those that are not completed and are not yet ready to be worked on.
+
+**Top Tip:** Using the key results set out in objectives will make it very easy to prioritise what needs doing.
 
 ### Iteration Planning
 
@@ -428,9 +479,11 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 - Demonstrate how the features delivered have moved the team closer to the OKRs with appropriate metrics.
 - Gain feedback throughout from all stakeholders.
 
+**Top Tip:** Invite appropriate stakeholders beforehand and ensure you demonstrate valuable features, not code.
+
 ### Iteration Retrospective
 
-**Purpose:**: Understand team member status and progress against the iteration goal
+**Purpose:**: Understand team member status and team efficiency of delivering the iteration goal
 
 **Duration:** Maximum of 90 minutes. If you can finish sooner then do so.
 
@@ -446,7 +499,9 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 - Exercise: Team writes down ideas to improve future iterations.
 - Review and celebrate what went well.
 - Review and understand what didn't go well.
-- Review and understand the ideas to improve future iterations, creating work items where necessary.
+- Review and understand the ideas to improve future iterations, creating work items and adjusting future ceremonies where necessary.
+
+**Top Tip:** From a leadership point of view treat retrospective actions as a high priority as it will immediately improve the team and demonstrate you are listening to their concerns.
 
 ## Stay Agile
 

@@ -158,7 +158,7 @@ Below is an example schedule of how you can setup your ceremonies to align with 
 
 The OKR ceremonies are setup to align with the start and end of the OKR cycle and the iteration ceremonies are setup to align with the start and end of the iteration cycle. The iteration cycles are driven by the OKRs established and the iterations are then just that, iterative progress against your objectives inline with the key results by which they have agreed to be measured.
 
-```mermaid!
+@startmermaid
 gantt
 title Integrated OKR and Agile Sprint Schedule
 dateFormat  YYYY-MM-DD
@@ -234,7 +234,7 @@ section OKR Next Start
 OKR Scene Setting: 2024-03-18, 2024-03-18
 OKR Creation: 2024-03-25, 2024-03-26
 OKR Impact Planning: 2024-03-27, 2024-03-27
-```
+@endmermaid
 
 ## OKR Ceremonies
 

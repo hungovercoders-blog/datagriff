@@ -18,7 +18,7 @@ It's been nearly 2 years since I posted one of my [first blogs which was around 
 - [The Football Analogy](#the-football-analogy)
 - [OKR and Agile Cycle](#okr-and-agile-cycle)
 - [OKR Ceremonies](#okr-ceremonies)
-  - [OKR Ideation](#okr-ideation)
+  - [OKR Scene Setting](#okr-scene-setting)
     - [Categories of Concern](#categories-of-concern)
   - [OKR Creation](#okr-creation)
   - [OKR Impact Planning](#okr-impact-planning)
@@ -154,7 +154,7 @@ dateFormat  YYYY-MM-DD
 excludes weekends
 
 section OKR Current Start
-OKR Ideation: 2023-12-18, 2023-12-18
+OKR Scene Setting: 2023-12-18, 2023-12-18
 OKR Creation: 2023-12-25, 2023-12-26
 OKR Impact Planning: 2023-12-27, 2023-12-27
 
@@ -192,20 +192,35 @@ section OKR Current End
 OKR Retrospective: 2024-03-22, 2024-03-22
 
 section OKR Next Start
-OKR Ideation: 2024-03-18, 2024-03-18
+OKR Scene Setting: 2024-03-18, 2024-03-18
 OKR Creation: 2024-03-25, 2024-03-26
 OKR Impact Planning: 2024-03-27, 2024-03-27
 ```
 
 ## OKR Ceremonies
 
-### OKR Ideation
+### OKR Scene Setting
 
 **Purpose:**: Initial Collection of Ideas and Visibility to Prepare for [OKR Creation](#okr-creation)
 
 **Duration:** Maximum of 1 day. If you can finish sooner then do so.
 
 **Agenda:**
+
+- Exercise: Everyone gets 5 minutes to write down what they think the current strategic objectives of the organisation are.
+- Reveal: Set the strategic scene of the organisation by relaying the current company strategy to the team.
+- Confirm: The organisations strategic scene is understood as a collective.
+- Exercise: Everyone gets 5 minutes to write down what they think the current technical objectives of the organisation are.
+- Reveal: Set the strategic scene of the technology by relaying the current technical principles and objectives to the team.
+- Confirm: The organisations technical principles and objectives is understood as a collective.
+- Exercise: Team breakouts in 2-3 people with 5-10 minutes to write down what they think the teams mission statement is.
+- Reveal: Every breakout relays their team mission statement.
+- Confirm: The team mission statement is agreed as a collective.
+- Exercise: Team breakouts in 2-3 with 5-10 minutes to write down what they think the teams tenets are.
+- Reveal: Everyone relays their team tenets.
+- Confirm: The teams tenets are agreed as a collective.
+- Review the current [categories of concern](#categories-of-concern) and their current status. Ensure they still provide coverage of the teams concerns and that they are still relevant.
+- Based on precision, understand if we are missing any categories of concern because we don't have them at all or if they simply have not been made available. Ensure that making these available is a priority for the OKR creation ceremony next. If they cannot be made available they will likely become an objective for the next OKR cycle.
 
 #### Categories of Concern
 
@@ -227,9 +242,44 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 **Purpose:**: Create and Confirm the Objectives and Key Results
 
-**Duration:** Maximum of 2 days
+**Duration:** Maximum of 2 days. If you can finish sooner then do so.
 
 **Agenda:**
+
+- Review the OKR Ideation ceremony output
+  - Ensure the company strategy understood
+  - Ensure the technical strategy understood
+  - Ensure the team mission agreed
+  - Ensure the team tenets agreed
+  - Ensure the categories of concern understood and available
+- Review precision as a collective, is any decision making data unavailable?
+- Review performance as a collective, are our products performing well?
+- Review deliverability as a collective, are we able to deliver changes quickly?
+- Review cost as a collective, are we spending too much?
+- Review reliability as a collective, are our products reliable?
+- Review risk as a collective, are our products secure and compliant?
+- Review developer experience as a collective, are the team happy developing?
+- Review integration as a collective, are we making our products data available to other teams?
+- Exercise: Team breakouts in 2-3 people with 5 minutes to write down what are the top three categories of concern.
+- Reveal: Every breakout relays their categories of concern.
+- Confirm: The team prioritises the top three categories of concern.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down what they think could be the team objectives.
+- Reveal: Every breakout relays their objectives
+- Confirm: The team prioritises the top four objectives.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down potential key results for the first objective.
+- Reveal: Every breakout relays their key results.
+- Action: Three key results are added to the first objective.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down potential key results for the second objective.
+- Reveal: Every breakout relays their key results.
+- Action: Three key results are added to the second objective.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down potential key results for the third objective.
+- Reveal: Every breakout relays their key results.
+- Action: Three key results are added to the third objective.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down potential key results for the fourth objective.
+- Reveal: Every breakout relays their key results.
+- Action: Three key results are added to the fourth objective.
+
+**BREAK OVERNIGHT**
 
 **Top Tip:** It is important to get the nights sleep in between formulating your ideas and then coming back to them. This is because you will likely have a different perspective on them the next day and you will be able to see if they are still as important as you thought they were.
 
@@ -237,9 +287,32 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 **Purpose:**: Initial creation of hypotheses of how the team can move towards the key results of the OKRs. 
 
-**Duration:** Maximum of 2 days
+**Duration:** Maximum of 2 days. If you can finish sooner then do so.
 
 **Agenda:**
+
+- Review the objectives and key results created in [OKR creation](#okr-creation).
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down hypotheses that could impact the key results.
+- Reveal: Every breakout relays their hypotheses.
+- Confirm: The team hypotheses are prioritised as a collective. You will want at least three to satisfy the upcoming initial iterations.
+- Action: Add the hypotheses feature to the backlog with appropriate detail.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the first hypotheses.
+- Reveal: Every breakout relays their work.
+- Action: The team work items to deliver the first hypotheses are added as a collective to the backlog under the feature.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the second hypotheses.
+- Reveal: Every breakout relays their work.
+- Action: The team work items to deliver the second hypotheses are added as a collective to the backlog under the feature.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the second hypotheses.
+- Reveal: Every breakout relays their work.
+- Action: The team work items to deliver the second hypotheses are added as a collective to the backlog under the feature.
+  
+**BREAK OVERNIGHT**
+
+- Review the work items added to the backlog and ensure they are still relevant and in the correct order. If they are not then change them. If a hypothesis is no longer relevant then remove it. If a new hypothesis has been created then add it to the backlog and repeat the exercises above.
+- Exercise: Team refines the work items under the highest priority feature.
+- Exercise: Team refines the work items under the second highest priority feature.
+- Exercise: Team refines the work items under the third highest priority feature.
+- Review the work items added to the backlog and ensure they are still relevant and in the correct order.
 
 **Top Tip:** It is important to get the nights sleep in between formulating your ideas and then coming back to them. This is because you will likely have a different perspective on them the next day and you will be able to see if they are still as important as you thought they were.
 

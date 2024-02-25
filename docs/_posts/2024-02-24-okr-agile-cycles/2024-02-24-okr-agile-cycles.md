@@ -10,6 +10,7 @@ tags: OKR Agile
 
 It's been nearly 2 years since I posted one of my [first blogs which was around OKRs (objectives and key results)](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="_blank"}. Since then I have been preaching their usage and loving the concept... but I have completely missed integrating their ideas into the day to day agile working practices, rendering them ineffective. Spurred on by co-workers, my will to ensure that prioritisation of value is easy during iteration ceremonies, and the awesome book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="_blank"}, below are my thoughts on how to integrate OKR cycles into the agile framework.
 
+- [Quick OKR \& Agile Recap](#quick-okr--agile-recap)
 - [Why Integrate OKRs with Agile](#why-integrate-okrs-with-agile)
 - [Making OKRs Everything](#making-okrs-everything)
   - [Objective Zero](#objective-zero)
@@ -29,6 +30,22 @@ It's been nearly 2 years since I posted one of my [first blogs which was around 
   - [Iteration Review](#iteration-review)
   - [Iteration Planning](#iteration-planning)
 - [Stay Agile](#stay-agile)
+
+## Quick OKR & Agile Recap
+
+For OKRs I recommend reading my previous [blog post](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="_blank"} on the matter but just in case here is a quick refresher:
+
+- OKRs stand for Objectives & Key Results.
+- A team mission should help understand objectives for the lifecycle of the team and should be fairly static. 
+- Objectives based on this mission should be agreed strategically with more senior members of the organisation and addressed about every 90 days. 
+- The key results then should be time-bound and an agreed method of how you will measure the success of your objectives. These objectives and key results should almost be unattainable, but realistic enough to be aspirational for the team as well as stretching them.
+
+For agile I recommend reading the [agile manifesto](https://agilemanifesto.org/){:target="_blank"} but with regards to this blog post I am referring to the ceremonies that are part of the agile framework. These ceremonies are:
+
+- Backlog refinement where the team reviews the backlog and ensures that the work is ready for the next iteration.
+- Sprint or iteration planning where the team decides what work they will do in the next iteration.
+- Sprint or iteration review where the team reviews the work they have done in the last iteration.
+- Sprint or iteration retrospective where the team reviews how they have worked in the last iteration and how they can improve.
 
 ## Why Integrate OKRs with Agile
 

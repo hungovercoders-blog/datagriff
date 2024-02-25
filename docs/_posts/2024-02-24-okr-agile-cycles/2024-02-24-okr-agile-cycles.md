@@ -11,9 +11,9 @@ tags: OKR Agile
 It's been nearly 2 years since I posted one of my [first blogs which was around OKRs (objectives and key results)](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="_blank"}. Since then I have been preaching their usage and loving the concept... but I have completely missed integrating their ideas into the day to day agile working practices, rendering them ineffective. Spurred on by co-workers, my will to ensure that prioritisation of value is easy during iteration ceremonies, and the awesome book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="_blank"}, below are my thoughts on how to integrate OKR cycles into the agile framework.
 
 - [Why Integrate OKRs with Agile](#why-integrate-okrs-with-agile)
-- [Making OKRs Everything...](#making-okrs-everything)
+- [Making OKRs Everything](#making-okrs-everything)
   - [Objective Zero](#objective-zero)
-- [...Except Renumeration](#except-renumeration)
+- [Team OKRs Should not Link to Individual Renumeration](#team-okrs-should-not-link-to-individual-renumeration)
 - [The Football Analogy](#the-football-analogy)
 - [OKR and Agile Cycle](#okr-and-agile-cycle)
 - [OKR Ceremonies](#okr-ceremonies)
@@ -24,10 +24,10 @@ It's been nearly 2 years since I posted one of my [first blogs which was around 
   - [OKR Retrospective](#okr-retrospective)
 - [Iteration Ceremonies](#iteration-ceremonies)
   - [Daily Stand-ups](#daily-stand-ups)
+  - [Zero Tolerance](#zero-tolerance)
   - [Backlog Refinement](#backlog-refinement)
   - [Iteration Review](#iteration-review)
   - [Iteration Planning](#iteration-planning)
-  - [Zero Tolerance](#zero-tolerance)
 - [Stay Agile](#stay-agile)
 
 ## Why Integrate OKRs with Agile
@@ -39,9 +39,9 @@ If you do not integrate your OKRs with the day to day workload usually managed b
 - Ensure bottom up engagement over top down control by allowing the team to establish their own OKRs and then align their work to them
 - Create a self-motivating team that is focused on shared goals rather than individual performance
 
-## Making OKRs Everything...
+## Making OKRs Everything
 
-If you are going to do OKRs I recommend just using them for everything - except individual renumeration ([see below](#except-renumeration)). This is because one of the main purposes of OKRs is to make prioritisation easy when you are in the middle of your iterations. When you are in short-term work mode and deep into solving the problem that is immediately in front of you as part of your iterations, you are not taking the time to lookup as much you would like and prioritisation almost feels like a distraction. How many times you have yourself maybe groaned at the prospect of backlog refinement or iteration planning because you are in the middle of something and you just want to get it done? OKRs can help by making it far easier in these ceremonies to prioritise the work as a team as you have already spent the time in advance to establish and agree your OKRs. If something does not align with your OKRs then it is not a priority and you can move on. I'd recommend making no more than four objectives and aim for around three key results each. This provides a simple way for the team to focus by not overwhelming them with too much to remember.
+If you are going to do OKRs I recommend just using them for everything - except individual renumeration ([see below](#team-okrs-should-not-link-to-individual-renumeration)). This is because one of the main purposes of OKRs is to make prioritisation easy when you are in the middle of your iterations. When you are in short-term work mode and deep into solving the problem that is immediately in front of you as part of your iterations, you are not taking the time to lookup as much you would like and prioritisation almost feels like a distraction. How many times you have yourself maybe groaned at the prospect of backlog refinement or iteration planning because you are in the middle of something and you just want to get it done? OKRs can help by making it far easier in these ceremonies to prioritise the work as a team as you have already spent the time in advance to establish and agree your OKRs. If something does not align with your OKRs then it is not a priority and you can move on. I'd recommend making no more than four objectives and aim for around three key results each. This provides a simple way for the team to focus by not overwhelming them with too much to remember.
 
 **Objective 1**: Improve Whiskey Distillery Coverage
 
@@ -61,7 +61,7 @@ If you are going to do OKRs I recommend just using them for everything - except 
 - **Key Result 2**: 4 Blog posts made available on hungovercoders by end of second month.
 - **Key Result 3**: 6 Blog posts made available on hungovercoders by end of third month.
 
-Looking at the above shows the clear focus and succinct nature of the OKRs. They are not overwhelming and they are not too detailed whilst maintaining a specificity that makes it easy for the team to prioristise their work as part of their agile iterations. 
+Looking at the above shows the clear focus and succinct nature of the OKRs. They are not overwhelming and they are not too detailed whilst maintaining a specificity that makes it easy for the team to prioristise their work as part of their agile iterations.
 
 Notice as well that each of the key results has a numeric assignment to them. This is important because it can allow the partial completion of an objective which often may be enough. The key results should aim to stretch a team. For example asking for 20% of Scottish distilleries to be available by the end of the quarter may be very achievable, but if the team stops here and regard this as success, they may not get the opportunity to achieve 70% of coverage, which whilst unsuccessful compared to the 100% set out in the key result, is still a more significant improvement than asking for less originally. Make sure when you agree your key results you understand if they are a "must have" completion, such as the end of a contract, or if they are aspirational. I prefer the aspirational type but they should always be about 70-80% achievable at least so as not to become demotivating to the team.
 
@@ -81,7 +81,7 @@ What about BAU or "keeping the lights on" type work? This is where you can creat
 
 The fact that you will realise that you need an objective zero speaks volumes about its importance and I would potentially default to treating this objective as the most important when prioritising, but hopefully with the least amount of work. If you do find that your Objective Zero is consuming most of your strategic work, you likely need to revisit why as part of your OKR planning and bring in more focused objectives to solve the amount of time you need to spend on keeping the lights on. I love this idea to integrate this type of work as part of your OKRs and aim to satisfy the need to cover this work in the ceremony "[Zero Tolerance](#zero-tolerance)" below. Ensure your objective zero sits alongside any documentation or posts that you have for your OKRs so that it is clear the importance of this work and the need to balance it with your strategic OKR work.
 
-## ...Except Renumeration
+## Team OKRs Should not Link to Individual Renumeration
 
 The goal of every team member should simply be to help the team achieve their OKRs. I love the simplicity of this statement.
 
@@ -100,9 +100,9 @@ Below is an example of what an individuals OKRs could look like within the conte
 
 **Objective**: Improve CRUD Application Delivery Knowledge
 
-- **Key Result 1**: Certification in some document storage and retrieval by end of the quarter (helping the team as an individual)
-- **Key Result 2**: Host a team tutorial on how to use the new document storage and retrieval system by end of the quarter (helping multiple individuals in the team)
-- **Key Result 3**: Host a company wide tutorial on how to use the new document storage and retrieval system by end of the quarter (helping multiple teams)
+- **Key Result 1**: Certification in some document storage and retrieval by end of the quarter (helping the team as an individual).
+- **Key Result 2**: Host a team tutorial on how to use the new document storage and retrieval system by end of the quarter (helping multiple individuals in the team).
+- **Key Result 3**: Host a company wide tutorial on how to use the new document storage and retrieval system by end of the quarter (helping multiple teams).
 
 ## The Football Analogy
 
@@ -122,12 +122,13 @@ Now an individual should not have their performance measured against the team ob
 - **Key Result 2**: Provide an average of 2 assists for goal scoring opportunities per game by end of the season (helping multiple individuals in the team)  
 - **Key Result 3**: Provide one pass master class per month to the academy teams until the end of the season (helping multiple teams)
 
-Hopefully this demonstrates 
-
+Hopefully this further demonstrates how you can allow an individual to succeed in the context of team OKRs but without explicitly having the two depend on one another. 
 
 ## OKR and Agile Cycle
 
-Below is an example schedule of how you can setup your ceremonies to align with your OKR cycles. The example below setups up quarterly OKR cycles and fortnightly iterations, this is a very high level view and you may need to adjust the timings of these ceremonies to fit your own teams needs. The OKR ceremonies are setup to align with the start and end of the OKR cycle and the iteration ceremonies are setup to align with the start and end of the iteration cycle. The iteration cycles are driven by the OKRs established and the iterations are then just that, iterative progress against your objectives inline with the key results by which they have agreed to be measured.
+Below is an example schedule of how you can setup your ceremonies to align with your OKR cycles. The example below setups up quarterly OKR cycles and fortnightly iterations, this is a very high level view and you may need to adjust the timings of these ceremonies to fit your own teams needs. If you are just starting OKRs it may be pertinent to try monthly cycles at first to get fast feedback on their efficacy and allowing you to change more often before committing to quarterly turnarounds. 
+
+The OKR ceremonies are setup to align with the start and end of the OKR cycle and the iteration ceremonies are setup to align with the start and end of the iteration cycle. The iteration cycles are driven by the OKRs established and the iterations are then just that, iterative progress against your objectives inline with the key results by which they have agreed to be measured.
 
 ```mermaid!
 gantt
@@ -183,22 +184,22 @@ OKR Impact Planning: 2024-03-27, 2024-03-27
 
 ### OKR Ideation
 
-**Purpose:**: 
+**Purpose:**: Initial Collection of Ideas and Visibility to Prepare for [OKR Creation](#okr-creation)
 
-**Duration:**
+**Duration:** Maximum of 1 day. If you can finish sooner then do so.
 
 **Agenda:**
 
 #### Categories of Concern
 
-The initial ideation process of OKRs could be quite an expansive place to find yourself in. You're going to need to be drowning in data as you make your decisions on what to focus on in the next OKR cycle otherwise you are just guessing. Below are a set of categories I suggest you walkthrough as part of your ideation ceremony to prioritise what you need to do next. If you do find you are unable to prioritise or simply guessing then I suggest first focussing on the "precision" concern below which should become a clear objective for the next OKR cycle.
+The initial ideation process of OKRs could be quite an expansive place to find yourself in. You're going to need to be drowning in data as you make your decisions on what to focus on in the next OKR cycle otherwise you are just guessing. Below are a set of categories I suggest you walkthrough as part of your ideation ceremony to prioritise what you need to do next. If you do find you are unable to prioritise or simply guessing at what you want to look at next, then I suggest first focussing on the "precision" concern below which should become a clear objective for the next OKR cycle.
 
 |--|--|--|
 | Category | Description | Examples |
 |---|---|---|
 | **Precision** | How easily can the team decide on which of the categories of concern we should focus on in the next OKR cycle. | Data availability for each of the below |
-| **Deliverability** | How fast are we able to deliver changes. | Lead Time, Deploys to Production per Day, AB Tests Carried Out |
 | **Performance** | How well are the products the team owns performing. | Conversion Ratios, Customer Satisfaction, Product Coverage |
+| **Deliverability** | How fast are we able to deliver changes. | Lead Time, Deploys to Production per Day, Number of AB Tests Carried Out, Number of Experiments, Number of Rollbacks |
 | **Cost** | How much are we spending to provide our products. | Cloud Costs, Third Party Contract Costs |
 | **Reliability** | How reliable are the teams products. | Uptime, Volume of alerts |
 | **Risk** | How secure and compliant are the teams products. | Number of Critical Vulnerabilities, Number of Risk Events |
@@ -207,19 +208,23 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 ### OKR Creation
 
-**Purpose:**: 
+**Purpose:**: Create and Confirm the Objectives and Key Results
 
-**Duration:**
+**Duration:** Maximum of 2 days
 
 **Agenda:**
+
+**Top Tip:** It is important to get the nights sleep in between formulating your ideas and then coming back to them. This is because you will likely have a different perspective on them the next day and you will be able to see if they are still as important as you thought they were.
 
 ### OKR Impact Planning
 
-**Purpose:**: 
+**Purpose:**: Initial creation of hypotheses of how the team can move towards the key results of the OKRs. 
 
-**Duration:**
+**Duration:** Maximum of 2 days
 
 **Agenda:**
+
+**Top Tip:** It is important to get the nights sleep in between formulating your ideas and then coming back to them. This is because you will likely have a different perspective on them the next day and you will be able to see if they are still as important as you thought they were.
 
 ### OKR Retrospective
 
@@ -231,12 +236,6 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 ## Iteration Ceremonies
 
-**Purpose:**: 
-
-**Duration:**
-
-**Agenda:**
-
 ### Daily Stand-ups
 
 **Purpose:**: 
@@ -244,6 +243,23 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 **Duration:**
 
 **Agenda:**
+
+### Zero Tolerance
+
+**Purpose:**: Identifying critical errors, alerts and vulnerabilities that may cause the team not to meet their objective zero
+
+**Duration:**: Maximum of 1 hour. If you can finish sooner then do so. If it is taking longer you likely need to revisit your objective zero or set an objective to improve the problems arising here. 
+
+**Frequency:**: Weekly.
+
+**Agenda:**
+
+- Review at a high level the ratio of requests to errors for every service.
+- Identify those with the highest ratio of errors to requests and create a ticket if it breaks the thresholds set out in objective zero.
+- Review at a high level the vulnerabilities for every service.
+- Identify those with the most critical vulnerability create a ticket if it breaks the thresholds set out in objective zero.
+- Review at a high level any outdated software for each service.
+- Identify those with the shortest time to live and create a ticket if it breaks the thresholds set out in objective zero.
 
 ### Backlog Refinement
 
@@ -269,23 +285,8 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 **Agenda:**
 
-### Zero Tolerance
-
-**Purpose:**: Identifying critical errors, alerts and vulnerabilities that may cause the team not to meet their objective zero. 
-
-**Duration:**: 1 hour.
-
-**Frequency:**: Weekly.
-
-**Agenda:**
-
-- Review at a high level the ratio of requests to errors for every service.
-- Identify those with the highest ratio of errors to requests and create a ticket if it breaks the thresholds set out in objective zero.
-- Review at a high level the vulnerabilities for every service.
-- Identify those with the most critical vulnerability create a ticket if it breaks the thresholds set out in objective zero.
-- Review at a high level any outdated software for each service.
-- Identify those with the shortest time to live and create a ticket if it breaks the thresholds set out in objective zero.
-
 ## Stay Agile
 
+All of the above are purely ideas, with the great thing about ideas is their ability to change and improve. You'll notice ceremonies like the backlog refinement and OKR creation repeat a number of agenda points that have happened likely quite recently in the previous ceremony. This is important because you should constantly revisit your priorities in the context of the here and now. What you believed to be true last week or last quarter is likely to have changed to the changes you have made as a team and the inevitable changes that have happened in the wider world. Could it be that having 80% of your most important objective being delivered now makes it the second most important objective? If so then you need to be able to change your priorities and reflect on this during your backlog refinement. In your OKR creation does your mission statement and team tenets still hold true? These would have a lower cadence of change but always take the time to go back over them and ensure they are still relevant in the world that you have changed since you last discussed them. If you have not completed an objective in a quarter, but it has improved, does it need to automatically carry over into the next quarter? Always revisit what is the most valuable thing you can be working on. It may often be that completing that objective is more advantageous than dropping it and starting something new, but always make that prioritisation call and understand why. It is far better to repeat your check-in of your current beliefs and constantly gather feedback than it is to not take that time and miss the opportunity to change and improve.
 
+ Every cycle, including the strategic OKR cycle has a retrospective. Much like you would do with your iteration retrospectives, ensure you are taking the time to reflect on how the OKR ceremonies are working for you and your team. If they are not working then change them. If they are working then keep them. The goal is to stay agile and to keep the team engaged and motivated. If you are not doing that then you are likely not doing it right.

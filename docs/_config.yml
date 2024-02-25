@@ -37,6 +37,8 @@ image:
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-spaceship
+mermaid: true
 
 google_analytics: GTM-5RJBJWL
 

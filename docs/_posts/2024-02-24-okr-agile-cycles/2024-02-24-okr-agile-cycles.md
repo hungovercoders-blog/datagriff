@@ -27,8 +27,9 @@ It's been nearly 2 years since I posted one of my [first blogs which was around 
   - [Daily Stand-ups](#daily-stand-ups)
   - [Zero Tolerance](#zero-tolerance)
   - [Backlog Refinement](#backlog-refinement)
-  - [Iteration Review](#iteration-review)
   - [Iteration Planning](#iteration-planning)
+  - [Iteration Review](#iteration-review)
+  - [Iteration Retrospective](#iteration-retrospective)
 - [Stay Agile](#stay-agile)
 
 ## Quick OKR & Agile Recap
@@ -281,11 +282,26 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 **BREAK OVERNIGHT**
 
+- Review the objectives and key results created the day before. Ensure there are no concerns.
+- Action: Create objective zero and make sure the team understand its purpose.
+- Exercise: Team breakouts in 2-3 people with 10 minutes to write down what they think should be the key results for objective zero.
+- Reveal: Every breakout relays their key results.
+- Action: Three key results are added to the objective zero.
+- Exercise: Team breakouts in 2-3 people with 5 minutes to remove one of the four objectives initially planned.
+- Reveal: Every breakout relays the objective they want to remove.
+- Action: An objective is removed from the OKR cycle and replaced with objective zero.
+- Action: The four objectives are added to the backlog with objective zero at the top.
+- Action: The key results are added to the backlog objective zero and final refinement takes place before confirming.
+- Action: The key results are added to the first backlog objective and final refinement takes place before confirming.
+- Action: The key results are added to the second backlog objective and final refinement takes place before confirming.
+- Action: The key results are added to the third backlog objective and final refinement takes place before confirming.
+- Lastly, confirm the OKRs as a collective.
+  
 **Top Tip:** It is important to get the nights sleep in between formulating your ideas and then coming back to them. This is because you will likely have a different perspective on them the next day and you will be able to see if they are still as important as you thought they were.
 
 ### OKR Impact Planning
 
-**Purpose:**: Initial creation of hypotheses of how the team can move towards the key results of the OKRs. 
+**Purpose:**: Initial creation of hypotheses of how the team can move towards the key results of the objectives.
 
 **Duration:** Maximum of 2 days. If you can finish sooner then do so.
 
@@ -295,16 +311,18 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 - Exercise: Team breakouts in 2-3 people with 15 minutes to write down hypotheses that could impact the key results.
 - Reveal: Every breakout relays their hypotheses.
 - Confirm: The team hypotheses are prioritised as a collective. You will want at least three to satisfy the upcoming initial iterations.
-- Action: Add the hypotheses feature to the backlog with appropriate detail.
+- Action: Add the first hypotheses feature to the backlog with appropriate detail under the appropriate objective.
 - Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the first hypotheses.
 - Reveal: Every breakout relays their work.
 - Action: The team work items to deliver the first hypotheses are added as a collective to the backlog under the feature.
+- Action: Add the second hypotheses feature to the backlog with appropriate detail under the appropriate objective.
 - Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the second hypotheses.
 - Reveal: Every breakout relays their work.
 - Action: The team work items to deliver the second hypotheses are added as a collective to the backlog under the feature.
-- Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the second hypotheses.
+- Action: Add the third hypotheses feature to the backlog with appropriate detail under the appropriate objective.
+- Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the third hypotheses.
 - Reveal: Every breakout relays their work.
-- Action: The team work items to deliver the second hypotheses are added as a collective to the backlog under the feature.
+- Action: The team work items to deliver the third hypotheses are added as a collective to the backlog under the feature.
   
 **BREAK OVERNIGHT**
 
@@ -328,11 +346,18 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 ### Daily Stand-ups
 
-**Purpose:**: 
+**Purpose:** Update on current iteration work and any blockers.
 
-**Duration:**
+**Duration:** 15 minutes maximum.
 
 **Agenda:**
+
+- Reiterate the iteration goal which links to the OKRs that the team is working towards.
+- Review the progress of work items from right to left on a kanban board.
+- Identify any blockers and prioritise their removal.
+- Ensure completed development work is prioritised for delivery and that every work item in any state has someone assigned to it.
+
+**Top Tip:** Walking the board from right to left keeps the focus on the teams work to meet their goal and helps to keep focus away from individuals.
 
 ### Zero Tolerance
 
@@ -353,27 +378,75 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 ### Backlog Refinement
 
-**Purpose:**: 
+**Purpose:**: Ensuring the most valuable work is ready for the next iteration.
 
-**Duration:**
+**Duration:** Maximum of 2 hours. If you can finish sooner then do so.
 
-**Agenda:**
-
-### Iteration Review
-
-**Purpose:**: 
-
-**Duration:**
+**Frequency:**: Weekly.
 
 **Agenda:**
+
+- Ensure all zero tolerance tickets are refined and ready for the next iteration. 
+- Ensure all unplanned requests are reviewed and prioritised against the OKRs. If they do not align with the OKRs then they are not a priority and can be removed. If they are a priority then they should be refined.
+- Confirm objectives and hypotheses are still in the correct order.
+- Navigate the objectives and hypotheses as a team in priority order ensuring work is closed if all work is completed.
+- Navigate the objectives and hypotheses as a team in priority order understanding what work is required to close each piece of work. This may mean either removing work items if now deemed less valuable or refining those that are not completed and are not yet ready to be worked on.
 
 ### Iteration Planning
 
-**Purpose:**: 
+**Purpose:**: Plan what work will be done in the next iteration to move closer to the key results of the objectives.
 
-**Duration:**
+**Duration:** Maximum of 90 minutes. If you can finish sooner then do so.
+
+**Frequency:**: Fortnightly.
 
 **Agenda:**
+
+- Establish an iteration goal that links to the priority of the OKRs that the team is working towards.
+- Capacity plan by understanding team absences, the team velocity and the amount of work that can be done in the next iteration.
+- Move any active work items from the previous iteration into the current iteration.
+- Review any of those not started from the previous iteration and understand if they are still valuable. If they are not then remove them.
+- Add any objective zero work items to the current iteration.
+- Navigate the objectives and hypotheses as a team in priority order and add relevant work items to meet the iteration goal.
+- Confirm iteration workload in the context of the team capacity.
+- Confirm sprint goal is understood and the workload will influence the key results of an objective as a result.
+
+**Top Tip:** if you're backlog refinement meetings have been going well then planning should be easy!
+
+### Iteration Review
+
+**Purpose:**: Demonstrate progress made against the iteration goal and the OKRs.
+
+**Duration:** Maximum of one hour. If you can finish sooner then do so.
+
+**Frequency:**: Fortnightly.
+
+**Agenda:**
+
+- Relay the iterations goal and how it links to the OKRs.
+- Demonstrate the features delivered
+- Demonstrate how the features delivered have moved the team closer to the OKRs with appropriate metrics.
+- Gain feedback throughout from all stakeholders.
+
+### Iteration Retrospective
+
+**Purpose:**: Understand team member status and progress against the iteration goal
+
+**Duration:** Maximum of 90 minutes. If you can finish sooner then do so.
+
+**Frequency:**: Fortnightly.
+
+**Agenda:**
+
+- Assess status of team with questionnaire.
+- Review the team status feedback and understand any issues.
+- Review team deliverability metrics like lead time for the last iteration.
+- Exercise: Team writes down what well in the last iteration.
+- Exercise: Team writes down what didn't well in the last iteration.
+- Exercise: Team writes down ideas to improve future iterations.
+- Review and celebrate what went well.
+- Review and understand what didn't go well.
+- Review and understand the ideas to improve future iterations, creating work items where necessary.
 
 ## Stay Agile
 

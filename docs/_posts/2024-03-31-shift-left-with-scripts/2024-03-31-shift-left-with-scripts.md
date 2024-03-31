@@ -36,7 +36,7 @@ I have seen the light and started using scripts for my deployment processes. Alo
 
 ## Goal: Deploying a Container App in Azure
 
-The code the blog below is based on can be found in this [github repo](https://github.com/hungovercoders/template.azure.container.dotnet). Essentially this repo:
+The code the blog below is based on can be found in this [github repo](https://github.com/hungovercoders/template.azure.container.dotnet){:target="_blank"}. Essentially this repo:
 
 1. Creates a dotnet API.
 2. It creates a container image and container with basic testing.

@@ -305,4 +305,4 @@ Once this is deployed to the production environment you can see that the applica
 
 At the end of this demonstration I removed the API being logged to the URL just to clean up my code.
 
-If you have managed to follow along checkout the [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com/){:target="_blank"} for some celebratory tipple!
+If you have managed to follow along checkout the [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com/){:target="_blank"} for some celebratory tipple! It might be a little slow as I allow it to scale to zero when not in use. I think the solution is great for me to demonstrate this solution, but I will likely look to present a static website to users simply searching for whiskey distilleries and keep the react interactive application for a future CRUD solution only for true hungovercoders...

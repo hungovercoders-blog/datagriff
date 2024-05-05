@@ -10,11 +10,18 @@ tags: React Docker Azure Containers Terraform
 
 React is a fickle beast when it comes to runtime environment variables and after visiting some of the distilleries on [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com){:target="_blank"} it becomes an even trickier prospect to handle... My goal was to ensure that I could reference the appropriate API url for each react application at runtime with the appropriate argument in each environment as I deployed them with terraform in Azure container apps. After reading this extremely helpful [post](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/){:target="_blank"} from the awesome [freecodecamp.org](https://www.freecodecamp.org/){:target="_blank"}, that did all the work for me, and then adding a little of my own brand of hungovercoding, the outcome was a success! My source code for all of this can be found in [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="_blank"}.
 
+- [Pre-Requisites](#pre-requisites)
+- [React Runtime Environment Variables](#react-runtime-environment-variables)
+- [Containerise React App with Runtime Environment Variables](#containerise-react-app-with-runtime-environment-variables)
+- [Deploying Dynamic API URL Runtime Variable with Terraform](#deploying-dynamic-api-url-runtime-variable-with-terraform)
+  - [Managing CORS](#managing-cors)
+  - [Demonstrating Working in Each Deployment](#demonstrating-working-in-each-deployment)
+
 ## Pre-Requisites
 
-* I am again using [gitpod](https://gitpod.io) as my development environment with all of the requirements found in the [gitpod yaml file](https://github.com/hungovercoders/whiskey.inventory/blob/main/.gitpod.yml) and the [supporting docker container](https://github.com/hungovercoders/whiskey.inventory/blob/main/.cde.Dockerfile) of the whiskey inventory solution.
-* I'd recommend reading my [previous blog post](https://blog.hungovercoders.com/datagriff/2024/03/31/shift-left-with-scripts.html) on setting up a basic container app deployment.
-* You'll need to have an API and a react app to test this with or you can utilise what I have setup at [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory) which came from [create-react-app.dev](https://create-react-app.dev/).
+- I am again using [gitpod](https://gitpod.io){:target="_blank"} as my development environment with all of the requirements found in the [gitpod yaml file](https://github.com/hungovercoders/whiskey.inventory/blob/main/.gitpod.yml){:target="_blank"} and the [supporting docker container](https://github.com/hungovercoders/whiskey.inventory/blob/main/.cde.Dockerfile){:target="_blank"} of the whiskey inventory solution.
+- I'd recommend reading my [previous blog post](https://blog.hungovercoders.com/datagriff/2024/03/31/shift-left-with-scripts.html){:target="_blank"} on setting up a basic container app deployment.
+- You'll need to have an API and a react app to test this with or you can utilise what I have setup at [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="_blank"} which came from [create-react-app.dev](https://create-react-app.dev/){:target="_blank"}.
 
 ## React Runtime Environment Variables
 
@@ -185,6 +192,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5240:5240
+    environment:
+    - CORS_ORIGINS=http://localhost:8080
   web:
     # image: $APP
     build:
@@ -193,8 +202,19 @@ services:
     ports:
       - 8080:80
     environment:
-    - API_URL=http://localhost:5240
+    - API_URL=http://localhost:5240/api
+
 ```
+
+If we then run:
+
+```bash
+docker-compose up
+```
+
+We again get our API and Web application working in conjunction with the environment variables passed in at runtime. What a glorious time to be alive!
+
+![Docker Compose]({{ site.baseurl }}/assets/2024-04-27-container-react-runtime-variables/docker_compose.png)
 
 ## Deploying Dynamic API URL Runtime Variable with Terraform
 

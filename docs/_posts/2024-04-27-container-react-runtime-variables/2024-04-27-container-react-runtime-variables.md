@@ -304,3 +304,5 @@ Once this is deployed to the production environment you can see that the applica
 ![Prod Environment]({{ site.baseurl }}/assets/2024-04-27-container-react-runtime-variables/prd_environment.png)
 
 At the end of this demonstration I removed the API being logged to the URL just to clean up my code.
+
+If you have managed to follow along checkout the [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com/){:target="_blank"} for some celebratory tipple!

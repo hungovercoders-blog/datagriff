@@ -8,9 +8,13 @@ image:
 tags: React Docker Azure Containers Terraform
 ---
 
-React is a fickle beast when it comes to runtime environment variables and after visiting some of the distilleries on [whiskey.hungovercoders.com](whiskey.hungovercoders.com){:target="_blank"} it becomes an even trickier prospect to handle... My goal was to ensure that I could reference the appropriate API url for each react application at runtime with the appropriate argument in each environment as I deployed them with terraform in Azure container apps. After reading this extremely helpful [post](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/){:target="_blank"} from the awesome [freecodecamp.org](https://www.freecodecamp.org/){:target="_blank"}, that did all the work for me, and then adding a little of my own brand of hungovercoding, the outcome was a success! My source code for all of this can be found in [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="_blank"}.
+React is a fickle beast when it comes to runtime environment variables and after visiting some of the distilleries on [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com){:target="_blank"} it becomes an even trickier prospect to handle... My goal was to ensure that I could reference the appropriate API url for each react application at runtime with the appropriate argument in each environment as I deployed them with terraform in Azure container apps. After reading this extremely helpful [post](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/){:target="_blank"} from the awesome [freecodecamp.org](https://www.freecodecamp.org/){:target="_blank"}, that did all the work for me, and then adding a little of my own brand of hungovercoding, the outcome was a success! My source code for all of this can be found in [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="_blank"}.
 
 ## Pre-Requisites
+
+* I am again using [gitpod](https://gitpod.io) as my development environment with all of the requirements found in the [gitpod yaml file](https://github.com/hungovercoders/whiskey.inventory/blob/main/.gitpod.yml) and the [supporting docker container](https://github.com/hungovercoders/whiskey.inventory/blob/main/.cde.Dockerfile) of the whiskey inventory solution.
+* I'd recommend reading my [previous blog post](https://blog.hungovercoders.com/datagriff/2024/03/31/shift-left-with-scripts.html) on setting up a basic container app deployment.
+* You'll need to have an API and a react app to test this with or you can utilise what I have setup at [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory) which came from [create-react-app.dev](https://create-react-app.dev/).
 
 ## React Runtime Environment Variables
 

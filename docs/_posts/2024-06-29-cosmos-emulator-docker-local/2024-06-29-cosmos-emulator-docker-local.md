@@ -8,7 +8,7 @@ image:
 tags: Docker Azure Cosmos
 ---
 
-A problem came up recently whereby we needed to run the cosmos emulator in a docker container for local development and subsequently in the CI stage of our deployment pipeline to reduce the need for a permanent environment. This was a right head scratcher and started to make me feel worse than a classic hungovercoder hangover. There was only way to cure myself of this... Solve the problem with my favourite of all hangover cures - doggos! Lets jump in and demonstrate how we can create a local developer experience with a dotnet app and the cosmo emulator running docker.
+A problem came up recently whereby we needed to run the cosmos emulator in a docker container for local development and subsequently in the CI stage of our deployment pipeline to reduce the need for a permanent environment. This was a right head scratcher due to the slowness of the emulator to start along with the need for a cert to interact with the emulator. This started to make me feel worse than a classic hungovercoder hangover, there was only way to cure myself of this... Solve the problem with my favourite of all hangover cures - doggos! Lets jump in and demonstrate how we can create a local developer experience with a dotnet app and the cosmo emulator running docker.
 
 - [Pre-Requisites](#pre-requisites)
 - [Compose your Cosmos Emulator](#compose-your-cosmos-emulator)
@@ -147,7 +147,9 @@ You can then run this command to see the logs of the cosmos emulator. This can b
 docker compose logs --follow
 ```
 
-Once the emulator is up and running you can then navigate to the cosmos explorer at [https://localhost:8081/_explorer/index.html](https://localhost:8081/_explorer/index.html) as we exposed port 8081 in the docker compose file.
+![Cosmos Compose Logs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/cosmos-compose-logs.png)
+
+Once the emulator is up and running (can be up to 2 minutes!) you can then navigate to the cosmos explorer at [https://localhost:8081/_explorer/index.html](https://localhost:8081/_explorer/index.html) as we exposed port 8081 in the docker compose file.
 
 Don't panic when you see the unsafe message...
 
@@ -230,7 +232,7 @@ public enum Status
 }
 ```
 
-The class creates a simple model for a rescue dog with a name, breed, status, id and timestamp. It's important to note that I had to fallback to use the Newtonsoft.Json library as the System.Text.Json library does not support serializing enums to strings. This is a bit of a pain but I'm sure it will be resolved in the future - see this ongoing gihub issue [here](https://github.com/dotnet/runtime/issues/74385).
+The class creates a simple model for a rescue dog with a name, breed, status, id and timestamp. It's important to note that I had to fallback to use the Newtonsoft.Json library as the System.Text.Json library does not support serializing enums to strings. This is a bit of a pain but I'm sure it will be resolved in the future - see this ongoing github issue [here](https://github.com/dotnet/runtime/issues/74385).
 
 Next create a Data directory and add an IDataAdapter.cs file with the following contents:
 
@@ -279,8 +281,6 @@ namespace dog_adopter.Data
 
         public CosmosSQLDatabase()
         {
-
-
             // Initialize CosmosClient
             _cosmosClient =  new CosmosClient(cosmos_conn, new CosmosClientOptions
             {
@@ -324,24 +324,35 @@ namespace dog_adopter.Data
             }
             catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                return null;
+                Console.WriteLine("Failed to get rescue dog.");
+                throw;
+                return false;
             }
         }
 
         public async Task<List<RescueDog>> GetRescueDogs()
         {
-            var query = new QueryDefinition("SELECT * FROM c");
-            FeedIterator<RescueDog> resultSet = _container.GetItemQueryIterator<RescueDog>(query);
+          try
+          {
+              var query = new QueryDefinition("SELECT * FROM c");
+              FeedIterator<RescueDog> resultSet = _container.GetItemQueryIterator<RescueDog>(query);
 
-            List<RescueDog> results = new List<RescueDog>();
-            
-            while (resultSet.HasMoreResults)
-            {
-                FeedResponse<RescueDog> response = await resultSet.ReadNextAsync();
-                results.AddRange(response.ToList());
-            }
+              List<RescueDog> results = new List<RescueDog>();
+              
+              while (resultSet.HasMoreResults)
+              {
+                  FeedResponse<RescueDog> response = await resultSet.ReadNextAsync();
+                  results.AddRange(response.ToList());
+              }
 
-            return results;
+              return results;
+          }
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Failed to get rescue dogs.");
+            throw;
+            return false;
         }
 
         public async Task<bool> CreateRescueDog(RescueDog rescueDog)
@@ -370,6 +381,8 @@ namespace dog_adopter.Data
             }
             catch (Exception)
             {
+                Console.WriteLine("Failed to update rescue dog.");
+                throw;
                 return false;
             }
         }
@@ -377,10 +390,96 @@ namespace dog_adopter.Data
 }
 ```
 
+This file initiates a cosmos client and utilises the environment variables we pass in that defines the environment (e.g Development!) and the cosmos connection string. Its important to note the options we're using here in the cosmos client setup. We're using the CosmosSerializationOptions to set the property naming policy to camel case. This is because the cosmos emulator uses camel case for the property names and we want to ensure our model properties are serialized correctly. We're also setting the HttpClientFactory to a lambda function that checks if the environment is development and if so it will accept any server certificate. This is because the cosmos emulator uses a self signed certificate and we need to accept this in development. This is a bit of a hack and should not be used in production. We then implement the methods defined in the IDatabaseAdapter interface to interact with rescue dogs.
+
+Finally we'll add the Program.cs file to the root of the project with the following contents:
+
+```csharp
+using System;
+using Microsoft.Azure.Cosmos;
+using dog_adopter.Models;
+using dog_adopter.Data;
+using System.Threading;
+using System.Diagnostics;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+
+        var cosmosSQLDatabase = new CosmosSQLDatabase();
+        await cosmosSQLDatabase.InitializeAsync();
+        int runDuration = 60;
+        int waitBetweenUpdate = 2000;
+        Console.WriteLine($"Program will run for {runDuration} seconds and waits between update will be {2000} milliseconds.");
+
+        Stopwatch timer = new Stopwatch();
+        timer.Start();
+        while (timer.Elapsed.TotalSeconds < runDuration)
+        {
+
+            RescueDog rescueDog = GetRandomRescueDog();
+
+            var success = await cosmosSQLDatabase.CreateRescueDog(rescueDog);
+
+            Console.WriteLine($"Created rescue dog: {rescueDog.Name} ({rescueDog.Breed}) has a status of {rescueDog.Status}");
+            Console.WriteLine($"The rescue dog has an id of {rescueDog.Id} and was created on {rescueDog.Timestamp}");
+
+            Console.WriteLine("Sleep for 2 seconds.");
+            Thread.Sleep(2000);
+
+            rescueDog.Status = Status.Adopted;
+
+            success = await cosmosSQLDatabase.UpdateRescueDog(rescueDog);
+
+            RescueDog updatedRescueDog = await cosmosSQLDatabase.GetRescueDog(rescueDog.Breed, rescueDog.Id);
+
+            Console.WriteLine($"Updated rescue dog: {updatedRescueDog.Name} ({updatedRescueDog.Breed}) has a status of {updatedRescueDog.Status}");
+            Console.WriteLine($"The rescue dog has an id of {updatedRescueDog.Id} and was updated on {updatedRescueDog.Timestamp}");
+
+            TimeSpan ts = timer.Elapsed;
+
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
+        }
+
+        timer.Stop();
+    }
+
+    public static RescueDog GetRandomRescueDog()
+    {
+        Guid newId = Guid.NewGuid();
+        DateTime newTimestamp = DateTime.UtcNow;
+        string[] dogNames = new string[] { "Harvey", "Mika", "Peppa", "Colin", "Kevin", "Betty", "Bandit", "Bobby", "Hank", "Pip" };
+        var random = new Random();
+        var randomName = dogNames[(random.Next(dogNames.Length))];
+        var valuesBreed = Enum.GetValues(typeof(Breed));
+        var randomBreed = (Breed)valuesBreed.GetValue(random.Next(valuesBreed.Length));
+        var valuesStatus = Enum.GetValues(typeof(Status));
+        var randomStatus = (Status)valuesStatus.GetValue(random.Next(valuesStatus.Length));
+        return new RescueDog(randomName, randomBreed, randomStatus, newId, newTimestamp);
+    }
+}
+```
+
+This program file creates a cosmos instance based on the cosmos adapter we made previously and then starts looping every 2 seconds for 60 seconds. During this loop is creates a random rescue dog, writes it to the cosmos database, sleeps for 2 seconds, updates the rescue dog to be adopted, then moves on to the next dog. If only all rescue dogs could be adopted so quickly! The program also outputs logs to the console which will be important when we check the logs in the docker compose environment later.
+
+Lets play it safe at this point and just perform a build to ensure the app is all tickety boo.
+
+```bash
+dotnet build
+```
+
 ## Dockerise your Console App
 
-
 ### Magic Entry Script!
+
+In order for the console app you create to interact with the cosmos emulator we need to ensure a cert is installed. We can do this by creating an entrypoint script that will download the cert and add it to the trusted certs if the emulator is available. Availability checking can be performed by a while loop every 5 seconds that checks the status of the emulator.
+
+We therefore want to create an entrypoint.sh file in the root of the project with the following contents and use it as the entrypoint in the docker file instead of the usual dll file. The file will only perform the emulator cert work if the environment is development and will then run the console app.
 
 ```bash
 #!/bin/bash
@@ -415,6 +514,16 @@ dotnet dog_adopter.dll
 ```
 
 ### Docker File
+
+Our docker file looks pretty standard for the application, taking the base from microsoft, copying files, performing a build and then using the script file defined above as the entry point. Its worth noting the ARG for the environment which allows us to pass in the environment as a build time variable to only install curl in development and also this will then be a runtime environment variable declared by the following ENV which means the running environment knows its in the development environment too! This might be a little bit suspect though and I may just install curl regardless if this does give me issues later on in the development process.
+
+Its also worth noting that originally I had some issues running the entrypoint.sh file due to permissions. I had to run the following manually once and then everthing was fine.
+
+```bash
+chmod +x entrypoint.sh
+```
+
+The resulting docker file looks like this:
 
 ```Dockerfile
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
@@ -459,8 +568,11 @@ USER root
 ENTRYPOINT ["./entrypoint.sh" ]
 ```
 
+We're going to skip straight to running the docker application via compose as we want it to integrate with the cosmos emulator we have running so we'll need to pass in some environment variables.
 
 ## Compose your Console App
+
+we need to add the app to the docker compose file we create earlier and place it in the same network as the cosmos emulator. Below is the docker compose file with the app service added. The app service is dependent on the cosmosdb service and we pass in the cosmos connection string as an environment variable. Note that the argument for the Development environment and the docker file being sourced from the work we did above. Its also really important to note that in the emulator connection string which we pass in as an environment variable we have changed localhost to be the hostname we have given the cosmosemulator - **azurecosmosemulator**. I missed this for ages and it was a real pain!
 
 ```yaml
 networks:
@@ -524,3 +636,33 @@ volumes:
 ```
 
 ## Run your Application
+
+For development iterations the way I tend to work is the following script flow. This limits the potential of the cosmos emulator going down and saves you the pain of waiting for it to come back up. 
+
+Bring the emulator (if not running) and the app up with the following command, which also builds the app so you can see changes while debugging. The detach command will ensure you don't cancel the emulator. Repeated as you don't know how lucky you are to have the emulator running if it already is!!
+
+```bash
+docker compose up --detach --build  
+```
+
+You can run this as much as you like safely and always bring in the changes of the app because of the build parameter. To check the logs of your docker environment during debugging you can then run:
+
+```bash
+docker compose logs --follow
+```
+
+You should see all our rescue dogs getting adopted for a minute in the console app logs as per below:
+
+![App Compose Logs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/app-compose-logs.png)
+
+You can safely cancel this command and the cosmos emulator will still be running. You can also then check the resuce dogs in cosmos explorer to confirm the application is writing to the database.
+
+![Cosmos Explorer Dogs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/cosmos-explorer-dogs.png)
+
+If you really want to bring your environment down and have definitely finished development (did I mention the cosmos emulator is slow to start?), run the following command:
+
+```bash
+docker compose down
+```
+
+Woof! That was possibly a bit barking mad but we got there in the end. I hope this helps you with your local development with the cosmos emulator in a container.

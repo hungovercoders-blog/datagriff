@@ -4,7 +4,7 @@ date: 2024-06-29
 author: dataGriff
 description: Developing locally with cosmos emulator in a container
 image:
-  path: /assets/2024-06-29-cosmos-emulator-docker/link.png
+  path: /assets/2024-06-29-cosmos-emulator-docker-local/link.png
 tags: Docker Azure Cosmos
 ---
 

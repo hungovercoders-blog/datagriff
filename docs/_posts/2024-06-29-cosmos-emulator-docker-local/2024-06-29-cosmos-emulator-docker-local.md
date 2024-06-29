@@ -653,7 +653,7 @@ You should see all our rescue dogs getting adopted for a minute in the console a
 
 ![App Compose Logs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/app-compose-logs.png)
 
-You can safely cancel this command and the cosmos emulator will still be running. You can also then check the resuce dogs in cosmos explorer to confirm the application is writing to the database.
+You can safely cancel this command and the cosmos emulator will still be running. You can also then check the rescue dogs in cosmos explorer to confirm the application is writing to the database. Note the glorious enums converted to strings!
 
 ![Cosmos Explorer Dogs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/cosmos-explorer-dogs.png)
 

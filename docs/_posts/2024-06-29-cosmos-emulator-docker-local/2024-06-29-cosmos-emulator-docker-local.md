@@ -264,8 +264,6 @@ Without further ado add a CosmosSQLDatabase.cs file to the same Data directory w
 ```csharp
 using Microsoft.Azure.Cosmos;
 using dog_adopter.Models;
-// using System.Text.Json;
-// using System.Text.Json.Serialization;
 
 namespace dog_adopter.Data
 {

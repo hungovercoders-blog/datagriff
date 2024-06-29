@@ -14,7 +14,7 @@ A problem came up recently whereby we needed to run the cosmos emulator in a doc
 - [Compose your Cosmos Emulator](#compose-your-cosmos-emulator)
 - [Create your Console App](#create-your-console-app)
 - [Dockerise your Console App](#dockerise-your-console-app)
-  - [Magic Entry Script!](#magic-entry-script)
+  - [Magic Entry Script](#magic-entry-script)
   - [Docker File](#docker-file)
 - [Compose your Console App](#compose-your-console-app)
 - [Run your Application](#run-your-application)
@@ -81,9 +81,9 @@ vscode:
 
 Now that was so easy. Did I mention I love [gitpod](https://gitpod.io/)?
 
-## Compose your Cosmos Emulator 
+## Compose your Cosmos Emulator
 
-The first thing we want to do is get the cosmos emulator running in a docker container. Full disclosure this blog post was made significantly easier by the discover of these [emulator recipes](https://github.com/Azure/cosmosdb-emulator-recipes/tree/main) provided by Microsoft... Therefore in order to pull and run the cosmos emulator in a container we're going to use the following docker compose file (the app will come later).
+The first thing we want to do is get the cosmos emulator running in a docker container. Full disclosure this blog post was made significantly easier by the discover of these [emulator recipes](https://github.com/Azure/cosmosdb-emulator-recipes/tree/main) provided by Microsoft. You'll notice a lot of stolen materials from there! Therefore in order to pull and run the cosmos emulator in a container we're going to use the following docker compose file (we know the app will come later which is why we're going straight compose).
 
 ```yaml
 networks:
@@ -473,11 +473,11 @@ dotnet build
 
 ## Dockerise your Console App
 
-### Magic Entry Script!
+### Magic Entry Script
 
 In order for the console app you create to interact with the cosmos emulator we need to ensure a cert is installed. We can do this by creating an entrypoint script that will download the cert and add it to the trusted certs if the emulator is available. Availability checking can be performed by a while loop every 5 seconds that checks the status of the emulator.
 
-We therefore want to create an entrypoint.sh file in the root of the project with the following contents and use it as the entrypoint in the docker file instead of the usual dll file. The file will only perform the emulator cert work if the environment is development and will then run the console app.
+We therefore want to create an entrypoint.sh file in the root of the project with the following contents and use it as the entrypoint in the docker file instead of the usual dll file. The file will only perform the emulator cert work if the environment is development and will then run the console app. I'd never thought of using a script as an entrypoint before but it totally makes sense here and another weapon in the docker arsenal!
 
 ```bash
 #!/bin/bash
@@ -663,4 +663,4 @@ If you really want to bring your environment down and have definitely finished d
 docker compose down
 ```
 
-Woof! That was possibly a bit barking mad but we got there in the end. I hope this helps you with your local development with the cosmos emulator in a container.
+Woof! That was possibly a bit barking mad but we got there in the end. I hope this helps you with your local development with the cosmos emulator in a container. Next I will have a think and either ensure this works in a CI build and deploys to an environment working, or I might have a play with mongo and see what the local experience is like with that. It might be a walk in the park compared to this! (tee hee).

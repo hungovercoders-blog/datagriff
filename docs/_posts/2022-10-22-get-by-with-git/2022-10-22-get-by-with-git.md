@@ -146,13 +146,13 @@ Run git status again and you should see that there is now nothing to commit as a
 Right you may have had a few and you don't want to override your work in the main branch. Therefore you want to make a branch off this branch that you can work with that doesn't disrupt your working code. To create a new branch run the following command, the prefix of feature is often a practice to highlight that its a new feature for the codebase:
 
 ```bash
-git branch feature-newidea 
+git branch feature-newidea
 ```
 
 Now change to work in this branch by running
 
 ```bash
-git checkout feature-newidea 
+git checkout feature-newidea
 ```
 
 To confirm you are now working in this branch and see all other branches run the following and you should see an asterisk against the branch you expect to be working in.
@@ -180,7 +180,7 @@ To check the history of commits of this branch, run the following command:
 git log -v
 ```
 
-You should see two commits against the feature branch as we have the original file that we added to the master branch and then another new idea in the feature branch. To compare the history with the original master branch and prove nothing has changed there yet, change to that branch and look at the history. 
+You should see two commits against the feature branch as we have the original file that we added to the master branch and then another new idea in the feature branch. To compare the history with the original master branch and prove nothing has changed there yet, change to that branch and look at the history.
 
 ```bash
 git checkout main
@@ -264,7 +264,7 @@ git branch main
 echo newidea > newfile.txt
 git add .
 git commit -m "added new file to main"
-git push origin main 
+git push origin main
 ```
 
 The error will be something like the following, stating that you the main branch can only be updated using a pull request with a reviewer.
@@ -282,7 +282,7 @@ git branch feature-newfile
 echo newfeature > newfeature.txt
 git add .
 git commit -m "added new file to feature"
-git push origin feature-newfile 
+git push origin feature-newfile
 ```
 
 Now that we have a remote feature branch we can perform a pull request and then merge the code into our production main branch safely...

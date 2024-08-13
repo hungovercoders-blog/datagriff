@@ -8,7 +8,7 @@ image:
 tags: Postman VSCode API
 ---
 
-I am way behind on my blogging given tis the season to be hungover and not coding... Below describes how to create a simple postman collection using the super [Marvel API](https://developer.marvel.com/){:target="_blank"} leveraging environments and variables using the [postman VS Code extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode){:target="_blank"}. This I thought would be a great opportunity for me to see how API endpoints get structured and documented for a public facing API. I then show how you can add some examples, descriptions and tests (using AI no less!) in the [Postman app](https://www.postman.com/downloads/){:target="_blank"}. **dataGriff SMASH!**
+I am way behind on my blogging given tis the season to be hungover and not coding... Below describes how to create a simple postman collection using the super [Marvel API](https://developer.marvel.com/){:target="\_blank"} leveraging environments and variables using the [postman VS Code extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode){:target="\_blank"}. This I thought would be a great opportunity for me to see how API endpoints get structured and documented for a public facing API. I then show how you can add some examples, descriptions and tests (using AI no less!) in the [Postman app](https://www.postman.com/downloads/){:target="\_blank"}. **dataGriff SMASH!**
 
 - [Prerequisites](#prerequisites)
 - [VS Code Extension](#vs-code-extension)
@@ -25,11 +25,11 @@ I am way behind on my blogging given tis the season to be hungover and not codin
 
 ## Prerequisites
 
-- [Postman Account](https://www.postman.com/){:target="_blank"} - This will be so you can use postman and ensure your settings are synced between the application and the VS code extension.
-- [Postman App](https://www.postman.com/downloads/){:target="_blank"} - This will provide some more functionality over the VS code extension such as AI assistant for test generation.
-- [VS Code](https://code.visualstudio.com/){:target="_blank"} - This to leverage the postman VS code extension.
-- [Postman Extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode){:target="_blank"} - This to VS code extension we will experiment with.
-- [Marvel Account](https://developer.marvel.com/account){:target="_blank"} - This is to get your own public and private keys so that you can experiment with the Marvel API.
+- [Postman Account](https://www.postman.com/){:target="\_blank"} - This will be so you can use postman and ensure your settings are synced between the application and the VS code extension.
+- [Postman App](https://www.postman.com/downloads/){:target="\_blank"} - This will provide some more functionality over the VS code extension such as AI assistant for test generation.
+- [VS Code](https://code.visualstudio.com/){:target="\_blank"} - This to leverage the postman VS code extension.
+- [Postman Extension](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode){:target="\_blank"} - This to VS code extension we will experiment with.
+- [Marvel Account](https://developer.marvel.com/account){:target="\_blank"} - This is to get your own public and private keys so that you can experiment with the Marvel API.
 
 ## VS Code Extension
 
@@ -51,7 +51,7 @@ Add two variables:
 
 - **apikey**: This will be the public api key from your Marvel developer portal.
 - **PRIVATE_API_KEY**: This will be the private api key from your Marvel developer portal.
-Set both of these to be of type secret.
+  Set both of these to be of type secret.
 
 ![Environment Keys]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/environment_keys.PNG)
 
@@ -86,10 +86,10 @@ Here is the script:
 
 ```javascript
 const public1 = pm.environment.replaceIn("{{apikey}}"),
-    private1 = pm.environment.replaceIn("{{PRIVATE_API_KEY}}"),
-    time = pm.environment.replaceIn("{{$timestamp}}"),
-    hash = CryptoJS.MD5(time + private1 + public1).toString();
-    
+  private1 = pm.environment.replaceIn("{{PRIVATE_API_KEY}}"),
+  time = pm.environment.replaceIn("{{$timestamp}}"),
+  hash = CryptoJS.MD5(time + private1 + public1).toString();
+
 pm.environment.set("hash", hash);
 ```
 
@@ -107,7 +107,7 @@ First create a folder for "Characters" under your Marvel collection. This will j
 
 ![Collection Folder]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/collection_folder.PNG)
 
-Add a GET request with the URL being **{% raw %}{{base_url}}/characters?hash={{hash}}&ts={{$timestamp}}{% endraw %}**. This will inherit the base_url and hash variables from our environment whilst also leveraging the built-in timestamp variable. We can also add each of the params documented in the [characters API](https://developer.marvel.com/docs){:target="_blank"} but not tick them so they're not used yet.
+Add a GET request with the URL being **{% raw %}{{base_url}}/characters?hash={{hash}}&ts={{$timestamp}}{% endraw %}**. This will inherit the base_url and hash variables from our environment whilst also leveraging the built-in timestamp variable. We can also add each of the params documented in the [characters API](https://developer.marvel.com/docs){:target="\_blank"} but not tick them so they're not used yet.
 
 ![Request Characters Example 1]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/request_characters_ex1.PNG)
 
@@ -157,7 +157,7 @@ I was hoping I'd never have to leave VS code ever again, and in the main this is
 
 ### Add Descriptions
 
-First I added descriptions to the characters API query parameters by taking them from the [Marvel API docs](https://developer.marvel.com/docs){:target="_blank"}.
+First I added descriptions to the characters API query parameters by taking them from the [Marvel API docs](https://developer.marvel.com/docs){:target="\_blank"}.
 
 ![Postman Variable Descriptions]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/postman_variables.PNG)
 
@@ -174,35 +174,42 @@ While I was in the postman app I was distracted by tests and the "Postbot"... Co
 ![Postman Tests]({{ site.baseurl }}/assets/2023-12-30-postman-vscode-marvel/postman_tests.PNG)
 
 ```javascript
-
 pm.test("Response status code is 200", function () {
-    pm.expect(pm.response.code).to.equal(200);
+  pm.expect(pm.response.code).to.equal(200);
 });
-
 
 pm.test("Content-Type header is application/json", function () {
-    pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json");
+  pm.expect(pm.response.headers.get("Content-Type")).to.include(
+    "application/json",
+  );
 });
 
-pm.test("Results array is present and contains the expected number of elements", function () {
+pm.test(
+  "Results array is present and contains the expected number of elements",
+  function () {
     const responseData = pm.response.json();
-    
-    pm.expect(responseData).to.have.property('data');
-    pm.expect(responseData.data).to.have.property('results');
-    pm.expect(responseData.data.results).to.be.an('array');
+
+    pm.expect(responseData).to.have.property("data");
+    pm.expect(responseData.data).to.have.property("results");
+    pm.expect(responseData.data.results).to.be.an("array");
     pm.expect(responseData.data.results).to.have.lengthOf.at.least(1);
-});
+  },
+);
 
-pm.test("Name and description in results array are non-empty strings", function () {
+pm.test(
+  "Name and description in results array are non-empty strings",
+  function () {
     const responseData = pm.response.json();
 
-    pm.expect(responseData.data.results).to.be.an('array');
-    responseData.data.results.forEach(function(result) {
-        pm.expect(result.name).to.be.a('string').and.to.have.lengthOf.at.least(1, "Name should not be empty");
-        //pm.expect(result.description).to.be.a('string').and.to.have.lengthOf.at.least(1, "Description should not be empty");
+    pm.expect(responseData.data.results).to.be.an("array");
+    responseData.data.results.forEach(function (result) {
+      pm.expect(result.name)
+        .to.be.a("string")
+        .and.to.have.lengthOf.at.least(1, "Name should not be empty");
+      //pm.expect(result.description).to.be.a('string').and.to.have.lengthOf.at.least(1, "Description should not be empty");
     });
-});
-
+  },
+);
 ```
 
 ## VS Code Extension Revisited

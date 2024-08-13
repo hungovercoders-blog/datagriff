@@ -29,14 +29,14 @@ Being an impatient hungovercoder due to the constant headaches the night before 
   - [Tests During Build](#tests-during-build)
   - [Azure Outcome](#azure-outcome)
 - [To be Continued](#to-be-continued)
-  
+
 ## Shifting Left with Scripts
 
-I have seen the light and started using scripts for my deployment processes. Along with dockerfiles all of the complexity of deployment can be abstracted away which keeps your deployment pipelines really dumb. Having the detail in the scripts too means you control the abstraction and have a deeper understanding of how things work. If you rely on third party tools, whilst they may seem quicker at first, they are not transferable nor can you recreate them locally. Not being able to do this locally can lead to a painful development process whereby you do not know the impact of your changes on a deployment pipeline until you have committed and waited an age to get that feedback... The details below hopefully show you how you can bring all of this right into your development process and shift that pipeline all the way to the left using scripts! 
+I have seen the light and started using scripts for my deployment processes. Along with dockerfiles all of the complexity of deployment can be abstracted away which keeps your deployment pipelines really dumb. Having the detail in the scripts too means you control the abstraction and have a deeper understanding of how things work. If you rely on third party tools, whilst they may seem quicker at first, they are not transferable nor can you recreate them locally. Not being able to do this locally can lead to a painful development process whereby you do not know the impact of your changes on a deployment pipeline until you have committed and waited an age to get that feedback... The details below hopefully show you how you can bring all of this right into your development process and shift that pipeline all the way to the left using scripts!
 
 ## Goal: Deploying a Container App in Azure
 
-The code the blog below is based on can be found in this [github repo](https://github.com/hungovercoders/template.azure.container.dotnet){:target="_blank"}. Essentially this repo:
+The code the blog below is based on can be found in this [github repo](https://github.com/hungovercoders/template.azure.container.dotnet){:target="\_blank"}. Essentially this repo:
 
 1. Creates a dotnet API.
 2. It creates a container image and container with basic testing.
@@ -47,33 +47,33 @@ The code the blog below is based on can be found in this [github repo](https://g
 
 You're going to need the following platforms in order to follow along with the demonstrations in this blog:
 
-- [Azure Account](https://portal.azure.com){:target="_blank"}
-- [Docker Hub Account](https://hub.docker.com){:target="_blank"}
-- [Github Account](https://github.com/){:target="_blank"}
-- [VS Code](https://code.visualstudio.com/download){:target="_blank"}
+- [Azure Account](https://portal.azure.com){:target="\_blank"}
+- [Docker Hub Account](https://hub.docker.com){:target="\_blank"}
+- [Github Account](https://github.com/){:target="\_blank"}
+- [VS Code](https://code.visualstudio.com/download){:target="\_blank"}
 
 For development on your local machine your going to need the following tools installed:
 
-- [DotNet](https://dotnet.microsoft.com/en-us/download/dotnet-framework){:target="_blank"}
-- [Git](https://git-scm.com/downloads){:target="_blank"}
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/){:target="_blank"}
-- [Terraform](https://developer.hashicorp.com/terraform/install){:target="_blank"}
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli){:target="_blank"}
-- [Curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux){:target="_blank"}
+- [DotNet](https://dotnet.microsoft.com/en-us/download/dotnet-framework){:target="\_blank"}
+- [Git](https://git-scm.com/downloads){:target="\_blank"}
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/){:target="\_blank"}
+- [Terraform](https://developer.hashicorp.com/terraform/install){:target="\_blank"}
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli){:target="\_blank"}
+- [Curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux){:target="\_blank"}
 
 These VS code extensions are also useful for the development methods used.
 
-- [Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform){:target="_blank"}
-- [Azure Tools Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack){:target="_blank"}
-- [C# Dev Kit Extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit){:target="_blank"}
-- [Github Actions Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions){:target="_blank"}
-- [Docker Extension](https://code.visualstudio.com/docs/containers/overview){:target="_blank"}
+- [Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform){:target="\_blank"}
+- [Azure Tools Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack){:target="\_blank"}
+- [C# Dev Kit Extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit){:target="\_blank"}
+- [Github Actions Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions){:target="\_blank"}
+- [Docker Extension](https://code.visualstudio.com/docs/containers/overview){:target="\_blank"}
 
-OR... you can just sign up and use [Gitpod](https://gitpod.io){:target="_blank"} and utilise the [configuration below](#configure-cloud-developer-startup) I used to create this which installs all of the above for you!!!
+OR... you can just sign up and use [Gitpod](https://gitpod.io){:target="\_blank"} and utilise the [configuration below](#configure-cloud-developer-startup) I used to create this which installs all of the above for you!!!
 
-- [Gitpod](https://gitpod.io){:target="_blank"}
+- [Gitpod](https://gitpod.io){:target="\_blank"}
 
-**Spoiler alert** the demos below are going to be using [Gitpod](https://gitpod.io){:target="_blank"} as a cloud developer environment because its **so much easier**...
+**Spoiler alert** the demos below are going to be using [Gitpod](https://gitpod.io){:target="\_blank"} as a cloud developer environment because its **so much easier**...
 
 ## Love Environment Variables
 
@@ -81,27 +81,27 @@ I am a big fan of environment variables. I think their power is criminally overl
 
 ### Dynamic Environment Variables
 
-| Variable Name | Purpose |
-|--|--|
-| ARM_CLIENT_ID | Used along with client secret and Tenant ID to authenticate with an application registration against Azure. |
-| ARM_CLIENT_SECRET | Used along with client ID and Tenant ID to authenticate with an application registration against Azure. |
-| ARM_TENANT_ID | Used along with client ID and client secret to authenticate with an application registration against Azure. |
-| ARM_SUBSCRIPTION_ID | Used to provide subscription that the resource deployment will take place in.  |
-| ARM_REGION | Dictates the region the resources will be deployed into e.g. north europe |
-| DOCKER_USERNAME | Docker username to login and push or pull images. |
-| DOCKER_PASSWORD | Docker password to login and push or pull images.  |
-| ENVIRONMENT | Whether the action is taking place in development, uat or production environment. |
-| ORGANISATION | The name of the organisation deploying e.g. hungovercoders. |
-| UNIQUE_NAMESPACE | A unique namespace to postfix Azure assets with e.g. hngc. |
+| Variable Name       | Purpose                                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- |
+| ARM_CLIENT_ID       | Used along with client secret and Tenant ID to authenticate with an application registration against Azure. |
+| ARM_CLIENT_SECRET   | Used along with client ID and Tenant ID to authenticate with an application registration against Azure.     |
+| ARM_TENANT_ID       | Used along with client ID and client secret to authenticate with an application registration against Azure. |
+| ARM_SUBSCRIPTION_ID | Used to provide subscription that the resource deployment will take place in.                               |
+| ARM_REGION          | Dictates the region the resources will be deployed into e.g. north europe                                   |
+| DOCKER_USERNAME     | Docker username to login and push or pull images.                                                           |
+| DOCKER_PASSWORD     | Docker password to login and push or pull images.                                                           |
+| ENVIRONMENT         | Whether the action is taking place in development, uat or production environment.                           |
+| ORGANISATION        | The name of the organisation deploying e.g. hungovercoders.                                                 |
+| UNIQUE_NAMESPACE    | A unique namespace to postfix Azure assets with e.g. hngc.                                                  |
 
 ### Static Environment Variables
 
-| Variable Name | Purpose |
-|--|--|
-| TEAM | The name of the team that owns the asset used in tagging resources for example. |
-| DOMAIN | The business domain that incorporates the asset used in tagging resources for example. |
-| APP | The name of the application. |
-| PORT | The port number tha application will expose itself on through docker. Makes it easy to reuse where needed.  |
+| Variable Name | Purpose                                                                                                    |
+| ------------- | ---------------------------------------------------------------------------------------------------------- |
+| TEAM          | The name of the team that owns the asset used in tagging resources for example.                            |
+| DOMAIN        | The business domain that incorporates the asset used in tagging resources for example.                     |
+| APP           | The name of the application.                                                                               |
+| PORT          | The port number tha application will expose itself on through docker. Makes it easy to reuse where needed. |
 
 The following is held in a domain.env file like the following:
 
@@ -112,7 +112,7 @@ APP=dotnet-api
 PORT=5050
 ```
 
-I have started a number of [cheatsheets](https://blog.hungovercoders.com/cheatsheets/){:target="_blank"} for hungovercoders and one of them is for my [configurations](https://blog.hungovercoders.com/cheatsheets/configuration/configuration.html){:target="_blank"} which is useful reference for myself and may give you some ideas too.
+I have started a number of [cheatsheets](https://blog.hungovercoders.com/cheatsheets/){:target="\_blank"} for hungovercoders and one of them is for my [configurations](https://blog.hungovercoders.com/cheatsheets/configuration/configuration.html){:target="\_blank"} which is useful reference for myself and may give you some ideas too.
 
 ## Smoke Test Driven Development
 
@@ -172,7 +172,7 @@ echo "Starting script: $0..."
 echo "Completed script: $0."
 ```
 
-This simply prints out the script file that has started and completed which makes it really easy to debug. 
+This simply prints out the script file that has started and completed which makes it really easy to debug.
 
 I then added the parent test.sh script file simply to have one thing to reference from my local development environment and my eventual pipelines. This means even if I mess around with test files my integration layer to my test scripts will be consistent. The file simply looks like the following with scope for more tests when needed.
 
@@ -362,7 +362,7 @@ echo "Completed script: $0."
 
 - The script takes in two booleans of whether you want to RUN or PUSH as well as the container build.
 - The script will only push if the container has run locally successfully including the tests on the running container.
-- The script uses some basic semantic versioning for my image tags by using the branch name and commit id when code is committed. If the repo has uncommitted changes then I use the branch name plus "-development" just to separate it from the image already in place for that branch to prevent overrides.  I need to refine this further but ultimately this stopped me from accidentally pushing to latest whilst my production API was still referencing it! Its a bit noisey with regards to number of images and tags, but it will do me for now.
+- The script uses some basic semantic versioning for my image tags by using the branch name and commit id when code is committed. If the repo has uncommitted changes then I use the branch name plus "-development" just to separate it from the image already in place for that branch to prevent overrides. I need to refine this further but ultimately this stopped me from accidentally pushing to latest whilst my production API was still referencing it! Its a bit noisey with regards to number of images and tags, but it will do me for now.
 - The script leverages all of our lovely environment variables.
 - The script also leverages 2 other scripts that I find useful for local development to speed things along...
 
@@ -439,11 +439,11 @@ If we run this script when the docker container is running, we see the following
 
 ### Pre Requisites
 
-Before you deploy a container app, you will need to setup an Azure Container Environment and associated Log Analytics. You can see this [hungovercoders repo](https://github.com/hungovercoders/platform.azure){:target="_blank"} here if you want to use terraform to do this or just create them manually for now.
+Before you deploy a container app, you will need to setup an Azure Container Environment and associated Log Analytics. You can see this [hungovercoders repo](https://github.com/hungovercoders/platform.azure){:target="\_blank"} here if you want to use terraform to do this or just create them manually for now.
 
 ### Terraform
 
-I covered in great detail in a [previous blog post](https://blog.hungovercoders.com/datagriff/2023/10/29/cloud-dev-platform-template.html){:target="_blank"} about how to leverage terraform for local development using cloud development environments. Here I will just highlight the fact I have adjusted the main terraform file to include a container app deploy.
+I covered in great detail in a [previous blog post](https://blog.hungovercoders.com/datagriff/2023/10/29/cloud-dev-platform-template.html){:target="\_blank"} about how to leverage terraform for local development using cloud development environments. Here I will just highlight the fact I have adjusted the main terraform file to include a container app deploy.
 
 ```hcl
 resource "azurerm_resource_group" "rg" {
@@ -530,15 +530,15 @@ TF_BACKEND_RESOURCE_GROUP="state-rg-$UNIQUE_NAMESPACE"
 TF_BACKEND_STORAGE_ACCOUNT="statesa$UNIQUE_NAMESPACE"
 
 echo "MESSAGE: Terraform state variables are..."
-echo "Unique Namespace is $TF_VAR_unique_namespace" 
-echo "Organisation is $TF_VAR_organisation" 
-echo "Region is $TF_VAR_region" 
-echo "Environment is $TF_VAR_environment" 
-echo "Team is $TF_VAR_team" 
-echo "Domain is $TF_VAR_domain" 
-echo "Image tag is $TF_VAR_image_tag" 
-echo "State Storage Account Resource Group is $TF_BACKEND_RESOURCE_GROUP" 
-echo "State Storage Account is $TF_BACKEND_STORAGE_ACCOUNT" 
+echo "Unique Namespace is $TF_VAR_unique_namespace"
+echo "Organisation is $TF_VAR_organisation"
+echo "Region is $TF_VAR_region"
+echo "Environment is $TF_VAR_environment"
+echo "Team is $TF_VAR_team"
+echo "Domain is $TF_VAR_domain"
+echo "Image tag is $TF_VAR_image_tag"
+echo "State Storage Account Resource Group is $TF_BACKEND_RESOURCE_GROUP"
+echo "State Storage Account is $TF_BACKEND_STORAGE_ACCOUNT"
 echo "State Storage Account Container is $TF_BACKEND_CONTAINER"
 
 echo "MESSAGE: Changing to infrastructure directory..."
@@ -621,7 +621,7 @@ tasks:
     command: |
       gp sync-await containerbuild
       sh ./tools_app/preview.sh
-      
+
 vscode:
   extensions:
     - hashicorp.terraform
@@ -665,37 +665,36 @@ on:
         type: string
     secrets:
       DOCKER_USERNAME:
-          required: true
+        required: true
       DOCKER_PASSWORD:
-          required: true
+        required: true
 
 jobs:
+  application:
+    name: "Application"
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
+      ORGANISATION: ${{ inputs.ORGANISATION }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-    application:
-        name: 'Application'
-        runs-on: ubuntu-latest
-        environment:  ${{ inputs.ENVIRONMENT }}
-        env:
-            ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
-            ORGANISATION: ${{ inputs.ORGANISATION }}
-            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        
-        steps:
-        - name: Checkout
-          uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-        - name: Install Test Requirements
-          run: |
-            sh ./test/requirements.sh
+      - name: Install Test Requirements
+        run: |
+          sh ./test/requirements.sh
 
-        - name: 'Show Variables'
-          run: |
-            sh ./tools_platform/environment_variables.sh
-    
-        - name: Docker Build
-          run: |
-            sh ./tools_app/docker_build.sh True True
+      - name: "Show Variables"
+        run: |
+          sh ./tools_platform/environment_variables.sh
+
+      - name: Docker Build
+        run: |
+          sh ./tools_app/docker_build.sh True True
 ```
 
 The infrastructure yaml looks like this, again leveraging the scripts exactly like we do locally.
@@ -720,82 +719,81 @@ on:
         type: string
     secrets:
       ARM_CLIENT_ID:
-          required: true
+        required: true
       ARM_CLIENT_SECRET:
-          required: true
+        required: true
       ARM_SUBSCRIPTION_ID:
-          required: true
+        required: true
       ARM_TENANT_ID:
-          required: true
+        required: true
 
 jobs:
+  terraform:
+    name: "Infrastructure"
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
+      UNIQUE_NAMESPACE: ${{ inputs.UNIQUE_NAMESPACE }}
+      ORGANISATION: ${{ inputs.ORGANISATION }}
+      ARM_REGION: ${{ inputs.ARM_REGION }}
 
-    terraform:
-        name: 'Infrastructure'
-        runs-on: ubuntu-latest
-        environment:  ${{ inputs.ENVIRONMENT }}
-        env:
-            ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-            ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-            ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-            ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
-            UNIQUE_NAMESPACE: ${{ inputs.UNIQUE_NAMESPACE }}  
-            ORGANISATION: ${{ inputs.ORGANISATION }}
-            ARM_REGION: ${{ inputs.ARM_REGION }}
-        
-        steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-    
-        - name: Setup Terraform
-          uses: hashicorp/setup-terraform@v1
-          with:
-            terraform_version: 1.6.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-        - name: 'Show Variables'
-          run: |
-            sh ./tools_platform/environment_variables.sh
-  
-        - name: 'Terraform Plan'
-          if: ${{ github.ref == 'refs/heads/main' && inputs.ENVIRONMENT == 'production-plan' }}
-          run: |
-            sh ./tools_platform/infrastructure.sh
-        
-        - name: Terraform Apply
-          if: ${{ github.ref == 'refs/heads/main' || (inputs.ENVIRONMENT != 'production' && inputs.ENVIRONMENT != 'production-plan') }}
-          run: |
-            sh ./tools_platform/infrastructure.sh True
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.6.3
+
+      - name: "Show Variables"
+        run: |
+          sh ./tools_platform/environment_variables.sh
+
+      - name: "Terraform Plan"
+        if: ${{ github.ref == 'refs/heads/main' && inputs.ENVIRONMENT == 'production-plan' }}
+        run: |
+          sh ./tools_platform/infrastructure.sh
+
+      - name: Terraform Apply
+        if: ${{ github.ref == 'refs/heads/main' || (inputs.ENVIRONMENT != 'production' && inputs.ENVIRONMENT != 'production-plan') }}
+        run: |
+          sh ./tools_platform/infrastructure.sh True
 ```
 
 As I reuse at least the infrastructure I then have a parent pipeline which calls the above. The only complexity of the code, or multiple lines, really coming from the formatting of the environment variables, but I can live with that.
 
 ```yaml
-name: 'pipeline'
+name: "pipeline"
 
 on:
   push:
     branches:
       - main
     paths-ignore:
-      - 'README.md'
-      - 'README-TEMPLATE.md'
-      - '.gitpod.yml'
-      - '.cde.Dockerfile'
-      - 'images/**'
-      - '.github/workflows/workmanagement.yml'
-      - '.github/ISSUE_TEMPLATE/**'
+      - "README.md"
+      - "README-TEMPLATE.md"
+      - ".gitpod.yml"
+      - ".cde.Dockerfile"
+      - "images/**"
+      - ".github/workflows/workmanagement.yml"
+      - ".github/ISSUE_TEMPLATE/**"
   pull_request:
     branches:
       - main
     paths-ignore:
-      - 'README.md'
-      - 'README-TEMPLATE.md'
-      - 'gitpod.yml'
-      - '.cde.Dockerfile'
-      - 'images/**'
-      - '.github/workflows/workmanagement.yml'
-      - '.github/ISSUE_TEMPLATE/**'
+      - "README.md"
+      - "README-TEMPLATE.md"
+      - "gitpod.yml"
+      - ".cde.Dockerfile"
+      - "images/**"
+      - ".github/workflows/workmanagement.yml"
+      - ".github/ISSUE_TEMPLATE/**"
   workflow_dispatch:
 
 jobs:

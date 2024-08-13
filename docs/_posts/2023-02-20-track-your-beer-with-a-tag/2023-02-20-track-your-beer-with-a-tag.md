@@ -12,7 +12,6 @@ tags: google-tag-manager
 
 You have a load of lovely links on your website that link to external alcoholic partners. How do you keep track of your beer fuelled journeys when a customer goes to those beer-infused partners?? With google tag manager and some tasty javascript, that's how!
 
-
 - [PreRequisites](#prerequisites)
 - [Create a Workspace](#create-a-workspace)
 - [Create a Tag](#create-a-tag)
@@ -49,8 +48,8 @@ Add the following javascript which will append a tracking id for any external li
     });
     return uuid;
 }
-  
-  
+
+
     // Set the domain/URL to your website.
     var myDomain = "www.hungovercoders.com";
     // Grab all links (anchor tags)

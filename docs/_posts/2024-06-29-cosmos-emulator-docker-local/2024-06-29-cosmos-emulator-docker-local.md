@@ -23,15 +23,15 @@ A problem came up recently whereby we needed to run the cosmos emulator in a doc
 
 In order to carry out this walkthrough you'll need the following:
 
-- [Github Account](https://github.com/){:target="_blank"}
-- [VS Code](https://code.visualstudio.com/download){:target="_blank"}
+- [Github Account](https://github.com/){:target="\_blank"}
+- [VS Code](https://code.visualstudio.com/download){:target="\_blank"}
 
 For development on your local machine your going to need the following tools installed:
 
-- [DotNet](https://dotnet.microsoft.com/en-us/download/dotnet-framework){:target="_blank"}
-- [Git](https://git-scm.com/downloads){:target="_blank"}
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/){:target="_blank"}
-- [Curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux){:target="_blank"}
+- [DotNet](https://dotnet.microsoft.com/en-us/download/dotnet-framework){:target="\_blank"}
+- [Git](https://git-scm.com/downloads){:target="\_blank"}
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/){:target="\_blank"}
+- [Curl](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux){:target="\_blank"}
 
 However, I am again using the mighty [gitpod](https://gitpod.io/) to cater for these needs and my docker file looks like this (I'm using this as a base for other Azure dotnet work which is why there are other things in there - handy though right??).
 
@@ -83,7 +83,7 @@ Now that was so easy. Did I mention I love [gitpod](https://gitpod.io/)?
 
 ## Compose your Cosmos Emulator
 
-The first thing we want to do is get the cosmos emulator running in a docker container. Full disclosure this blog post was made significantly easier by the discover of these [emulator recipes](https://github.com/Azure/cosmosdb-emulator-recipes/tree/main){:target="_blank"} provided by Microsoft. You'll notice a lot of stolen materials from there! Therefore in order to pull and run the cosmos emulator in a container we're going to use the following docker compose file (we know the app will come later which is why we're going straight compose).
+The first thing we want to do is get the cosmos emulator running in a docker container. Full disclosure this blog post was made significantly easier by the discover of these [emulator recipes](https://github.com/Azure/cosmosdb-emulator-recipes/tree/main){:target="\_blank"} provided by Microsoft. You'll notice a lot of stolen materials from there! Therefore in order to pull and run the cosmos emulator in a container we're going to use the following docker compose file (we know the app will come later which is why we're going straight compose).
 
 ```yaml
 networks:
@@ -99,24 +99,24 @@ services:
     restart: always
     container_name: "azure-cosmos-emulator-latest"
     hostname: "azurecosmosemulator"
-    image: 'mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest'
+    image: "mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest"
     mem_limit: 4GB
     tty: true
     ports:
-    - '8081:8081' # Data Explorer
-    - '8900:8900'
-    - '8901:8901'
-    - '8902:8902'
-    - '10250:10250'
-    - '10251:10251'
-    - '10252:10252'
-    - '10253:10253'
-    - '10254:10254'
-    - '10255:10255'
-    - '10256:10256'
-    - '10350:10350'
+      - "8081:8081" # Data Explorer
+      - "8900:8900"
+      - "8901:8901"
+      - "8902:8902"
+      - "10250:10250"
+      - "10251:10251"
+      - "10252:10252"
+      - "10253:10253"
+      - "10254:10254"
+      - "10255:10255"
+      - "10256:10256"
+      - "10350:10350"
     expose:
-    - "8081"
+      - "8081"
     environment:
       - AZURE_COSMOS_EMULATOR_PARTITION_COUNT=11
       - AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true
@@ -136,7 +136,7 @@ The compose file is pretty self explanatory. We are pulling the latest cosmos em
 Run this following bash command with detach to start the cosmos emulator in a container.
 
 ```bash
-docker compose up --detach 
+docker compose up --detach
 ```
 
 Its important to use the detach for the cosmos emulator as it take ages to start and so you want to make sure you don't accidentally cancel if you ran it interactively, which would bring down the container. Pretty much when you get the cosmos emulator running you want to leave it running to save time! Later on we will see how we rebuild solely on the app when performing docker compose so we leave the slow starting cosmos emulator running.
@@ -149,7 +149,7 @@ docker compose logs --follow
 
 ![Cosmos Compose Logs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/cosmos-compose-logs.png)
 
-Once the emulator is up and running (can be up to 2 minutes and not just when partitions started!) you can then navigate to the cosmos explorer at [https://localhost:8081/_explorer/index.html](https://localhost:8081/_explorer/index.html){:target="_blank"} as we exposed port 8081 in the docker compose file.
+Once the emulator is up and running (can be up to 2 minutes and not just when partitions started!) you can then navigate to the cosmos explorer at [https://localhost:8081/\_explorer/index.html](https://localhost:8081/_explorer/index.html){:target="\_blank"} as we exposed port 8081 in the docker compose file.
 
 Don't panic when you see the unsafe message...
 
@@ -232,7 +232,7 @@ public enum Status
 }
 ```
 
-The class creates a simple model for a rescue dog with a name, breed, status, id and timestamp. It's important to note that I had to fallback to use the Newtonsoft.Json library as the System.Text.Json library does not support serializing enums to strings. This is a bit of a pain but I'm sure it will be resolved in the future - see this ongoing github issue [here](https://github.com/dotnet/runtime/issues/74385){:target="_blank"}.
+The class creates a simple model for a rescue dog with a name, breed, status, id and timestamp. It's important to note that I had to fallback to use the Newtonsoft.Json library as the System.Text.Json library does not support serializing enums to strings. This is a bit of a pain but I'm sure it will be resolved in the future - see this ongoing github issue [here](https://github.com/dotnet/runtime/issues/74385){:target="\_blank"}.
 
 Next create a Data directory and add an IDataAdapter.cs file with the following contents:
 
@@ -486,7 +486,7 @@ We therefore want to create an entrypoint.sh file in the root of the project wit
 
 ```bash
 #!/bin/bash
-#set -e 
+#set -e
 
 echo "$ASPNETCORE_ENVIRONMENT environment..."
 
@@ -573,7 +573,7 @@ ENTRYPOINT ["./entrypoint.sh" ]
 
 Lets do a build of the image and ensure everything still works.
 
-```bash 
+```bash
 docker build -f ".Dockerfile" -t dog_adopter_console:latest .
 ```
 
@@ -599,24 +599,24 @@ services:
     restart: always
     container_name: "azure-cosmos-emulator-latest"
     hostname: "azurecosmosemulator"
-    image: 'mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest'
+    image: "mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest"
     mem_limit: 4GB
     tty: true
     ports:
-    - '8081:8081' # Data Explorer
-    - '8900:8900'
-    - '8901:8901'
-    - '8902:8902'
-    - '10250:10250'
-    - '10251:10251'
-    - '10252:10252'
-    - '10253:10253'
-    - '10254:10254'
-    - '10255:10255'
-    - '10256:10256'
-    - '10350:10350'
+      - "8081:8081" # Data Explorer
+      - "8900:8900"
+      - "8901:8901"
+      - "8902:8902"
+      - "10250:10250"
+      - "10251:10251"
+      - "10252:10252"
+      - "10253:10253"
+      - "10254:10254"
+      - "10255:10255"
+      - "10256:10256"
+      - "10350:10350"
     expose:
-    - "8081"
+      - "8081"
     environment:
       - AZURE_COSMOS_EMULATOR_PARTITION_COUNT=11
       - AZURE_COSMOS_EMULATOR_ENABLE_DATA_PERSISTENCE=true
@@ -633,11 +633,11 @@ services:
       context: .
       dockerfile: .Dockerfile
       args:
-      - environment=Development
+        - environment=Development
     depends_on:
       - cosmosdb
     environment:
-      - COSMOS_CONN=AccountEndpoint=https://azurecosmosemulator:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==; 
+      - COSMOS_CONN=AccountEndpoint=https://azurecosmosemulator:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==;
     networks:
       default:
         ipv4_address: 172.16.238.242
@@ -655,7 +655,7 @@ For development iterations the way I tend to work is the following script flow. 
 Bring the emulator (if not running) and the app up with the following command, which also builds the app so you can see changes while debugging. The detach command will ensure you don't cancel the emulator. Repeated as you don't know how lucky you are to have the emulator running if it already is!!
 
 ```bash
-docker compose up --detach --build  
+docker compose up --detach --build
 ```
 
 If you get an entrypoint file permissions error remember to run this!
@@ -678,7 +678,7 @@ You should see all our rescue dogs getting adopted for a minute in the console a
 
 ![App Compose Logs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/app-compose-logs.png)
 
-Pretty happy ended up with Colin the random rottweiler getting adopted. You can safely cancel this command (CTRL+C) and the cosmos emulator will still be running. You can also then check the rescue dogs in cosmos explorer at your local host, as we exposed port 8081, via  [https://localhost:8081/_explorer/index.html](https://localhost:8081/_explorer/index.html) to confirm the application is writing to the database. Note the glorious enums converted to strings!
+Pretty happy ended up with Colin the random rottweiler getting adopted. You can safely cancel this command (CTRL+C) and the cosmos emulator will still be running. You can also then check the rescue dogs in cosmos explorer at your local host, as we exposed port 8081, via [https://localhost:8081/\_explorer/index.html](https://localhost:8081/_explorer/index.html) to confirm the application is writing to the database. Note the glorious enums converted to strings!
 
 ![Cosmos Explorer Dogs]({{ site.baseurl }}/assets/2024-06-29-cosmos-emulator-docker-local/cosmos-explorer-dogs.png)
 

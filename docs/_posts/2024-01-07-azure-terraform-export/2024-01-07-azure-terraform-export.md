@@ -8,7 +8,7 @@ image:
 tags: Azure Terraform
 ---
 
-The hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} is now an absolute beast and a template I frequently use as a starting point for any codebases that will deploy infrastructure to Azure. However, I wanted to know if there was a way to fast-track anyone who doesn't want to convert their ARM or bicep from first principles into terraform... The answer is yes and it is [aztfexport](https://github.com/Azure/aztfexport){:target="_blank"}! Lets crack open a can and automate those terraform files!
+The hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="\_blank"} is now an absolute beast and a template I frequently use as a starting point for any codebases that will deploy infrastructure to Azure. However, I wanted to know if there was a way to fast-track anyone who doesn't want to convert their ARM or bicep from first principles into terraform... The answer is yes and it is [aztfexport](https://github.com/Azure/aztfexport){:target="\_blank"}! Lets crack open a can and automate those terraform files!
 
 - [Prerequisites](#prerequisites)
 - [Import the Resources](#import-the-resources)
@@ -21,17 +21,17 @@ The hungovercoders [template.azure.terraform repo](https://github.com/hungoverco
 
 You can either:
 
-- Use the hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} in a cloud developer environment that will come with absolutely everything you need to get started. See the [README](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} for detailed instructions of how to use. The section [importing existing azure resources into terraform](https://github.com/hungovercoders/template.azure.terraform#importing-existing-azure-resources-into-terraform){:target="_blank"} is essentially the root of this blog post.
+- Use the hungovercoders [template.azure.terraform repo](https://github.com/hungovercoders/template.azure.terraform){:target="\_blank"} in a cloud developer environment that will come with absolutely everything you need to get started. See the [README](https://github.com/hungovercoders/template.azure.terraform){:target="\_blank"} for detailed instructions of how to use. The section [importing existing azure resources into terraform](https://github.com/hungovercoders/template.azure.terraform#importing-existing-azure-resources-into-terraform){:target="\_blank"} is essentially the root of this blog post.
 
 OR you will need to install:
 
-- [VS Code](https://code.visualstudio.com/){:target="_blank"}
-- [VS Code Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform){:target="_blank"}
-- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="_blank"}
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli){:target="_blank"}
-- [aztfexport](https://github.com/Azure/aztfexport/releases){:target="_blank"}
+- [VS Code](https://code.visualstudio.com/){:target="\_blank"}
+- [VS Code Terraform Extension](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform){:target="\_blank"}
+- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli){:target="\_blank"}
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli){:target="\_blank"}
+- [aztfexport](https://github.com/Azure/aztfexport/releases){:target="\_blank"}
 
-**Note:** For the last three tools I used [homebrew](https://brew.sh/){:target="_blank"} to install as part of the docker container for the cloud developer environment that the template produces, see [here](https://github.com/hungovercoders/template.azure.terraform/blob/main/.cde.Dockerfile){:target="_blank"} for details. If you have brew available on your local machine this might be an easier option.
+**Note:** For the last three tools I used [homebrew](https://brew.sh/){:target="\_blank"} to install as part of the docker container for the cloud developer environment that the template produces, see [here](https://github.com/hungovercoders/template.azure.terraform/blob/main/.cde.Dockerfile){:target="\_blank"} for details. If you have brew available on your local machine this might be an easier option.
 
 I certainly prefer option (1) as its all done for me. The methods and screenshots below will be based on the template cloud developer environment, but it will still all be relevant to if you perform the tasks locally.
 
@@ -181,4 +181,4 @@ In this example the resource group at the end looks like the below which is iden
 
 ## Use the Template
 
-If you're using the [template](https://github.com/hungovercoders/template.azure.terraform){:target="_blank"} you can move the imported code into the terraform folder and start tweaking it to meet your needs. This becomes a really quick start to import azure resources into terraform, utilise a cloud developer environment with all the tooling ready and a github actions pipeline ready for you to deploy. Now that is a happy new year!
+If you're using the [template](https://github.com/hungovercoders/template.azure.terraform){:target="\_blank"} you can move the imported code into the terraform folder and start tweaking it to meet your needs. This becomes a really quick start to import azure resources into terraform, utilise a cloud developer environment with all the tooling ready and a github actions pipeline ready for you to deploy. Now that is a happy new year!

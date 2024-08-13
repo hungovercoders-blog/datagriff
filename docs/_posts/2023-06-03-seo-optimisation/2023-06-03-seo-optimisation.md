@@ -37,64 +37,82 @@ I may have been on Barry Island when I thought of the title of this blog post an
 Meta tags are pieces of html at the top of a webpage. Each of them contributes in different ways to search engine optimisation and how text or images appear in links. If you navigate to [www.hungovercoders.com](www.hungovercoders.com), then right-click and view page source, you will see the HTML and something that looks like the below in the head. I've removed the css links and the google tag manager scripts from html - but these would be at the end - just to focus on the importance of this meta section.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8">
+    <!-- Primary Meta Tags -->
+    <title>Hungovercoders | Coding Under the Influence</title>
+    <meta name="title" content="Hungovercoders | Coding Under the Influence<" />
+    <meta
+      name="description"
+      content="Explore our technical blogs and discover innovative solutions which indulge in the fun side of topics like film, geek culture, music, local food, beer, and breweries."
+    />
+    <meta name="author" content="Richard Griffiths" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Primary Meta Tags -->
-  <title>Hungovercoders | Coding Under the Influence</title>
-  <meta name="title"
-    content="Hungovercoders | Coding Under the Influence<">
-  <meta name="description"
-    content="Explore our technical blogs and discover innovative solutions which indulge in the fun side of topics like film, geek culture, music, local food, beer, and breweries.">
-  <meta name="author" content="Richard Griffiths">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.hungovercoders.com/" />
+    <meta
+      property="og:title"
+      content="Hungovercoders | Coding Under the Influence"
+    />
+    <meta
+      property="og:description"
+      content="Explore our technical blogs and discover innovative solutions which indulge in the fun side of topics like film, geek culture, music, local food, beer, and breweries."
+    />
+    <meta
+      property="og:image"
+      content="https://www.hungovercoders.com/assets/meta_image.png"
+    />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.hungovercoders.com/">
-  <meta property="og:title"
-    content="Hungovercoders | Coding Under the Influence">
-  <meta property="og:description"
-    content="Explore our technical blogs and discover innovative solutions which indulge in the fun side of topics like film, geek culture, music, local food, beer, and breweries.">
-  <meta property="og:image" content="https://www.hungovercoders.com/assets/meta_image.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.hungovercoders.com/" />
+    <meta
+      property="twitter:title"
+      content="Hungovercoders | Coding Under the Influence"
+    />
+    <meta
+      property="twitter:description"
+      content="Explore our technical blogs and discover innovative solutions which indulge in the fun side of topics like film, geek culture, music, local food, beer, and breweries."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.hungovercoders.com/assets/meta_image.png"
+    />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://www.hungovercoders.com/">
-  <meta property="twitter:title"
-    content="Hungovercoders | Coding Under the Influence">
-  <meta property="twitter:description"
-    content="Explore our technical blogs and discover innovative solutions which indulge in the fun side of topics like film, geek culture, music, local food, beer, and breweries.">
-  <meta property="twitter:image" content="https://www.hungovercoders.com/assets/meta_image.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo3.ico" />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/logo3.ico"
+    />
 
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/logo3.ico">
-  <link rel="apple-touch-icon" type="image/png" sizes="16x16" href="assets/logo3.ico">
-
- <!-- Scripts and GTM after meta -->
-
-</head>
+    <!-- Scripts and GTM after meta -->
+  </head>
   <body>
-     <!-- Content -->
+    <!-- Content -->
   </body>
 </html>
 ```
 
-The title and description are the important meta tags for key word search optimisation and how your content will appear in web searches. The html ```<title>``` tag is what provides the description at the top of your webpage.
+The title and description are the important meta tags for key word search optimisation and how your content will appear in web searches. The html `<title>` tag is what provides the description at the top of your webpage.
 
-The first html```<meta name="title">``` is what creates the text at the top of search results. The other two title sections then for 'og' and 'twitter' are for general social media content and twitter respectively. I have chosen to keep the title consistent everywhere so the same message is always displayed.
+The first html`<meta name="title">` is what creates the text at the top of search results. The other two title sections then for 'og' and 'twitter' are for general social media content and twitter respectively. I have chosen to keep the title consistent everywhere so the same message is always displayed.
 
-The html ```<meta name="description">``` is what creates underneath the title in search results or the more detailed text below social media links the other meta descriptions. Again I have chosen to keep all these consistent to make it easier.
+The html `<meta name="description">` is what creates underneath the title in search results or the more detailed text below social media links the other meta descriptions. Again I have chosen to keep all these consistent to make it easier.
 
 ![Meta Search Results]({{ site.baseurl }}/assets/2023-06-03-seo-optimisation/meta-search-results.png)
 
-The  html```<meta name="viewport" content="width=device-width, initial-scale=1.0">``` is key to ensure that your webpage displays appropriately sized on any screen that it is displayed upon. This was a bit of a revelation!
+The html`<meta name="viewport" content="width=device-width, initial-scale=1.0">` is key to ensure that your webpage displays appropriately sized on any screen that it is displayed upon. This was a bit of a revelation!
 
-We then also have a number of image tags that have different purposes. The two images at the end, html```<link rel="icon"``` and html```<link rel="apple-touch-icon"``` are what create icons either at the top of your webpage tab or on apple tablet style devices respectively. Both recommended as improving performance in SEO.
+We then also have a number of image tags that have different purposes. The two images at the end, html`<link rel="icon"` and html`<link rel="apple-touch-icon"` are what create icons either at the top of your webpage tab or on apple tablet style devices respectively. Both recommended as improving performance in SEO.
 
-We then have the social media images in html```<meta property="og:image"``` and html```<meta property="twitter:image"```. These are the images that will be shown when you share your links on social media.
+We then have the social media images in html`<meta property="og:image"` and html`<meta property="twitter:image"`. These are the images that will be shown when you share your links on social media.
 
 You'll notice that search engines and social media might take a little while to get the updated meta tags that you want to share. This was when I discovered [meta tags](https://metatags.io/) which allows you to pop in the link to your website and confirm everything is working correctly. Nice!
 
@@ -163,6 +181,7 @@ e.g. to check TXT
 ```bash
 nslookup -q=txt hungovercoders.com
 ```
+
 e.g. to check CNAME
 
 ```bash

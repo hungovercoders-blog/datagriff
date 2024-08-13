@@ -8,7 +8,7 @@ image:
 tags: React Docker Azure Containers Terraform
 ---
 
-React is a fickle beast when it comes to runtime environment variables and after visiting some of the distilleries on [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com){:target="_blank"} it becomes an even trickier prospect to handle... My goal was to ensure that I could reference the appropriate API url for each react application at runtime with the appropriate argument in each environment as I deployed them with terraform in Azure container apps. After reading this extremely helpful [post](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/){:target="_blank"} from the awesome [freecodecamp.org](https://www.freecodecamp.org/){:target="_blank"}, that did all the work for me, and then adding a little of my own brand of hungovercoding, the outcome was a success! My source code for all of this can be found in [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="_blank"}.
+React is a fickle beast when it comes to runtime environment variables and after visiting some of the distilleries on [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com){:target="\_blank"} it becomes an even trickier prospect to handle... My goal was to ensure that I could reference the appropriate API url for each react application at runtime with the appropriate argument in each environment as I deployed them with terraform in Azure container apps. After reading this extremely helpful [post](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/){:target="\_blank"} from the awesome [freecodecamp.org](https://www.freecodecamp.org/){:target="\_blank"}, that did all the work for me, and then adding a little of my own brand of hungovercoding, the outcome was a success! My source code for all of this can be found in [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="\_blank"}.
 
 - [Pre-Requisites](#pre-requisites)
 - [React Runtime Environment Variables](#react-runtime-environment-variables)
@@ -19,13 +19,13 @@ React is a fickle beast when it comes to runtime environment variables and after
 
 ## Pre-Requisites
 
-- I am again using [gitpod](https://gitpod.io){:target="_blank"} as my development environment with all of the requirements found in the [gitpod yaml file](https://github.com/hungovercoders/whiskey.inventory/blob/main/.gitpod.yml){:target="_blank"} and the [supporting docker container](https://github.com/hungovercoders/whiskey.inventory/blob/main/.cde.Dockerfile){:target="_blank"} of the whiskey inventory solution.
-- I'd recommend reading my [previous blog post](https://blog.hungovercoders.com/datagriff/2024/03/31/shift-left-with-scripts.html){:target="_blank"} on setting up a basic container app deployment.
-- You'll need to have an API and a react app to test this with or you can utilise what I have setup at [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="_blank"} which came from [create-react-app.dev](https://create-react-app.dev/){:target="_blank"}.
+- I am again using [gitpod](https://gitpod.io){:target="\_blank"} as my development environment with all of the requirements found in the [gitpod yaml file](https://github.com/hungovercoders/whiskey.inventory/blob/main/.gitpod.yml){:target="\_blank"} and the [supporting docker container](https://github.com/hungovercoders/whiskey.inventory/blob/main/.cde.Dockerfile){:target="\_blank"} of the whiskey inventory solution.
+- I'd recommend reading my [previous blog post](https://blog.hungovercoders.com/datagriff/2024/03/31/shift-left-with-scripts.html){:target="\_blank"} on setting up a basic container app deployment.
+- You'll need to have an API and a react app to test this with or you can utilise what I have setup at [hungovercoders/whiskey.inventory](https://github.com/hungovercoders/whiskey.inventory){:target="\_blank"} which came from [create-react-app.dev](https://create-react-app.dev/){:target="\_blank"}.
 
 ## React Runtime Environment Variables
 
-**The source of this section can be found on freecodecamp [here](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/){:target="_blank"}. I am stealing and summarising below.** Hopefully the latter sections leveraging this solution in deployment absolves me of the stolen material. The best developers steal right? 
+**The source of this section can be found on freecodecamp [here](https://www.freecodecamp.org/news/how-to-implement-runtime-environment-variables-with-create-react-app-docker-and-nginx-7f9d42a91d70/){:target="\_blank"}. I am stealing and summarising below.** Hopefully the latter sections leveraging this solution in deployment absolves me of the stolen material. The best developers steal right?
 
 Local to your react application you're going to need a .env file to store the runtime variable that you're interested in passing in as a parameter. In this instance we want to pass in the API_URL at runtime so it uses the appropriate API implementation per environment. The below shows the default local host which will be overridden with the environment specific API by the methods we put in place.
 
@@ -64,7 +64,7 @@ Now add the following bash script as env.sh at the root of your react applicatio
 rm -rf ./env-config.js
 touch ./env-config.js
 
-# Add assignment 
+# Add assignment
 echo "window._env_ = {" >> ./env-config.js
 
 # Read each line in .env file
@@ -81,7 +81,7 @@ do
   value=$(printf '%s\n' "${!varname}")
   # Otherwise use value from .env file
   [[ -z $value ]] && value=${varvalue}
-  
+
   # Append configuration property to JS file
   echo "  $varname: \"$value\"," >> ./env-config.js
 done < .env
@@ -181,10 +181,9 @@ and the local website doesn't work:
 We can also add the environment variable to a docker-compose file in conjunction with our API so that the whole solution works in tandem when developing locally e.g.
 
 ```yaml
-version: '3.4'
+version: "3.4"
 
 services:
-
   api:
     # image: ${APP}
     build:
@@ -193,7 +192,7 @@ services:
     ports:
       - 5240:5240
     environment:
-    - CORS_ORIGINS=http://localhost:8080
+      - CORS_ORIGINS=http://localhost:8080
   web:
     # image: $APP
     build:
@@ -202,8 +201,7 @@ services:
     ports:
       - 8080:80
     environment:
-    - API_URL=http://localhost:5240/api
-
+      - API_URL=http://localhost:5240/api
 ```
 
 If we then run:
@@ -291,7 +289,7 @@ resource "azurerm_container_app" "web" {
 
 Its worth noting that to manage the API CORS requirements of the API I am also passing in a custom domain of the Web API per environment. This means that each API in each environment is also more secure as it will only expect web calls from the correct web address as well.
 
-As a result of me using the custom web domains, [devwhiskey.hungovercoders.com](https://devwhiskey.hungovercoders.com/){:target="_blank"} and [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com/){:target="_blank"}, I have had to tell the terraform lifecyle to ignore these changes in the custom domain at the end of the terraform as I could only manage this manually.
+As a result of me using the custom web domains, [devwhiskey.hungovercoders.com](https://devwhiskey.hungovercoders.com/){:target="\_blank"} and [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com/){:target="\_blank"}, I have had to tell the terraform lifecyle to ignore these changes in the custom domain at the end of the terraform as I could only manage this manually.
 
 ### Demonstrating Working in Each Deployment
 
@@ -305,4 +303,4 @@ Once this is deployed to the production environment you can see that the applica
 
 At the end of this demonstration I removed the API being logged to the URL just to clean up my code.
 
-If you have managed to follow along checkout the [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com/){:target="_blank"} for some celebratory tipple! It might be a little slow as I allow it to scale to zero when not in use. I think the solution is great for me to demonstrate this solution, but I will likely look to present a static website to users simply searching for whiskey distilleries and keep the react interactive application for a future CRUD solution only for true hungovercoders...
+If you have managed to follow along checkout the [whiskey.hungovercoders.com](https://whiskey.hungovercoders.com/){:target="\_blank"} for some celebratory tipple! It might be a little slow as I allow it to scale to zero when not in use. I think the solution is great for me to demonstrate this solution, but I will likely look to present a static website to users simply searching for whiskey distilleries and keep the react interactive application for a future CRUD solution only for true hungovercoders...

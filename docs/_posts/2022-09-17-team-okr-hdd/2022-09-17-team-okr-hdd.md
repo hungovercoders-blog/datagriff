@@ -26,11 +26,11 @@ There should be no doubting from a common sense perspective however that people 
 
 ![Borg]({{ site.baseurl }}/assets/2022-09-17-team-ork-hdd/borg.jpg)
 
-Although not the purpose of this blog, appropriate team boundaries can be established utilising domain discovery methods such as [event storming](https://www.eventstorming.com/). Once business problem domains are identified they can be divided amongst your organisation using common sense around what business problems make the most sense to live closely together. The target implementation aiming to reduce handovers and ensuring teams can provided business value by reaching a customer independently, as well as resourcing domains accordingly based on their complexity. For further information on identifying a suitable team layout for your organisation please see resources on  [team topologies](https://teamtopologies.com/). **Top Tip:** Keep an eye out for cross-cutting platform teams that can support a lot of the repeated work across your value-based teams - you wouldn't want to repeat creation of authentication mechanisms across your organisation now would you?
+Although not the purpose of this blog, appropriate team boundaries can be established utilising domain discovery methods such as [event storming](https://www.eventstorming.com/). Once business problem domains are identified they can be divided amongst your organisation using common sense around what business problems make the most sense to live closely together. The target implementation aiming to reduce handovers and ensuring teams can provided business value by reaching a customer independently, as well as resourcing domains accordingly based on their complexity. For further information on identifying a suitable team layout for your organisation please see resources on [team topologies](https://teamtopologies.com/). **Top Tip:** Keep an eye out for cross-cutting platform teams that can support a lot of the repeated work across your value-based teams - you wouldn't want to repeat creation of authentication mechanisms across your organisation now would you?
 
 ## OKRs
 
-OKRs stand for Objectives & Key Results. You may have other terms for them within your organisation, as ultimately they are just a goal setting tool, but one that I have found extremely inspiring. They allow a bottom-up as well as top-down approach to your organisations strategy. This allows teams close to the problem domains described above, to utilise their knowledge under their own volition at the correct time, to deliver value like only they know how. This is a high trust relationship between those running the organisation and the engineers they have employed, but one that should reap dividends if implemented successfully.  
+OKRs stand for Objectives & Key Results. You may have other terms for them within your organisation, as ultimately they are just a goal setting tool, but one that I have found extremely inspiring. They allow a bottom-up as well as top-down approach to your organisations strategy. This allows teams close to the problem domains described above, to utilise their knowledge under their own volition at the correct time, to deliver value like only they know how. This is a high trust relationship between those running the organisation and the engineers they have employed, but one that should reap dividends if implemented successfully.
 
 A team **mission** should help understand objectives for the lifecycle of the team and should be fairly static. **Objectives** based on this mission should be agreed strategically with more senior members of the organisation and addressed about every 90 days. The **key results** then should be time-bound and an agreed method of how you will measure the success of your objectives. These objectives and key results should almost be unattainable, but realistic enough to be aspirational for the team as well as stretching them.
 
@@ -58,7 +58,7 @@ We have a established a team exclusively on making the hungovercoders drinking b
 We have a established a team exclusively on ensuring the hungovercoders promote environmental concerns
 . Lets motivate them!
 
-**Team Mission:** Ensure that the Hungovercoders protect the environment 
+**Team Mission:** Ensure that the Hungovercoders protect the environment
 
 **Objective:** Hungovercoders pickup litter
 
@@ -99,7 +99,7 @@ Below is an example implementation hierarchy, but know that your terminology of 
 
 ## Monitor your Implementation
 
-If you cannot get feedback from your teams on the success or failure of a hypotheses against a key result in around 2 weeks then you maybe you likely need to check if your objectives are too complex at this point, or more likely there may be an issue with your organisational setup if they cannot deliver independently. 
+If you cannot get feedback from your teams on the success or failure of a hypotheses against a key result in around 2 weeks then you maybe you likely need to check if your objectives are too complex at this point, or more likely there may be an issue with your organisational setup if they cannot deliver independently.
 
 Either way keep dreaming the dream, you should be aiming for every team in your organisation to understand if they can impact business value every 2 weeks, with absolutely clear signals of how they are doing that along with full autonomy to do so. Go get 'em tigers!
 

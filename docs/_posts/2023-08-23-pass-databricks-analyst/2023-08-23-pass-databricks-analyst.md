@@ -74,7 +74,7 @@ There are a couple of analytic definitions you need to be aware of which are cov
 
 ## Provision Workspace and Unity Catalog
 
-The following section is not needed for the exam but I have put in case you need a workspace to practice your analytics in if you do not have one available. It takes about 15 minutes and is not a bad exercise to understand the workings of it all anyway. 
+The following section is not needed for the exam but I have put in case you need a workspace to practice your analytics in if you do not have one available. It takes about 15 minutes and is not a bad exercise to understand the workings of it all anyway.
 The process here is manual but there are ways of automating this using tools such as terraform. This is all out of scope for the exam so just to get what you need for an environment to work within, the following should do. If you already have a workspace and catalog setup skip to [Quick SQL Tour and Warehouse Setup](#quick-sql-tour-and-warehouse-setup).
 
 ### Create Workspace
@@ -99,9 +99,9 @@ You'll need to create a storage account to back your unity catalog storage creat
 3. Set the resource group to be the same one you created your workspace in.
 4. Set the storage account name to be something like lrncatalogsaeuwdgrf, changing the last four characters to be something unique for your resource.
 5. Set the region to be the same as your databricks workspace and the same as the shortcode you placed for the storage - in this case I used West Europe (euw).
-![Create Storage]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage.PNG)
+   ![Create Storage]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage.PNG)
 6. On the advanced tab ensure that "Enable Hierarchical Namespace" is ticked. This ensures a data lake storage account is created.
-![Create Storage HNS]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage-hns.PNG)
+   ![Create Storage HNS]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-storage-hns.PNG)
 7. Leave everything else the same and select review then create.
 
 ### Create Containers
@@ -122,32 +122,32 @@ The external connector is how your databricks workspace will authenticate agains
 4. Name it something like lrn-databricks-dbexc-euw-dgrf but change the last four characters to make it unique to your resource.
 5. Choose the same region that you created your your other resources, for me this was West Europe.
 6. Click review and create.
-![Create Databricks Connector]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-databricks-connector.PNG)
+   ![Create Databricks Connector]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-databricks-connector.PNG)
 7. Navigate to your storage account, go to Access Control and select + Add.
-![Storage Add Permissions]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-add-permissions.PNG)
+   ![Storage Add Permissions]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-add-permissions.PNG)
 8. For the role choose storage Blob Data Contributor.
 9. For members choose Managed Identity, select members and then pick the databricks access connector we have created.
 10. Select review and assign.
-![Storage Assign Blob Contributor]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-assign-blob-contributor.PNG)
+    ![Storage Assign Blob Contributor]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/storage-assign-blob-contributor.PNG)
 
 ### Create Unity Catalog
 
 1. Launch your new databricks workspace.
 2. In the top right click your user name and navigate to "Manage Account".
 
-    ![Manage Account]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/manage-account.PNG)
+   ![Manage Account]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/manage-account.PNG)
 
-1. Choose data and then select "create metastore".
-![Create Metastore 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-01.PNG)
-1. Name the metastore lrn-databricks-uc-euw-dgrf, remembering to change the last four characters to something unique to you.
-1. Select the same region you created your other resources, in my case it was West Europe again.
-1. Set the ADLS Gen 2 Path to be your storage account path which should be something like this: abfss://default@lrncatalogsaeuwdgrf.dfs.core.windows.net/
-1. Set the access connector id to be the external connector resource id you created which will be something like this: /subscriptions/xxxxxx-xxxxxx-xxxxxx-xxxxxx-xxxxxx/resourceGroups/lrn-databricks-rg/providers/Microsoft.Databricks/accessConnectors/lrn-databricks-dbexc-euw-dgrf.
+3. Choose data and then select "create metastore".
+   ![Create Metastore 01]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-01.PNG)
+4. Name the metastore lrn-databricks-uc-euw-dgrf, remembering to change the last four characters to something unique to you.
+5. Select the same region you created your other resources, in my case it was West Europe again.
+6. Set the ADLS Gen 2 Path to be your storage account path which should be something like this: abfss://default@lrncatalogsaeuwdgrf.dfs.core.windows.net/
+7. Set the access connector id to be the external connector resource id you created which will be something like this: /subscriptions/xxxxxx-xxxxxx-xxxxxx-xxxxxx-xxxxxx/resourceGroups/lrn-databricks-rg/providers/Microsoft.Databricks/accessConnectors/lrn-databricks-dbexc-euw-dgrf.
 
-    ![Create Metastore 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-02.PNG)
+   ![Create Metastore 02]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/create-metastore-02.PNG)
 
-1. Assign the metastore to your new workspace.
-![Assign Workspace]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/assign-workspace.PNG)
+8. Assign the metastore to your new workspace.
+   ![Assign Workspace]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/assign-workspace.PNG)
 
 ### Create External Location
 
@@ -612,11 +612,10 @@ UNION ALL
 SELECT 'Scaredy Cats' AS Pub, CAST(ARRAY(5, 6, 5) AS ARRAY<TINYINT>) AS DrinkStrengths
 )
 
-SELECT 
+SELECT
 Pub,explode(DrinkStrengths) AS DrinkStrengths
  FROM CTE
 ```
-
 
 ![Explode Arrays]({{ site.baseurl }}/assets/2023-08-23-pass-databricks-analyst/arrays-explode.PNG)
 
@@ -629,7 +628,7 @@ UNION ALL
 SELECT 'Scaredy Cats' AS Pub, CAST(ARRAY(5, 6, 5) AS ARRAY<TINYINT>) AS DrinkStrengths
 )
 
-SELECT 
+SELECT
 Pub,DrinkStrengths,transform(DrinkStrengths, value -> value + 1 ) AS FeelsLikeDrinkStrength
  FROM CTE
 ```
@@ -704,7 +703,7 @@ WITH CTE_dt AS (
     SELECT current_date() - INTERVAL 6 DAYS AS Dt
 )
 , CTE_base AS (
-SELECT 
+SELECT
 dt, place, drink, quantity + floor(rand()*2) + -2 AS quantity
 FROM learning.hungovercoders.night_out
 CROSS JOIN CTE_dt
@@ -777,7 +776,7 @@ WITH CTE_dt AS (
     SELECT current_date() - INTERVAL 6 DAYS AS Dt
 )
 , CTE_base AS (
-SELECT 
+SELECT
 dt, place, drink, quantity + floor(rand()*2) + -2 AS quantity
 FROM learning.hungovercoders.night_out
 CROSS JOIN CTE_dt

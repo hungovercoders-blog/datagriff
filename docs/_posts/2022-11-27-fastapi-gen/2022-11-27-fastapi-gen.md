@@ -152,12 +152,7 @@ Run this generate.py file in your IDE and you should generate a local Beer.json 
     "Flavour": {
       "title": "Flavour",
       "description": "This is a flavour of a beer\n\n    Args:\n        str (_type_): This takes in a string for the flavour description\n        Enum (_type_): This inherits from Enum data type for the flavour enum\n    ",
-      "enum": [
-        "Hoppy",
-        "Chocolate",
-        "Caramel",
-        "Orange"
-      ],
+      "enum": ["Hoppy", "Chocolate", "Caramel", "Orange"],
       "type": "string"
     },
     "Beer": {
@@ -187,29 +182,20 @@ Run this generate.py file in your IDE and you should generate a local Beer.json 
         },
         "flavours": {
           "description": "These are the lists of flavours in the beer",
-          "example": [
-            "Caramel"
-          ],
+          "example": ["Caramel"],
           "type": "array",
           "items": {
             "$ref": "#/definitions/Flavour"
           }
         }
       },
-      "required": [
-        "name",
-        "brewer",
-        "strength"
-      ],
+      "required": ["name", "brewer", "strength"],
       "examples": [
         {
           "name": "Elvis Juice",
           "brewer": "Brewdog",
           "strength": 5.1,
-          "flavours": [
-            "Orange",
-            "Hoppy"
-          ]
+          "flavours": ["Orange", "Hoppy"]
         }
       ]
     }
@@ -272,7 +258,7 @@ The output should be something like...
 ```json
 {"name": "dolor nobis elit. officiis sit esse amet", "brewer": "magnam,", "strength": 2.0, "flavours": []}
 {"name": "molestias, Hic", "brewer": "modi Hic elit. reiciendis esse nobis", "strength": 12.0}
-{"name": "modi", "brewer": "accusantium quas Lorem culpa! odit exercitationem", "strength": 2.0, "flavours": ["Caramel"]}    
+{"name": "modi", "brewer": "accusantium quas Lorem culpa! odit exercitationem", "strength": 2.0, "flavours": ["Caramel"]}
 {"name": "architecto sit elit. placeat modi quas reiciendis", "brewer": "repellendus consectetur magnam, possimus ipsum", "strength": 18.0, "flavours": ["Orange", "Caramel", "Orange", "Caramel", "Caramel"]}
 {"name": "elit. sit modi reprehenderit illum elit. illum", "brewer": "placeat culpa! nobis esse possimus elit. ipsum", "strength": 14.0, "flavours": ["Chocolate", "Hoppy", "Orange"]}
 ```

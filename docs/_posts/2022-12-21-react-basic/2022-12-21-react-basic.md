@@ -57,8 +57,8 @@ We are going to use some boiler plate command line tools to create our file stru
 beer-demo
 │   README.md
 |   .gitignore
-|   package-lock.json  
-|   package.json  
+|   package-lock.json
+|   package.json
 │
 └───data
 │   │   db.json
@@ -97,7 +97,7 @@ The gitignore will already have the node_modules removed from source control. Th
 
 ```bash
  npm install
- ```
+```
 
 It will then pick up all the packages required to install from **Packages.json** in the app directory.
 
@@ -124,21 +124,21 @@ The public folder contains the **index.html** file that is the main page of your
 The div referencing the root id is what then calls our react javascript files in the src folder that contains all of our application logic. To simply rename the tab of the webpage, change the title to be "Beer Demo" instead of "React App".
 
 ```html
-  <title>Beer Demo</title>
+<title>Beer Demo</title>
 ```
 
 You should then see the tab renamed:
 
 ![Beer Tab Demo]({{ site.baseurl }}/assets/2022-12-21-react-basic/beer-demo-tab.png)
 
-This gives you an idea of the changes you can make to this file to update images etc also contained in this directory. The robots.txt file is dictating what search engine crawlers can access your site.  This outside the scope of this blog buy you can find an example [here](https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt).
+This gives you an idea of the changes you can make to this file to update images etc also contained in this directory. The robots.txt file is dictating what search engine crawlers can access your site. This outside the scope of this blog buy you can find an example [here](https://developers.google.com/search/docs/crawling-indexing/robots/create-robots-txt).
 
 ### Src Folder
 
 The src folder contains all the react and javascript application logic. The main ones we are interested in are:
 
 - **index.css** - This contains the main styling for the app. We can have individual css files for each app component but to make this easier we'll just use this file.
-- **index.js** - This contains the div root entry point for the public/index.html and immediately references app.js using ```<App />```.
+- **index.js** - This contains the div root entry point for the public/index.html and immediately references app.js using `<App />`.
 - **App.js** - This contains the main routes to each component of the app. We'll be adding more of these to our beer form below.
 
 ## Example Beer Data
@@ -194,17 +194,18 @@ If you navigate to [localhost:8000/beers](http://localhost:8000/beers) you shoul
 We're going to add the simplest page to our application first which will cater for all the placeholder pages and functionality that won't exist yet - the NotFound.js. In your src folder add the file NotFound.js and add the following code:
 
 ```jsx
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
-    return ( <div className="not-found">
-        <h2>You seem to be lost or drunk...</h2>
-        <p>That page cannot be found</p>
-        <Link to="/">Go to the homepage...
-        </Link>
-    </div> );
-}
- 
+  return (
+    <div className="not-found">
+      <h2>You seem to be lost or drunk...</h2>
+      <p>That page cannot be found</p>
+      <Link to="/">Go to the homepage...</Link>
+    </div>
+  );
+};
+
 export default NotFound;
 ```
 
@@ -213,17 +214,16 @@ This creates a NotFound function with a className of "not-found", with the latte
 Update the app.js file to look like the following, which will send every page to the Not Found page, including the home page as it doesn't exist yet!
 
 ```jsx
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import NotFound from './NotFound';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NotFound from "./NotFound";
 
 function App() {
-
   return (
     <Router>
       <div className="App">
         <div className="content">
           <Routes>
-            <Route path='*' element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
@@ -234,7 +234,7 @@ function App() {
 export default App;
 ```
 
-You can see we are using Routes to route parts fo the application specific components, in this one we are sending all paths to the NotFound page. The order of these ```<Route>``` tags is important with the order setting precedence, which is why it is important that the NotFound should appear at the bottom. You should see no matter what [path](http://localhost:3000/drunk) you go to in the app, you always get the below:
+You can see we are using Routes to route parts fo the application specific components, in this one we are sending all paths to the NotFound page. The order of these `<Route>` tags is important with the order setting precedence, which is why it is important that the NotFound should appear at the bottom. You should see no matter what [path](http://localhost:3000/drunk) you go to in the app, you always get the below:
 
 ![Not Found]({{ site.baseurl }}/assets/2022-12-21-react-basic/not-found.png)
 
@@ -247,20 +247,20 @@ We're now going to add a navigation bar component that will take us home or allo
 Add a new file called NavBar.js to the src directory and add the following code:
 
 ```jsx
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-    return ( 
-        <nav className="navbar">
-            <h1>Beers</h1>
-            <div className="links">
-                <Link to="/">Home</Link>
-                <Link to="/create" >New Beer</Link>
-            </div>
-        </nav>
-     );
-}
- 
+  return (
+    <nav className="navbar">
+      <h1>Beers</h1>
+      <div className="links">
+        <Link to="/">Home</Link>
+        <Link to="/create">New Beer</Link>
+      </div>
+    </nav>
+  );
+};
+
 export default Navbar;
 ```
 
@@ -269,19 +269,18 @@ This again adds a new component with class for styling called "navbar". It then 
 Then update the app.js to look like this to include the navbar:
 
 ```jsx
-import Navbar from './Navbar'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import NotFound from './NotFound';
+import Navbar from "./Navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NotFound from "./NotFound";
 
 function App() {
-
   return (
     <Router>
       <div className="App">
-         <Navbar />
+        <Navbar />
         <div className="content">
           <Routes>
-            <Route path='*' element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
@@ -317,42 +316,42 @@ import { useEffect, useState } from "react";
 
 // This is a custom hook we made
 const useFetch = (url) => {
-    // state
-    const [data, setData] = useState(null);
-    const [isPending, setIsPending] = useState(true);
-    const [error, setError] = useState(null);
+  // state
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const abortCont = new AbortController();
+  useEffect(() => {
+    const abortCont = new AbortController();
 
-            fetch(url, { signal: abortCont.signal })
-                .then(res => {
-                    if (!res.ok) { // error coming back from server
-                        throw Error('Could not fetch the data for that resource.');
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    setIsPending(false);
-                    setData(data);
-                    setError(null);
-                })
-                .catch(err => {
-                    // auto catches network / connection error
-                    if (err.name === 'AbortError') {
-                        console.log('fetch aborted');
-                    }
-                    else {
-                        setIsPending(false);
-                        setError(err.message);
-                    }
-                })
+    fetch(url, { signal: abortCont.signal })
+      .then((res) => {
+        if (!res.ok) {
+          // error coming back from server
+          throw Error("Could not fetch the data for that resource.");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setIsPending(false);
+        setData(data);
+        setError(null);
+      })
+      .catch((err) => {
+        // auto catches network / connection error
+        if (err.name === "AbortError") {
+          console.log("fetch aborted");
+        } else {
+          setIsPending(false);
+          setError(err.message);
+        }
+      });
 
-        return () => abortCont.abort();
-    }, [url]);
+    return () => abortCont.abort();
+  }, [url]);
 
-    return { data, isPending, error }
-}
+  return { data, isPending, error };
+};
 
 export default useFetch;
 ```
@@ -369,8 +368,8 @@ import { Link } from "react-router-dom";
 const BeerList = ({ beers }) => {
   return (
     <div className="beer-list">
-      {beers.map(beer => (
-        <div className="beer-preview" key={beer.id} >
+      {beers.map((beer) => (
+        <div className="beer-preview" key={beer.id}>
           <Link to={`/beers/${beer.id}`}>
             <h2>{beer.name}</h2>
             <p>Brewed by {beer.brewer}</p>
@@ -379,7 +378,7 @@ const BeerList = ({ beers }) => {
       ))}
     </div>
   );
-}
+};
 
 export default BeerList;
 ```
@@ -393,17 +392,20 @@ import BeerList from "./BeerList";
 import useFetch from "./useFetch";
 
 const Home = () => {
+  const {
+    data: beers,
+    isPending,
+    error,
+  } = useFetch("http://localhost:8000/beers");
 
-    const {data: beers, isPending, error} = useFetch('http://localhost:8000/beers')
-
-    return (
-        <div className="home">
-            {error && <div>{error}</div>}
-            {isPending && <div>Pouring...</div>}
-            {beers && <BeerList beers={beers} />}
-        </div>
-    );
-}
+  return (
+    <div className="home">
+      {error && <div>{error}</div>}
+      {isPending && <div>Pouring...</div>}
+      {beers && <BeerList beers={beers} />}
+    </div>
+  );
+};
 
 export default Home;
 ```
@@ -413,21 +415,20 @@ This utilises the BeerList and UseFetch components created in the previous secti
 To enable this functionality update the app.js file to the following:
 
 ```jsx
-import Navbar from './Navbar'
-import Home from './Home'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import NotFound from './NotFound';
+import Navbar from "./Navbar";
+import Home from "./Home";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NotFound from "./NotFound";
 
 function App() {
-
   return (
     <Router>
       <div className="App">
-         <Navbar />
+        <Navbar />
         <div className="content">
           <Routes>
-             <Route path='/' element={<Home />} />
-            <Route path='*' element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
@@ -448,95 +449,90 @@ Now for our favourite, creating a beer (well maybe drinking it is better, but we
 
 ```jsx
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-    //state
-    const [name, setName] = useState('');
-    const [brewer, setBrewer] = useState('');
-    const [strength, setStrength] = useState('');
-    const [flavours, setFlavours] = useState('');
-    const [isPending, setIsPending] = useState(false);
-    const navigate = useNavigate();
+  //state
+  const [name, setName] = useState("");
+  const [brewer, setBrewer] = useState("");
+  const [strength, setStrength] = useState("");
+  const [flavours, setFlavours] = useState("");
+  const [isPending, setIsPending] = useState(false);
+  const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); //stops page refresh
-        const beer = {name, brewer, strength, flavours};
-        setIsPending(true);
-        
-        fetch('http://localhost:8000/beers', {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(beer)
-        }).then(() => {
-            console.log(JSON.stringify(beer));
-            setIsPending(false);
-            navigate('/');
-        })
+  const handleSubmit = (e) => {
+    e.preventDefault(); //stops page refresh
+    const beer = { name, brewer, strength, flavours };
+    setIsPending(true);
 
-    }
+    fetch("http://localhost:8000/beers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(beer),
+    }).then(() => {
+      console.log(JSON.stringify(beer));
+      setIsPending(false);
+      navigate("/");
+    });
+  };
 
-    return ( 
-        <div className="create">
-            <h2>Add a New Beer</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Beer Name</label>
-                <input
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                />
-                 <label>Brewer</label>
-                <textarea
-                required
-                value={brewer}
-                onChange={(e) => setBrewer(e.target.value)}
-                ></textarea>
-                <label>Strength</label>
-                <input
-                type="text"
-                required
-                value={strength}
-                onChange={(e) => setStrength(e.target.value)}
-                />
-                <select
-                value={flavours}
-                onChange={(e) => setFlavours(e.target.value)}
-                >
-                    <option value="hoppy">hoppy</option>
-                    <option value="caramel">caramel</option>
-                </select> 
-                { !isPending && <button>Add Beer</button> }
-                { isPending && <button disabled>Adding Beer...</button> }
-            </form>
-        </div>
-     );
-}
- 
+  return (
+    <div className="create">
+      <h2>Add a New Beer</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Beer Name</label>
+        <input
+          type="text"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label>Brewer</label>
+        <textarea
+          required
+          value={brewer}
+          onChange={(e) => setBrewer(e.target.value)}
+        ></textarea>
+        <label>Strength</label>
+        <input
+          type="text"
+          required
+          value={strength}
+          onChange={(e) => setStrength(e.target.value)}
+        />
+        <select value={flavours} onChange={(e) => setFlavours(e.target.value)}>
+          <option value="hoppy">hoppy</option>
+          <option value="caramel">caramel</option>
+        </select>
+        {!isPending && <button>Add Beer</button>}
+        {isPending && <button disabled>Adding Beer...</button>}
+      </form>
+    </div>
+  );
+};
+
 export default Create;
 ```
 
 Then update the app.js file to the following to include the create functionality which can be reached easily via the navbar:
 
 ```jsx
-import Navbar from './Navbar'
-import Home from './Home'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Create from './Create';
-import NotFound from './NotFound';
+import Navbar from "./Navbar";
+import Home from "./Home";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Create from "./Create";
+import NotFound from "./NotFound";
 
 function App() {
-
   return (
     <Router>
       <div className="App">
-         <Navbar />
+        <Navbar />
         <div className="content">
           <Routes>
-             <Route path='/' element={<Home />} />
-              <Route path='/create' element={<Create />} />
-            <Route path='*' element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
@@ -564,34 +560,38 @@ import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 
 const BeerDetails = () => {
-    const { id } = useParams();
-    const { data: beer, error, isPending } = useFetch('http://localhost:8000/beers/' + id);
-    const navigate = useNavigate();
+  const { id } = useParams();
+  const {
+    data: beer,
+    error,
+    isPending,
+  } = useFetch("http://localhost:8000/beers/" + id);
+  const navigate = useNavigate();
 
-    const handleClick = () => {
-        fetch('http://localhost:8000/beers/' + beer.id, {
-            method: 'DELETE'
-        }).then(() => {
-            navigate('/');
-        })
-    }
+  const handleClick = () => {
+    fetch("http://localhost:8000/beers/" + beer.id, {
+      method: "DELETE",
+    }).then(() => {
+      navigate("/");
+    });
+  };
 
-    return (
-        <div className="beer-details">
-            {isPending && <div>Pouring...</div>}
-            {error && <div>{error}</div>}
-            {beer && (
-                <article>
-                    <h2>{beer.name}</h2>
-                    <p>Brewed by {beer.brewer}</p>
-                    <div>Strength: {beer.strength} %</div>
-                    <div>Flavours: {beer.flavours}</div>
-                    <button onClick={handleClick}>Delete Beer</button>
-                </article>
-            )}
-        </div>
-    );
-}
+  return (
+    <div className="beer-details">
+      {isPending && <div>Pouring...</div>}
+      {error && <div>{error}</div>}
+      {beer && (
+        <article>
+          <h2>{beer.name}</h2>
+          <p>Brewed by {beer.brewer}</p>
+          <div>Strength: {beer.strength} %</div>
+          <div>Flavours: {beer.flavours}</div>
+          <button onClick={handleClick}>Delete Beer</button>
+        </article>
+      )}
+    </div>
+  );
+};
 
 export default BeerDetails;
 ```
@@ -599,7 +599,7 @@ export default BeerDetails;
 This code imports the UseFetch component then creates a BeerDetail function. The function:
 
 - Sets constants handling the beer id.
-- Sets the beer data, pending and error using UseFetch. The specific beer data is handled by passing the beers API url as a constant plus the current beer id into the function. 
+- Sets the beer data, pending and error using UseFetch. The specific beer data is handled by passing the beers API url as a constant plus the current beer id into the function.
 - Sets a navigate constant which allows us to navigate to different paths.
 - It provides the ability to delete a beer from the beer details which then routes back to the homepage using navigate.
 - It returns a div which parses the beer detailed properties into something legible, along with a button that references the delete functionality in the handleClick function.
@@ -607,25 +607,24 @@ This code imports the UseFetch component then creates a BeerDetail function. The
 To add this functionality to your application, update your app.js file to look like the following:
 
 ```jsx
-import Navbar from './Navbar'
-import Home from './Home'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Create from './Create';
-import BeerDetails from './BeerDetails';
-import NotFound from './NotFound';
+import Navbar from "./Navbar";
+import Home from "./Home";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Create from "./Create";
+import BeerDetails from "./BeerDetails";
+import NotFound from "./NotFound";
 
 function App() {
-
   return (
     <Router>
       <div className="App">
-         <Navbar />
+        <Navbar />
         <div className="content">
           <Routes>
-             <Route path='/' element={<Home />} />
-              <Route path='/create' element={<Create />} />
-              <Route path='/beers/:id' element={<BeerDetails />} />
-            <Route path='*' element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/beers/:id" element={<BeerDetails />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>

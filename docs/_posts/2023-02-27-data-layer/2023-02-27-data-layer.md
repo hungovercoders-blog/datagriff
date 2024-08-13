@@ -12,7 +12,6 @@ tags: google-tag-manager javascript
 
 I wanted to make some local breweries available to the browser client side so I can then use this in tagging exploits. Below talks through how I can make these alcoholic hotpots available in the data layer!
 
-
 - [PreRequisities](#prerequisities)
 - [What is the Data Layer?](#what-is-the-data-layer)
 - [Setup a Basic Web Page with DataLayer](#setup-a-basic-web-page-with-datalayer)
@@ -36,14 +35,22 @@ Its quite straight forward to setup a basic data layer. You first initiate an em
 
 ```html
 <head>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-    </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
 </head>
 <body>
-    <h1>Breweries</h1>
-    <button onclick="window.dataLayer.push({'event': 'Click','brewery': 'Tiny Rebel'});">Tiny Rebel</button>
-    <button onclick="window.dataLayer.push({'event': 'Click','brewery': 'Crafty Devil'});">Crafty Devil</button>
+  <h1>Breweries</h1>
+  <button
+    onclick="window.dataLayer.push({'event': 'Click','brewery': 'Tiny Rebel'});"
+  >
+    Tiny Rebel
+  </button>
+  <button
+    onclick="window.dataLayer.push({'event': 'Click','brewery': 'Crafty Devil'});"
+  >
+    Crafty Devil
+  </button>
 </body>
 ```
 
@@ -67,25 +74,32 @@ If you click the other button and repeat the process you should then see the new
 
 ## Create a GTM Data Layer Variable
 
-Go to your [GTM account](https://tagmanager.google.com/) and the relevant  container. First you'll need to add the GTM container code to your HTML page. You can get this from Admin > Instal Google Tag Manager. When you add the code to your HTML make sure to put the head script below the dataLayer script.
+Go to your [GTM account](https://tagmanager.google.com/) and the relevant container. First you'll need to add the GTM container code to your HTML page. You can get this from Admin > Instal Google Tag Manager. When you add the code to your HTML make sure to put the head script below the dataLayer script.
 
 ```html
-
 <head>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-    </script>
-    <!-- Google Tag Manager -->
-    ...
-    <!-- End Google Tag Manager -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+  <!-- Google Tag Manager -->
+  ...
+  <!-- End Google Tag Manager -->
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    ...
-    <!-- End Google Tag Manager (noscript) -->
-    <h1>Breweries</h1>
-    <button onclick="window.dataLayer.push({'event': 'click','brewery': 'Tiny Rebel'});">Tiny Rebel</button>
-    <button onclick="window.dataLayer.push({'event': 'click','brewery': 'Crafty Devil'});">Crafty Devil</button>
+  <!-- Google Tag Manager (noscript) -->
+  ...
+  <!-- End Google Tag Manager (noscript) -->
+  <h1>Breweries</h1>
+  <button
+    onclick="window.dataLayer.push({'event': 'click','brewery': 'Tiny Rebel'});"
+  >
+    Tiny Rebel
+  </button>
+  <button
+    onclick="window.dataLayer.push({'event': 'click','brewery': 'Crafty Devil'});"
+  >
+    Crafty Devil
+  </button>
 </body>
 ```
 
@@ -111,7 +125,7 @@ When asked for the URL use the one that is running on your local server e.g. htt
 
 ![GTM Debug]({{ site.baseurl }}/assets/2023-02-27-data-layer/debug.png)
 
-If you look at tag assistant under variables you will see that _event is gtm.load and the brewery is "not set" as per the default we gave it.
+If you look at tag assistant under variables you will see that \_event is gtm.load and the brewery is "not set" as per the default we gave it.
 
 ![GTM Debug Page Load]({{ site.baseurl }}/assets/2023-02-27-data-layer/pageloadvar.png)
 

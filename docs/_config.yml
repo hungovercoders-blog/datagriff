@@ -23,13 +23,13 @@ author: dataGriff
 ##email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   This is a technical blog by Richard Griffiths otherwise known as dataGriff!
-domain: blog.hungovercoders.com       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+domain: blog.hungovercoders.com # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
 url: https://blog.hungovercoders.com # the base hostname and protocol for your site, e.g. http://example.com
-baseurl: /datagriff      # place folder name if the site is served in a subfolder
+baseurl: /datagriff # place folder name if the site is served in a subfolder
 twitter_username: datagriff
-github_username:  datagriff
-linkedin_username:  datagriff
-youtube_username:  '@datagriff182'
+github_username: datagriff
+linkedin_username: datagriff
+youtube_username: "@datagriff182"
 image:
   path: /assets/site/datagriff.png
 

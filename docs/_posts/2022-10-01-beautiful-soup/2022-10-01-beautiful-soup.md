@@ -32,7 +32,7 @@ In your favourite IDE setup a folder structure like the following.
 beerapi
 │   README.md
 │   requirements.txt
-|   .gitignore    
+|   .gitignore
 │
 └───app
 │   │   app.py
@@ -81,24 +81,22 @@ Lets start guzzling beer!
 In the test/pages/html01.html, add the following html code to create a very basic webpage.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<body>
-
-<div class="beers">
-    <div class="beer">
+  <body>
+    <div class="beers">
+      <div class="beer">
         <p id="name">Mike Rayer</p>
         <p id="brewer">Crafty Devil</p>
         <p id="strength">4.2%</p>
-    </div>
-    <div class="beer">
+      </div>
+      <div class="beer">
         <p id="name">Elvis Juice</p>
         <p id="brewer">Brew Dog</p>
         <p id="strength">5.2%</p>
+      </div>
     </div>
-</div>
-
-</body>
+  </body>
 </html>
 ```
 
@@ -136,15 +134,19 @@ app\app.py
 You should end up with something that looks like this, which is an array of the beer div elements.
 
 ```html
-[<div class="beer">
-<p id="name">Mike Rayer</p>
-<p id="brewer">Crafty Devil</p>
-<p id="strength">4.2%</p>
-</div>, <div class="beer">
-<p id="name">Elvis Juice</p>
-<p id="brewer">Brew Dog</p>
-<p id="strength">5.2%</p>
-</div>]
+[
+<div class="beer">
+  <p id="name">Mike Rayer</p>
+  <p id="brewer">Crafty Devil</p>
+  <p id="strength">4.2%</p>
+</div>
+,
+<div class="beer">
+  <p id="name">Elvis Juice</p>
+  <p id="brewer">Brew Dog</p>
+  <p id="strength">5.2%</p>
+</div>
+]
 ```
 
 Now replace your beer function with the following in the app.py file:
@@ -170,8 +172,8 @@ def guzzle_beer():
     print(beer_list)
 ```
 
-This creates a beer_list that we want to create a in a format that is more easy for us to use, such as a JSON object. 
-Anyway the beers that we found in the original beautiful soup parsing are looped through and we find the name, brewer and strength in the HTML document. This is found in the beer object in each iteration through beers, then using the find and get_text methods from beautiful soup to find each property. Finally we construct a JSON beer object that we add to our beer_list array and then print it. 
+This creates a beer_list that we want to create a in a format that is more easy for us to use, such as a JSON object.
+Anyway the beers that we found in the original beautiful soup parsing are looped through and we find the name, brewer and strength in the HTML document. This is found in the beer object in each iteration through beers, then using the find and get_text methods from beautiful soup to find each property. Finally we construct a JSON beer object that we add to our beer_list array and then print it.
 
 Run the new version of the function by calling your application in the python environment.
 
@@ -182,18 +184,17 @@ app\app.py
 You should end up with something that looks like this, which is an JSON of the tasty beers we have parsed. Hmm... this feels like we could POST it to an API or something, one to look at when I feel more sober...
 
 ```json
-[   
-    {
-    "name": "Mike Rayer", 
-    "brewer": "Crafty Devil", 
+[
+  {
+    "name": "Mike Rayer",
+    "brewer": "Crafty Devil",
     "strength": "4.2%"
-    }
-, 
-    {
+  },
+  {
     "name": "Elvis Juice",
-     "brewer": "Brew Dog",
-      "strength": "5.2%"
-    }
+    "brewer": "Brew Dog",
+    "strength": "5.2%"
+  }
 ]
 ```
 
@@ -297,7 +298,7 @@ def guzzle_beer(url:str,beers_class: str, beer_class: str, beer_config: dict):
     return beer_list
 ```
 
-For each beer now in the beers div that we find, it loops over each key in the beer config and pulls our the properties it requires to seek them out, appending them to a dictionary for each beer we find. For each name, brewer and strength for each beer, it gets the dom object, dom identifier and the value that identifies it. These all then get passed  into the original beautiful soup command we had to find and get the actual text for these. This just makes it far more dynamic now from some configuration data! It adds the value found until the full dictionary is constructed of name, brewer and strength. These full constructed beer dictionaries are then added to the beer_list just like before and are equivalent to the JSON objects we already had. Awesome sauce. Such power.
+For each beer now in the beers div that we find, it loops over each key in the beer config and pulls our the properties it requires to seek them out, appending them to a dictionary for each beer we find. For each name, brewer and strength for each beer, it gets the dom object, dom identifier and the value that identifies it. These all then get passed into the original beautiful soup command we had to find and get the actual text for these. This just makes it far more dynamic now from some configuration data! It adds the value found until the full dictionary is constructed of name, brewer and strength. These full constructed beer dictionaries are then added to the beer_list just like before and are equivalent to the JSON objects we already had. Awesome sauce. Such power.
 
 Before calling the application we now need to adjust the running of the main method to pass in the new configuration. Update the main section of your app.py to look like the below.
 
@@ -312,9 +313,9 @@ if __name__ == '__main__':
     , beer_config=beer_config)
 
     print(beer_list)
-  ```
+```
 
-  Running the application again you should end up with the same beer list as before, but now from a far more configurable baseline.
+Running the application again you should end up with the same beer list as before, but now from a far more configurable baseline.
 
 ```bash
 app\app.py

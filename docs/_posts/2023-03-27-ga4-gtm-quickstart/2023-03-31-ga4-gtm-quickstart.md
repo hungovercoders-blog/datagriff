@@ -35,7 +35,7 @@ You're going to need a [google account](https://myaccount.google.com/) so that y
 
 ## Why use Google Analytics 4 and GTM?
 
-[Google analytics 4](https://developers.google.com/analytics/devguides/collection/ga4) is a great tool to monitor your website with very minimal effort. It offers a huge amount of built in analytics out of the box, it integrates well into google tag manager and allows you to synch a million rows of event data to [big query](https://cloud.google.com/bigquery) absolutely free - daily! I also have a preference to use [google tag manager](https://tagmanager.google.com/) to manage all GA integration over the site tag as once in place it allows complete management of analytics from GTM without the need for website deploys. 
+[Google analytics 4](https://developers.google.com/analytics/devguides/collection/ga4) is a great tool to monitor your website with very minimal effort. It offers a huge amount of built in analytics out of the box, it integrates well into google tag manager and allows you to synch a million rows of event data to [big query](https://cloud.google.com/bigquery) absolutely free - daily! I also have a preference to use [google tag manager](https://tagmanager.google.com/) to manage all GA integration over the site tag as once in place it allows complete management of analytics from GTM without the need for website deploys.
 
 The following setup will look something like the below.
 
@@ -109,7 +109,7 @@ In Variables, create a new constant User-Defined Variable called "GA Measurement
 
 ### GA4 Configuration Tag
 
- Then go to tags > New.
+Then go to tags > New.
 
 ![GTM New Tag]({{ site.baseurl }}/assets/2023-03-31-ga4-gtm-quickstart/gtm-new-tag.png)
 

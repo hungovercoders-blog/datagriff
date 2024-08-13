@@ -2,7 +2,7 @@
 title: "Terraform Azure Data Learning Platform"
 date: 2023-04-30
 author: dataGriff
-description: This is how to deploy azure platform resources with terraform. The resource deployed include azure data lake storage, databricks and event hub namespaces. The  automated deployment utilises github actions and terraform cloud. 
+description: This is how to deploy azure platform resources with terraform. The resource deployed include azure data lake storage, databricks and event hub namespaces. The  automated deployment utilises github actions and terraform cloud.
 image:
   path: /assets/2023-04-30-terraform-azure-data/link.png
 tags: terraform azure
@@ -20,9 +20,9 @@ I am quite often creating various data assets like data lake storage, databricks
 ## Pre-Requisites
 
 - You'll need an [azure subscription](portal.azure.com) to host your data infrastructure and be an owner at the subscription level.
-- You'll need an IDE like  [visual studio code](https://code.visualstudio.com/).
+- You'll need an IDE like [visual studio code](https://code.visualstudio.com/).
 - You'll need to install [terraform](https://developer.hashicorp.com/terraform/downloads).
-- You'll need a [github account](https://github.com/) for source control and deployment with github actions. 
+- You'll need a [github account](https://github.com/) for source control and deployment with github actions.
 - You'll want a [hashicorp developer account](https://developer.hashicorp.com/) and [terraform cloud account](https://app.terraform.io/) to host your state files.
 - Ideally you'll want a local environment variable for your AZURE_SUBSCRIPTION_ID. Otherwise wherever you see the bash command %AZURE_SUBSCRIPTION_ID% just replace it with your actual azure subscription id.
 
@@ -42,7 +42,7 @@ First lets create the simplest possible deployment possible using local state. C
 ```file
 azure.platform.data
 │   README.md
-|   .gitignore    
+|   .gitignore
 |   main.tf
 |   outputs.tf
 |   variables.tf
@@ -234,17 +234,17 @@ In terraform cloud create a variable set called "Azure Learning Credentials" and
 
 Then add environment variables to the terraform cloud variable set that came out of the azure CLI command above. Make sure you set them as environment variables and the ARM_CLIENT_SECRET is set to sensitive.
 
-| CLI Command Output Name | Terraform Cloud Variable Name  |
-|---|---|
-|  appId |  ARM_CLIENT_ID |
-|  password |  ARM_CLIENT_SECRET |
-|  tenant |  ARM_TENANT_ID |
+| CLI Command Output Name | Terraform Cloud Variable Name |
+| ----------------------- | ----------------------------- |
+| appId                   | ARM_CLIENT_ID                 |
+| password                | ARM_CLIENT_SECRET             |
+| tenant                  | ARM_TENANT_ID                 |
 
 You will also need to add ARM_SUBSCRIPTION_ID as a variable and add your Azure subscription id to this. Save your variable set once completed.
 
-| Terraform Cloud Variable Name  |
-|---|
-|  ARM_SUBSCRIPTION_ID |
+| Terraform Cloud Variable Name |
+| ----------------------------- |
+| ARM_SUBSCRIPTION_ID           |
 
 Your variable keys and their values should look something like the below. Make sure the category is **env**.
 
@@ -314,12 +314,13 @@ In your github repository go to actions and choose a Terraform workflow.
 
 You can remove all the comments at the top as they are pretty much everything we have just gone through. The two things to change will be to add a workflow dispatch as an "on" trigger and also remove the quotes from "main" in the apply conditional branch. You can also remove all comments if you wish. Your file should now look something like the following, commit this to your remote repository.
 {% raw %}
+
 ```yaml
-name: 'Terraform'
+name: "Terraform"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
   workflow_dispatch:
 
@@ -328,7 +329,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: "Terraform"
     runs-on: ubuntu-latest
     environment: production
 
@@ -337,27 +338,28 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-    - name: Terraform Init
-      run: terraform init
+      - name: Terraform Init
+        run: terraform init
 
-    - name: Terraform Format
-      run: terraform fmt -check
+      - name: Terraform Format
+        run: terraform fmt -check
 
-    - name: Terraform Plan
-      run: terraform plan -input=false
+      - name: Terraform Plan
+        run: terraform plan -input=false
 
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
 ```
+
 {% endraw %}
 You should be able to do a manual run of this workflow because we added the workflow_dispatch trigger. Run your workflow and make sure it all goes green!
 
@@ -482,7 +484,7 @@ resource "azurerm_eventhub_namespace" "ehns" {
 }
 ```
 
-Check in your source code and the github actions should kick off automatically. At the end of this you should then find your resource group now has some basic azure data platform assets for you to use whenever you need to do some learning! 
+Check in your source code and the github actions should kick off automatically. At the end of this you should then find your resource group now has some basic azure data platform assets for you to use whenever you need to do some learning!
 
 ![Azure Resource Group Final]({{ site.baseurl }}/assets/2023-04-30-terraform-azure-data/resourcegroup_final.png)
 

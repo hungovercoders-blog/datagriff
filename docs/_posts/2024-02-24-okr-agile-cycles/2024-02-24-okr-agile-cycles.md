@@ -8,7 +8,7 @@ image:
 tags: OKR Agile
 ---
 
-It's been nearly 2 years since I posted one of my [first blogs which was around OKRs (objectives and key results)](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="_blank"}. Since then I have been preaching their usage and loving the concept... but I have completely missed integrating their ideas into the day to day agile working practices, rendering them ineffective. Spurred on by co-workers, my will to ensure that prioritisation of value is easy during iteration ceremonies, and the awesome book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="_blank"}, below are my thoughts on how to integrate OKR cycles into the agile framework.
+It's been nearly 2 years since I posted one of my [first blogs which was around OKRs (objectives and key results)](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="\_blank"}. Since then I have been preaching their usage and loving the concept... but I have completely missed integrating their ideas into the day to day agile working practices, rendering them ineffective. Spurred on by co-workers, my will to ensure that prioritisation of value is easy during iteration ceremonies, and the awesome book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="\_blank"}, below are my thoughts on how to integrate OKR cycles into the agile framework.
 
 - [Quick OKR and Agile Recap](#quick-okr-and-agile-recap)
 - [Why Integrate OKRs with Agile](#why-integrate-okrs-with-agile)
@@ -34,14 +34,14 @@ It's been nearly 2 years since I posted one of my [first blogs which was around 
 
 ## Quick OKR and Agile Recap
 
-For OKRs I recommend reading my previous [blog post](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="_blank"} on the matter but just in case here is a quick refresher:
+For OKRs I recommend reading my previous [blog post](https://blog.hungovercoders.com/datagriff/2022/09/17/team-okr-hdd.html){:target="\_blank"} on the matter but just in case here is a quick refresher:
 
 - OKRs stand for Objectives & Key Results.
-- A team mission should help understand objectives for the lifecycle of the team and should be fairly static. 
-- Objectives based on this mission should be agreed strategically with more senior members of the organisation and addressed about every 90 days. 
+- A team mission should help understand objectives for the lifecycle of the team and should be fairly static.
+- Objectives based on this mission should be agreed strategically with more senior members of the organisation and addressed about every 90 days.
 - The key results then should be time-bound and an agreed method of how you will measure the success of your objectives. These objectives and key results should almost be unattainable, but realistic enough to be aspirational for the team as well as stretching them.
 
-For agile I recommend reading the [agile manifesto](https://agilemanifesto.org/){:target="_blank"} but with regards to this blog post I am referring to the ceremonies that are part of the agile framework. These ceremonies are:
+For agile I recommend reading the [agile manifesto](https://agilemanifesto.org/){:target="\_blank"} but with regards to this blog post I am referring to the ceremonies that are part of the agile framework. These ceremonies are:
 
 - Backlog refinement where the team reviews the backlog and ensures that the work is ready for the next iteration.
 - Sprint or iteration planning where the team decides what work they will do in the next iteration.
@@ -70,7 +70,7 @@ If you are going to do OKRs I recommend just using them for everything (except i
 - **Key Result 1**: 100% of Scottish distilleries are available for online hungovercoder visitors to read by the end of the quarter.
 - **Key Result 2**: 100% of Irish distilleries are available for online hungovercoder visitors to read by the end of the quarter.
 - **Key Result 3**: One hungovercoder visitor has clicked a distillery link by the end of the quarter.
-  
+
 **Objective 2**: Improve Dog Rescue Coverage
 
 - **Key Result 1**: 100% of Dogs Trust centres are available for online hungovercoder visitors to read by the end of the quarter.
@@ -95,7 +95,7 @@ What about work that we need to do that does not come as part of the more strate
 
 ### Objective Zero
 
-What about BAU or "keeping the lights on" type work? This is where you can create an "Objective Zero" as discussed in the book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="_blank"}. This describes treating your objective zero and its key results as a set of service level agreements (SLAs) that you need to maintain in order to keep the lights on. This way you can still have a set of OKRs that are strategic and aspirational and a set of OKRs that are more operational and tactical. It also highlights the tension between the two types of work and the need to balance them rather than "managing" BAU tickets separately to what you want to achieve strategically. It may even involve removing a strategic objective because of the realisation of this work.
+What about BAU or "keeping the lights on" type work? This is where you can create an "Objective Zero" as discussed in the book [Succeeding with OKRs in Agile](https://www.amazon.co.uk/Succeeding-OKRs-Agile-deliver-objectives-ebook/dp/B0CGXLGL74){:target="\_blank"}. This describes treating your objective zero and its key results as a set of service level agreements (SLAs) that you need to maintain in order to keep the lights on. This way you can still have a set of OKRs that are strategic and aspirational and a set of OKRs that are more operational and tactical. It also highlights the tension between the two types of work and the need to balance them rather than "managing" BAU tickets separately to what you want to achieve strategically. It may even involve removing a strategic objective because of the realisation of this work.
 
 **Objective Zero**: Ensure the team is able to maintain the current level of service
 
@@ -116,7 +116,7 @@ However a persons individual remuneration should not be associated with the team
 How then do you solve the problem of awarding people for their individual performance when so much of their day to day is wrapped up in the team OKRs? My approach would be to link self-development, team and community goals to the individuals performance. These three categories can be related to how they may impact OKRs but should not be directly linked to them. This way you can still reward people for their individual performance but not at the expense of the sharing of the team based goals that are the OKRs. Performance rewards here can not only be based on how they did against the tasks they set out for themselves, but also the tasks they chose and what foresight they held to know how they could help their own team or the wider communities. You could ask these questions to team members in order to spark ideas for their self-development, team and community goals:
 
 - **What skills do you want to develop?** (how can you help the team as an individual)
-  - I can learn automated testing (so that I can improve the quality and throughput of the team to meet their OKRs)  
+  - I can learn automated testing (so that I can improve the quality and throughput of the team to meet their OKRs)
 - **What can you do to support the team?** (how can you help multiple individuals in the team)
   - I can automate that manual scaling process we have to do (so that I can save my team members time and give them more time to focus on OKRs)
 - **What can you do to support the community?** (how can you help multiple teams)
@@ -145,7 +145,7 @@ Now an individual should not have their performance measured against the team ob
 **Football Player Objective:** Improve Assists at the Football Club
 
 - **Key Result 1**: Improve pass accuracy in simulation to 95% by end of the season (helping the team as an individual)
-- **Key Result 2**: Provide an average of 2 assists for goal scoring opportunities per game by end of the season (helping multiple individuals in the team)  
+- **Key Result 2**: Provide an average of 2 assists for goal scoring opportunities per game by end of the season (helping multiple individuals in the team)
 - **Key Result 3**: Provide one pass master class per month to the academy teams until the end of the season (helping multiple teams)
 
 Hopefully this further demonstrates how you can allow an individual to succeed in the context of team OKRs but without explicitly having the two depend on one another.
@@ -258,7 +258,7 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 - Action: The key results are added to the second backlog objective and final refinement takes place before confirming.
 - Action: The key results are added to the third backlog objective and final refinement takes place before confirming.
 - Lastly, confirm the OKRs as a collective.
-  
+
 **Top Tip:** It is important to get the nights sleep in between formulating your ideas and then coming back to them. This is because you will likely have a different perspective on them the next day and you will be able to see if they are still as important as you thought they were.
 
 ### OKR Impact Planning
@@ -289,7 +289,7 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 - Exercise: Team breakouts in 2-3 people with 15 minutes to write down work that could help deliver the third hypotheses.
 - Reveal: Every breakout relays their work.
 - Action: The team work items to deliver the third hypotheses are added as a collective to the backlog under the feature.
-  
+
 **BREAK OVERNIGHT**
 
 - Review the work items added to the backlog and ensure they are still relevant and in the correct order. If they are not then change them. If a hypothesis is no longer relevant then remove it. If a new hypothesis has been created then add it to the backlog and repeat the exercises above.
@@ -320,7 +320,7 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 - Review and understand what didn't go well.
 - Review and understand the ideas to improve future OKR cycles, creating work items and adjusting future ceremonies where necessary.
 - Celebrate the end of the OKR cycle and the start of the next.
-  
+
 **Top Tip:** Celebrate! You've just been working for an entire quarter, make sure you take the time to celebrate and socialise with the team and a job well done.
 
 ![Celebrate]({{ site.baseurl }}/assets/2024-02-24-okr-agile-cycles/celebrate.jpg)
@@ -348,7 +348,7 @@ The initial ideation process of OKRs could be quite an expansive place to find y
 
 **Goal:** Identify critical errors, alerts and vulnerabilities that may cause the team not to meet their objective zero.
 
-**Duration:** Maximum of 1 hour. If you can finish sooner then do so. If it is taking longer you likely need to revisit your objective zero or set an objective to improve the problems arising here. 
+**Duration:** Maximum of 1 hour. If you can finish sooner then do so. If it is taking longer you likely need to revisit your objective zero or set an objective to improve the problems arising here.
 
 **Frequency:** Weekly.
 

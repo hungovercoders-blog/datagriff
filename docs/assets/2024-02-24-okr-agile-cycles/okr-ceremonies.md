@@ -1,8 +1,7 @@
-
 @startmermaid
 gantt
 title Integrated OKR and Agile Sprint Schedule
-dateFormat  YYYY-MM-DD
+dateFormat YYYY-MM-DD
 excludes weekends
 
 section OKR Current Start

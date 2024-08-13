@@ -12,7 +12,7 @@ image:
 tags: google-tag-manager
 ---
 
-Ok beer and code lovers, I wanted to make sure that I captured consent for analytics for anyone coming to the hungovercoders website.  I'll be honest by the end of my consent rabbit hole I really fancied a can, but instead I'll share my knowledge here with you of how I leveraged [Google Tag Manager](https://tagmanager.google.com/) and [Klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) to manage consent for a website. The reason that this is such a great combination is that it is free, extremely customizable and you can manage your consent from a single point.
+Ok beer and code lovers, I wanted to make sure that I captured consent for analytics for anyone coming to the hungovercoders website. I'll be honest by the end of my consent rabbit hole I really fancied a can, but instead I'll share my knowledge here with you of how I leveraged [Google Tag Manager](https://tagmanager.google.com/) and [Klaro](https://heyklaro.com/docs/klaro?utm_source=hungovercoders) to manage consent for a website. The reason that this is such a great combination is that it is free, extremely customizable and you can manage your consent from a single point.
 
 - [Prerequisites](#prerequisites)
   - [Tools](#tools)
@@ -107,15 +107,15 @@ var klaroConfig = {
                 description:
                     'Here you can see and customize the information that we collect about you.', // Modal box text
             },
-            analytics: { 
+            analytics: {
                 description: 'Collecting of visitor statistics to understand site traffic and user behaviour without being utilised for marketing',
             },
            marketing: {
                 description: 'Marketing to users of the website based on the information collected',
             },
             purposes: {
-                analytics: 'Analytics', 
-                marketing: 'Marketing', 
+                analytics: 'Analytics',
+                marketing: 'Marketing',
             },
         },
     },
@@ -144,7 +144,7 @@ Add a trigger to your tag for "Consent Initialization - All Pages". Your "Consen
 
 ### Create First Party Cookie Variable
 
-Now create a first party cookie variable to capture the consent details captured in the cookie in the previous section. We can then leverage this as a cookie and parse it into other variables. To do this go to variables > create new > first party cookie. Set the variable name to be "consentCapture" and set the cookie name to be what you set in your claro config, in this case "consent", finally set it to be a URI-decode cookie with a tick box.  
+Now create a first party cookie variable to capture the consent details captured in the cookie in the previous section. We can then leverage this as a cookie and parse it into other variables. To do this go to variables > create new > first party cookie. Set the variable name to be "consentCapture" and set the cookie name to be what you set in your claro config, in this case "consent", finally set it to be a URI-decode cookie with a tick box.
 
 ![GTM First Party Cookie]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/cookie-variable.png)
 
@@ -173,7 +173,7 @@ function(){
     return 'granted'
   }
   else
-  { 
+  {
   return 'denied'
   }
 }
@@ -194,7 +194,7 @@ function(){
     return 'granted'
   }
   else
-  { 
+  {
   return 'denied'
   }
 }
@@ -245,9 +245,7 @@ Add a trigger to this tag so that it fires on "Consent Initialization - All Page
 In order to make sure the consent for marketing and analytics is working correctly I added two test tags for every page. First add a new tag called "Consent Test Analytics". Use custom HTML and add the script below which will log the tag firing to the console.
 
 ```javascript
-<script>
-  console.log("Consent Test Analytics Tag Fired")
-</script>
+<script>console.log("Consent Test Analytics Tag Fired")</script>
 ```
 
 Your tag should look like this.
@@ -261,9 +259,7 @@ Under advanced settings in the tag, for consent settings set the "Require additi
 Secondly add a new tag called "Consent Test Marketing". Use custom HTML and add the script below which will log the tag firing to the console.
 
 ```javascript
-<script>
-  console.log("Consent Test Marketing Tag Fired")
-</script>
+<script>console.log("Consent Test Marketing Tag Fired")</script>
 ```
 
 Your tag should look like this.
@@ -284,7 +280,7 @@ This is an optional step but you can collect all your consent related objects in
 
 ### Navigate Preview Website
 
-In the top right hand corner of your screen you should have 12 workspace changes (or 11 if you didn't do the folder categorisation in the last step). 
+In the top right hand corner of your screen you should have 12 workspace changes (or 11 if you didn't do the folder categorisation in the last step).
 
 ![GTM Preview Workspace Changes]({{ site.baseurl }}/assets/2023-03-11-cookie-consent/preview-workspace-changes.png)
 
@@ -304,9 +300,9 @@ Navigate to some other pages now of the website and you will not be asked for co
 
 ### Tag Assistant Logs
 
-If we now go into tag assistant and look through the different events you will see the triggers firing and the different states of the variables we have implemented. We can also see our test tags firing or not. There is a bit of chicken and egg going on with the consent capture as by default customers deny all on their first visit until they have completed the consent pop-up. This is why I set the  **mustConsent: true** configuration in the klaro configuration to ensure we get this as early as possible so the customer can consent appropriately.
+If we now go into tag assistant and look through the different events you will see the triggers firing and the different states of the variables we have implemented. We can also see our test tags firing or not. There is a bit of chicken and egg going on with the consent capture as by default customers deny all on their first visit until they have completed the consent pop-up. This is why I set the **mustConsent: true** configuration in the klaro configuration to ensure we get this as early as possible so the customer can consent appropriately.
 
-Let's have a walkthrough of the events to explain this... 
+Let's have a walkthrough of the events to explain this...
 
 So on the home page for consent initialisation both the consent mode and the consent capture tags fire.
 

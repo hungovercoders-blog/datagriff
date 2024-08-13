@@ -2,13 +2,13 @@
 title: "Local Install of Spark, Python and Pyspark on Windows"
 date: 2023-04-14
 author: dataGriff
-description: This is you can install python, spark and pyspark locally on a windows machine. 
+description: This is you can install python, spark and pyspark locally on a windows machine.
 image:
   path: /assets/2023-04-14-local-install-spark/link.png
 tags: spark python pyspark windows
 ---
 
-Want to install python, spark and pyspark for some local data pipeline testing? Look no further... Accompanying this blog there is also this [video on youtube](https://www.youtube.com/watch?v=QYTPpqPYaw0). Multimedia has hit the hungovercoders!!! 
+Want to install python, spark and pyspark for some local data pipeline testing? Look no further... Accompanying this blog there is also this [video on youtube](https://www.youtube.com/watch?v=QYTPpqPYaw0). Multimedia has hit the hungovercoders!!!
 
 - [Pre-Requisites](#pre-requisites)
 - [Python Install](#python-install)
@@ -38,7 +38,7 @@ Click install now to complete. Check then in your environment variables to confi
 
 ## Java Install
 
-Go to [java downloads](https://www.java.com/en/download/help/windows_manual_download.html) and  go to download and install.
+Go to [java downloads](https://www.java.com/en/download/help/windows_manual_download.html) and go to download and install.
 
 ![Java Download]({{ site.baseurl }}/assets/2023-04-14-local-install-spark/java_download.png)
 
@@ -111,7 +111,7 @@ You can also navigate to the local host spark UI here [http://localhost:4040/](h
 To install pyspark open up visual studio code. Open a terminal and run the following command to create a virtual environment and pip install pyspark. Ensure you use the correct python version that you installed originally in the command.
 
 ```bash
-py -3.11 -m venv venv 
+py -3.11 -m venv venv
 venv\scripts\activate
 pip install pyspark
 pyspark
@@ -128,9 +128,9 @@ df.show()
 
 The deactivate your environment.
 
-```
+````
 ```bash
 venv\scripts\deactivate
-```
+````
 
 You have now successfully setup a local environment whereby you can run python, spark and pyspark locally! Time for a drink...

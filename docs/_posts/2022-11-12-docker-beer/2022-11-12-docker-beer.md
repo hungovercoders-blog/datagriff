@@ -25,7 +25,8 @@ In the previous post we created a [Beer API using Fast API in python](https://ww
 - You'll need to install [docker](https://docs.docker.com/get-docker/). I highly recommend going through the docker tutorial once you have it installed, its very cool.
 - You'll need a [docker account](https://hub.docker.com/signup) which you can get for free.
 - You'll need an [azure account](https://azure.microsoft.com/en-gb/) which you can get for free.
-- 
+-
+
 ## Setup your Codebase
 
 In your favourite IDE setup a folder structure like the following.
@@ -35,7 +36,7 @@ beerapi
 │   README.md
 │   requirements.txt
 |   .gitignore
-|   Dockerfile    
+|   Dockerfile
 │
 └───app
 │   │   main.py
@@ -52,7 +53,7 @@ uvicorn
 
 ## Setup the FastAPI Code
 
-We're going to use exactly the same beer API shown in the previous blog for our new docker hosted API. It gives just enough functionality to test with and is full of beer! Copy and paste the following code into your main.py file. For this exercise, we're going to leave the __init__.py file empty.
+We're going to use exactly the same beer API shown in the previous blog for our new docker hosted API. It gives just enough functionality to test with and is full of beer! Copy and paste the following code into your main.py file. For this exercise, we're going to leave the **init**.py file empty.
 
 ```py
 from fastapi import FastAPI, status, Response, Body
@@ -184,7 +185,7 @@ async def create_beer(response: Response, beer: Beer= Body(
         string: Description of whether beer is added.
     """
     if beer not in beer_list:
-        beer_list.append(beer) 
+        beer_list.append(beer)
         content = f'Beer "{beer.name}" Added.'
         response.status_code=status.HTTP_201_CREATED
         return content
@@ -241,7 +242,7 @@ We now need to tag your image with a new name so that it is recognised when we p
 docker tag imagebeerapi {dockername}/beerapi
 ```
 
-Finally run the below and the image will now be available globally from your docker account! 
+Finally run the below and the image will now be available globally from your docker account!
 
 ```bash
 docker push {dockername}/beerapi
@@ -271,7 +272,7 @@ Now we'll create a basic app plan to host our web app on. This will be about a t
 az appservice plan create -n dv-beerapi-apl-eun-{uniquenamespace} -g qa-beerapi-rg --is-linux
 ```
 
-Finally we create a web app that utilises the app plan and pulls the beerapi we pushed up to docker as the image for the application. Again just make sure you replace the "uniquenamespace" with what you used above and alter the "dockername" to be from your account. 
+Finally we create a web app that utilises the app plan and pulls the beerapi we pushed up to docker as the image for the application. Again just make sure you replace the "uniquenamespace" with what you used above and alter the "dockername" to be from your account.
 
 ```bash
 az webapp create --resource-group dv-beerapi-rg --plan dv-beerapi-apl-eun-{uniquenamespace}  --name dv-beerapi-app-eun-{uniquenamespace} --deployment-container-image-name registry.hub.docker.com/{dockername}/beerapi:latest

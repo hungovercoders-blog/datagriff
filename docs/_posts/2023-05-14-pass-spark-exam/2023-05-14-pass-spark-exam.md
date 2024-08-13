@@ -73,7 +73,7 @@ There are far better diagrams out there such as this one so this is simply to ke
 - **Executor:** This is a process that runs on a worker node that carries out a task.
 - **Slot:** A slot is the name databricks give for the available threads to do work in parallel in spark.
 - **Shuffle:** A shuffle is when data needs to be redistributed across the cluster. This is an expensive operation.
-- **Transformation:** Transformations are lazily executed and just provide the logic to create a dataframe without actually doing anything until an action is called. Transformations include filter, select, union,  sample and cache.
+- **Transformation:** Transformations are lazily executed and just provide the logic to create a dataframe without actually doing anything until an action is called. Transformations include filter, select, union, sample and cache.
 - **Action:** An action actually performs some data processing as a result of carrying out the logic provided by the transformations. Action commands include count, take, show, min, max and collect.
 - **Narrow Transformation:** This is a data transformation that involves no shuffling as everything can happen on a single partition. These are less resource intensive and quicker than wide transformations. Narrow transformations include select, filter and union.
 - **Wide Transformation:** This is a data transformation that involves shuffling across partitions. These are more resource intensive and slower than narrow transformations. Wide transformations include groupBy, join and sort.
@@ -488,7 +488,7 @@ You can get the number of partitions in a dataframe using DataFrame.rdd.getNumPa
 df_beers_drank.rdd.getNumPartitions()
 ```
 
-You can reduce the number of partitions in a dataframe using DataFrame.coalesce(n). This never causes a shuffle and you can only decrease the number of partitions. Data skew may still be an issue after a coalesce because it does not cause a shuffle, but it is quicker. 
+You can reduce the number of partitions in a dataframe using DataFrame.coalesce(n). This never causes a shuffle and you can only decrease the number of partitions. Data skew may still be an issue after a coalesce because it does not cause a shuffle, but it is quicker.
 
 ```py
 df_beers_drank_coalesce = df_beers_drank.coalesce(2)

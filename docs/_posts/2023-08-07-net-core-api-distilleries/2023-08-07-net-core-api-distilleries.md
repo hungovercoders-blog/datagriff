@@ -23,16 +23,16 @@ Well I was definitely a hungovercoder yesterday and it was quite difficult to st
 
 ## Pre-Requisites
 
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [.Net Framework](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [.Net Framework](https://dotnet.microsoft.com/en-us/download/dotnet-framework)
 
 ## Plan the API
 
 The API is going to allow us to retrieve a list of distileries. Therefore the first and only endpoint for now is going to be simple GET of a list of distilleries. We can later use this to provide validation and dropdowns.
 
-| Behaviour  | HTTP Verb  | URI |
-|---|---|---|
-|  Get distilleries |  GET |  https://api.myurl/v1/distilleries |
+| Behaviour        | HTTP Verb | URI                               |
+| ---------------- | --------- | --------------------------------- |
+| Get distilleries | GET       | https://api.myurl/v1/distilleries |
 
 ## Codebase Overview
 
@@ -41,7 +41,7 @@ The codebase we end up with is going to look something like the following. We wi
 ```file
 whiskey.reviews
 │   README.md
-|   .gitignore    
+|   .gitignore
 └───api
 │   │   Program.cs
 │   │   api.csproj
@@ -179,7 +179,7 @@ namespace api.Models
         /// This is the name of the distillery
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; } 
+        public string Name { get; set; }
 
         /// <summary>
         /// This is a link to the wikipedia of the distillery
@@ -188,7 +188,7 @@ namespace api.Models
         public string? WikiLink { get; set; }
 
         /// <summary>
-        /// This is the country that the distillery is found in 
+        /// This is the country that the distillery is found in
         /// </summary>
         [JsonPropertyName("country")]
         public string? Country { get; set; }
@@ -210,27 +210,27 @@ Create a distilleries.json file under a api/DataSource directory. This is going 
 
 ```json
 [
-    {
-        "id": "glenmorangie",
-        "name": "Glenmorangie",
-        "wikiLink": "/wiki/Glenmorangie_distillery",
-        "country": "Scotland",
-        "type": "Single Malt"
-    },
-        {
-        "id": "clontarf1014",
-        "name": "Clontarf 1014",
-        "wikiLink": "/wiki/Clontarf_(whiskey)",
-        "country": "Ireland",
-        "type": "Blended"
-    },
-    {
-        "id": "hakushu",
-        "name": "Hakushu",
-        "wikiLink": "/wiki/Hakushu_distillery",
-        "country": "Japan",
-        "type": "Single grain Irishs"
-    }
+  {
+    "id": "glenmorangie",
+    "name": "Glenmorangie",
+    "wikiLink": "/wiki/Glenmorangie_distillery",
+    "country": "Scotland",
+    "type": "Single Malt"
+  },
+  {
+    "id": "clontarf1014",
+    "name": "Clontarf 1014",
+    "wikiLink": "/wiki/Clontarf_(whiskey)",
+    "country": "Ireland",
+    "type": "Blended"
+  },
+  {
+    "id": "hakushu",
+    "name": "Hakushu",
+    "wikiLink": "/wiki/Hakushu_distillery",
+    "country": "Japan",
+    "type": "Single grain Irishs"
+  }
 ]
 ```
 
@@ -270,7 +270,7 @@ namespace api.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// 
+        ///
         ///     GET api/v1/distilleries
         /// </remarks>
         /// <response code="200">Successfully returned distillers</response>

@@ -2,7 +2,7 @@
 title: "Docker Environment Variables and Secret Beers in Azure Key Vault"
 date: 2023-01-02
 author: dataGriff
-description: This is how you can use environment variables in a docker application and reference key vault for these in a deployed application in Azure 
+description: This is how you can use environment variables in a docker application and reference key vault for these in a deployed application in Azure
 image:
   path: /assets/2023-01-02-docker-environment-variables/link.png
 tags: docker azure
@@ -72,8 +72,8 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-var1 ="blank1" 
-var2 ="blank2" 
+var1 ="blank1"
+var2 ="blank2"
 
 @app.get("/")
 async def root():
@@ -82,14 +82,14 @@ async def root():
     Returns:
         string: Welcome message
     """
- 
+
     return f"Its no secret that {var1} brew {var2}.."
 ```
 
 The run the fastapi using uvicorn server:
 
 ```bash
-uvicorn app.main:app --reload    
+uvicorn app.main:app --reload
 ```
 
 And you should see your api running with blank1 and blank2 as the variable values.
@@ -120,7 +120,7 @@ var2 =os.getenv("MY_SECRET_VARIABLE2")
 Run the application again with the environment file as an extra parameter...
 
 ```bash
-uvicorn app.main:app --reload  --env-file .env  
+uvicorn app.main:app --reload  --env-file .env
 ```
 
 ... and you should see the environment variables presented in the API!

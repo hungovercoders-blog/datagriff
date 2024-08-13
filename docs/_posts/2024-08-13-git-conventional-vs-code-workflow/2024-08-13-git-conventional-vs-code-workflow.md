@@ -81,3 +81,7 @@ Now every time I hit this combo I save the work, I then start the conventional c
 ![VS Code Conventional Commit Workflow]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/conventional-commit-workflow.gif)
 
 If I do decide I have committed to early I can simply press escape to carry on coding. However why would you ever not commit regularly to a remote...? Trunk based development I can imagine would require some [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks){:target="_blank"} to protect your commit which is something I might look at soon (see this [pre-commit](https://pre-commit.com/){:target="_blank"} which looks interesting). For feature branch development however I think this workflow is very handy for good commits, safely remotely stored code and fast feedback!
+
+**Update:** Ok I have some work to do on the content of the commit messages, but you can see below my commit history is starting to look at bit more conventional.
+
+![Conventional Commit History]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/github-conventional-commit-history.PNG

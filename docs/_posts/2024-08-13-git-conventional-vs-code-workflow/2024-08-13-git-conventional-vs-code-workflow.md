@@ -64,8 +64,6 @@ The last piece of the extension recommendations, in File > Preferences > Setting
 
 ![Git Post Commit Sync]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/git-post-commit-sync.PNG)
 
-The full workflow can be seen below...
-
 ## Ctrl + S
 
 I wanted to shortcut up the initiation of the conventional commit > commit > sync workflow to make it even easier for myself.
@@ -79,5 +77,7 @@ Secondly I changed the keyboard shortcut for the conventional commit to be CTRL+
 ![VS Code Keyboard Shortcut]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/vs-code-keyboard-shortcut.PNG)
 
 Now every time I hit this combo I save the work, I then start the conventional commit workflow and when it ends - boom it commits then syncs. Living the dream!
+
+![VS Code Conventional Commit Workflow]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/conventional-commit-workflow.gif)
 
 If I do decide I have committed to early I can simply press escape to carry on coding. However why would you ever not commit regularly to a remote...? Trunk based development I can imagine would require some [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks){:target="_blank"} to protect your commit which is something I might look at soon (see this [pre-commit](https://pre-commit.com/){:target="_blank"} which looks interesting). For feature branch development however I think this workflow is very handy for good commits, safely remotely stored code and fast feedback!

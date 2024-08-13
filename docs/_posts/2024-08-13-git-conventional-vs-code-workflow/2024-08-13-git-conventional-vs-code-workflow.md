@@ -64,6 +64,10 @@ The last piece of the extension recommendations, in File > Preferences > Setting
 
 ![Git Post Commit Sync]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/git-post-commit-sync.PNG)
 
+The full workflow can be seen below.
+
+
+
 ## Ctrl + S
 
 I wanted to shortcut up the initiation of the conventional commit > commit > sync workflow to make it even easier for myself.

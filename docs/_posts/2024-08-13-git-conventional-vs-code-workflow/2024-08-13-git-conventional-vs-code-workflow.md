@@ -4,7 +4,7 @@ date: 2024-08-13
 author: dataGriff
 description: Turbo charging your conventional git commit workflow in VS Code
 image:
-  path: /assets/2024-06-29-cosmos-emulator-docker-local/link.png
+  path: /assets/2024-08-13-git-conventional-vs-code-workflow/link.png
 tags: Git VSCode
 ---
 

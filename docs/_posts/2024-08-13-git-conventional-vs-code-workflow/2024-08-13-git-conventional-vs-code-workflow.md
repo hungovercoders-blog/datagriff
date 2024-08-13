@@ -84,4 +84,4 @@ If I do decide I have committed to early I can simply press escape to carry on c
 
 **Update:** Ok I have some work to do on the content of the commit messages, but you can see below my commit history is starting to look at bit more conventional.
 
-![Conventional Commit History]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/github-conventional-commit-history.PNG
+![Conventional Commit History]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/github-conventional-commit-history.PNG)

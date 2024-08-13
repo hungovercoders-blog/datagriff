@@ -8,7 +8,7 @@ image:
 tags: Git VSCode
 ---
 
-I was recently introduced to [git conventional commits](https://www.conventionalcommits.org/en/v1.0.0/){:target="_blank"} as a method of streamlining your logged messages and providing the ability to automatically generate [CHANGELOG](https://github.com/marketplace/actions/generate-changelog-based-on-conventional-commits){:target="_blank"}. My first instinct these days is to quickly search for a [VS Code extension](https://marketplace.visualstudio.com/vscode){:target="_blank"} on any new language or topic I am given. Lo and behold I had a [hit](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits){:target="_blank"}! After some preference tweaking, as recommended by the extension, and a new (but old) keyboard shortcut, I now bring to you my turbocharge git conventional commit workflow in VS code!
+I was recently introduced to [git conventional commits](https://www.conventionalcommits.org/en/v1.0.0/){:target="_blank"} as a method of streamlining your logged messages and providing the ability to automatically generate [CHANGELOG](https://github.com/marketplace/actions/generate-changelog-based-on-conventional-commits){:target="_blank"}. My first instinct these days is to quickly search for a [VS Code extension](https://marketplace.visualstudio.com/vscode){:target="_blank"} on any new language or topic I am given. Lo and behold I had a [hit](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits){:target="_blank"}! After some preference tweaking, as recommended by the extension, and a new (but old) keyboard shortcut, I now bring to you my turbocharged git conventional commit workflow in VS code!
 
 - [Pre-Requisites](#pre-requisites)
 - [End Goal](#end-goal)
@@ -60,7 +60,7 @@ Following on from the extension recommendations, in File > Preferences > Setting
 
 ![Git Smart Commit]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/git-smart-commit.PNG)
 
-The last piece of the extension recommendations, in File > Preferences > Settings of VS Code set git.postCommitCommand to sync. This will mean every time you commit... you sync! No more lost code im remote locations and awesome commit messages to boot!
+The last piece of the extension recommendations, in File > Preferences > Settings of VS Code set git.postCommitCommand to sync. This will mean every time you commit... you sync! No more lost code in remote locations and awesome commit messages to boot!
 
 ![Git Post Commit Sync]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/git-post-commit-sync.PNG)
 

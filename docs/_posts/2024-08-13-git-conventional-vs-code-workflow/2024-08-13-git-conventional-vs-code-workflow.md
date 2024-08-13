@@ -35,7 +35,7 @@ As always I will be using the mighty [gitpod](https://gitpod.io){:target="_blank
 
 ## Install VS Code Extension
 
-Part one turned out to be really easy! All I needed to do was install the [VS Code Conventional Commit Extension](https://code.visualstudio.com/download){:target="_blank"}! This easily accessible from the command palette (CTRL+P) by searching for "conventional commit". This takes you the process  of providing a good [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/){:target="_blank"} with prompts and dropdown lists to help you apply all the standard conventions. This is fantastic news for me as my memory is often suspect these days with my whiskey addled mind becoming less and less reliable.
+Part one turned out to be really easy! All I needed to do was install the [VS Code Conventional Commit Extension](https://code.visualstudio.com/download){:target="_blank"}! This easily accessible from the command palette (CTRL+P) by searching for "conventional commit". This takes you the process  of providing a good [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/){:target="_blank"} with prompts and dropdown lists to help you apply all the standard conventions. This is fantastic news for me as my memory is often suspect these days with my whiskey addled mind becoming less and less reliable.
 
 The extension will prompt for:
 

@@ -8,7 +8,7 @@ image:
 tags: Git VSCode
 ---
 
-I was recently introduced to [git conventional commits](https://www.conventionalcommits.org/en/v1.0.0/){:target="_blank"} as a method of streamlining your commit messages and providing the ability to automatically generate [CHANGELOG](https://github.com/marketplace/actions/generate-changelog-based-on-conventional-commits){:target="_blank"}. My first instinct these days is to quickly search for a [VS Code extension](https://marketplace.visualstudio.com/vscode){:target="_blank"} on any new language or topic I am given. Lo and behold I had a [hit](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits){:target="_blank"}! After some preference tweaking, as recommended by the extension, and a new (but old) keyboard shortcut, I now bring to you my turbocharged git conventional commit workflow in VS code!
+I was recently introduced to [git conventional commits](https://www.conventionalcommits.org/en/v1.0.0/){:target="\_blank"} as a method of streamlining your commit messages and providing the ability to automatically generate [CHANGELOG](https://github.com/marketplace/actions/generate-changelog-based-on-conventional-commits){:target="\_blank"}. My first instinct these days is to quickly search for a [VS Code extension](https://marketplace.visualstudio.com/vscode){:target="\_blank"} on any new language or topic I am given. Lo and behold I had a [hit](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits){:target="\_blank"}! After some preference tweaking, as recommended by the extension, and a new (but old) keyboard shortcut, I now bring to you my turbocharged git conventional commit workflow in VS code! 
 
 - [Pre-Requisites](#pre-requisites)
 - [End Goal](#end-goal)
@@ -20,12 +20,12 @@ I was recently introduced to [git conventional commits](https://www.conventional
 
 In order to carry out this walkthrough you'll need the following:
 
-- [Github Account](https://github.com/){:target="_blank"}
-- [Git](https://git-scm.com/downloads){:target="_blank"}
-- [VS Code](https://code.visualstudio.com/download){:target="_blank"}
-- [VS Code Conventional Commit Extension](https://code.visualstudio.com/download){:target="_blank"} - We will install this as part of the blog post. 
+- [Github Account](https://github.com/){:target="\_blank"}
+- [Git](https://git-scm.com/downloads){:target="\_blank"}
+- [VS Code](https://code.visualstudio.com/download){:target="\_blank"}
+- [VS Code Conventional Commit Extension](https://code.visualstudio.com/download){:target="\_blank"} - We will install this as part of the blog post.
 
-As always I will be using the mighty [gitpod](https://gitpod.io){:target="_blank"} so I won't need to configure anything other than spinning up a workspace.
+As always I will be using the mighty [gitpod](https://gitpod.io){:target="\_blank"} so I won't need to configure anything other than spinning up a workspace.
 
 ## End Goal
 
@@ -35,7 +35,7 @@ As always I will be using the mighty [gitpod](https://gitpod.io){:target="_blank
 
 ## Install VS Code Extension
 
-Part one turned out to be really easy! All I needed to do was install the [VS Code Conventional Commit Extension](https://code.visualstudio.com/download){:target="_blank"}! This easily accessible from the command palette (CTRL+P) by searching for "conventional commit". This takes you the process  of providing a good [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/){:target="_blank"} with prompts and dropdown lists to help you apply all the standard conventions. This is fantastic news for me as my memory is often suspect these days with my whiskey addled mind becoming less and less reliable.
+Part one turned out to be really easy! All I needed to do was install the [VS Code Conventional Commit Extension](https://code.visualstudio.com/download){:target="\_blank"}! This easily accessible from the command palette (CTRL+P) by searching for "conventional commit". This takes you the process of providing a good [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/){:target="\_blank"} with prompts and dropdown lists to help you apply all the standard conventions. This is fantastic news for me as my memory is often suspect these days with my whiskey addled mind becoming less and less reliable.
 
 The extension will prompt for:
 
@@ -46,11 +46,11 @@ The extension will prompt for:
 5. Adding the long message.
 6. Adding details on whether it was a breaking change.
 
-The settings are all configurable as per the [extension docs](https://code.visualstudio.com/download){:target="_blank"}.
+The settings are all configurable as per the [extension docs](https://code.visualstudio.com/download){:target="\_blank"}.
 
 ## Set the Following Preferences in VS Code
 
-To make your workflow even slicker you can set the conventional commits extension plus vs code to automatically stage and sync any commits you decide to make. All of this taken from the recommendations in the [extension docs](https://code.visualstudio.com/download){:target="_blank"}. It really does pay to read the documentation sometimes...
+To make your workflow even slicker you can set the conventional commits extension plus vs code to automatically stage and sync any commits you decide to make. All of this taken from the recommendations in the [extension docs](https://code.visualstudio.com/download){:target="\_blank"}. It really does pay to read the documentation sometimes...
 
 In File > Preferences > Settings of VS Code set conventionalCommits.autoCommit to be true. The default is already true but just double check. This will attempt to commit any changes when you go through the extension workflow above, but if you have not staged your files it will prompt you to stage them in a dialog box and you also have to remember to sync. That's 2 things extra to do! I simply couldn't cope with this extra cognitive load.
 
@@ -80,7 +80,9 @@ Now every time I hit this combo I save the work, I then start the conventional c
 
 ![VS Code Conventional Commit Workflow]({{ site.baseurl }}/assets/2024-08-13-git-conventional-vs-code-workflow/conventional-commit-workflow.gif)
 
-If I do decide I have committed to early I can simply press escape to carry on coding. However why would you ever not commit regularly to a remote...? Trunk based development I can imagine would require some [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks){:target="_blank"} to protect your commit which is something I might look at soon (see this [pre-commit](https://pre-commit.com/){:target="_blank"} which looks interesting). For feature branch development however I think this workflow is very handy for good commits, safely remotely stored code and fast feedback!
+TODO
+
+If I do decide I have committed to early I can simply press escape to carry on coding. However why would you ever not commit regularly to a remote...? Trunk based development I can imagine would require some [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks){:target="\_blank"} to protect your commit which is something I might look at soon (see this [pre-commit](https://pre-commit.com/){:target="\_blank"} which looks interesting). For feature branch development however I think this workflow is very handy for good commits, safely remotely stored code and fast feedback!
 
 **Update:** Ok I have some work to do on the content of the commit messages, but you can see below my commit history is starting to look at bit more conventional.
 

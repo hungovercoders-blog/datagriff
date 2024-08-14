@@ -1,7 +1,7 @@
 tasks:
   - name: Install trunk
     before: |
-      curl https://get.trunk.io -fsSL | bash
+      curl https://get.trunk.io -fsSL | bash -s -- -y
       trunk upgrade
   - name: Install and Run Jekyll
     init: |

@@ -33,16 +33,16 @@ As always I will be using the mighty [gitpod](https://gitpod.io){:target="\_blan
 
 [Trunk](https://trunk.io/) is the best thing in the world for lazy and terrified developers like myself who still want to ship code as fast and easily as possible. The focus is on developer experience and automating those aspects you know are important but can often get overlooked as you race to the finish line. Their four main products are as follows:
 
-- **[Code Quality](https://trunk.io/code-quality){:target="\_blank"}**: This is the first and last code linter you will ever need. The code quality product leverages linters already available and automatically adds them to your code base when you install trunk. The whole trunk approach is **configurable with a yaml file. The code quality aspect is what I will be focused on in this blog.
+- **[Code Quality](https://trunk.io/code-quality){:target="\_blank"}**: This is the first and last code linter you will ever need. The code quality product leverages linters already available and automatically adds them to your code base when you install trunk. The whole trunk approach is configurable with a yaml file. The code quality aspect is what I will be focused on in this blog.
 - **[Merge Queue](https://trunk.io/merge-queue){:target="\_blank"}**: This is to manage and accelerate the appropriate pull request merges for your team into the main branch.
 - **[CI Analytics](https://trunk.io/ci-analytics){:target="\_blank}"**: These are glorious visualisations over your build and deployment pipelines to see how you are performing.
-- **[Flaky Tests](https://trunk.io/flaky-tests){:target="\_blank"}**:  This an upcoming project that can detect and remove flaky tests from your pipelines on any CI system. I know a few people who are going to be interested in this! 
+- **[Flaky Tests](https://trunk.io/flaky-tests){:target="\_blank"}**:  This an upcoming project that can detect and remove flaky tests from your pipelines on any CI system. I know a few people who are going to be interested in this!
 
 If I could play with all of these trunk toys right now I would. Watch this space for more experimentation in between meals. Now to get started with Trunk and code quality...
 
 ## Create Trunk Account
 
-First sign-up to [Trunk](https://trunk.io/){:target="\_blank"} at [app.trunk.io](https://app.trunk.io/){:target="\_blank"}. If you're concerned about costs dear not as they offer a [free tier](https://trunk.io/pricing)[Trunk](https://trunk.io/){:target="\_blank"} which is unlimited on public repos and free for up to five committers on private repos (thank you [Trunk](https://trunk.io/){:target="\_blank"}!).  
+First sign-up to [Trunk](https://trunk.io/){:target="\_blank"} at [app.trunk.io](https://app.trunk.io/){:target="\_blank"}. If you're concerned about costs fear not as they offer a [free tier](https://trunk.io/pricing)[Trunk](https://trunk.io/){:target="\_blank"} which is unlimited on public repos and free for up to five committers on private repos (thank you [Trunk](https://trunk.io/){:target="\_blank"}!).  
 
 ![Trunk Welcome]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_welcome.PNG)
 
@@ -50,13 +50,15 @@ Then select "code quality" and connect the trunk app to your github organisation
 
 ![Trunk Connect Github]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_connect_github.PNG)
 
-I have three organisations at this point in git hub and eventually added them all. This became three organisations represented in Trunk under the url `https://app.trunk.io/{organisation-name}`.
+I have three organisations at this point in github and eventually added them all. This became three organisations represented in Trunk under the url format `https://app.trunk.io/{organisation-name}`.
 
 Now that we have trunk setup on our organisations lets initialise it on a repo. Still in trunk on the code quality tab, select a repo in the top left hand corner. If you have not used trunk on a repo in this organisation before you will be asked to setup a .trunk repository. This is the github action that gets added to all organisations that leverage trunk to perform appropriate checks. You can see mine are identical on my personal [datagriff](https://github.com/dataGriff/.trunk/blob/main/.github/workflows/trunk-check.yaml){:target="\_blank"}, [hungovercoders](https://github.com/hungovercoders/.trunk){:target="\_blank"} and [hungovercoders-blog](https://github.com/hungovercoders-blog/.trunk){:target="\_blank"} organisations.
 
 You can then configure trunk to run on every pull request to that repository (critical!) and/or at certain time intervals.
 
 ![Trunk Configure Code Quality]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_configure_code_quality.PNG)
+
+Its worth noting that there is [native slack integration](https://docs.trunk.io/administration/integration-for-slack#add-trunk-to-your-slack-workspace-admin-privileges-required){:target="\_blank"} if you wanted to receive notifications on poor code quality scenarios.
 
 Next we'll look at how we can start leveraging trunk in our codebases while developing to start embedding code quality in our workflow.
 
@@ -69,9 +71,9 @@ curl https://get.trunk.io -fsSL | bash -s -- -y ## executes without prompts
 trunk upgrade
 ```
 
-I have added the above to the gitpod configuration files of the repos I have added Trunk to so far and I may eventually just create a standard image with this in.
+I have added this installation to the [gitpod](https://gitpod.io){:target="\_blank"} configuration files of the repos I have added Trunk to so far. I may eventually just create a standard image with this in as I feel so enamoured with it right now.
 
-To [initialise trunk in a repo](https://docs.trunk.io/code-quality/advanced-setup/cli/init-in-a-git-repo){:target="\_blank"} you run
+To [initialise trunk in a repo](https://docs.trunk.io/code-quality/advanced-setup/cli/init-in-a-git-repo){:target="\_blank"} you run:
 
 ```bash
 trunk init
@@ -127,23 +129,23 @@ actions:
     - trunk-upgrade-available
 ```
 
-There is also an option to login during this process to get all of trunks features. We went through all the effort of setting up an account so lets do eet! (you can also login using trunk login).
+There is also an option to login during this process to get all of trunks features. We went through all the effort of setting up an account so lets do eet! (you can also login using **trunk login**).
 
-![Trunk Init]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_init.PNG)n
+![Trunk Init]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_init.PNG)
 
 You also get asked if you want trunk to manage your githooks and enable some built-in hooks along with performing a scan, why not?
 
-![Trunk Enable]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_enable_check.PNG)
-
-This was my sanbdox and as you can see, ahem, my code quality is not quite up to scratch!
-
 ![Trunk Enable]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_enable.PNG)
+
+This was my sandbox and as you can see, ahem, my code quality is not quite up to scratch!
+
+![Trunk Enable]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_enable_check.PNG)
 
 Moving on now to how we will improve our code quality...
 
 ## Code Quality
 
-Code quality tends rely on [code linting](https://owasp.org/www-project-devsecops-guideline/latest/01b-Linting-Code){:target="\_blank"} that highlight were code is not meeting certain standards of readbility or security. Its something we rely often manually to be done by other developers when performing pull requests. The amount of [code linters](https://github.com/caramelomartins/awesome-linters){:target="\_blank"} out there suggest this should be automated and this is exactly where trunk comes in.
+Code quality tends rely on [code linting](https://owasp.org/www-project-devsecops-guideline/latest/01b-Linting-Code){:target="\_blank"} that highlight were code is not meeting certain standards of readability or security. Its something we rely often manually to be done by other developers when performing pull requests. The amount of [code linters](https://github.com/caramelomartins/awesome-linters){:target="\_blank"} out there suggest this should be automated and this is exactly where trunk comes in.
 
 ### Trunk Check
 
@@ -186,7 +188,7 @@ trunk check --all
 
 ![Trunk Check All 2]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_check_all2.PNG)
 
-Now that looks more like my sandbox! Using the all parameter you'll then be faced with all the current issues with your code (in my case the same ones I saw earlier!).
+Now that looks more like my sandbox! Using the **--all** parameter you'll then be faced with all the current issues with your code (in my case the same ones I saw earlier!).
 
 Trunk has now become the authority on linters for me and automated the entire code quality check process for me. This is one last decision for me to make as a developer and you can literally feel the cognitive weight start to fall off your shoulders. Now to fix that pesky code!
 
@@ -242,7 +244,7 @@ Then I go to commit... I get prevented from doing so and keep my code quality up
 
 ![Trunk PreCommit]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_pre_commit.PNG)
 
-First I fix the code and add the indent (this is syntax and not code quality). 
+First I fix the code and add the indent (this is syntax and not code quality).
 
 ```python
 if (1==1):
@@ -277,8 +279,12 @@ Along with [previous post on conventional commit setup](https://blog.hungovercod
 5. Commit better quality code (automated).
 6. Synchronise code to remote main branch (automated).
 
-This is still my individual workflow at the moment when not working with other developers. This is so much faster and of higher quality than what I was doing just 2 days ago. Next, to protect myself and others I want to investigate how to perform testing before allowing merging into main, to hopefully safely meet the goal of trunk based development! Those over at [Trunk](https://trunk.io/){:target="\_blank"} have definitely made this journey a lot easier! I highly recommend checking out the [docs](https://docs.trunk.io/){:target="\_blank"} over at [Trunk](https://trunk.io/){:target="\_blank"} as I am just scratching the surface on what is possible.
+This is still my individual workflow at the moment when not working with other developers. This is so much faster and of higher quality than what I was doing just 2 days ago. I'd also like to shout out to the [Error Lens VS Code extension](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) too which is helping me see errors more clearly as I go.
+
+Next, to protect myself and others I want to investigate how to perform testing before allowing merging into main, to hopefully safely meet the goal of trunk based development. Those over at [Trunk](https://trunk.io/){:target="\_blank"} have definitely made this journey a lot easier! I highly recommend checking out the [docs](https://docs.trunk.io/){:target="\_blank"} over at [Trunk](https://trunk.io/){:target="\_blank"} as I am just scratching the surface on what is possible.
 
 ## Mega Tidy Commit Example
 
 I first installed trunk on my datagriff blog and it is here that I had that first "wow" moment of how powerful trunk could be in doing a big tidy up of my code in the real world. [Here is the link to the commit](https://github.com/hungovercoders-blog/datagriff/commit/cc71393a6d9165a11c34cf2b3f109fb6784e94f6){:target="\_blank"} and also a screenshot below showing how much of the code, and images, it brought up to standard for me. I am highly likely going to be embedded trunk in all my workflows and adding as a standard to my gitpod configuration files. Sweet sweet code protection is just what a gung-ho, lazy and terrified hungovercoder needs!
+
+![Trunk eCommit]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_commit_check.PNG)

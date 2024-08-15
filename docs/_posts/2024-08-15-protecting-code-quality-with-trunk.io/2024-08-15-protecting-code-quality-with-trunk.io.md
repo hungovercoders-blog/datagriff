@@ -17,8 +17,8 @@ I recently went down a rabbit hole of [VS code extensions](https://www.freecodec
 - [Code Quality](#code-quality)
   - [Trunk Check](#trunk-check)
   - [Trunk Format](#trunk-format)
-- [Enable Precommits](#enable-precommits)
-- [My New Gitworkflow](#my-new-gitworkflow)
+- [Enable Precommit Action](#enable-precommit-action)
+- [My New Git Workflow](#my-new-git-workflow)
 - [Mega Tidy Commit Example](#mega-tidy-commit-example)
 
 ## Pre-Requisites
@@ -34,9 +34,9 @@ As always I will be using the mighty [gitpod](https://gitpod.io){:target="\_blan
 [Trunk](https://trunk.io/) is the best thing in the world for lazy and terrified developers like myself who still want to ship code as fast and easily as possible. The focus is on developer experience and automating those aspects you know are important but can often get overlooked as you race to the finish line. Their four main products are as follows:
 
 - **[Code Quality](https://trunk.io/code-quality){:target="\_blank"}**: This is the first and last code linter you will ever need. The code quality product leverages linters already available and automatically adds them to your code base when you install trunk. The whole trunk approach is **configurable with a yaml file. The code quality aspect is what I will be focused on in this blog.
-- **[Merge Queue](https://trunk.io/merge-queue){:target="\_blank"}**: 
-- **[CI Analytics](https://trunk.io/ci-analytics){:target="\_blank}"**: 
-- **[Flaky Tests](https://trunk.io/flaky-tests){:target="\_blank"}**: 
+- **[Merge Queue](https://trunk.io/merge-queue){:target="\_blank"}**: This is to manage and accelerate the appropriate pull request merges for your team into the main branch.
+- **[CI Analytics](https://trunk.io/ci-analytics){:target="\_blank}"**: These are glorious visualisations over your build and deployment pipelines to see how you are performing.
+- **[Flaky Tests](https://trunk.io/flaky-tests){:target="\_blank"}**:  This an upcoming project that can detect and remove flaky tests from your pipelines on any CI system. I know a few people who are going to be interested in this! 
 
 If I could play with all of these trunk toys right now I would. Watch this space for more experimentation in between meals. Now to get started with Trunk and code quality...
 
@@ -77,7 +77,7 @@ To [initialise trunk in a repo](https://docs.trunk.io/code-quality/advanced-setu
 trunk init
 ```
 
-This will create the initial [trunk.yml](https://docs.trunk.io/code-quality/reference/trunk-yaml){:target="\_blank"} file of your repo that controls things like the linters you want to use and what actions you want enabled. The yaml file will look something like the following.
+This will create the initial [trunk.yml](https://docs.trunk.io/code-quality/reference/trunk-yaml){:target="\_blank"} file of your repo that controls things like the linters you want to use and what actions you want enabled. The linters installed will be inferred by the code you already have in your repo. The yaml file will look something like the following.
 
 ```yaml
 # This file controls the behavior of Trunk: https://docs.trunk.io/cli
@@ -210,9 +210,63 @@ trunk fmt --all
 
 This can obviously be quite a radical approach to take if performing over a large codebase when the linting options are not historically what you may have used. I would say it be mandatory that you test your code changes if you do decide to perform wholesale code quality changes like this, or more likely you'll just want to fix going forwards for now and just ensure you have code quality checks on any new commits. I wonder if there's a way to automate this - enter trunk pre-commits!
 
-## Enable Precommits
+## Enable Precommit Action
 
-## My New Gitworkflow
+I want to make sure I don't commit any new poor quality changes into my repo. I can do this using the built-in actions provided by [Trunk](https://trunk.io/){:target="\_blank"}. 
+
+To see a list of the actions that are available and which are enabled run the following:
+
+```bash
+trunk actions list
+```
+
+![Trunk Actions List]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_actions_list.PNG)
+
+To enable an action you can run the enable command. In order to embed the trunk checking in my workflow and protect every commit, I have run the following:
+
+```bash
+trunk actions enable trunk-check-pre-commit
+trunk actions enable trunk-check-pre-push-always
+```
+
+![Trunk Actions Enable]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_actions_enabled.PNG)
+
+Now if I perform a change with some bad python indentation in there for example...
+
+```python
+if (1==1):
+print("hello trunk!")
+```
+
+Then I go to commit... I get prevented from doing so and keep my code quality up to scratch!
+
+![Trunk PreCommit]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_pre_commit.PNG)
+
+First I fix the code and add the indent (this is syntax and not code quality). 
+
+```python
+if (1==1):
+  print("hello trunk!")
+```
+
+Then I can run and say yes to the suggestion:
+
+```bash
+trunk check
+```
+
+![Trunk PreCommit]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_pre_commit_check.PNG)
+
+I could also have just run `trunk fmt` but I wanted to highlight the issue first. Completing these scripts then removes the superfluous brackets as part of code quality checks from black and I end up with:
+
+```python
+if 1==1:
+  print("hello trunk!")
+```
+
+Then I can perform the now rather beautiful commit.
+
+## My New Git Workflow
 
 Along with [previous post on conventional commit setup](https://blog.hungovercoders.com/datagriff/2024/08/13/git-conventional-vs-code-workflow.html){:target="\_blank"} my new git workflow straight to main is as follows.
 
@@ -223,7 +277,7 @@ Along with [previous post on conventional commit setup](https://blog.hungovercod
 5. Commit better quality code (automated).
 6. Synchronise code to remote main branch (automated).
 
-This is still my individual workflow at the moment when not working with other developers. This is so much faster and of higher quality than what I was doing just 2 days ago. Next, to protect myself and others I want to investigate how to perform testing before allowing merging into main, to hopefully safely meet the goal of trunk based development! Those over at [Trunk](https://trunk.io/){:target="\_blank"} have definitely made this journey a lot easier!
+This is still my individual workflow at the moment when not working with other developers. This is so much faster and of higher quality than what I was doing just 2 days ago. Next, to protect myself and others I want to investigate how to perform testing before allowing merging into main, to hopefully safely meet the goal of trunk based development! Those over at [Trunk](https://trunk.io/){:target="\_blank"} have definitely made this journey a lot easier! I highly recommend checking out the [docs](https://docs.trunk.io/){:target="\_blank"} over at [Trunk](https://trunk.io/){:target="\_blank"} as I am just scratching the surface on what is possible.
 
 ## Mega Tidy Commit Example
 

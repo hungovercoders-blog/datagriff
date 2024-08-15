@@ -15,11 +15,10 @@ I recently went down a rabbit hole of [VS code extensions](https://www.freecodec
 - [Create Trunk Account](#create-trunk-account)
 - [Initialise Trunk](#initialise-trunk)
 - [Code Quality](#code-quality)
-  - [Create some Bad Example Code](#create-some-bad-example-code)
   - [Trunk Check](#trunk-check)
   - [Trunk Format](#trunk-format)
 - [Enable Precommits](#enable-precommits)
-- [New Gitworkflow](#new-gitworkflow)
+- [My New Gitworkflow](#my-new-gitworkflow)
 - [Mega Tidy Commit Example](#mega-tidy-commit-example)
 
 ## Pre-Requisites
@@ -45,31 +44,187 @@ If I could play with all of these trunk toys right now I would. Watch this space
 
 First sign-up to [Trunk](https://trunk.io/){:target="\_blank"} at [app.trunk.io](https://app.trunk.io/){:target="\_blank"}. If you're concerned about costs dear not as they offer a [free tier](https://trunk.io/pricing)[Trunk](https://trunk.io/){:target="\_blank"} which is unlimited on public repos and free for up to five committers on private repos (thank you [Trunk](https://trunk.io/){:target="\_blank"}!).  
 
-![Trunk Welcome]({ site.baseurl }/assets/date_blog/trunk_welcome.PNG)
+![Trunk Welcome]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_welcome.PNG)
+
+Then select "code quality" and connect the trunk app to your github organisation(s).
+
+![Trunk Connect Github]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_connect_github.PNG)
+
+I have three organisations at this point in git hub and eventually added them all. This became three organisations represented in Trunk under the url `https://app.trunk.io/{organisation-name}`.
+
+Now that we have trunk setup on our organisations lets initialise it on a repo. Still in trunk on the code quality tab, select a repo in the top left hand corner. If you have not used trunk on a repo in this organisation before you will be asked to setup a .trunk repository. This is the github action that gets added to all organisations that leverage trunk to perform appropriate checks. You can see mine are identical on my personal [datagriff](https://github.com/dataGriff/.trunk/blob/main/.github/workflows/trunk-check.yaml){:target="\_blank"}, [hungovercoders](https://github.com/hungovercoders/.trunk){:target="\_blank"} and [hungovercoders-blog](https://github.com/hungovercoders-blog/.trunk){:target="\_blank"} organisations.
+
+You can then configure trunk to run on every pull request to that repository (critical!) and/or at certain time intervals.
+
+![Trunk Configure Code Quality]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_configure_code_quality.PNG)
+
+Next we'll look at how we can start leveraging trunk in our codebases while developing to start embedding code quality in our workflow.
 
 ## Initialise Trunk
 
-To initialise trunk you first need to install the CLI as per the docs by running the below.
+To initialise trunk you first need to install the CLI as per the [docs](https://docs.trunk.io/code-quality/usage){:target="\_blank"} by running the below.
 
 ```bash
-curl https://get.trunk.io -fsSL | bash -s -- -y
+curl https://get.trunk.io -fsSL | bash -s -- -y ## executes without prompts
 trunk upgrade
 ```
 
+I have added the above to the gitpod configuration files of the repos I have added Trunk to so far and I may eventually just create a standard image with this in.
+
+To [initialise trunk in a repo](https://docs.trunk.io/code-quality/advanced-setup/cli/init-in-a-git-repo){:target="\_blank"} you run
+
+```bash
+trunk init
+```
+
+This will create the initial [trunk.yml](https://docs.trunk.io/code-quality/reference/trunk-yaml){:target="\_blank"} file of your repo that controls things like the linters you want to use and what actions you want enabled. The yaml file will look something like the following.
+
+```yaml
+# This file controls the behavior of Trunk: https://docs.trunk.io/cli
+# To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
+version: 0.1
+cli:
+  version: 1.22.2
+# Trunk provides extensibility via plugins. (https://docs.trunk.io/plugins)
+plugins:
+  sources:
+    - id: trunk
+      ref: v1.6.1
+      uri: https://github.com/trunk-io/plugins
+# Many linters and tools depend on runtimes - configure them here. (https://docs.trunk.io/runtimes)
+runtimes:
+  enabled:
+    - go@1.21.0
+    - node@18.12.1
+    - python@3.10.8
+# This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
+lint:
+  enabled:
+    - sqlfmt@0.23.2
+    - bandit@1.7.9
+    - black@24.8.0
+    - checkov@3.2.225
+    - dotenv-linter@3.3.0
+    - git-diff-check
+    - hadolint@2.12.0
+    - isort@5.13.2
+    - markdownlint@0.41.0
+    - osv-scanner@1.8.3
+    - oxipng@9.1.2
+    - prettier@3.3.3
+    - ruff@0.5.7
+    - shellcheck@0.10.0
+    - shfmt@3.6.0
+    - tflint@0.52.0
+    - trivy@0.54.1
+    - trufflehog@3.81.8
+    - yamllint@1.35.1
+actions:
+  enabled:
+    - trunk-announce
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
+    - trunk-upgrade-available
+```
+
+There is also an option to login during this process to get all of trunks features. We went through all the effort of setting up an account so lets do eet! (you can also login using trunk login).
+
+![Trunk Init]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_init.PNG)n
+
+You also get asked if you want trunk to manage your githooks and enable some built-in hooks along with performing a scan, why not?
+
+![Trunk Enable]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_enable_check.PNG)
+
+This was my sanbdox and as you can see, ahem, my code quality is not quite up to scratch!
+
+![Trunk Enable]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_enable.PNG)
+
+Moving on now to how we will improve our code quality...
+
 ## Code Quality
 
-### Create some Bad Example Code
-
-I found this particularly easy 
+Code quality tends rely on [code linting](https://owasp.org/www-project-devsecops-guideline/latest/01b-Linting-Code){:target="\_blank"} that highlight were code is not meeting certain standards of readbility or security. Its something we rely often manually to be done by other developers when performing pull requests. The amount of [code linters](https://github.com/caramelomartins/awesome-linters){:target="\_blank"} out there suggest this should be automated and this is exactly where trunk comes in.
 
 ### Trunk Check
 
+Trunk automatically adds the linters required for your repo when you run trunk init. You can explicitly suggest which linters more granularly using the following commands:
+
+```bash
+trunk init --only-detected-formatters
+trunk init --only-detected-linters
+```
+
+To see then which are available and which are enabled run:
+
+```bash
+trunk check list
+```
+
+![Trunk Check List]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_check_list.PNG)
+
+To enable a specific check you can use the command by executing trunk check enable with the specific formatter/linter. e.g.
+
+```bash
+trunk check enable sqlfmt
+```
+
+To perform a trunk check to determine the code quality of your repository, simply run:
+
+```bash
+trunk check
+```
+
+![Trunk Check]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_check.PNG)
+
+Hooray I have no issues! Oh hang on, that only checked ten files, that is the ones I am going to commit. This is great going forward when I only want to check changes for merging, but what about that initial overhaul of your code? To do this run the below:
+
+```bash
+trunk check --all
+```
+
+![Trunk Check All 1]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_check_all1.PNG)
+
+![Trunk Check All 2]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_check_all2.PNG)
+
+Now that looks more like my sandbox! Using the all parameter you'll then be faced with all the current issues with your code (in my case the same ones I saw earlier!).
+
+Trunk has now become the authority on linters for me and automated the entire code quality check process for me. This is one last decision for me to make as a developer and you can literally feel the cognitive weight start to fall off your shoulders. Now to fix that pesky code!
+
 ### Trunk Format
+
+Next we want to fix our poor quality code. This is again extremely simple thanks to our friends as trunk using the following command:
+
+```bash
+trunk fmt
+```
+
+![Trunk Format]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_format.PNG)
+
+Again trunk fmt alone will only work on the current set of files to commit. If you want to perform formatting on the entire repo, you'll need to use:
+
+```bash
+trunk fmt --all
+```
+
+![Trunk Format All]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_format_all.PNG)
+
+This can obviously be quite a radical approach to take if performing over a large codebase when the linting options are not historically what you may have used. I would say it be mandatory that you test your code changes if you do decide to perform wholesale code quality changes like this, or more likely you'll just want to fix going forwards for now and just ensure you have code quality checks on any new commits. I wonder if there's a way to automate this - enter trunk pre-commits!
 
 ## Enable Precommits
 
-## New Gitworkflow
+## My New Gitworkflow
+
+Along with [previous post on conventional commit setup](https://blog.hungovercoders.com/datagriff/2024/08/13/git-conventional-vs-code-workflow.html){:target="\_blank"} my new git workflow straight to main is as follows.
+
+1. Use the keyboard shortcut of CTRL+S to start the conventional commit flow as per the VS Code extension.
+2. Enter my conventional commit details following the prompts.
+3. Perform code linting as a pre-commit (automated).
+4. Correct any errors thrown up (manual - though I may automate this as well).
+5. Commit better quality code (automated).
+6. Synchronise code to remote main branch (automated).
+
+This is still my individual workflow at the moment when not working with other developers. This is so much faster and of higher quality than what I was doing just 2 days ago. Next, to protect myself and others I want to investigate how to perform testing before allowing merging into main, to hopefully safely meet the goal of trunk based development! Those over at [Trunk](https://trunk.io/){:target="\_blank"} have definitely made this journey a lot easier!
 
 ## Mega Tidy Commit Example
 
-I first installed trunk on my datagriff blog and it is here that I had that first "wow" moment of how powerful trunk could be in doing a big tidy up of my code in the real world. Here is the link to the commit and also a screenshot below showing how much of the code, and images, it brought up to standard for me. I am highly likely going to be embedded trunk in all my workflows and adding as a standard to my gitpod configuration files. Sweet sweet code protection is just what a gung-ho, lazy and terrified hungovercoder needs!
+I first installed trunk on my datagriff blog and it is here that I had that first "wow" moment of how powerful trunk could be in doing a big tidy up of my code in the real world. [Here is the link to the commit](https://github.com/hungovercoders-blog/datagriff/commit/cc71393a6d9165a11c34cf2b3f109fb6784e94f6){:target="\_blank"} and also a screenshot below showing how much of the code, and images, it brought up to standard for me. I am highly likely going to be embedded trunk in all my workflows and adding as a standard to my gitpod configuration files. Sweet sweet code protection is just what a gung-ho, lazy and terrified hungovercoder needs!

@@ -287,4 +287,4 @@ Next, to protect myself and others I want to investigate how to perform testing 
 
 I first installed trunk on my datagriff blog and it is here that I had that first "wow" moment of how powerful trunk could be in doing a big tidy up of my code in the real world. [Here is the link to the commit](https://github.com/hungovercoders-blog/datagriff/commit/cc71393a6d9165a11c34cf2b3f109fb6784e94f6){:target="\_blank"} and also a screenshot below showing how much of the code, and images, it brought up to standard for me. I am highly likely going to be embedded trunk in all my workflows and adding as a standard to my gitpod configuration files. Sweet sweet code protection is just what a gung-ho, lazy and terrified hungovercoder needs!
 
-![Trunk eCommit]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_commit_check.PNG)
+![Trunk Commit]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_commit.PNG)

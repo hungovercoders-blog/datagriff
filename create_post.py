@@ -19,7 +19,7 @@ print("Completed creating post directory.")
 print("Start creating asset directory...")
 asset_directory = f"/workspace/datagriff/docs/assets/{date_blog}"
 Path(asset_directory).mkdir(parents=True, exist_ok=True)
-image_directory = f"/workspace/datagriff/docs/assets/{date_blog}/link.png"
+image_directory = f"assets/{date_blog}/link.png"
 print("Completed creating asset directory.")
 
 print("Start creating blog file paths...")

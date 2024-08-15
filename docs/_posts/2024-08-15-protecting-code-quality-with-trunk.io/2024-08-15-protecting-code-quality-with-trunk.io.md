@@ -8,7 +8,7 @@ image:
 tags: Git VSCode Trunk.io
 ---
 
-I recently went down a rabbit hole of [VS code extensions](https://www.freecodecamp.org/news/best-vscode-extensions/){:target="\_blank"} and whilst doing some extension exploration of my own I came across one that looked interesting called [trunk](https://marketplace.visualstudio.com/items?itemName=Trunk.io){:target="\_blank"}. I mused that this could help me with [trunk based development](https://www.thoughtworks.com/en-gb/insights/blog/enabling-trunk-based-development-deployment-pipelines){:target="\_blank"} along with my consistently poor data quality (what can I say, I am a fairly lazy hungovercoder). I quickly became intoxicated with everything that [trunk.io](https://trunk.io/){:target="\_blank"} had to offer and integrated it into my workflow to easily protect my code quality before committing to the main branch!
+I recently went down a rabbit hole of [VS code extensions](https://www.freecodecamp.org/news/best-vscode-extensions/){:target="\_blank"} and whilst doing some extension exploration of my own I came across one that looked interesting called [trunk](https://marketplace.visualstudio.com/items?itemName=Trunk.io){:target="\_blank"}. I mused that this could help me with [trunk based development](https://www.thoughtworks.com/en-gb/insights/blog/enabling-trunk-based-development-deployment-pipelines){:target="\_blank"} along with my consistently poor code quality (what can I say, I am a fairly lazy hungovercoder). I quickly became intoxicated with everything that [trunk.io](https://trunk.io/){:target="\_blank"} had to offer and integrated it into my workflow to easily protect my code quality before committing to the main branch!
 
 - [Pre-Requisites](#pre-requisites)
 - [What is Trunk?](#what-is-trunk)

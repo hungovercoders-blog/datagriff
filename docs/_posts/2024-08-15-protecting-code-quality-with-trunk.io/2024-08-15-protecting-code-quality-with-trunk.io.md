@@ -8,7 +8,7 @@ image:
 tags: Git VSCode Trunk.io
 ---
 
-I recently went down a rabbit hole of [VS code extensions](https://www.freecodecamp.org/news/best-vscode-extensions/){:target="\_blank"} and whilst doing some extension exploration of my own I came across one that looked interesting called [trunk](https://marketplace.visualstudio.com/items?itemName=Trunk.io){:target="\_blank"}. I mused that this could help me with [trunk based development](https://www.thoughtworks.com/en-gb/insights/blog/enabling-trunk-based-development-deployment-pipelines){:target="\_blank"} along with my consistently poor data quality (what can I say, I am a fairly lazy hungovercoder). I quickly became intoxicated with everything that [trunk.io](https://trunk.io/){:target="\_blank"} had to offer and integrated it into my workflow to easily protect my code quality before committing to main!
+I recently went down a rabbit hole of [VS code extensions](https://www.freecodecamp.org/news/best-vscode-extensions/){:target="\_blank"} and whilst doing some extension exploration of my own I came across one that looked interesting called [trunk](https://marketplace.visualstudio.com/items?itemName=Trunk.io){:target="\_blank"}. I mused that this could help me with [trunk based development](https://www.thoughtworks.com/en-gb/insights/blog/enabling-trunk-based-development-deployment-pipelines){:target="\_blank"} along with my consistently poor data quality (what can I say, I am a fairly lazy hungovercoder). I quickly became intoxicated with everything that [trunk.io](https://trunk.io/){:target="\_blank"} had to offer and integrated it into my workflow to easily protect my code quality before committing to the main branch!
 
 - [Pre-Requisites](#pre-requisites)
 - [What is Trunk?](#what-is-trunk)
@@ -35,14 +35,14 @@ As always I will be using the mighty [gitpod](https://gitpod.io){:target="\_blan
 
 - **[Code Quality](https://trunk.io/code-quality){:target="\_blank"}**: This is the first and last code linter you will ever need. The code quality product leverages linters already available and automatically adds them to your code base when you install trunk. The whole trunk approach is configurable with a yaml file. The code quality aspect is what I will be focused on in this blog.
 - **[Merge Queue](https://trunk.io/merge-queue){:target="\_blank"}**: This is to manage and accelerate the appropriate pull request merges for your team into the main branch.
-- **[CI Analytics](https://trunk.io/ci-analytics){:target="\_blank}"**: These are glorious visualisations over your build and deployment pipelines to see how you are performing.
-- **[Flaky Tests](https://trunk.io/flaky-tests){:target="\_blank"}**:  This an upcoming project that can detect and remove flaky tests from your pipelines on any CI system. I know a few people who are going to be interested in this!
+- **[CI Analytics](https://trunk.io/ci-analytics){:target="\_blank}**: These are glorious visualisations over your build and deployment pipelines to see how you are performing.
+- **[Flaky Tests](https://trunk.io/flaky-tests){:target="\_blank"}**: This an upcoming project that can detect and remove flaky tests from your pipelines on any CI system. I know a few people who are going to be interested in this!
 
 If I could play with all of these trunk toys right now I would. Watch this space for more experimentation in between meals. Now to get started with Trunk and code quality...
 
 ## Create Trunk Account
 
-First sign-up to [Trunk](https://trunk.io/){:target="\_blank"} at [app.trunk.io](https://app.trunk.io/){:target="\_blank"}. If you're concerned about costs fear not as they offer a [free tier](https://trunk.io/pricing)[Trunk](https://trunk.io/){:target="\_blank"} which is unlimited on public repos and free for up to five committers on private repos (thank you [Trunk](https://trunk.io/){:target="\_blank"}!).  
+First sign-up to [Trunk](https://trunk.io/){:target="\_blank"} at [app.trunk.io](https://app.trunk.io/){:target="\_blank"}. If you're concerned about costs fear not as they offer a [free tier](https://trunk.io/pricing)[Trunk](https://trunk.io/){:target="\_blank"} which is unlimited on public repos and free for up to five committers on private repos (thank you [Trunk](https://trunk.io/){:target="\_blank"}!).
 
 ![Trunk Welcome]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_welcome.PNG)
 
@@ -214,7 +214,7 @@ This can obviously be quite a radical approach to take if performing over a larg
 
 ## Enable Precommit Action
 
-I want to make sure I don't commit any new poor quality changes into my repo. I can do this using the built-in actions provided by [Trunk](https://trunk.io/){:target="\_blank"}. 
+I want to make sure I don't commit any new poor quality changes into my repo. I can do this using the built-in actions provided by [Trunk](https://trunk.io/){:target="\_blank"}.
 
 To see a list of the actions that are available and which are enabled run the following:
 
@@ -233,7 +233,13 @@ trunk actions enable trunk-check-pre-push-always
 
 ![Trunk Actions Enable]({{ site.baseurl }}/assets/2024-08-15-protecting-code-quality-with-trunk.io/trunk_actions_enabled.PNG)
 
-Now if I perform a change with some bad python indentation in there for example...
+To ensure this configuration is applied to multiple users, so the repo is always protected, run the following command which will ensure that your trunk.yaml file is shared with anyone who uses the repo.
+
+```bash
+trunk config share
+```
+
+Next if I perform a change with some bad python indentation in there for example...
 
 ```python
 if (1==1):

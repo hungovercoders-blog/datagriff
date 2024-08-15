@@ -46,6 +46,8 @@ Introductory text
 ## Pre-Requisites
 
 - [VS Code](https://code.visualstudio.com/download){{:target="\_blank"}}
+- [Github Account](https://github.com/){:target="\_blank"}
+- [Git](https://git-scm.com/downloads){:target="\_blank"}
 
 As always I will be using the mighty [gitpod](https://gitpod.io){{:target="\_blank"}} so I won't need to configure anything other than spinning up a workspace.
 
@@ -53,7 +55,7 @@ As always I will be using the mighty [gitpod](https://gitpod.io){{:target="\_bla
 
 Text goes here
 
-![Image Description]({{ site.baseurl }}/assets/date_blog/image-01.PNG)
+![Image Description]({{ site.baseurl }}/assets/{date_blog}/image-01.PNG)
 """
     )
 print("Completed creating blog file and content.")

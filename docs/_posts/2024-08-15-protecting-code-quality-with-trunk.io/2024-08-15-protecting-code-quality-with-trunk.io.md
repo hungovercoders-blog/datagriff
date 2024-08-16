@@ -60,7 +60,7 @@ You can then configure trunk to run on every pull request to that repository (cr
 
 Its worth noting that there is [native slack integration](https://docs.trunk.io/administration/integration-for-slack#add-trunk-to-your-slack-workspace-admin-privileges-required){:target="\_blank"} if you wanted to receive notifications on poor code quality scenarios.
 
-Next we'll look at how we can start leveraging trunk in our codebases while developing to start embedding code quality in our workflow.
+Next we'll look at how we can start leveraging trunk in our codebases while we develop to start embedding code quality in our workflow.
 
 ## Initialise Trunk
 
@@ -145,7 +145,7 @@ Moving on now to how we will improve our code quality...
 
 ## Code Quality
 
-Code quality tends rely on [code linting](https://owasp.org/www-project-devsecops-guideline/latest/01b-Linting-Code){:target="\_blank"} that highlight were code is not meeting certain standards of readability or security. Its something we rely often manually to be done by other developers when performing pull requests. The amount of [code linters](https://github.com/caramelomartins/awesome-linters){:target="\_blank"} out there suggest this should be automated and this is exactly where trunk comes in.
+Code quality tends to rely on [code linting](https://owasp.org/www-project-devsecops-guideline/latest/01b-Linting-Code){:target="\_blank"} that highlights where code is not meeting certain standards of readability or security. Its something we rely often manually to be done by other developers when performing pull requests. The amount of [code linters](https://github.com/caramelomartins/awesome-linters){:target="\_blank"} out there suggest this should be automated and this is exactly where trunk comes in.
 
 ### Trunk Check
 
@@ -190,7 +190,7 @@ trunk check --all
 
 Now that looks more like my sandbox! Using the **--all** parameter you'll then be faced with all the current issues with your code (in my case the same ones I saw earlier!).
 
-Trunk has now become the authority on linters for me and automated the entire code quality check process for me. This is one last decision for me to make as a developer and you can literally feel the cognitive weight start to fall off your shoulders. Now to fix that pesky code!
+Trunk has now become the authority on linters for me and automated the entire code quality check process. This is one last decision for me to make as a developer and you can literally feel the cognitive weight start to fall off your shoulders. Now to fix that pesky code!
 
 ### Trunk Format
 
@@ -214,7 +214,7 @@ This can obviously be quite a radical approach to take if performing over a larg
 
 ## Enable Precommit Action
 
-I want to make sure I don't commit any new poor quality changes into my repo. I can do this using the built-in actions provided by [Trunk](https://trunk.io/){:target="\_blank"}.
+I want to make sure I don't commit any new poor code quality changes into my repo. I can do this using the built-in actions provided by [Trunk](https://trunk.io/){:target="\_blank"}.
 
 To see a list of the actions that are available and which are enabled run the following:
 

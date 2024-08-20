@@ -1,4 +1,4 @@
-I'm---
+---
 title: "Protecting Code Quality with Trunk.io"
 date: 2024-08-15
 author: dataGriff

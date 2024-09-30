@@ -1,8 +1,8 @@
 from datetime import datetime
 from pathlib import Path
 
-blog_title = "Protecting Code Quality with Trunk.io"
-tags = ["Git", "VSCode", "Trunk.io"]
+blog_title = "Distributed Reporting Mesh with Duckdb Delta and Streamlit"
+tags = ["Duckdb", "Delta", "Streamlit", "Azure"]
 author = "dataGriff"
 
 print("Start creating blog title...")
@@ -46,8 +46,8 @@ Introductory text
 ## Pre-Requisites
 
 - [VS Code](https://code.visualstudio.com/download){{:target="\_blank"}}
-- [Github Account](https://github.com/){:target="\_blank"}
-- [Git](https://git-scm.com/downloads){:target="\_blank"}
+- [Github Account](https://github.com/){{:target="\_blank"}}
+- [Git](https://git-scm.com/downloads){{:target="\_blank"}}
 
 As always I will be using the mighty [gitpod](https://gitpod.io){{:target="\_blank"}} so I won't need to configure anything other than spinning up a workspace.
 

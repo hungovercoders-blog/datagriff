@@ -2,3 +2,6 @@ duckdb==1.1.1
 streamlit==1.37.1
 pandas==2.2.3
 azure-identity
+deltalake
+polars
+magic_duckdb

@@ -295,7 +295,7 @@ This is super cool as we can also potentially allow the container app to scale t
 
 ## Summary
 
-Using duckdb, streamlit and azure container apps we:
+Using [duckdb](https://duckdb.org/){:target="\_blank"}, [streamlit](https://streamlit.io/){:target="\_blank"} and [azure container apps](https://azure.microsoft.com/en-us/products/container-apps) we:
 
 - Created a lightweight database solution
 - We source controlled our reporting application

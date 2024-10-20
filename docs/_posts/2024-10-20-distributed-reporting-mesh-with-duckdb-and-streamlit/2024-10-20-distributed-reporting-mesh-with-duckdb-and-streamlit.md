@@ -8,7 +8,7 @@ image:
 tags: Duckdb Streamlit Azure
 ---
 
-Is all data big? Not really. I wanted to find a solution to setting up a lightweight reporting mesh to compliment distributed storage in a data mesh. Do we really need to setup enterprise solutions like power bi, databricks and tableau for our reporting needs if we can in fact create small instance of reporting that provide compute on demand? I agreed with my thoughts that not all data was "big", then on discovering [duckdb](https://duckdb.org/){:target="\_blank"} and [streamlit](https://streamlit.io/){:target="\_blank"}. I realised that I could create a lightweight and source controlled reporting mesh with tools already available! I quickly jumped on to [kaggle](https://www.kaggle.com/){:target="\_blank"} to find a nice dataset to prove the experiment - say cheese...!
+Is all data big? Not really. I wanted to find a solution to setting up a lightweight reporting mesh to compliment distributed storage in a data mesh. Is there a way we can create distributed small instances of reporting applications that provide compute on demand whilst also source controlling the visualisations? I then discovered [duckdb](https://duckdb.org/){:target="\_blank"} and [streamlit](https://streamlit.io/){:target="\_blank"} realising that I could indeed create a lightweight and source controlled reporting mesh with tools already available! I quickly jumped on to [kaggle](https://www.kaggle.com/){:target="\_blank"} to find a nice dataset to prove the experiment - say cheese...!
 
 - [Pre-Requisites](#pre-requisites)
 - [Environment Configuration](#environment-configuration)

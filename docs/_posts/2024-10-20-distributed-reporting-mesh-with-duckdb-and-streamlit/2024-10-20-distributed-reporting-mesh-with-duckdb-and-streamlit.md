@@ -161,9 +161,7 @@ st.table(duckdb.sql("SELECT * FROM cheeses LIMIT 5;").df())
 
 ![Streamlit Page One]({{ site.baseurl }}/assets/2024-10-20-distributed-reporting-mesh-with-duckdb-and-streamlit/streamlit_page_one.PNG)
 
-For the second page I added a `2_dashboard.py` file which would display the top ten cheeses by region and a pie chart showing the countries with the most cheeses. According to this the good old USA are the biggest cheese monsters of the world!
-
-Notice that the `@st.cache_data` decorator is used to cache the data so that it is not reloaded every time the page is refreshed. This is a great feature of streamlit that allows you to cache data and only reload it when it changes.
+For the second page I added a `2_dashboard.py` file which would display the top ten cheeses by region and a pie chart showing the countries with the most cheeses. Notice that the `@st.cache_data` decorator is used to cache the data so that it is not reloaded every time the page is refreshed. This is a great feature of streamlit that allows you to cache data and only reload it when it changes.
 
 ```python
 import duckdb
@@ -216,7 +214,7 @@ fig = px.pie(
 st.plotly_chart(fig)
 ```
 
-Duckdb allowed me to use simple SQL to query the cheeses data along with [plotly](https://plotly.com/python/){:target="\_blank"} and barely scratching the surface of the [streamlit api offerings](https://docs.streamlit.io/develop/api-reference){:target="\_blank"}, I was able to create a decent looking dashboard with a few lines of code.
+Duckdb allowed me to use simple SQL to query the cheeses data along with [plotly](https://plotly.com/python/){:target="\_blank"} and barely scratching the surface of the [streamlit api offerings](https://docs.streamlit.io/develop/api-reference){:target="\_blank"}, I was able to create a decent looking dashboard with a few lines of code. According to this the good old USA are the biggest cheese monsters of the world!
 
 ![Streamlit Page Two]({{ site.baseurl }}/assets/2024-10-20-distributed-reporting-mesh-with-duckdb-and-streamlit/streamlit_page_two.PNG)
 

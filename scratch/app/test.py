@@ -1,5 +1,4 @@
 import duckdb
-import streamlit
 
 con = duckdb.connect(database="./data/cheese.duckdb", read_only=False)
 

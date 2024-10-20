@@ -1,8 +1,8 @@
 from datetime import datetime
 from pathlib import Path
 
-blog_title = "Distributed Reporting Mesh with Duckdb Delta and Streamlit"
-tags = ["Duckdb", "Delta", "Streamlit", "Azure"]
+blog_title = "Distributed Reporting Mesh with Duckdb and Streamlit"
+tags = ["Duckdb", "Streamlit", "Azure"]
 author = "dataGriff"
 
 print("Start creating blog title...")

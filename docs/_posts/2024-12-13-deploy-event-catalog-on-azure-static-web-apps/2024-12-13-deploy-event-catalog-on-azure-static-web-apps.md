@@ -123,7 +123,7 @@ This will ensure that npm install and build are done as part of a pre-requisite 
 
 ## Custom Domain - Events.Hungovercoders
 
-I decided to keep my event catalog close to my hungovercoders domain and I am going to host event catalog on [events.hungovercoders.com](events.hungovercoders.com).
+I decided to keep my event catalog close to my hungovercoders domain and I am going to host event catalog on [events.hungovercoders.com](https://events.hungovercoders.com){:target="\_blank"}.
 
 First copy the unique url from your azure static website in the azure portal.
 

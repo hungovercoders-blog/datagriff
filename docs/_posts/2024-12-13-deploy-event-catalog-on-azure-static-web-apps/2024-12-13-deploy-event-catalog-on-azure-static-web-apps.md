@@ -8,7 +8,7 @@ image:
 tags: Azure Event Catalog
 ---
 
-This blog is a bit of a cheat as its pretty much the same as my [previous post](https://blog.hungovercoders.com/2024-12-02-deploy-docusaurus-on-azure-static-web-apps/){:target="\_blank"} but this time I am deploying the [event catalog](https://www.eventcatalog.dev/){:target="\_blank"} website to [Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/overview){:target="\_blank"} using the [vs code extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps){:target="\_blank"}. Below is how to create the template event catalog website and deploy it to azure static web apps.
+This blog is a bit of a cheat as its pretty much the same as my [previous post](https://blog.hungovercoders.com/2024-12-02-deploy-docusaurus-on-azure-static-web-apps.html){:target="\_blank"} but this time I am deploying the [event catalog](https://www.eventcatalog.dev/){:target="\_blank"} website to [Azure Static Web Apps](https://docs.microsoft.com/en-us/azure/static-web-apps/overview){:target="\_blank"} using the [vs code extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps){:target="\_blank"}. Below is how to create the template event catalog website and deploy it to azure static web apps.
 
 - [Pre-Requisites](#pre-requisites)
 - [Event Catlog Start](#event-catlog-start)

@@ -1,8 +1,8 @@
 from datetime import datetime
 from pathlib import Path
 
-blog_title = "Deploy docusaurus on Azure Static Web Apps"
-tags = ["Azure", "Docusuaurus"]
+blog_title = "Deploy event catalog c on Azure Static Web Apps"
+tags = ["Azure", "Event Catalog"]
 author = "dataGriff"
 
 print("Start creating blog title...")

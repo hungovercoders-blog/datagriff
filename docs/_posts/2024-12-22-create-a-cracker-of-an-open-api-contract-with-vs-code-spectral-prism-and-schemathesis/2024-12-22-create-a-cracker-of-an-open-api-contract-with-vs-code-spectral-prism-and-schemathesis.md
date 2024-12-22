@@ -16,6 +16,10 @@ I've become super interested in the design, or contract, first approach to APIs,
 - [Requirements](#requirements)
 - [Domain Model](#domain-model)
 - [API Contract](#api-contract)
+  - [Post Endpoint](#post-endpoint)
+  - [Get Endpoint](#get-endpoint)
+  - [Open API Extension](#open-api-extension)
+  - [Formatting Errors](#formatting-errors)
 - [Lint API Contract](#lint-api-contract)
 - [Mock API Contract](#mock-api-contract)
 - [Manually Test Mock API](#manually-test-mock-api)
@@ -38,8 +42,8 @@ These extensions will have their own sections in the blog post but its worth bei
 - [Drawio](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio){:target="\_blank"}
 - [Open API](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi){:target="\_blank"}
 - [YAML](https://open-vsx.org/extension/redhat/vscode-yaml){:target="\_blank"}
-- [Spectral](https://marketplace.visualstudio.com/items?itemName=stoplight.spectral){:target="\_blank"}
 - [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"}
+- [Spectral](https://marketplace.visualstudio.com/items?itemName=stoplight.spectral){:target="\_blank"}
 - [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client){:target="\_blank"}
 - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 
@@ -118,6 +122,336 @@ As we only have one feature and one entity in this application (whiskey), then t
 ![Draw IO]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/drawio.PNG)
 
 ## API Contract
+
+The API contract will be developed in VS code initially leveraging the [Open API](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi){:target="\_blank"}, [YAML](https://open-vsx.org/extension/redhat/vscode-yaml){:target="\_blank"} and [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"} extension. We'll be using more later but I want to highlight what they bring to the table as we walk through.
+
+To see the final API contract at any point just go [here]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/whiskey_inventory.1.oas.yml), but the rest of the blog will give you insights into the how and why it ended up looking like it did...
+
+### Post Endpoint
+
+The first components of the open api contract we'll create will be:
+
+- **OpenAPI Version**
+- **Info** - including title, details and description
+- **Servers** - just a mock endpoint at this point in preparation
+- **Tags** - even though we have a simple API, its worth adding tags now and keeping your contract organised.
+- **Paths** - We'll add one POST endpoint first so that we have a valid Open API contract. I have utilised the term "whiskies" to acknowledge we are interacting with a collection of items. One example has been added but you can add more if you need a richer document for testing and you consumers.
+- **Components** - For the schemas we'll reuse in the contract, in this case the whiskey. Note the use of **allOf** in whiskeyWithID schema so that we can leverage the original whiskey schema that wouldn't have an ID generated for it yet, but return it in a response. I have restricted the whiskey brands to be a shortlist of enums so the API contract remains small for this demo, but I will eventually add all known brands!
+
+```yaml
+openapi: 3.0.3
+info:
+  title: Whiskey Inventory
+  description: |
+    Whiskey Inventory.<br>
+    ## Domain Model
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Mock server for development purposes.
+tags:
+  - name: Whiskey
+    description: Operations related to whiskey
+paths:
+  /whiskies:
+    post:
+      description: Add a new whiskey.
+      tags:
+        - Whiskey
+      summary: Add a whiskey
+      operationId: addWhiskey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Whiskey"
+            examples:
+              mythRequest:
+                summary: Myth Request
+                value:
+                  name: Myth
+                  brand: Penderyn
+                  age: 8
+                  type: Single Malt
+      responses:
+        "201":
+          description: Whiskey added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WhiskeyWithId"
+              examples:
+                mythResponse:
+                  summary: Response for successfully adding Myth
+                  value:
+                    id: penderyn-myth
+                    name: Myth
+                    brand: Penderyn
+                    age: 8
+                    type: Single Malt
+
+components:
+  schemas:
+    Whiskey:
+      type: object
+      required:
+        - name
+        - brand
+        - age
+        - type
+      properties:
+        name:
+          type: string
+          description: Name of the whiskey.
+          example: Myth
+          minLength: 2
+          maxLength: 30
+        brand:
+          type: string
+          description: Brand of the whiskey.
+          example: Penderyn
+          enum:
+            - Penderyn
+            - Glenmorangie
+            - Glenfidditch
+        age:
+          type: integer
+          description: How long the whiskey was aged.
+          example: 12
+          minimum: 3
+          maximum: 85
+        type:
+          type: string
+          description: What is the type of whiskey.
+          example: Single Malt
+          maxItems: 3
+          items:
+            type: string
+            enum:
+              - Single Malt
+              - Blended
+
+    WhiskeyWithId:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Whiskey"
+        - type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the whiskey.
+              example: penderyn-myth
+```
+
+### Get Endpoint
+
+No we'll add a GET endpoint to retrieve all of our whiskies from the whiskies path. When we do this we're going to move the whiskey array into a "data" object and add a "pagination" object in there too. This means the client can manage pages correctly and also using an object for data will be more extensible in the future than returning a straight up array. See the updated contract below.
+
+```yaml
+openapi: 3.0.3
+info:
+  title: Whiskey Inventory
+  description: |
+    Whiskey Inventory.<br>
+    ## Domain Model
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Mock server for development purposes.
+tags:
+  - name: Whiskey
+    description: Operations related to whiskey
+paths:
+  /whiskies:
+    post:
+      description: Add a new whiskey.
+      tags:
+        - Whiskey
+      summary: Add a whiskey
+      operationId: addWhiskey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Whiskey"
+            examples:
+              mythRequest:
+                summary: Myth Request
+                value:
+                  name: Myth
+                  brand: Penderyn
+                  age: 8
+                  type: Single Malt
+      responses:
+        "201":
+          description: Whiskey added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WhiskeyWithId"
+              examples:
+                mythResponse:
+                  summary: Response for successfully adding Myth
+                  value:
+                    id: penderyn-myth
+                    name: Myth
+                    brand: Penderyn
+                    age: 8
+                    type: Single Malt
+    get:
+      description: Get a list of all whiskies.
+      tags:
+        - Whiskey
+      summary: List whiskies
+      operationId: listWhiskies
+      responses:
+        "200":
+          description: List of all whiskies.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - pagination
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      whiskies:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/WhiskeyWithId"
+                  pagination:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        items:
+                          $ref: "#/components/schemas/pagination"
+              examples:
+                allWhiskies:
+                  summary: List of all whiskies
+                  value:
+                    data:
+                      whiskeys:
+                        - id: penderyn-myth
+                          name: Myth
+                          brand: Penderyn
+                          age: 8
+                          type: Single Malt
+                        - id: glenmorangie-lasanta
+                          name: Lasanta
+                          brand: Glenmorangie
+                          age: 12
+                          type: Single Malt
+                        - id: penderyn-legend
+                          name: Myth
+                          brand: Legend
+                          age: 12
+                          type: Single Malt
+                    pagination:
+                      total: 4
+                      currentPage: 1
+                      perPage: 10
+
+components:
+  schemas:
+    Whiskey:
+      type: object
+      required:
+        - name
+        - brand
+        - age
+        - type
+      properties:
+        name:
+          type: string
+          description: Name of the whiskey.
+          example: Myth
+          minLength: 2
+          maxLength: 30
+        brand:
+          type: string
+          description: Brand of the whiskey.
+          example: Penderyn
+          enum:
+            - Penderyn
+            - Glenmorangie
+            - Glenfidditch
+        age:
+          type: integer
+          description: How long the whiskey was aged.
+          example: 12
+          minimum: 3
+          maximum: 85
+        type:
+          type: string
+          description: What is the type of whiskey.
+          example: Single Malt
+          maxItems: 3
+          items:
+            type: string
+            enum:
+              - Single Malt
+              - Blended
+
+    WhiskeyWithId:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Whiskey"
+        - type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the whiskey.
+              example: penderyn-myth
+
+    pagination:
+      type: object
+      required:
+        - total
+        - currentPage
+        - perPage
+      additionalProperties: false
+      properties:
+        total:
+          type: integer
+          description: Total number of whiskeys available.
+          example: 4
+        currentPage:
+          type: integer
+          description: The current page being viewed.
+          example: 1
+        perPage:
+          type: integer
+          description: Number of whiskeys per page.
+          example: 10
+```
+
+### Open API Extension
+
+The open API extension will allow you to see the API document format in the left navigation bar as well as preview the swagger as it currently is.
+
+Here is the outline:
+
+![Open API Extension]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_outline.png)
+
+Here is the swagger preview:
+
+![Open API Swagger]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_swagger.png)
+
+Annoyingly at the moment it does not support Open API version 3.1 (see [here](https://github.com/42Crunch/vscode-openapi/issues/110){:target="\_blank"}), so I will already potentially be keeping an eye out on other tooling here.
+
+### Formatting Errors
+
+Error lens at this point will highlight basic yaml and open API document errors, such as if certain sections are missing (see below)
+
+It won't, however, highlight any
 
 ## Lint API Contract
 

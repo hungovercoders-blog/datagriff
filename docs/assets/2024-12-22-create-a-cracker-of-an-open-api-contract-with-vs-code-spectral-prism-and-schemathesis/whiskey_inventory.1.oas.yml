@@ -1,0 +1,181 @@
+openapi: 3.0.3
+info:
+  title: Whiskey Inventory
+  description: |
+    Whiskey Inventory.<br>
+    ## Domain Model
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Mock server for development purposes.
+tags:
+  - name: Whiskey
+    description: Operations related to whiskey
+paths:
+  /whiskies:
+    post:
+      description: Add a new whiskey.
+      tags:
+        - Whiskey
+      summary: Add a whiskey
+      operationId: addWhiskey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Whiskey"
+            examples:
+              mythRequest:
+                summary: Myth Request
+                value:
+                  name: Myth
+                  brand: Penderyn
+                  age: 8
+                  type: Single Malt
+      responses:
+        "201":
+          description: Whiskey added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WhiskeyWithId"
+              examples:
+                mythResponse:
+                  summary: Response for successfully adding Myth
+                  value:
+                    id: penderyn-myth
+                    name: Myth
+                    brand: Penderyn
+                    age: 8
+                    type: Single Malt
+    get:
+      description: Get a list of all whiskies.
+      tags:
+        - Whiskey
+      summary: List whiskies
+      operationId: listWhiskies
+      responses:
+        "200":
+          description: List of all whiskies.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - pagination
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      whiskies:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/WhiskeyWithId"
+                  pagination:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        items:
+                          $ref: "#/components/schemas/pagination"
+              examples:
+                allWhiskies:
+                  summary: List of all whiskies
+                  value:
+                    data:
+                      whiskeys:
+                        - id: penderyn-myth
+                          name: Myth
+                          brand: Penderyn
+                          age: 8
+                          type: Single Malt
+                        - id: glenmorangie-lasanta
+                          name: Lasanta
+                          brand: Glenmorangie
+                          age: 12
+                          type: Single Malt
+                        - id: penderyn-legend
+                          name: Myth
+                          brand: Legend
+                          age: 12
+                          type: Single Malt
+                    pagination:
+                      total: 4
+                      currentPage: 1
+                      perPage: 10
+
+components:
+  schemas:
+    Whiskey:
+      type: object
+      required:
+        - name
+        - brand
+        - age
+        - type
+      properties:
+        name:
+          type: string
+          description: Name of the whiskey.
+          example: Myth
+          minLength: 2
+          maxLength: 30
+        brand:
+          type: string
+          description: Brand of the whiskey.
+          example: Penderyn
+          enum:
+            - Penderyn
+            - Glenmorangie
+            - Glenfidditch
+        age:
+          type: integer
+          description: How long the whiskey was aged.
+          example: 12
+          minimum: 3
+          maximum: 85
+        type:
+          type: string
+          description: What is the type of whiskey.
+          example: Single Malt
+          maxItems: 3
+          items:
+            type: string
+            enum:
+              - Single Malt
+              - Blended
+
+    WhiskeyWithId:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Whiskey"
+        - type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the whiskey.
+              example: penderyn-myth
+
+    pagination:
+      type: object
+      required:
+        - total
+        - currentPage
+        - perPage
+      additionalProperties: false
+      properties:
+        total:
+          type: integer
+          description: Total number of whiskeys available.
+          example: 4
+        currentPage:
+          type: integer
+          description: The current page being viewed.
+          example: 1
+        perPage:
+          type: integer
+          description: Number of whiskeys per page.
+          example: 10

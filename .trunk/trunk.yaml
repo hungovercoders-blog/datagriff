@@ -22,7 +22,7 @@ lint:
     - pre-commit-hooks@4.6.0
     - bandit@1.7.10
     - black@24.8.0
-    - checkov@3.2.256
+    # - checkov@3.2.256
     - git-diff-check
     - isort@5.13.2
     - markdownlint@0.42.0

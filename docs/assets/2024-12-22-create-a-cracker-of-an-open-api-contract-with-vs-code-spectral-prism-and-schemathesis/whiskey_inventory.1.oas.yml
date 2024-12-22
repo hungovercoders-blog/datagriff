@@ -6,6 +6,10 @@ info:
     ## Domain Model
     ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
   version: 1.0.0
+  contact:
+    name: datagriff
+    url: https://hungovercoders.com
+    email: info@hungovercoders.com
 servers:
   - url: http://localhost:8080
     description: Mock server for development purposes.

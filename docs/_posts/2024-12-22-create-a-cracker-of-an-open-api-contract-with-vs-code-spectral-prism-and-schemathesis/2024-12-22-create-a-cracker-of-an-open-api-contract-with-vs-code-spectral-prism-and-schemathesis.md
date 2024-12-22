@@ -21,6 +21,9 @@ I've become super interested in the design, or contract, first approach to APIs,
   - [Open API Extension](#open-api-extension)
   - [Formatting Errors](#formatting-errors)
 - [Lint API Contract](#lint-api-contract)
+  - [Out of the Box](#out-of-the-box)
+  - [Custom Rules](#custom-rules)
+  - [Spectral CLI with Docker Compose](#spectral-cli-with-docker-compose)
 - [Mock API Contract](#mock-api-contract)
 - [Manually Test Mock API](#manually-test-mock-api)
 - [Automate Testing against Mock API](#automate-testing-against-mock-api)
@@ -449,11 +452,151 @@ Annoyingly at the moment it does not support Open API version 3.1 (see [here](ht
 
 ### Formatting Errors
 
-Error lens at this point will highlight basic yaml and open API document errors, such as if certain sections are missing (see below)
+[Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"} at this point will highlight basic yaml and open API document errors, such as if certain sections are missing (see below).
 
-It won't, however, highlight any
+![Basic Errors]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_error_missinginfo.png)
+
+It won't, however, highlight any more detailed errors that you might want to enforce in your API contract. This is where Spectral comes in.
 
 ## Lint API Contract
+
+I wanted a way to apply my own validation and more indepth rules to the API contract. [Spectral](https://stoplight.io/open-source/spectral){:target="\_blank"} is a tool that allows you to do this and is available as a [VS Code extension](https://marketplace.visualstudio.com/items?itemName=stoplight.spectral){:target="\_blank"}. To take advantage of spectral for open API specifications you need to add a configuration file called ".spectral.yaml" and add the following to the contents:
+
+```yaml
+extends: ["spectral:oas"]
+```
+
+If you wanted to look at AsyncAPI, another contract I want to explore, you would add:
+
+```yaml
+extends: ["spectral:asyncapi"]
+```
+
+### Out of the Box
+
+Out of the box Spectral open API ruleset combined with [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"} will highlight any errors in the API contract that do not conform to the schemas specified, which is over and abobe what we originally got. For example, if you have a required field that is not present in the contract, it will highlight this for you.
+
+![Missing Property]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing property.png)
+
+Or if you have a value that is not in the allowed enums, it will highlight this for you.
+
+![Invalid Value]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_invalid_value.png)
+
+For me this was absolutely great as I could see where I had made mistakes in the contract and correct them. I already had one with a missing contact section under info:
+
+![Missing Contact]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing_contact.png)
+
+So I added this at the top to remove the error:
+
+```yaml
+info:
+  title: Whiskey Inventory
+  description: |
+    Whiskey Inventory.<br>
+    ## Domain Model
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+  version: 1.0.0
+  contact:
+    name: datagriff
+    url: https://hungovercoders.com
+    email: info@hungovercoders.com
+```
+
+I now wanted to go further with this and see if I could apply my own rules to the API contract. Enter [spectral rulesets](https://docs.stoplight.io/docs/spectral/e5b9616d6d50c-rulesets){:target="\_blank"}...
+
+### Custom Rules
+
+You can apply your own API design rules using [spectral rulesets](https://docs.stoplight.io/docs/spectral/e5b9616d6d50c-rulesets){:target="\_blank"}. I wasn't sure what rules I wanted to apply, only that I wanted to apply them. Luckily I found this [page of examples](https://github.com/stoplightio/spectral-rulesets){:target="\_blank"} and pilfered some of the adidas ones who have published all of their API rules [here](https://github.com/adidas/api-guidelines/blob/master/.spectral.yml).
+
+My simple .spectral.yaml file looks like this:
+
+```yaml
+extends: ["spectral:oas"]
+
+rules:
+  # ---------------------------------------------------------------------------
+  # General OAS rules
+  # ---------------------------------------------------------------------------
+
+  paths-kebab-case:
+    description: All YAML/JSON paths MUST follow kebab-case
+    severity: warn
+    recommended: true
+    message: "{{property}} is not kebab-case: {{error}}"
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\/([a-z0-9]+(-[a-z0-9]+)*)?(\/[a-z0-9]+(-[a-z0-9]+)*|\/{.+})*$"
+
+  path-parameters-camelCase-alphanumeric:
+    description: Path parameters MUST follow camelCase
+    severity: warn
+    recommended: true
+    message: "{{property}} path parameter is not camelCase: {{error}}"
+    given: $..parameters[?(@.in == 'path')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  definitions-camelCase-alphanumeric:
+    description: All YAML/JSON definitions MUST follow fields-camelCase and be ASCII alphanumeric characters or `_` or `$`.
+    severity: error
+    recommended: true
+    message: "{{property}} MUST follow camelCase and be ASCII alphanumeric characters or `_` or `$`."
+    given: $.definitions[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "/^[a-z$_]{1}[A-Z09$_]*/"
+
+  properties-camelCase-alphanumeric:
+    description: All JSON Schema properties MUST follow fields-camelCase and be ASCII alphanumeric characters or `_` or `$`.
+    severity: error
+    recommended: true
+    message: "{{property}} MUST follow camelCase and be ASCII alphanumeric characters or `_` or `$`."
+    given: $.definitions..properties[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "/^[a-z$_]{1}[A-Z09$_]*/"
+```
+
+However if I change a property to be camel case now, this is not highlighted in vs code. I tried ensuring that spectral was using the correct .spectral configuration file for the extension, but it still didn't work. I will need to investigate this further, but luckily the spectral CLI can be used to lint the contract and apply the ruleset...
+
+![No Error]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_vs_code_no_error.png)
+
+### Spectral CLI with Docker Compose
+
+I knew I'd want to integrate the spectral linting with a CI pipeline at some point so I decided to use the [spectral CLI with docker compose](https://docs.stoplight.io/docs/spectral/b8391e051b7d8-installation){:target="\_blank"} to lint the API contract. I created a docker-compose.yml file with the following contents:
+
+```yaml
+version: "3.9"
+services:
+  spectral:
+    image: stoplight/spectral:5
+    command: "lint /tmp/whiskey_inventory.1.oas --ruleset /tmp/.spectral.yml"
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas:ro
+      - ./.spectral.yml:/tmp/.spectral.yml:ro
+```
+
+I then ran the following command to lint the API contract:
+
+```bash
+docker compose up
+```
+
+This will output any errors in the API contract that do not conform to the ruleset. I will need to investigate why the VS Code extension is not picking up the ruleset, but at least I have a way to lint the contract in a CI pipeline.
+
+![Spectral Lint Docker]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_lint_docker.png)
+
+Once all errors are removed then the CLI will report that the contract is valid.
+
+![Spectral Lint Docker Correct]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_lint_docker_correct.png)
+
+This linting can easily be added as a githook to shift left the validation of the API contract.
 
 ## Mock API Contract
 

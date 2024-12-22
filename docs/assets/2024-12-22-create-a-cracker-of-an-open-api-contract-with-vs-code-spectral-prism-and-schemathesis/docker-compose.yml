@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  spectral:
+    image: stoplight/spectral:5
+    command: lint /tmp/whiskey_inventory.1.oas --ruleset /tmp/.spectral.yml
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas:ro
+      - ./.spectral.yml:/tmp/.spectral.yml:ro

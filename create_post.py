@@ -1,14 +1,14 @@
 from datetime import datetime
 from pathlib import Path
 
-blog_title = "Deploy event catalog c on Azure Static Web Apps"
-tags = ["Azure", "Event Catalog"]
+blog_title = "Create a Cracker of an Open API Contract with VS Code, Spectral, Prism and Schemathesis"
+tags = ["API"]
 author = "dataGriff"
 
 print("Start creating blog title...")
 blog_file_title = blog_title.lower().replace(" ", "-")
 date = datetime.today().strftime("%Y-%m-%d")
-date_blog = f"{date}-{blog_file_title}"
+date_blog = f"{date}-{blog_file_title.replace(",","")}"
 print("Completed creating blog title.")
 
 print("Start creating post directory...")
@@ -49,7 +49,7 @@ Introductory text
 - [Github Account](https://github.com/){{:target="\_blank"}}
 - [Git](https://git-scm.com/downloads){{:target="\_blank"}}
 
-As always I will be using the mighty [gitpod](https://gitpod.io){{:target="\_blank"}} so I won't need to configure anything other than spinning up a workspace.
+As always I will be using the mighty [gitpod](https://gitpod.io){{:target="\_blank"}} so I won't need to configure anything other than spinning up the default workspace.
 
 ## Section 1
 

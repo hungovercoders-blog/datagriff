@@ -543,7 +543,7 @@ extends: ["spectral:asyncapi"]
 
 Out of the box Spectral open API ruleset combined with [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"} will highlight any errors in the API contract that do not conform to the schemas specified, which is over and abobe what we originally got. For example, if you have a required field that is not present in the contract, it will highlight this for you.
 
-![Missing Property]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing property.PNG)
+![Missing Property]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing_property.PNG)
 
 Or if you have a value that is not in the allowed enums, it will highlight this for you.
 

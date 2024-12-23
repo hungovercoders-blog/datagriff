@@ -4,7 +4,7 @@ date: 2024-12-22
 author: dataGriff
 description: "Create a Cracker of an Open API Contract with VS Code, Spectral, Prism and Schemathesis"
 image:
-  path: assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/link.png
+  path: assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/link.PNG
 tags: API
 ---
 
@@ -118,17 +118,17 @@ Feature: Manage Whiskey Inventory
 
 As we only have one feature and one entity in this application (whiskey), then the domain model becomes ridiculously simple. Again as mentioned above this is intentional as I wanted to focus on the creation of a contract experience over creating a complex API (I am new to this!) - but at the same time documenting this step in the process so you give it a good portion of you time before diving in! Below is an image of the super simple domain model containing one whiskey entity, for further insight into domain model explore [domain driven design](https://martinfowler.com/bliki/DomainDrivenDesign.html){:target="\_blank"} and [domain models](https://www.thoughtworks.com/en-gb/insights/blog/agile-project-management/domain-modeling-what-you-need-to-know-before-coding).
 
-![Domain Model]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png)
+![Domain Model]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png)
 
 **Hint:** I used the [draw.io vs code extension](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio){:target="\_blank"} to create this and if you search for uml in the templates its pretty close to what you need for a domain model.
 
-![Draw IO]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/drawio.PNG)
+![Draw IO]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/drawio.PNG)
 
 ## API Contract
 
 The API contract will be developed in VS code initially leveraging the [Open API](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi){:target="\_blank"}, [YAML](https://open-vsx.org/extension/redhat/vscode-yaml){:target="\_blank"} and [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"} extension. We'll be using more later but I want to highlight what they bring to the table as we walk through.
 
-To see the final API contract at any point just go [here]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/whiskey_inventory.1.oas.yml), but the rest of the blog will give you insights into the how and why it ended up looking like it did...
+To see the final API contract at any point just go [here]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/whiskey_inventory.1.oas.yml), but the rest of the blog will give you insights into the how and why it ended up looking like it did...
 
 ### Post Endpoint
 
@@ -148,7 +148,7 @@ info:
   description: |
     Whiskey Inventory.<br>
     ## Domain Model
-    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.PNG?raw=true)
   version: 1.0.0
 servers:
   - url: http://localhost:8080
@@ -259,7 +259,7 @@ info:
   description: |
     Whiskey Inventory.<br>
     ## Domain Model
-    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.PNG?raw=true)
   version: 1.0.0
 servers:
   - url: http://localhost:8080
@@ -442,11 +442,11 @@ The open API extension will allow you to see the API document format in the left
 
 Here is the outline:
 
-![Open API Extension]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_outline.png)
+![Open API Extension]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_outline.PNG)
 
 Here is the swagger preview:
 
-![Open API Swagger]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_swagger.png)
+![Open API Swagger]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_swagger.PNG)
 
 Annoyingly at the moment it does not support Open API version 3.1 (see [here](https://github.com/42Crunch/vscode-openapi/issues/110){:target="\_blank"}), so I will already potentially be keeping an eye out on other tooling here.
 
@@ -454,7 +454,7 @@ Annoyingly at the moment it does not support Open API version 3.1 (see [here](ht
 
 [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"} at this point will highlight basic yaml and open API document errors, such as if certain sections are missing (see below).
 
-![Basic Errors]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_error_missinginfo.png)
+![Basic Errors]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/openapi_error_missinginfo.PNG)
 
 It won't, however, highlight any more detailed errors that you might want to enforce in your API contract. This is where Spectral comes in.
 
@@ -476,15 +476,15 @@ extends: ["spectral:asyncapi"]
 
 Out of the box Spectral open API ruleset combined with [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens){:target="\_blank"} will highlight any errors in the API contract that do not conform to the schemas specified, which is over and abobe what we originally got. For example, if you have a required field that is not present in the contract, it will highlight this for you.
 
-![Missing Property]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing property.png)
+![Missing Property]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing property.PNG)
 
 Or if you have a value that is not in the allowed enums, it will highlight this for you.
 
-![Invalid Value]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_invalid_value.png)
+![Invalid Value]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_invalid_value.PNG)
 
 For me this was absolutely great as I could see where I had made mistakes in the contract and correct them. I already had one with a missing contact section under info:
 
-![Missing Contact]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing_contact.png)
+![Missing Contact]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_missing_contact.PNG)
 
 So I added this at the top to remove the error:
 
@@ -494,7 +494,7 @@ info:
   description: |
     Whiskey Inventory.<br>
     ## Domain Model
-    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.PNG?raw=true)
   version: 1.0.0
   contact:
     name: datagriff
@@ -565,7 +565,7 @@ rules:
 
 However if I change a property to be camel case now, this is not highlighted in vs code. I tried ensuring that spectral was using the correct .spectral configuration file for the extension, but it still didn't work. I will need to investigate this further, but luckily the spectral CLI can be used to lint the contract and apply the ruleset...
 
-![No Error]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_vs_code_no_error.png)
+![No Error]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_vs_code_no_error.PNG)
 
 ### Spectral CLI with Docker Compose
 
@@ -590,11 +590,11 @@ docker compose up
 
 This will output any errors in the API contract that do not conform to the ruleset. I will need to investigate why the VS Code extension is not picking up the ruleset, but at least I have a way to lint the contract in a CI pipeline.
 
-![Spectral Lint Docker]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_lint_docker.png)
+![Spectral Lint Docker]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_lint_docker.PNG)
 
 Once all errors are removed then the CLI will report that the contract is valid.
 
-![Spectral Lint Docker Correct]({ site.baseurl }/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_lint_docker_correct.png)
+![Spectral Lint Docker Correct]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/spectral_lint_docker_correct.PNG)
 
 This linting can easily be added as a githook to shift left the validation of the API contract.
 

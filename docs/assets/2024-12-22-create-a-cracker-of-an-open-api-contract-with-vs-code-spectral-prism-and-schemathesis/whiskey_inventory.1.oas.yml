@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.0.4
 info:
   title: Whiskey Inventory
   description: |
@@ -76,15 +76,11 @@ paths:
                     properties:
                       whiskies:
                         type: array
+                        maxItems: 10
                         items:
                           $ref: "#/components/schemas/WhiskeyWithId"
                   pagination:
-                    type: object
-                    properties:
-                      pagination:
-                        type: object
-                        items:
-                          $ref: "#/components/schemas/pagination"
+                    $ref: "#/components/schemas/pagination"
               examples:
                 allWhiskies:
                   summary: List of all whiskies
@@ -107,7 +103,7 @@ paths:
                           age: 12
                           type: Single Malt
                     pagination:
-                      total: 4
+                      total: 3
                       currentPage: 1
                       perPage: 10
 
@@ -146,11 +142,9 @@ components:
           description: What is the type of whiskey.
           example: Single Malt
           maxItems: 3
-          items:
-            type: string
-            enum:
-              - Single Malt
-              - Blended
+          enum:
+            - Single Malt
+            - Blended
 
     WhiskeyWithId:
       type: object
@@ -174,12 +168,18 @@ components:
         total:
           type: integer
           description: Total number of whiskeys available.
-          example: 4
+          example: 3
+          maximum: 100000
+          minimum: 1
         currentPage:
           type: integer
           description: The current page being viewed.
           example: 1
+          maximum: 10000
+          minimum: 1
         perPage:
           type: integer
           description: Number of whiskeys per page.
           example: 10
+          maximum: 10
+          minimum: 1

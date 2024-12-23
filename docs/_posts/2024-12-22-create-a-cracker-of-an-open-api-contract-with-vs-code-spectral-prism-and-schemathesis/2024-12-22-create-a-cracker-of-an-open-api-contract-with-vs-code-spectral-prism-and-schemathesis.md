@@ -28,6 +28,7 @@ I've become super interested in the design, or contract, first approach to APIs,
   - [Manually Test Mock API](#manually-test-mock-api)
 - [Automate Testing against Mock API](#automate-testing-against-mock-api)
 - [What Next?](#what-next)
+  - [Intgerating with Pre-Commit \& CI](#intgerating-with-pre-commit--ci)
   - [Mocking and Testing Tools](#mocking-and-testing-tools)
   - [The Role of Artificial Intelligence](#the-role-of-artificial-intelligence)
   - [Hosting Contracts](#hosting-contracts)
@@ -611,7 +612,7 @@ This linting can easily be added as a githook to shift left the validation of th
 
 ## Mock API Contract
 
-I wanted to run a mock API against the contract so that I could test it manually and also automate tests against it. I decided to use [prism](https://stoplight.io/open-source/prism){:target="\_blank"} as it was easy to use and I could run it in a [docker compose solution](https://docs.stoplight.io/docs/prism/f51bcc80a02db-installation#docker-compose) alongside my linting. I added the prism execution to my docker-compose.yml file which ended up looking like this:
+I wanted to run a mock API against the contract so that I could test it manually and also automate tests against it. I decided to use [prism](https://stoplight.io/open-source/prism){:target="\_blank"} as it was easy to use and I could run it in a [docker compose solution](https://docs.stoplight.io/docs/prism/f51bcc80a02db-installation#docker-compose){:target="\_blank"} alongside my linting. I added the prism execution to my docker-compose.yml file which ended up looking like this:
 
 ```yaml
 version: "3.9"
@@ -661,7 +662,6 @@ Content-Type: application/json
 
 ### Get a list of all whiskies
 GET http://localhost:8080/whiskies
-
 ```
 
 Executing the first POST request should return a 201 response for "created" and will mirror what we placed in the response of our contract example for this endpoint.
@@ -672,15 +672,96 @@ Executing the second GET request should return a 200 response for "ok" and will 
 
 ![Mock GET]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/mock_get.PNG)
 
-If we want to ignore the examples and create dynamic content based on the schemas in the contract, we can use the following syntax in the rest client file:
+If we want to ignore the examples and create dynamic content based on the schemas in the contract, we can use the following syntax in the rest client file to [leverage prism dynamic content](https://docs.stoplight.io/docs/prism/9528b5a8272c0-dynamic-response-generation-with-faker){:target="\_blank"}:
 
 ```http
+### Add a new whiskey - Dynamic
+POST http://localhost:8080/whiskies
+Content-Type: application/json
+Prefer: dynamic=true
 
+{
+  "name": "Myth",
+  "brand": "Penderyn",
+  "age": 8,
+  "type": "Single Malt"
+}
+
+### Get a list of all whiskies
+GET http://localhost:8080/whiskies
+Prefer: dynamic=true
 ```
+
+This will now return dynamic content based on the schemas in the contract as per the below.
+
+![Dynamic GET]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/dynamic_get.PNG)
+
+I noticed that additional properties would appear in the whiskey schema despite me using additionalProperties:false or unevaluatedProperties: false, this is something I need to investigate further.
 
 ## Automate Testing against Mock API
 
+I wanted to test the mock API as much as possible without having to write a full suite of manual tests. I came across the tool [schemathesis](https://schemathesis.readthedocs.io/en/stable/index.html){:target="\_blank"} which dynmically generates tests based on the contract. It seemed a bit odd for me to test a mock of the contract on the contract as it was likely guranteed to pass, but I wanted to see how it worked and it couldn't hurt. I also thought this looked like a good tool to test the real API.
+
+I first needed to add CURL to the prism docker image so that I could perform a healthcheck before schemathesis ran, as it needed the API to be available first. I created a dockerfile and added the following to install curl on the prism image:
+
+```Dockerfile
+# Extend the base image
+FROM stoplight/prism:4
+
+# Install curl
+RUN apk add --no-cache curl
+```
+
+I then amended the docker compose file to look like the following. I added a healthcheck to the prism service to ensure the API was available before schemathesis ran. I also added the schemathesis service to the docker compose file which would run the tests against the mock API.
+
+```yaml
+version: "3.9"
+services:
+  spectral:
+    image: stoplight/spectral:5
+    command: lint /tmp/whiskey_inventory.1.oas --ruleset /tmp/.spectral.yml
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas:ro
+      - ./.spectral.yml:/tmp/.spectral.yml:ro
+
+  prism:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: mock -h 0.0.0.0 /tmp/whiskey_inventory.1.oas.yml
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas.yml:ro
+    ports:
+      - 8080:4010 # Serve the mocked API locally as available on port 8080
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4010/whiskies"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+
+  schemathesis:
+    image: schemathesis/schemathesis:stable
+    depends_on:
+      prism:
+        condition: service_healthy
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas.yml:ro
+    command: >
+      run
+      --base-url=http://prism:4010
+      /tmp/whiskey_inventory.1.oas.yml
+```
+
+In the output you will see a number of requests against prism and finally, if all is well, you will get a schemathesis report stating all is well.
+
+![Schemathesis Summary]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/schemathesis_summary.PNG)
+
+All of this linting and dynamic mock testing I thought would be a good basis for approving an API contract as part of a pre-commit and likely CI stage. Its all in docker compose so can be easily integrated into a pipeline.
+
 ## What Next?
+
+### Intgerating with Pre-Commit & CI
 
 ### Mocking and Testing Tools
 

@@ -28,7 +28,8 @@ I've become super interested in the design, or contract, first approach to APIs,
   - [Manually Test Mock API](#manually-test-mock-api)
 - [Automate Testing against Mock API](#automate-testing-against-mock-api)
 - [What Next?](#what-next)
-  - [Intgerating with Pre-Commit \& CI](#intgerating-with-pre-commit--ci)
+  - [Intgerating with Pre-Commit and CI](#intgerating-with-pre-commit-and-ci)
+  - [Changelogs](#changelogs)
   - [Mocking and Testing Tools](#mocking-and-testing-tools)
   - [The Role of Artificial Intelligence](#the-role-of-artificial-intelligence)
   - [Hosting Contracts](#hosting-contracts)
@@ -66,6 +67,10 @@ It's very important that I stress my goal here is to establish a process of crea
 7. **Automate Testing against Mock API** - Quickly test all the endpoints of your mock. This might be overkill as the method of testing is based on the contract, which is what the mock is... but I used [schemathesis](https://schemathesis.readthedocs.io/en/stable/){:target="\_blank"} to perform automatically generated tests against the mock very quickly.
 
 Whilst researching this blog post I came across this [excellent video on contract first development](https://www.youtube.com/watch?v=Z-_2vuSfl88){:target="\_blank"} by [Andrey Fadeev](https://www.youtube.com/@andrey.fadeev){:target="\_blank"} that pretty much summarised where my thoughts were at. I highly recommend giving this a watch as he also covers the automation of changelogs which I have not covered here.
+
+so really I should have an 8th step...
+
+- **Automation of Change Logs** - Automate the generation of change logs from the contract. I've not covered in this blog but I imagine I need to look into tools like [oasdiff](https://www.oasdiff.com/) that can fit this need.
 
 ## Requirements
 
@@ -154,124 +159,13 @@ The first areas of the open api contract we'll create will be:
 - **Components** - For the schemas we'll reuse in the contract, in this case the whiskey. Note the use of **allOf** in whiskeyWithID schema so that we can leverage the original whiskey schema that wouldn't have an ID generated for it yet, but return it in a response. I have restricted the whiskey brands to be a shortlist of enums so the API contract remains small for this demo, but I will eventually add all known brands!
 
 ```yaml
-openapi: 3.0.3
+openapi: 3.0.4
 info:
   title: Whiskey Inventory
   description: |
     Whiskey Inventory.<br>
     ## Domain Model
-    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.PNG?raw=true)
-  version: 1.0.0
-servers:
-  - url: http://localhost:8080
-    description: Mock server for development purposes.
-tags:
-  - name: Whiskey
-    description: Operations related to whiskey
-paths:
-  /whiskies:
-    post:
-      description: Add a new whiskey.
-      tags:
-        - Whiskey
-      summary: Add a whiskey
-      operationId: addWhiskey
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Whiskey"
-            examples:
-              mythRequest:
-                summary: Myth Request
-                value:
-                  name: Myth
-                  brand: Penderyn
-                  age: 8
-                  type: Single Malt
-      responses:
-        "201":
-          description: Whiskey added successfully.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/WhiskeyWithId"
-              examples:
-                mythResponse:
-                  summary: Response for successfully adding Myth
-                  value:
-                    id: penderyn-myth
-                    name: Myth
-                    brand: Penderyn
-                    age: 8
-                    type: Single Malt
-
-components:
-  schemas:
-    Whiskey:
-      type: object
-      required:
-        - name
-        - brand
-        - age
-        - type
-      properties:
-        name:
-          type: string
-          description: Name of the whiskey.
-          example: Myth
-          minLength: 2
-          maxLength: 30
-        brand:
-          type: string
-          description: Brand of the whiskey.
-          example: Penderyn
-          enum:
-            - Penderyn
-            - Glenmorangie
-            - Glenfidditch
-        age:
-          type: integer
-          description: How long the whiskey was aged.
-          example: 12
-          minimum: 3
-          maximum: 85
-        type:
-          type: string
-          description: What is the type of whiskey.
-          example: Single Malt
-          maxItems: 3
-          items:
-            type: string
-            enum:
-              - Single Malt
-              - Blended
-
-    WhiskeyWithId:
-      type: object
-      allOf:
-        - $ref: "#/components/schemas/Whiskey"
-        - type: object
-          properties:
-            id:
-              type: string
-              description: Unique identifier for the whiskey.
-              example: penderyn-myth
-```
-
-### Get Endpoint
-
-No we'll add a GET endpoint to retrieve all of our whiskies from the whiskies path. When we do this we're going to move the whiskey array into a "data" object and add a "pagination" object in there too. This means the client can manage pages correctly and also using an object for data will be more extensible in the future than returning a straight up array. See the updated contract below.
-
-```yaml
-openapi: 3.0.3
-info:
-  title: Whiskey Inventory
-  description: |
-    Whiskey Inventory.<br>
-    ## Domain Model
-    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.PNG?raw=true)
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
   version: 1.0.0
 servers:
   - url: http://localhost:8080
@@ -339,15 +233,11 @@ paths:
                     properties:
                       whiskies:
                         type: array
+                        maxItems: 10
                         items:
                           $ref: "#/components/schemas/WhiskeyWithId"
                   pagination:
-                    type: object
-                    properties:
-                      pagination:
-                        type: object
-                        items:
-                          $ref: "#/components/schemas/pagination"
+                    $ref: "#/components/schemas/pagination"
               examples:
                 allWhiskies:
                   summary: List of all whiskies
@@ -370,7 +260,7 @@ paths:
                           age: 12
                           type: Single Malt
                     pagination:
-                      total: 4
+                      total: 3
                       currentPage: 1
                       perPage: 10
 
@@ -409,11 +299,170 @@ components:
           description: What is the type of whiskey.
           example: Single Malt
           maxItems: 3
-          items:
-            type: string
-            enum:
-              - Single Malt
-              - Blended
+          enum:
+            - Single Malt
+            - Blended
+
+    WhiskeyWithId:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Whiskey"
+        - type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the whiskey.
+              example: penderyn-myth
+```
+
+### Get Endpoint
+
+No we'll add a GET endpoint to retrieve all of our whiskies from the whiskies path. When we do this we're going to move the whiskey array into a "data" object and add a "pagination" object in there too. This means the client can manage pages correctly and also using an object for data will be more extensible in the future than returning a straight up array. See the updated contract below.
+
+```yaml
+openapi: 3.0.4
+info:
+  title: Whiskey Inventory
+  description: |
+    Whiskey Inventory.<br>
+    ## Domain Model
+    ![Domain Model](https://github.com/hungovercoders-blog/datagriff/blob/main/docs/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/domain_model.drawio.png?raw=true)
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Mock server for development purposes.
+tags:
+  - name: Whiskey
+    description: Operations related to whiskey
+paths:
+  /whiskies:
+    post:
+      description: Add a new whiskey.
+      tags:
+        - Whiskey
+      summary: Add a whiskey
+      operationId: addWhiskey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Whiskey"
+            examples:
+              mythRequest:
+                summary: Myth Request
+                value:
+                  name: Myth
+                  brand: Penderyn
+                  age: 8
+                  type: Single Malt
+      responses:
+        "201":
+          description: Whiskey added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WhiskeyWithId"
+              examples:
+                mythResponse:
+                  summary: Response for successfully adding Myth
+                  value:
+                    id: penderyn-myth
+                    name: Myth
+                    brand: Penderyn
+                    age: 8
+                    type: Single Malt
+    get:
+      description: Get a list of all whiskies.
+      tags:
+        - Whiskey
+      summary: List whiskies
+      operationId: listWhiskies
+      responses:
+        "200":
+          description: List of all whiskies.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - pagination
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      whiskies:
+                        type: array
+                        maxItems: 10
+                        items:
+                          $ref: "#/components/schemas/WhiskeyWithId"
+                  pagination:
+                    $ref: "#/components/schemas/pagination"
+              examples:
+                allWhiskies:
+                  summary: List of all whiskies
+                  value:
+                    data:
+                      whiskeys:
+                        - id: penderyn-myth
+                          name: Myth
+                          brand: Penderyn
+                          age: 8
+                          type: Single Malt
+                        - id: glenmorangie-lasanta
+                          name: Lasanta
+                          brand: Glenmorangie
+                          age: 12
+                          type: Single Malt
+                        - id: penderyn-legend
+                          name: Myth
+                          brand: Legend
+                          age: 12
+                          type: Single Malt
+                    pagination:
+                      total: 3
+                      currentPage: 1
+                      perPage: 10
+
+components:
+  schemas:
+    Whiskey:
+      type: object
+      required:
+        - name
+        - brand
+        - age
+        - type
+      properties:
+        name:
+          type: string
+          description: Name of the whiskey.
+          example: Myth
+          minLength: 2
+          maxLength: 30
+        brand:
+          type: string
+          description: Brand of the whiskey.
+          example: Penderyn
+          enum:
+            - Penderyn
+            - Glenmorangie
+            - Glenfidditch
+        age:
+          type: integer
+          description: How long the whiskey was aged.
+          example: 12
+          minimum: 3
+          maximum: 85
+        type:
+          type: string
+          description: What is the type of whiskey.
+          example: Single Malt
+          maxItems: 3
+          enum:
+            - Single Malt
+            - Blended
 
     WhiskeyWithId:
       type: object
@@ -437,15 +486,21 @@ components:
         total:
           type: integer
           description: Total number of whiskeys available.
-          example: 4
+          example: 3
+          maximum: 100000
+          minimum: 1
         currentPage:
           type: integer
           description: The current page being viewed.
           example: 1
+          maximum: 10000
+          minimum: 1
         perPage:
           type: integer
           description: Number of whiskeys per page.
           example: 10
+          maximum: 10
+          minimum: 1
 ```
 
 ### Open API Extension
@@ -698,6 +753,8 @@ This will now return dynamic content based on the schemas in the contract as per
 
 I noticed that additional properties would appear in the whiskey schema despite me using additionalProperties:false or unevaluatedProperties: false, this is something I need to investigate further.
 
+Other extensions that could be used to test the APIs are [postman](https://marketplace.visualstudio.com/items?itemName=Postman.postman-for-vscode){:target="\_blank"}, [httpie](https://marketplace.visualstudio.com/items?itemName=wk-j.vscode-httpie){:target="\_blank"} and [thunderclient](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client){:target="\_blank"}, which may be more powerful than the REST Client extension when it comes to more complex flows. For now though I have the need for manual exploratory testing as part of my process and [Rest client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client){:target="\_blank"} covers that need, particularly as I can store the requests in source control alongside the contract.
+
 ## Automate Testing against Mock API
 
 I wanted to test the mock API as much as possible without having to write a full suite of manual tests. I came across the tool [schemathesis](https://schemathesis.readthedocs.io/en/stable/index.html){:target="\_blank"} which dynmically generates tests based on the contract. It seemed a bit odd for me to test a mock of the contract on the contract as it was likely guranteed to pass, but I wanted to see how it worked and it couldn't hurt. I also thought this looked like a good tool to test the real API.
@@ -761,10 +818,36 @@ All of this linting and dynamic mock testing I thought would be a good basis for
 
 ## What Next?
 
-### Intgerating with Pre-Commit & CI
+### Intgerating with Pre-Commit and CI
+
+Seen as the method used here to carry out all the checks is using a `docker compose up` command, it should be relatively trivial now to add this to a pre-commit githook or CI pipeline. I hope to extract some of the variables into environment variables so I can reuse the solution and customise it for different contracts.
+
+### Changelogs
+
+I'll want to investigate tools like [oasdiff](https://www.oasdiff.com/){:target="\_blank"} to generate changelogs based on the contract. It looks like this also identifies breaking changes which will be really useful.
 
 ### Mocking and Testing Tools
 
+I have already started down this rabbit hole which is why I reeled myself in and focused on the process so I could get something working. Any of the tools can be swapped in and out as benefits or drawbacks are found. I am particularly interested in stateful mocks to provide a more realistic experience for consumers. I'll likely look at tools that have asyncpi support too. The following are a good starting point for investigation:
+
+- [Specmatic](https://specmatic.io/){:target="\_blank"}
+- [Microcks](https://microcks.io/){:target="\_blank"}
+- [Mockoon](https://mockoon.com/){:target="\_blank"}
+
+But there are many more (e.g. [Top API Mocking tools](https://speedscale.com/blog/api-mocking-tools/){:target="\_blank"}).
+
 ### The Role of Artificial Intelligence
 
+Initially this was going to be a post about using AI to generate API contracts. For example there already is an [open api GPT](https://chatgpt.com/g/g-gQ0FMGHmb-openapi-gpt){:target="\_blank"} that can be used, as well as obviously copilot within vs code. I started with this with the context from the feature file, but found I had to rework a lot of it anyway. The specific linting provided to me by spectral and error lens was far better than iterating against AI at this point. Also I found it important that I understood the contract specitication deeply as it helped my understand the behaviour I was building. I think AI is useful in this process but is not substitiute for understanding the OpenAPI contract and the behaviour you need to create. Once the contract is in place however based on good requirements, code generation from AI will likely be a very useful tool.
+
 ### Hosting Contracts
+
+I need to make a decision on hosting contracts somewhere and being able to apply this process to them from a central source of truth for the API. This will be for both publishers to implement and test, and consumers to be able to accurately mock from. Options so far are:
+
+- [Docusaurus](https://docusaurus.io/){:target="\_blank"} - leveraging the [open api plugin](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs)
+- [Event catalog](https://www.eventcatalog.dev/){:target="\_blank"}
+- [Swaggerhub](https://swagger.io/tools/swaggerhub/){:target="\_blank"}
+
+So many choices and many rabbit holes will be explored!
+
+Have a merry christmas all!

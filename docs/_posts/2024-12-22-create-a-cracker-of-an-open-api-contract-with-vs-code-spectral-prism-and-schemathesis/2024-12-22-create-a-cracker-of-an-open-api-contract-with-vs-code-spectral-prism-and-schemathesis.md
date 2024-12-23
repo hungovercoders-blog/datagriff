@@ -25,7 +25,7 @@ I've become super interested in the design, or contract, first approach to APIs,
   - [Custom Rules](#custom-rules)
   - [Spectral CLI with Docker Compose](#spectral-cli-with-docker-compose)
 - [Mock API Contract](#mock-api-contract)
-- [Manually Test Mock API](#manually-test-mock-api)
+  - [Manually Test Mock API](#manually-test-mock-api)
 - [Automate Testing against Mock API](#automate-testing-against-mock-api)
 - [What Next?](#what-next)
   - [Mocking and Testing Tools](#mocking-and-testing-tools)
@@ -81,37 +81,38 @@ Feature: Manage Whiskey Inventory
 
   Scenario: Create a new whiskey
     Given I am on the "Add Whiskey" page
-    When I enter the whiskey name "Glenfiddich"
+    When I enter the whiskey name "Myth"
+    And I enter the brand "Penderyn"
+    And I enter the age "8"
     And I enter the type "Single Malt"
-    And I enter the age "12"
     And I click the "Save" button
     Then I should see a confirmation message "Whiskey added successfully"
     And the whiskey "Glenfiddich" should appear in the whiskey list
 
   Scenario: View a list of whiskeys
     Given I have the following whiskeys in the system:
-      | Name         | Type        | Age |
-      | Glenfiddich  | Single Malt | 12  |
-      | Macallan     | Single Malt | 15  |
+      | Name      | Brand        | Age | Type         |
+      | Myth      | Penderyn     | 8   | Single Malt  |
+      | Lasanta   | Glenmorangie | 12  | Single Malt  |
     When I navigate to the "Whiskey List" page
     Then I should see the following whiskeys:
-      | Name         | Type        | Age |
-      | Glenfiddich  | Single Malt | 12  |
-      | Macallan     | Single Malt | 15  |
+      | Name      | Brand        | Age | Type         |
+      | Myth      | Penderyn     | 8   | Single Malt  |
+      | Lasanta   | Glenmorangie | 12  | Single Malt  |
 
   Scenario: Update an existing whiskey
-    Given the whiskey "Glenfiddich" exists in the system
-    When I navigate to the "Edit Whiskey" page for "Glenfiddich"
+    Given the whiskey "Myth" exists in the system
+    When I navigate to the "Edit Whiskey" page for "Myth"
     And I update the age to "18"
     And I click the "Save" button
     Then I should see a confirmation message "Whiskey updated successfully"
-    And the whiskey "Glenfiddich" should have the age "18" in the whiskey list
+    And the whiskey "Myth" should have the age "18" in the whiskey list
 
   Scenario: Delete a whiskey
-    Given the whiskey "Macallan" exists in the system
-    When I click the "Delete" button for "Macallan"
+    Given the whiskey "Lasanta" exists in the system
+    When I click the "Delete" button for "Lasanta"
     Then I should see a confirmation message "Whiskey deleted successfully"
-    And the whiskey "Macallan" should not appear in the whiskey list
+    And the whiskey "Lasanta" should not appear in the whiskey list
 ```
 
 ## Domain Model
@@ -130,9 +131,19 @@ The API contract will be developed in VS code initially leveraging the [Open API
 
 To see the final API contract at any point just go [here]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/whiskey_inventory.1.oas.yml), but the rest of the blog will give you insights into the how and why it ended up looking like it did...
 
+Based on the feature requirements and domain model, I know roughly my endpoints will look something like the following before I start my API contract:
+
+```bash
+POST whiskies/ ## to create a whiskey
+GET whiskies/ ## to get a list of whiskies
+GET whiskies/{id} ## get a single whiskey
+PUT whiskies/{id} ## udpate a single whiskey
+DELETE whiskies/{id} ## delete a single whiskey
+```
+
 ### Post Endpoint
 
-The first components of the open api contract we'll create will be:
+The first areas of the open api contract we'll create will be:
 
 - **OpenAPI Version**
 - **Info** - including title, details and description
@@ -506,7 +517,7 @@ I now wanted to go further with this and see if I could apply my own rules to th
 
 ### Custom Rules
 
-You can apply your own API design rules using [spectral rulesets](https://docs.stoplight.io/docs/spectral/e5b9616d6d50c-rulesets){:target="\_blank"}. I wasn't sure what rules I wanted to apply, only that I wanted to apply them. Luckily I found this [page of examples](https://github.com/stoplightio/spectral-rulesets){:target="\_blank"} and pilfered some of the adidas ones who have published all of their API rules [here](https://github.com/adidas/api-guidelines/blob/master/.spectral.yml).
+You can apply your own API design rules using [spectral rulesets](https://docs.stoplight.io/docs/spectral/e5b9616d6d50c-rulesets){:target="\_blank"}. I wasn't sure what rules I wanted to apply, only that I wanted to apply them. Luckily I found this [page of examples](https://github.com/stoplightio/spectral-rulesets){:target="\_blank"} which included [adidas spectral rules](https://github.com/adidas/api-guidelines/blob/master/.spectral.yml){:target="\_blank"} and also some good security ones from [owasp](https://github.com/stoplightio/spectral-owasp-ruleset){:target="\_blank"}. In this blog post I am not currently concerned with security, as its a big subject in its own right, but I will return to it I promise! I decided to pilfer some of the adidas ones who have published all of their API rules [here](https://github.com/adidas/api-guidelines/blob/master/.spectral.yml).
 
 My simple .spectral.yaml file looks like this:
 
@@ -600,7 +611,72 @@ This linting can easily be added as a githook to shift left the validation of th
 
 ## Mock API Contract
 
-## Manually Test Mock API
+I wanted to run a mock API against the contract so that I could test it manually and also automate tests against it. I decided to use [prism](https://stoplight.io/open-source/prism){:target="\_blank"} as it was easy to use and I could run it in a [docker compose solution](https://docs.stoplight.io/docs/prism/f51bcc80a02db-installation#docker-compose) alongside my linting. I added the prism execution to my docker-compose.yml file which ended up looking like this:
+
+```yaml
+version: "3.9"
+services:
+  spectral:
+    image: stoplight/spectral:5
+    command: lint /tmp/whiskey_inventory.1.oas --ruleset /tmp/.spectral.yml
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas:ro
+      - ./.spectral.yml:/tmp/.spectral.yml:ro
+  prism:
+    image: stoplight/prism:4
+    command: "mock -h 0.0.0.0 /tmp/whiskey_inventory.1.oas.yml"
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas.yml:ro
+    ports:
+      - "8080:4010" # Serve the mocked API locally as available on port 8080
+```
+
+Now when I run the following command:
+
+```bash
+docker compose up
+```
+
+I now first have my linting checks run and then the prism mock API is started with the endpoints available.
+
+![Prism Running]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/prism_running.PNG)
+
+Next I wanted to easily manually test and save those tests in source...
+
+### Manually Test Mock API
+
+I decided to use the [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client){:target="\_blank"} extension in VS code to manually test the mock API. I created a new file called "whiskey_inventory.http" and added the following content:
+
+```http
+### Add a new whiskey
+POST http://localhost:8080/whiskies
+Content-Type: application/json
+
+{
+  "name": "Myth",
+  "brand": "Penderyn",
+  "age": 8,
+  "type": "Single Malt"
+}
+
+### Get a list of all whiskies
+GET http://localhost:8080/whiskies
+
+```
+
+Executing the first POST request should return a 201 response for "created" and will mirror what we placed in the response of our contract example for this endpoint.
+
+![Mock POST]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/mock_post.PNG)
+
+Executing the second GET request should return a 200 response for "ok" and will mirror the list that we placed as the response in our contract example for this endpoint.
+
+![Mock GET]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/mock_get.PNG)
+
+If we want to ignore the examples and create dynamic content based on the schemas in the contract, we can use the following syntax in the rest client file:
+
+```http
+
+```
 
 ## Automate Testing against Mock API
 

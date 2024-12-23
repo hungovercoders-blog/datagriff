@@ -6,3 +6,10 @@ services:
     volumes:
       - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas:ro
       - ./.spectral.yml:/tmp/.spectral.yml:ro
+  prism:
+    image: stoplight/prism:4
+    command: mock -h 0.0.0.0 /tmp/whiskey_inventory.1.oas.yml
+    volumes:
+      - ./whiskey_inventory.1.oas.yml:/tmp/whiskey_inventory.1.oas.yml:ro
+    ports:
+      - 8080:4010 # Serve the mocked API locally as available on port 8080

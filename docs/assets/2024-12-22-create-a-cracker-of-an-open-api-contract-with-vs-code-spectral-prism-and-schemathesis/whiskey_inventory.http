@@ -1,0 +1,13 @@
+### Add a new whiskey
+POST http://localhost:8080/whiskies
+Content-Type: application/json
+
+{
+  "name": "Myth",
+  "brand": "Penderyn",
+  "age": 8,
+  "type": "Single Malt"
+}
+
+### Get a list of all whiskies
+GET http://localhost:8080/whiskies

@@ -4,7 +4,7 @@ date: 2024-12-22
 author: dataGriff
 description: "Create a Cracker of an Open API Contract with VS Code, Spectral, Prism and Schemathesis"
 image:
-  path: assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/link.PNG
+  path: assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/link.png
 tags: API
 ---
 

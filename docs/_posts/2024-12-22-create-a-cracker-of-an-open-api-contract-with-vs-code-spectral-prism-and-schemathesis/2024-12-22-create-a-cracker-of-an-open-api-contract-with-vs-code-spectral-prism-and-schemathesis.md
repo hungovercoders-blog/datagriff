@@ -814,7 +814,7 @@ In the output you will see a number of requests against prism and finally, if al
 
 ![Schemathesis Summary]({{ site.baseurl }}/assets/2024-12-22-create-a-cracker-of-an-open-api-contract-with-vs-code-spectral-prism-and-schemathesis/schemathesis_summary.PNG)
 
-All of this linting and dynamic mock testing I thought would be a good basis for approving an API contract as part of a pre-commit and likely CI stage. Its all in docker compose so can be easily integrated into a pipeline.
+All of this linting and dynamic mock testing I thought would be a good basis for approving an API contract as part of a pre-commit and likely CI stage. Its all in docker compose so can be easily integrated into a pipeline. Hopefully will all these checks in place you'll end up with a **cracking API contract**!
 
 ## What Next?
 

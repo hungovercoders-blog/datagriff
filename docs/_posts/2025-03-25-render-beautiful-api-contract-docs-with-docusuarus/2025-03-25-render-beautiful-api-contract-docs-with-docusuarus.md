@@ -543,7 +543,7 @@ If I didn't do this for example the csharp code examples would not render correc
 
 And of course I utilise the dracula theme for dark mode!
 
-![Whiskey Code Docs Dark Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_api_dark.PNG)
+![Whiskey Code Docs Dark Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_api_example_dark.PNG)
 
 ## Final Docs in Live Site
 

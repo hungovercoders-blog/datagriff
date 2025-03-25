@@ -8,7 +8,19 @@ image:
 tags: API Docusaurus
 ---
 
-Its been far too long again and I need to share with you more about my contracts obsession. Starting with how to make API contracts aesthetically pleasing with code examples using [Docusaurus](https://docusaurus.io/){:target="\_blank"} and the [openapi plugin](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs){:target="\_blank"}.
+Its been far too long again and I need to share with you more about my contracts obsession. Starting with how to make API contracts aesthetically pleasing with code examples using [Docusaurus](https://docusaurus.io/){:target="\_blank"} and the [openapi plugin](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs){:target="\_blank"}. If you simply can't wait to see how pretty these are before you invest anytime, skip to the [Final Docs in Live Site](#final-docs-in-live-site) section.
+
+- [Pre-Requisites](#pre-requisites)
+- [Directory Layout](#directory-layout)
+- [Add API Contract](#add-api-contract)
+- [Configure Docusuarus for API Doc Generation](#configure-docusuarus-for-api-doc-generation)
+  - [Configure Docusaurus Config File](#configure-docusaurus-config-file)
+  - [Configure Sidebar](#configure-sidebar)
+- [Generate API Docs](#generate-api-docs)
+- [Resolving Issues](#resolving-issues)
+- [Code Examples](#code-examples)
+- [Final Docs in Live Site](#final-docs-in-live-site)
+- [Next Steps](#next-steps)
 
 ## Pre-Requisites
 
@@ -505,9 +517,40 @@ If you do get issues with any of the above (which I did on occasion) make sure y
 - Revisit the [docusaurus-openapi-template](https://github.com/PaloAltoNetworks/docusaurus-template-openapi-docs/blob/main/docusaurus.config.ts){:target="\_blank"} for reference
 - Check the [compatibility matrix](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs#compatibility-matrix){:target="\_blank"} for docusaurus vs the open api docs and ensure they match
 - Check out any [open issues](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues){:target="\_blank"} on the docusaurus open api github page
+- Try stopping and starting you app again
 
-## Add Languages
+## Code Examples
+
+One of the coolest things about this plugin is that it renders the code examples for you. This is a great way to ensure that your API contract is up to date and that the code examples are correct. It also means that you can easily copy and paste the code examples into your codebase.
+
+![Whiskey Code Docs Standard]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_example01.PNG)
+
+I found that in order to render some themes correctly I also had to add this code to the prism section of the docusaurus.config.ts or docusaurus.config.js file:
+
+```ts
+    prism: {
+       additionalLanguages: [
+         "csharp",
+       ],
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+```
+
+If I didn't do this for example the csharp code examples would not render correctly in the theme I wanted. This only works for some languages. You can see below that the github theme makes the code example look far nicer now.
+
+![Whiskey Code Docs Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_example02.PNG)
+
+And of course I utilise the dracula theme for dark mode!
+
+![Whiskey Code Docs Dark Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_example_dark.PNG)
 
 ## Final Docs in Live Site
 
+These are all work in progress but I am utilising these open api docs in both the [hungovercoders](https://docs.hungovercoders.com){:target="\_blank"} website and my new [dogusaurus](https://www.dogusaurus.com/){:target="\_blank"} website, which I aim to be a documentation website for multiple dog related projects!
+
 ## Next Steps
+
+I will continue building both my [hungovercoders](https://docs.hungovercoders.com){:target="\_blank"} and [dogusaurus](https://www.dogusaurus.com/){:target="\_blank"} websites and will be adding more contracts to them. I want to add some automated spectral linting to the contracts and add some pre commit hooks as well as some CI/CD pipelines to ensure that the contracts are valid according to best practice and my own rules. I'd also like to potentially serve an API from my azure static website that will simply pass the raw api contracts when requested to make it easier for them to download. I'll also want to look at better methods of versioning which I think is also provided by the open api plugin.
+
+I'll also be adding more contract types such as [data contracts](https://datacontract.com/) and [asyncapi contracts](https://www.asyncapi.com/) to the static/contracts directory and will be rendering them in the same way as the API contracts. I'm really keen on trying some [jinja templates](https://jinja.palletsprojects.com/en/stable/){:target="\_blank"} to make data contracts render in MDX so I can host them in my docusaurus websites too. Exciting times!

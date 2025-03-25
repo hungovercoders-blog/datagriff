@@ -523,7 +523,7 @@ If you do get issues with any of the above (which I did on occasion) make sure y
 
 One of the coolest things about this plugin is that it renders the code examples for you. This is a great way to ensure that your API contract is up to date and that the code examples are correct. It also means that you can easily copy and paste the code examples into your codebase.
 
-![Whiskey Code Docs Standard]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_example01.PNG)
+![Whiskey Code Docs Standard]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_api_example01.PNG)
 
 I found that in order to render some themes correctly I also had to add this code to the prism section of the docusaurus.config.ts or docusaurus.config.js file:
 
@@ -539,11 +539,11 @@ I found that in order to render some themes correctly I also had to add this cod
 
 If I didn't do this for example the csharp code examples would not render correctly in the theme I wanted. This only works for some languages. You can see below that the github theme makes the code example look far nicer now.
 
-![Whiskey Code Docs Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_example02.PNG)
+![Whiskey Code Docs Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_api_example02.PNG)
 
 And of course I utilise the dracula theme for dark mode!
 
-![Whiskey Code Docs Dark Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_example_dark.PNG)
+![Whiskey Code Docs Dark Theme]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_api_dark.PNG)
 
 ## Final Docs in Live Site
 

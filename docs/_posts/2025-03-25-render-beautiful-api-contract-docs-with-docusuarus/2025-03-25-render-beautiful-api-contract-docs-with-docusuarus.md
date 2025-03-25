@@ -5,10 +5,10 @@ author: dataGriff
 description: "Render Beautiful API Contract Docs with Docusuarus"
 image:
   path: assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/link.png
-tags: API Docusuaurus
+tags: API Docusaurus
 ---
 
-Its been far too long again and I need to share with you more about my contracts obsession. Starting with how to make API contracts aesthetically pleasing with code examples using [Docusaurus](https://docusaurus.io/).
+Its been far too long again and I need to share with you more about my contracts obsession. Starting with how to make API contracts aesthetically pleasing with code examples using [Docusaurus](https://docusaurus.io/){:target="\_blank"} and the [openapi plugin](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs){:target="\_blank"}.
 
 ## Pre-Requisites
 
@@ -21,7 +21,7 @@ As always I will be using the mighty [gitpod](https://gitpod.io){:target="\_blan
 
 ## Directory Layout
 
-If you've setup docusuaurus like in my [previous post](https://blog.hungovercoders.com/datagriff/2024/12/02/deploy-docusaurus-on-azure-static-web-apps.html){:target="\_blank"}, you should have a root directory layout that looks something like this:
+If you've setup [Docusaurus](https://docusaurus.io/){:target="\_blank"} like in my [previous post](https://blog.hungovercoders.com/datagriff/2024/12/02/deploy-docusaurus-on-azure-static-web-apps.html){:target="\_blank"}, you should have a root directory layout that looks something like this:
 
 ```txt
 .github/
@@ -39,7 +39,7 @@ package-lock.json
 README.md
 ```
 
-We're going to leverage the static folder with a new directory called "contracts" to store our API contracts. This will also be where we store our other contracts in the future such as data contracts or asyncapi contracts. I decided to take the domain approach as the parent directory so domains are clustred together with their contracts rather than separating them out by function first. Our future static directory structure will therefore look something like the following:
+We're going to leverage the static folder with a new directory called "contracts" to store our API contracts. This will also be where we store our other contracts in the future such as data contracts or asyncapi contracts. I decided to take the domain approach as the parent directory so domains are clustered together with their contracts rather than separating them out by function first. Our future static directory structure will therefore look something like the following:
 
 ```txt
 static/
@@ -60,7 +60,7 @@ For now we will be focusing purely on the API contracts but I will be adding the
 
 ## Add API Contract
 
-In the static/contracts/whiskey/api/v1/ directoy add a file called whiskey.oas.1.0.yml with the following content:
+In the static/contracts/whiskey/api/v1/ directory add a file called whiskey.oas.1.0.yml with the following content:
 
 ```yaml
 openapi: 3.0.1
@@ -339,7 +339,7 @@ components:
 
 ## Configure Docusuarus for API Doc Generation
 
-Next the fun bit to render these documents beatifully in docusuaurus using this awesome [openapi plugin](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs). You can follow the documentation on the plugin page but I'll give you a quick start guide here.
+Next the fun bit to render these documents beautifully in docusaurus using this awesome [openapi plugin](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs){:target="\_blank"}. You can follow the documentation on the plugin page but I'll give you a quick start guide here.
 
 First install the plugin:
 
@@ -352,6 +352,19 @@ Then install the theme:
 ```bash
 yarn add docusaurus-theme-openapi-docs
 ```
+
+You should then see the following in your package.json:
+
+```json
+    "docusaurus-plugin-openapi-docs": "^4.3.7",
+    "docusaurus-theme-openapi-docs": "^4.3.7",
+```
+
+To see the latest dependency matrix for the open api docs go [here](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs#compatibility-matrix){:target="\_blank"}. As long as your docusaurus version and open api docs version are compatible you should be good to go.
+
+### Configure Docusaurus Config File
+
+This bit tripped me up a few times and luckily I realised I could use the [docusaurus-openapi-template](https://github.com/PaloAltoNetworks/docusaurus-template-openapi-docs/blob/main/docusaurus.config.ts){:target="\_blank"} as a good reference point.
 
 Add the plugin to your docusaurus.config.ts or docusaurus.config.js file:
 
@@ -384,7 +397,26 @@ plugins: [
 themes: ["docusaurus-theme-openapi-docs"],
 ```
 
-Ensure that whiskey is added to your navbar as well in the docusaurus.config.ts or docusaurus.config.js file as per the below:
+Ensure that your export default is set to the following:
+
+```ts
+export default async function createConfig() {
+  return config;
+}
+```
+
+Ensure that the following imports are added to the top of your docusaurus.config.ts or docusaurus.config.js file:
+
+```ts
+import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
+import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
+import type * as Plugin from "@docusaurus/types/src/plugin";
+}
+```
+
+Ensure that whiskey is added to your navbar as per the below:
 
 ```ts
   themeConfig: {
@@ -418,6 +450,8 @@ Ensure that whiskey is added to your navbar as well in the docusaurus.config.ts 
       ],
     },
 ```
+
+### Configure Sidebar
 
 Ensure that whiskey is added to your sidebar.ts or sidebar.js as well:
 
@@ -463,6 +497,14 @@ To run your website you will see the whiskey sidebar...
 And the stunning API docs 😍
 
 ![Whiskey API Docs]({{ site.baseurl }}/assets/2025-03-25-render-beautiful-api-contract-docs-with-docusuarus/docusaurus_whiskey_api.PNG)
+
+## Resolving Issues
+
+If you do get issues with any of the above (which I did on occasion) make sure you try some of the following:
+
+- Revisit the [docusaurus-openapi-template](https://github.com/PaloAltoNetworks/docusaurus-template-openapi-docs/blob/main/docusaurus.config.ts){:target="\_blank"} for reference
+- Check the [compatibility matrix](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs#compatibility-matrix){:target="\_blank"} for docusaurus vs the open api docs and ensure they match
+- Check out any [open issues](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs/issues){:target="\_blank"} on the docusaurus open api github page
 
 ## Add Languages
 

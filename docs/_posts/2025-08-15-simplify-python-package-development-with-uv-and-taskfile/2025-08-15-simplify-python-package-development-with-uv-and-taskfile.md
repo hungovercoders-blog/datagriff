@@ -133,15 +133,72 @@ This imports the app into the main entry point and allows us to run the CLI.
 
 We'll remove all the code from the `__init__.py` file. We still need the file to mark the directory as a package.
 
-We then need to update the `pyproject.toml` file to include an entry point for the script and include a dependency on [typer](https://typer.tiangolo.com/){:target="\_blank"}.
+We then need to update the `pyproject.toml` file to include an entry point for the script and include a dependency on [typer](https://typer.tiangolo.com/){:target="\_blank"}. By adding typer as a dependency UV will automatically install this into our virtual environment for us.
 
-Finally to install and test the cli locally we can run the following
+```toml
+##...
+dependencies = ["typer"]
 
-```bash
-
+[project.scripts]
+demo-python-greet = "demo_python_package.cli:app"
+###..
 ```
 
+Finally to install and test the cli locally we can run the following to install it locally
+
+```bash
+uv pip install . e
+```
+
+then run the following to see it work based off the alias we gave it in the toml
+
+```bash
+uv run demo-python-greet --name griff
+```
+
+![UV Run Package]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/uv_run_cli.PNG)
+
 ### Lint the Package
+
+Next up we can lint our python package using [ruff](https://docs.astral.sh/ruff/){:target="\_blank"}. This is also brought to us by the same people as UV so is extremely fast and lightweight.
+
+Run the following to perform the ruff checks.
+
+```bash
+uvx ruff check
+```
+
+![Ruff Check Pass]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/ruff_check_pass.PNG)
+
+These are all passing which is a bit boring, so lets break some linting rules, such as an f -string without any variable, and run it again. Now we get an error.
+
+![Ruff Failure]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/ruff_failure.PNG)
+
+We can fix this by running
+
+```bash
+uvx ruff check --fix
+```
+
+![Ruff Fix]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/ruff_fix.PNG)
+
+Next run uv build so we can get the packaged up wheel files and ensure that they are also pass linting checks correctly.
+
+```bash
+uv build
+```
+
+These will be created in the `dist` directory.
+
+Then run the following to ensure that the files built all have the appropriate metadata as part of the lint checks.
+
+```bash
+uvx twin
+```
+
+![Ruff Pass]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/ruff_pass.PNG)
+
+Right we're looking good from a linting point of view, lets move on to testing!
 
 ### Test the Package
 

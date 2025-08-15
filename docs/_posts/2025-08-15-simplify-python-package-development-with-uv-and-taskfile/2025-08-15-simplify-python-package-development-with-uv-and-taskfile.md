@@ -646,7 +646,7 @@ This is something that will be fantastic to keep your README and CONTRIBUTING le
 
 There is also a nice [vs code extension for task](https://marketplace.visualstudio.com/items?itemName=task.vscode-task){:target="\_blank"} if you're a GUI monster and you can discover and execute all your tasks from there too.
 
-![Taskfile VS Code Extension]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_vscode_extension.PNG)
+![Taskfile VS Code Extension]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/task_vscode.PNG)
 
 ## Simplify Github Action
 

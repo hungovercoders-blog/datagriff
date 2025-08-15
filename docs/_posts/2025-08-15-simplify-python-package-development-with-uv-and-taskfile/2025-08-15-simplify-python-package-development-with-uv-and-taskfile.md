@@ -180,7 +180,7 @@ We can fix this by running
 uvx ruff check --fix
 ```
 
-![Ruff Fix]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/ruff_fix.PNG)
+![Ruff Fix]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/ruff_failure_fix.PNG)
 
 Next run uv build so we can get the packaged up wheel files and ensure that they are also pass linting checks correctly.
 

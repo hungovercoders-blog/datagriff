@@ -658,7 +658,6 @@ jobs:
           task --version
 
       - name: Install Python CLI 'uv'
-        # 'uv' provides the `uv` and `uvx` CLI tools used by the Taskfile.
         run: |
           python3 -m pip install --upgrade pip setuptools wheel
           python3 -m pip install uv
@@ -710,8 +709,18 @@ I actually fixed a bug by using task and having consistency with my local dev an
 
 ## Use the Package
 
-To easily use the package immediately you can pip install from the github repo
+To easily use the package immediately you can pip install from the github repo as long as it is public
+
+```bash
+pip install git+https://github.com/hungovercoders-blog/demo-python-package
+```
 
 and then execute it like so
+
+```bash
+ demo-python-greet --name dataGriff
+```
+
+![Package Demo]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/package_demo.PNG)
 
 In a future blog I will be showing how to publish this to pypi and improve your documentation so that its both more user and contributing friendly!

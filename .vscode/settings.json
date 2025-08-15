@@ -30,6 +30,7 @@
     "randomfractalsinc",
     "rulesets",
     "Schemathesis",
+    "setuptools",
     "sqltools",
     "stlite",
     "Taskfile",

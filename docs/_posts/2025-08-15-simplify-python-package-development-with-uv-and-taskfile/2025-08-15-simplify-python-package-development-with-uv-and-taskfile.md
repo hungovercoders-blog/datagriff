@@ -62,6 +62,8 @@ You can also initiate apps, libraries or completely bare python projects using u
 uv init --help
 ```
 
+### Add some Code to the Package
+
 ### Lint the Package
 
 ### Test the Package

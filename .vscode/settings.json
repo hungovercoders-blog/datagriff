@@ -19,11 +19,13 @@
     "Macallan",
     "Namecheap",
     "OLAP",
+    "pipx",
     "randomfractalsinc",
     "rulesets",
     "Schemathesis",
     "sqltools",
     "stlite",
+    "Taskfile",
     "trivy",
     "whitphx"
   ]

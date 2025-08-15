@@ -1,8 +1,8 @@
 from datetime import datetime
 from pathlib import Path
 
-blog_title = "Render Beautiful API Contract Docs with Docusuarus and Spectral"
-tags = ["API", "Docusuaurus", "Spectral"]
+blog_title = "Simplify Python Package Development with UV and Taskfile"
+tags = ["Python", "UV", "Taskfile"]
 author = "dataGriff"
 
 print("Start creating blog title...")

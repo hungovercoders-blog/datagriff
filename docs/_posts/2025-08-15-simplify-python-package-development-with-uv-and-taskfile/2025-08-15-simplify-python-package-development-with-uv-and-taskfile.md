@@ -202,8 +202,230 @@ Right we're looking good from a linting point of view, lets move on to testing!
 
 ### Test the Package
 
+We're going to add a straight forward test that will check the functionality of the cli itself.
+
+In a tests directory add a `test_cli.py` file with the following contents.
+
+```python
+import subprocess
+import sys
+import pytest
+from pathlib import Path
+
+@pytest.mark.parametrize("name,expected", [
+    ("Alice", "Hello Alice!"),
+    ("Bob", "Hello Bob!"),
+    ("", "Hello !"),
+])
+def test_greet_cli(name, expected):
+    result = subprocess.run(
+        [sys.executable, "-m", "demo_python_package.cli", "--name", name],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert expected in result.stdout
+```
+
+Then run the following command to run the tests
+
+```bash
+pytest -v
+```
+
+![Pytest Pass]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/pytest.PNG)
+
 ## Create a Github Action
+
+Next, we can create a GitHub Action to automate our CI process which will include building, linting and testing. Create a `.github/workflows/ci.yml` file with the following contents:
+
+```yaml
+name: continuous-integration
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - ".python-version"
+      - ".github/workflows/ci.yml"
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies (dev + extras)
+        run: uv sync --all-extras --dev
+
+      - name: Run linter
+        run: uvx ruff check
+
+      - name: Build distribution
+        run: uv build
+
+      - name: Check distribution with twine
+        run: uvx twine check dist/*
+
+      - name: Install package for testing
+        run: |
+          pip install -e .
+          pip install pytest pytest-cov
+
+      - name: Run tests with coverage and JUnit output
+        run: |
+          pytest \
+            --junit-xml=pytest-results.xml \
+            --cov=src \
+            --cov-report=xml \
+            --cov-report=term \
+            > test_output.txt
+          status=$?
+          coverage_failed=0
+          test_failed=0
+          if [ $status -ne 0 ]; then
+            if grep -q 'FAIL Required test coverage of 100%' test_output.txt; then
+              echo '❌ Pipeline failed: Code coverage is below 100%.'
+              coverage_failed=1
+            fi
+            if grep -q 'FAILED' test_output.txt; then
+              echo '❌ Pipeline failed: One or more tests failed.'
+              test_failed=1
+            fi
+            cat test_output.txt
+          fi
+          exit $status
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: pytest-results.xml
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: pytest-results.xml
+
+      - name: Write test summary to GitHub Actions UI
+        if: always()
+        run: |
+          echo "## 🧪 Test Results and Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat test_output.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Write coverage summary to GitHub Actions UI
+        if: always()
+        run: |
+          echo "## 📊 Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          uvx coverage report --show-missing >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+```
+
+This will install all the appropriate python packages, perform linting and testing. Once complete you should get successful workflow passing and successful test output.
+
+We'll be making this workflow considerably simpler in the next section using taskfiles...
 
 ## Introduce a Task File
 
+Now to simplify both our CI pipeline and our development approach we are going to introduce a [taskfile](https://taskfile.dev/){:target="\_blank"}! Taskfiles are a great way to abstract away common command you want to run and also to keep consistency between your development process and the eventual CI.
+
+### Install Task
+
+You can [install task](https://taskfile.dev/docs/installation){:target="\_blank"} in a number of ways, but here we can just pip install.
+
+```bash
+pip install go-task-bin
+```
+
+Then confirm your version with ..
+
+```bash
+task --version
+```
+
+You can then run the following to initiate a Taskfile:
+
+```bash
+task init
+```
+
+You should also add `task/` to your `.gitignore` file.
+
+### Default
+
+First we'll amend our default task to show we can make our variables in taskfiles dynamic like so
+
+```bash
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GITUSER:
+    sh: git config user.name || echo "Unknown User"
+
+tasks:
+  default:
+    cmds:
+      - echo "Hello {{.GITUSER}}"
+    silent: true
+```
+
+Then when we run
+
+```bash
+task
+```
+
+We get get the output and our user name
+
+### Install and Dependencies
+
+### Lint
+
+#### Lint Fix
+
+### Test
+
+### CI
+
+### Task VS Code Extension
+
 ## Simplify Github Action
+
+## Use the Package
+
+To easily use the package immediately you can pip install from the github repo
+
+and then execute it like so
+
+In a future blog I will be showing how to publish this to pypi and improve your documentation so that its both more user and contributing friendly!

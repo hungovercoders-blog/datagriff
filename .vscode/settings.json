@@ -27,6 +27,7 @@
     "pipx",
     "pyproject",
     "pytest",
+    "pyvenv",
     "randomfractalsinc",
     "rulesets",
     "Schemathesis",
@@ -38,6 +39,7 @@
     "trivy",
     "typer",
     "vars",
+    "venv",
     "whitphx",
     "woop"
   ]

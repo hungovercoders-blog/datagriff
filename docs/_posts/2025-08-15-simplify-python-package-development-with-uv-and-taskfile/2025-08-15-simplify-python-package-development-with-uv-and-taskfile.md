@@ -10,6 +10,29 @@ tags: Python UV Taskfile
 
 I'd never made a python package before and I was keenly aware of my mismanagement of python environments in the past, especially after a few beers. Leveraging the power of [UV](https://docs.astral.sh/uv/){:target="\_blank"} I was quickly able to create a virtual environment and manage my dependencies with a sobering ease.Combining this with [Taskfile](https://taskfile.dev/){:target="\_blank"} allowed me to further simplify my development processes with abstractions for all my commands. This also allowed me to leverage very easily the same commands for local development and my CI. I cannot wait to use taskfile ... everywhere!
 
+- [Pre-Requisites](#pre-requisites)
+- [Create a Python Package with UV](#create-a-python-package-with-uv)
+  - [Install UV](#install-uv)
+  - [Initiate Package](#initiate-package)
+  - [Run the package locally](#run-the-package-locally)
+  - [Convert the Package into a CLI](#convert-the-package-into-a-cli)
+  - [Lint the Package](#lint-the-package)
+  - [Test the Package](#test-the-package)
+- [Create a Github Action](#create-a-github-action)
+- [Introduce a Task File](#introduce-a-task-file)
+  - [Install Task](#install-task)
+  - [Default](#default)
+  - [Install and Dependencies](#install-and-dependencies)
+  - [Build](#build)
+  - [Lint](#lint)
+    - [Lint Fix](#lint-fix)
+  - [Test](#test)
+  - [CI](#ci)
+  - [Task List](#task-list)
+  - [Task VS Code Extension](#task-vs-code-extension)
+- [Simplify Github Action](#simplify-github-action)
+- [Use the Package](#use-the-package)
+
 ## Pre-Requisites
 
 - [VS Code](https://code.visualstudio.com/download){:target="\_blank"}
@@ -597,7 +620,15 @@ Now we can easily execute our CI locally or in a pipeline super easily with...
 task ci
 ```
 
-![Taskfile CI]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_ci.PNG)
+![Taskfile CI]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_ci_noforce.PNG)
+
+As everything has already run it just prints out that its happy because nothing has changed. While its a time saver we may want to make the CI run just in case... We can use the force parameter to make this happen.
+
+```bash
+task ci --force
+```
+
+![Taskfile CI Force]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_ci_force.PNG)
 
 ### Task List
 

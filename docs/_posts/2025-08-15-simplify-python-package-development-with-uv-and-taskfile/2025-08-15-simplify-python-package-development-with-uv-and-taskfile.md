@@ -51,10 +51,12 @@ uv --version
 Next create your package using the `--package` argument for your uv init command. This means you are creating package.
 
 ```bash
-uv init --package hungovercoders_demo
+uv init --package
 ```
 
 ![UV Install]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/uv_initiate_package.PNG)
+
+You can provide a name for the package as an argument as well, but I have deliberately not provided one so that toml file ends up in the root along with the src directory. This does mean your github repo naming is important to reflect the name of the package. This later allows us to treat the github repo directly as a package and we can install from it using pip install without needing to publish to pypi. This is very handy for a quick turnaround and testing of our package!
 
 You can also initiate apps, libraries or completely bare python projects using uv. Use the following command to see what's on offer.
 
@@ -62,7 +64,82 @@ You can also initiate apps, libraries or completely bare python projects using u
 uv init --help
 ```
 
-### Add some Code to the Package
+### Run the package locally
+
+The package comes initiated with one main method in the code `src/hungovercoders_demo/__init__.py`
+
+```python
+def main() -> None:
+    print("Hello from demo-python-package!")
+```
+
+To try this out we can run the package using uv
+
+```bash
+uv run demo-python-package
+```
+
+![UV Run Package]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/uv_run_package.PNG)
+
+Uv will automatically create a virtual environment for you (woop! woop!) and create a uv.lock file. The uv.lock file will ensure consistent environments for anyone who uses your package.
+
+### Convert the Package into a CLI
+
+Next we're going to convert the package into a CLI. Keeping this simple for the demo we'll leverage the simple greetings package laid out in [packaging python]({:target="_blank"}){:target="\_blank"} - [creating and packaging command-line tools](https://packaging.python.org/en/latest/guides/creating-command-line-tools/){:target="\_blank"}, and tweak it to make it slightly simpler. The package will leverage the [typer](https://typer.tiangolo.com/){:target="\_blank"} library which makes creating a CLI tool even easier.
+
+First create a `greetings.py` file and add the following code
+
+```python
+import typer
+from typing_extensions import Annotated
+
+
+def greet(
+    name: Annotated[str, typer.Option(help="The name of the person to greet")] = ""
+):
+    greeting = f"Hello {name}!"
+    print(greeting)
+```
+
+This means we're going to expose a command called greet that takes a `--name` option as a parameter then prints this out to the terminal.
+
+Then add a `cli.py` file and add the following code
+
+```python
+import typer
+
+from .greetings import greet
+
+
+app = typer.Typer()
+app.command()(greet)
+
+
+if __name__ == "__main__":
+    app()
+```
+
+This means we're creating a typer application and adding the greet command we defined in greetings. We're then going to expose this typer application through our main entry point.
+
+Then add a `main.py` file and add the following code
+
+```python
+if __name__ == "__main__":
+    from demo_python_package.cli import app
+    app()
+```
+
+This imports the app into the main entry point and allows us to run the CLI.
+
+We'll remove all the code from the `__init__.py` file. We still need the file to mark the directory as a package.
+
+We then need to update the `pyproject.toml` file to include an entry point for the script and include a dependency on [typer](https://typer.tiangolo.com/){:target="\_blank"}.
+
+Finally to install and test the cli locally we can run the following
+
+```bash
+
+```
 
 ### Lint the Package
 

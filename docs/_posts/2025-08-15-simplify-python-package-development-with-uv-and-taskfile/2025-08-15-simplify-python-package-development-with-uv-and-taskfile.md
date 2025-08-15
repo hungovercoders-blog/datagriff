@@ -8,7 +8,7 @@ image:
 tags: Python UV Taskfile
 ---
 
-I'd never made a python package before and I was keenly aware of my mismanagement of python environments in the past, especially after a few beers. Leveraging the power of [UV](https://docs.astral.sh/uv/){:target="\_blank"} I was quickly able to create a virtual environment and manage my dependencies with a sobering ease.Combining this with [Taskfile](https://taskfile.dev/){:target="\_blank"} allowed me to further simplify my development processes with abstractions for all my commands. This also allowed me to leverage very easily the same commands for local development and my CI!
+I'd never made a python package before and I was keenly aware of my mismanagement of python environments in the past, especially after a few beers. Leveraging the power of [UV](https://docs.astral.sh/uv/){:target="\_blank"} I was quickly able to create a virtual environment and manage my dependencies with a sobering ease.Combining this with [Taskfile](https://taskfile.dev/){:target="\_blank"} allowed me to further simplify my development processes with abstractions for all my commands. This also allowed me to leverage very easily the same commands for local development and my CI. I cannot wait to use taskfile ... everywhere!
 
 ## Pre-Requisites
 

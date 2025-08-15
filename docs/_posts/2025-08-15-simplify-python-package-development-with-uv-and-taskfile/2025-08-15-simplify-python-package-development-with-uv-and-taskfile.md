@@ -366,6 +366,8 @@ You can [install task](https://taskfile.dev/docs/installation){:target="\_blank"
 pip install go-task-bin
 ```
 
+![Taskfile Install]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_install.PNG)
+
 Then confirm your version with ..
 
 ```bash
@@ -378,16 +380,18 @@ You can then run the following to initiate a Taskfile:
 task init
 ```
 
+![Taskfile Init]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_init.PNG)
+
 You should also add `task/` to your `.gitignore` file.
 
 ### Default
 
 First we'll amend our default task to show we can make our variables in taskfiles dynamic like so
 
-```bash
+```yaml
 # https://taskfile.dev
 
-version: '3'
+version: "3"
 
 vars:
   GITUSER:
@@ -408,19 +412,301 @@ task
 
 We get get the output and our user name
 
+![Taskfile Default]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_default.PNG)
+
 ### Install and Dependencies
+
+Next we'll add a task to install our package and its dependencies
+
+```yaml
+install:
+  desc: Install dependencies and package
+  sources:
+    - pyproject.toml
+    - uv.lock
+  generates:
+    - .venv/pyvenv.cfg
+  cmds:
+    - uv sync --all-extras --dev
+    - uv pip install -e .
+    - |
+      # Only run the demo CLI when running interactively (prevents hanging in CI/background)
+      if [ -t 1 ]; then
+        uv run demo-python-greet --name "{{.GITUSER}}"
+      else
+        echo "Skipping interactive demo: non-interactive shell detected"
+      fi
+```
+
+When we run
+
+```bash
+task install
+```
+
+We get
+
+![Taskfile Install]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_package_install.PNG)
+
+Sweet sweet abstraction and less commands we have to remember! Also note the **sources** property in the schema, this means that the taskfile will only rerun if anything in those directories have changed. Therefore if I run the task again it doesn't waste either of our time and just prints out the below.
+
+![Taskfile Install]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_package_install_noforce.PNG)
+
+If we want to ensure a task runs again we can use the `--force`` argument and it will ensure the task always runs.
+
+```bash
+task install --force
+```
+
+![Taskfile Install]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_package_install_force.PNG)
+
+Taskfile keeps track of its status of each tasks using checksums in the `.task` directory.
+
+### Build
+
+Next up lets add a build command to our taskfile that will turn our package into a wheel.
+
+```yaml
+build:
+  desc: Build the package
+  deps: [install]
+  sources:
+    - src/**/*.py
+    - pyproject.toml
+  generates:
+    - dist/*.whl
+    - dist/*.tar.gz
+  cmds:
+    - uv build
+```
+
+Now we can easily run
+
+```bash
+task build
+```
+
+To get the following
+
+![Taskfile Build]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_build.PNG)
 
 ### Lint
 
+Next up lets make our lint commands easier to remember by adding the following to our taskfile.
+
+```yaml
+lint:
+  desc: Run linting and build checks
+  deps: [build]
+  sources:
+    - src/**/*.py
+    - tests/**/*.py
+    - pyproject.toml
+  cmds:
+    - |
+      # Fail fast if lint hangs: 5 minute timeout
+      timeout 5m uvx ruff check
+    - uvx twine check dist/*
+```
+
+Yup you guessed it...
+
+```bash
+task lint
+```
+
+![Taskfile Lint]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_lint.PNG)
+
+Note the **deps** attribute in the schema here on the build task. This attribute ensures that certain prerequisites for tasks will always run if need be before the task if requires. If there have been no changes though and the dependency has already run then it won't run again. You will see the ci task later is simple as its just a collection of dependencies and a nice success message!
+
 #### Lint Fix
+
+Well we don't want to be messing around remembering the automated commands to fix our linting issues so yup lets add a task for that!
+
+```yaml
+lint-fix:
+  desc: Run linting and build checks
+  deps: [build]
+  sources:
+    - src/**/*.py
+    - tests/**/*.py
+    - pyproject.toml
+  cmds:
+    - |
+      uvx ruff format
+      uvx ruff check --fix
+```
+
+```bash
+task lint-fix
+```
+
+![Taskfile Lint Fix]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_lint_fix.PNG)
+
+Bosh! You can feel your brain freeing up all that space...
 
 ### Test
 
+Lets add our final regular task .. testing!
+
+```yaml
+test:
+  desc: Run tests with coverage (CI mode - output to files)
+  deps: [install]
+  sources:
+    - src/**/*.py
+    - tests/**/*.py
+    - pyproject.toml
+  cmds:
+    - |
+      # Fail tests if they hang: 10 minute timeout. Produce junit and coverage artifacts and capture console output.
+      timeout 10m uv run pytest --junit-xml=pytest-results.xml --cov=src --cov-report=xml --cov-report=term > test_output.txt 2>&1 || { cat test_output.txt; exit 1; }
+    - |
+      if [ -f test_output.txt ]; then
+        echo "📄 Last Test Output (from test_output.txt):"
+        echo "==========================================="
+        cat test_output.txt
+      else
+        echo "❌ No test_output.txt found. Run 'task test' first."
+      fi
+```
+
+This will output all of the appropriate reporting files to your local directory which handily will also be used in our github action reporting later...
+
+```bash
+task test
+```
+
+![Taskfile Test]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_test.PNG)
+
 ### CI
+
+Last but not least our super simple CI stage which is now just a collection of dependencies on test and lint, which also have an upstream dependency on the appropriate builds and installation.
+
+```yaml
+ci:
+  desc: Run full CI pipeline
+  deps: [lint, test]
+  cmds:
+    - echo "✅ CI pipeline completed successfully"
+```
+
+Now we can easily execute our CI locally or in a pipeline super easily with...
+
+```bash
+task ci
+```
+
+![Taskfile CI]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_ci.PNG)
+
+### Task List
+
+If you want to quickly see what tasks are available to you in a repo you can run
+
+```bash
+task --list
+```
+
+![Taskfile List]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_list.PNG)
+
+This is something that will be fantastic to keep your README and CONTRIBUTING lean whilst still allowing people to have all the developer functionality they need.
 
 ### Task VS Code Extension
 
+There is also a nice [vs code extension for task](https://marketplace.visualstudio.com/items?itemName=task.vscode-task){:target="\_blank"} if you're a GUI monster and you can discover and execute all your tasks from there too.
+
+![Taskfile VS Code Extension]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/taskfile_vscode_extension.PNG)
+
 ## Simplify Github Action
+
+You can now reduce your github action down by leveraging the taskfile as follows. This also guarantees consistency with the CI you run locally and in the pipeline!
+
+```yaml
+name: continuous-integration
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - ".python-version"
+      - ".github/workflows/ci.yml"
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Taskfile (task CLI)
+        run: |
+          # install task (go-task) using official installer
+          curl -sSfL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin
+          task --version
+
+      - name: Install Python CLI 'uv'
+        # 'uv' provides the `uv` and `uvx` CLI tools used by the Taskfile.
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel
+          python3 -m pip install uv
+
+      - name: Use Taskfile to install deps, lint and build
+        run: |
+          task ci --force --verbose
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: pytest-results.xml
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: pytest-results.xml
+
+      - name: Write test summary to GitHub Actions UI
+        if: always()
+        run: |
+          echo "## 🧪 Test Results and Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat test_output.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Write coverage summary to GitHub Actions UI
+        if: always()
+        run: |
+          echo "## 📊 Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          uvx coverage report --show-missing >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+```
+
+I actually fixed a bug by using task and having consistency with my local dev and have all test reports working correctly when I publish in github actions.
+
+![Taskfile VS Code Extension]({{ site.baseurl }}/assets/2025-08-15-simplify-python-package-development-with-uv-and-taskfile/github_action_success_task.PNG)
 
 ## Use the Package
 
